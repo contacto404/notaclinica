@@ -13,44 +13,71 @@ export default async function DashboardPage() {
     .order('created_at', { ascending: false })
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <div className="w-52 bg-white border-r border-gray-200 min-h-screen flex flex-col">
-        <div className="px-4 py-5 border-b border-gray-100">
-          <span className="text-base font-medium text-gray-900">Nota<span className="text-blue-600">Clínica</span></span>
-        </div>
-        <nav className="flex flex-col gap-1 p-3 flex-1">
-          <a href="/dashboard" className="px-3 py-2 rounded-lg bg-blue-50 text-blue-700 text-sm font-medium">Dashboard</a>
-          <a href="/dashboard/pacientes/nuevo" className="px-3 py-2 rounded-lg text-gray-600 text-sm hover:bg-gray-50">Nuevo paciente</a>
-        </nav>
-        <div className="p-4 border-t border-gray-100 text-xs text-gray-500 truncate">{user.email}</div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header mobile */}
+      <div className="bg-white border-b border-gray-200 px-4 py-4 flex items-center justify-between sticky top-0 z-10">
+        <span className="text-lg font-bold text-[#185FA5]">NotaClínica</span>
+        <a href="/dashboard/pacientes/nuevo" className="bg-[#185FA5] text-white px-4 py-2 rounded-xl text-sm font-medium">
+          + Nuevo
+        </a>
       </div>
-      <div className="flex-1 p-7">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-xl font-medium text-gray-900">Dashboard</h1>
-          <a href="/dashboard/pacientes/nuevo" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700">+ Nuevo paciente</a>
-        </div>
-        <div className="grid grid-cols-3 gap-4 mb-7">
-          <div className="bg-gray-100 rounded-xl p-4"><p className="text-xs text-gray-500 mb-1">Pacientes activos</p><p className="text-2xl font-medium">{patients?.length ?? 0}</p></div>
-          <div className="bg-gray-100 rounded-xl p-4"><p className="text-xs text-gray-500 mb-1">Sesiones este mes</p><p className="text-2xl font-medium">0</p></div>
-          <div className="bg-gray-100 rounded-xl p-4"><p className="text-xs text-gray-500 mb-1">PDFs exportados</p><p className="text-2xl font-medium">0</p></div>
-        </div>
-        <div>
-          <h2 className="text-sm font-medium text-gray-900 mb-3">Pacientes recientes</h2>
-          <div className="flex flex-col gap-2">
-            {patients && patients.length > 0 ? patients.map((p: any) => (
-              <a key={p.id} href={"/dashboard/pacientes/" + p.id} className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3 hover:border-blue-400">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-sm font-medium text-blue-700">{p.full_name?.[0]}</div>
-                <div className="flex-1"><p className="text-sm font-medium text-gray-900">{p.full_name}</p><p className="text-xs text-gray-500">{p.diagnosis ?? 'Sin diagnóstico'}</p></div>
-              </a>
-            )) : (
-              <div className="bg-white border border-dashed border-gray-200 rounded-xl px-4 py-10 text-center">
-                <p className="text-sm text-gray-500">Todavía no tenés pacientes.</p>
-                <a href="/dashboard/pacientes/nuevo" className="text-sm text-blue-600 mt-1 inline-block hover:underline">+ Agregar el primero</a>
-              </div>
-            )}
+
+      <div className="p-4 max-w-2xl mx-auto">
+        {/* Métricas */}
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="bg-white rounded-xl p-3 border border-gray-200 text-center">
+            <p className="text-2xl font-bold text-[#185FA5]">{patients?.length ?? 0}</p>
+            <p className="text-xs text-gray-500 mt-1">Pacientes</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-gray-200 text-center">
+            <p className="text-2xl font-bold text-gray-900">0</p>
+            <p className="text-xs text-gray-500 mt-1">Sesiones</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-gray-200 text-center">
+            <p className="text-2xl font-bold text-gray-900">0</p>
+            <p className="text-xs text-gray-500 mt-1">PDFs</p>
           </div>
         </div>
+
+        {/* Lista pacientes */}
+        <h2 className="text-sm font-medium text-gray-900 mb-3">Pacientes recientes</h2>
+        <div className="flex flex-col gap-2">
+          {patients && patients.length > 0 ? patients.map((p: any) => (
+            <a key={p.id} href={"/dashboard/pacientes/" + p.id}
+              className="bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3 active:bg-gray-50">
+              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-sm font-bold text-[#185FA5] flex-shrink-0">
+                {p.full_name?.[0]}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 truncate">{p.full_name}</p>
+                <p className="text-xs text-gray-500 truncate">{p.diagnosis ?? 'Sin diagnóstico'}</p>
+              </div>
+              <span className="text-gray-400 text-lg">›</span>
+            </a>
+          )) : (
+            <div className="bg-white border border-dashed border-gray-200 rounded-xl px-4 py-12 text-center">
+              <p className="text-sm text-gray-500">Todavía no tenés pacientes.</p>
+              <a href="/dashboard/pacientes/nuevo" className="text-sm text-[#185FA5] mt-2 inline-block">
+                + Agregar el primero
+              </a>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Bottom nav */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex">
+        <a href="/dashboard" className="flex-1 flex flex-col items-center py-3 text-[#185FA5]">
+          <span className="text-xl">🏠</span>
+          <span className="text-xs mt-0.5">Inicio</span>
+        </a>
+        <a href="/dashboard/pacientes/nuevo" className="flex-1 flex flex-col items-center py-3 text-gray-400">
+          <span className="text-xl">➕</span>
+          <span className="text-xs mt-0.5">Nuevo</span>
+        </a>
+      </div>
+
+      <div className="h-20" />
     </div>
   )
 }
