@@ -1,0 +1,67 @@
+import { createClient } from '@/lib/supabase/server'
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function POST(request: NextRequest) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+
+  const { patientId, question } = await request.json()
+
+  // Traer todas las sesiones del paciente con transcripciones y resúmenes
+  const { data: sessions } = await supabase
+    .from('sessions')
+    .select('session_date, status, transcriptions(content), summaries(chief_complaint, observations, plan, next_steps)')
+    .eq('patient_id', patientId)
+    .order('session_date', { ascending: false })
+
+  const { data: patient } = await supabase
+    .from('patients')
+    .select('full_name, diagnosis, notes')
+    .eq('id', patientId)
+    .single()
+
+  if (!sessions || sessions.length === 0) {
+    return NextResponse.json({ answer: 'No hay sesiones registradas para este paciente todavía.' })
+  }
+
+  // Construir contexto para la IA
+  const context = sessions.map((s: any) => {
+    const date = new Date(s.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })
+    const transcription = s.transcriptions?.content ?? ''
+    const summary = s.summaries
+      ? `Motivo: ${s.summaries.chief_complaint ?? '-'}\nObservaciones: ${s.summaries.observations ?? '-'}\nPlan: ${s.summaries.plan ?? '-'}\nPróximos pasos: ${s.summaries.next_steps ?? '-'}`
+      : ''
+    return `--- Sesión del ${date} ---\n${summary}\n${transcription ? 'Transcripción: ' + transcription : ''}`
+  }).join('\n\n')
+
+  const systemPrompt = `Sos un asistente clínico que ayuda a profesionales de salud mental a consultar el historial de sus pacientes. 
+Tenés acceso al historial completo de sesiones del paciente ${patient?.full_name} (diagnóstico: ${patient?.diagnosis ?? 'no especificado'}).
+Respondé de forma clara, precisa y basada únicamente en la información del historial. Si no encontrás la información, decilo claramente.
+No inventes datos. Hablá en español rioplatense.`
+
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': process.env.ANTHROPIC_API_KEY!,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: 'claude-opus-4-20250514',
+      max_tokens: 1024,
+      system: systemPrompt,
+      messages: [
+        {
+          role: 'user',
+          content: `Historial del paciente:\n\n${context}\n\nPregunta: ${question}`
+        }
+      ]
+    })
+  })
+
+  const data = await response.json()
+  const answer = data.content?.[0]?.text ?? 'No se pudo obtener una respuesta.'
+
+  return NextResponse.json({ answer })
+}
