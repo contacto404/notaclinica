@@ -20,7 +20,14 @@ export default async function DashboardLayout({ children }: { children: React.Re
           <a href="/dashboard" className="px-3 py-2 rounded-lg text-gray-600 text-sm hover:bg-gray-50">Dashboard</a>
           <a href="/dashboard/pacientes/nuevo" className="px-3 py-2 rounded-lg text-gray-600 text-sm hover:bg-gray-50">Nuevo paciente</a>
         </nav>
-        <div className="p-4 border-t border-gray-100 text-xs text-gray-500 truncate">{user.email}</div>
+<div className="p-4 border-t border-gray-100">
+          <p className="text-xs text-gray-500 truncate mb-2">{user.email}</p>
+          <form action="/api/logout" method="POST">
+            <button type="submit" className="text-xs text-red-500 hover:text-red-700">
+              Cerrar sesión
+            </button>
+          </form>
+        </div>
       </aside>
 
       {/* Header móvil */}
@@ -52,4 +59,11 @@ export default async function DashboardLayout({ children }: { children: React.Re
       </nav>
     </div>
   )
-}
+}<div className="p-4 border-t border-gray-100">
+          <p className="text-xs text-gray-500 truncate mb-2">{user.email}</p>
+          <form action="/api/logout" method="POST">
+            <button type="submit" className="text-xs text-red-500 hover:text-red-700">
+              Cerrar sesión
+            </button>
+          </form>
+        </div>
