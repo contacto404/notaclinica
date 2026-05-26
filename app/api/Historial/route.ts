@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
 
   const { patientId, question } = await request.json()
 
-  // Traer todas las sesiones del paciente con transcripciones y resúmenes
   const { data: sessions } = await supabase
     .from('sessions')
     .select('session_date, status, transcriptions(content), summaries(chief_complaint, observations, plan, next_steps)')
@@ -25,7 +24,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ answer: 'No hay sesiones registradas para este paciente todavía.' })
   }
 
-  // Construir contexto para la IA
   const context = sessions.map((s: any) => {
     const date = new Date(s.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })
     const transcription = s.transcriptions?.content ?? ''
@@ -48,7 +46,7 @@ No inventes datos. Hablá en español rioplatense.`
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: 'claude-opus-4-20250514',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 1024,
       system: systemPrompt,
       messages: [
