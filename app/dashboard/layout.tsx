@@ -10,24 +10,21 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="min-h-screen bg-gray-50">
 
       {/* Sidebar — solo desktop */}
-      <aside className="hidden md:flex fixed top-0 left-0 h-screen w-52 bg-white border-r border-gray-200 flex-col justify-between z-20">
-        <div>
-          <div className="px-4 py-5 border-b border-gray-100">
-            <span className="text-base font-medium text-gray-900">Nota<span className="text-blue-600">Clínica</span></span>
-          </div>
-          <nav className="flex flex-col gap-1 p-3">
-            <a href="/dashboard" className="px-3 py-2 rounded-lg text-gray-600 text-sm hover:bg-gray-50">Dashboard</a>
-            <a href="/dashboard/pacientes/nuevo" className="px-3 py-2 rounded-lg text-gray-600 text-sm hover:bg-gray-50">Nuevo paciente</a>
-          </nav>
+      <aside className="hidden md:flex fixed top-0 left-0 h-screen w-52 bg-white border-r border-gray-200 flex-col z-20">
+        <div className="px-4 py-5 border-b border-gray-100">
+          <span className="text-base font-medium text-gray-900">Nota<span className="text-blue-600">Clínica</span></span>
         </div>
-        <div className="p-4 border-t border-gray-100 flex flex-col gap-2">
-          <p className="text-xs text-gray-500 truncate">{user.email}</p>
+        <nav className="flex flex-col gap-1 p-3 flex-1">
+          <a href="/dashboard" className="px-3 py-2 rounded-lg text-gray-600 text-sm hover:bg-gray-50">Dashboard</a>
+          <a href="/dashboard/pacientes/nuevo" className="px-3 py-2 rounded-lg text-gray-600 text-sm hover:bg-gray-50">Nuevo paciente</a>
+          <div className="flex-1" />
           <form action="/api/logout" method="POST">
-            <button type="submit" className="text-xs text-red-500 hover:text-red-700 cursor-pointer">
+            <button type="submit" className="w-full text-left px-3 py-2 rounded-lg text-sm text-red-500 hover:bg-red-50 cursor-pointer">
               Cerrar sesión
             </button>
           </form>
-        </div>
+          <p className="text-xs text-gray-400 px-3 truncate pb-2">{user.email}</p>
+        </nav>
       </aside>
 
       {/* Header — solo móvil */}
