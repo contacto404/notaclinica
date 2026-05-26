@@ -10,7 +10,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="min-h-screen bg-gray-50">
 
       {/* Sidebar — solo desktop */}
-      <aside className="hidden md:flex fixed top-0 left-0 h-full w-52 bg-white border-r border-gray-200 flex-col z-20">
+      <aside className="hidden md:flex fixed top-0 left-0 h-screen w-52 bg-white border-r border-gray-200 flex-col z-20">
         <div className="px-4 py-5 border-b border-gray-100">
           <span className="text-base font-medium text-gray-900">Nota<span className="text-blue-600">Clínica</span></span>
         </div>
