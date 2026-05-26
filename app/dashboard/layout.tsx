@@ -1,10 +1,8 @@
-import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -23,13 +21,18 @@ export default async function DashboardLayout({ children }: { children: React.Re
               Cerrar sesión
             </button>
           </form>
-          <p className="text-xs text-gray-400 px-3 truncate pb-2">{user.email}</p>
+          <p className="text-xs text-gray-400 px-3 truncate pb-2">{user?.email}</p>
         </nav>
       </aside>
 
       {/* Header — solo móvil */}
-      <header className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center px-4 z-20">
+      <header className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 z-20">
         <span className="text-base font-medium text-gray-900">Nota<span className="text-blue-600">Clínica</span></span>
+        <form action="/api/logout" method="POST">
+          <button type="submit" className="text-sm text-red-500 hover:text-red-700 cursor-pointer">
+            Cerrar sesión
+          </button>
+        </form>
       </header>
 
       {/* Contenido */}
