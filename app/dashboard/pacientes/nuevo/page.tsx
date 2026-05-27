@@ -7,6 +7,7 @@ export default function NuevoPacientePage() {
   const [nombre, setNombre] = useState('')
   const [fechaNac, setFechaNac] = useState('')
   const [diagnostico, setDiagnostico] = useState('')
+  const [telefono, setTelefono] = useState('')
   const [notas, setNotas] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -24,6 +25,7 @@ export default function NuevoPacientePage() {
       full_name: nombre,
       date_of_birth: fechaNac || null,
       diagnosis: diagnostico || null,
+      phone: telefono || null,
       notes: notas || null,
     })
     if (error) { setError(error.message) } else { router.push('/dashboard') }
@@ -57,6 +59,12 @@ export default function NuevoPacientePage() {
               <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Diagnóstico</label>
               <input type="text" value={diagnostico} onChange={e => setDiagnostico(e.target.value)}
                 placeholder="Ansiedad generalizada"
+                className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] text-[#2D1F14]" />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Teléfono (WhatsApp)</label>
+              <input type="tel" value={telefono} onChange={e => setTelefono(e.target.value)}
+                placeholder="+54 9 11 1234 5678"
                 className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] text-[#2D1F14]" />
             </div>
             <div className="flex flex-col gap-1.5">
