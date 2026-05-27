@@ -16,74 +16,87 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
     .eq('patient_id', id).order('session_date', { ascending: false })
 
   return (
-    <div className="p-5 md:p-7">
-      <div className="mb-5">
-        <a href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700">← Volver</a>
-      </div>
-      <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-4">
-        <div className="flex items-start gap-4 flex-wrap">
-          <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-xl font-medium text-blue-700 shrink-0">
-            {patient.full_name?.[0]}
-          </div>
-          <div className="flex-1 min-w-0">
-            <h1 className="text-xl font-medium text-gray-900">{patient.full_name}</h1>
-            <p className="text-sm text-gray-500 mt-0.5">{patient.diagnosis ?? 'Sin diagnóstico'}</p>
-          </div>
-          <div className="flex gap-2 w-full sm:w-auto flex-wrap">
-            <a href={"/dashboard/pacientes/" + id + "/historial"}
-              className="border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 flex items-center gap-2 flex-1 sm:flex-none justify-center">
-              🔍 Consultar historial
-            </a>
-            <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center gap-2 flex-1 sm:flex-none justify-center">
-              🎙️ Nueva sesión
-            </a>
-          </div>
+    <div className="min-h-screen bg-[#FBF7F4] p-5 md:p-8">
+      <div className="max-w-3xl mx-auto">
+
+        {/* Volver */}
+        <div className="mb-6">
+          <a href="/dashboard" className="text-xs text-[#A08070] hover:text-[#2D1F14] transition-colors font-medium">
+            ← Volver
+          </a>
         </div>
-        {patient.notes && (
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <p className="text-xs text-gray-500 mb-1">Notas</p>
-            <p className="text-sm text-gray-700">{patient.notes}</p>
+
+        {/* Header paciente */}
+        <div className="bg-white rounded-3xl p-6 mb-4 border border-[#F0E8E0]">
+          <div className="flex items-start gap-4 flex-wrap">
+            <div className="w-16 h-16 rounded-full bg-[#FDE8C8] flex items-center justify-center text-2xl font-bold text-[#E8602C] shrink-0">
+              {patient.full_name?.[0]}
+            </div>
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl font-bold text-[#2D1F14]">{patient.full_name}</h1>
+              <p className="text-sm text-[#A08070] mt-0.5">{patient.diagnosis ?? 'Sin diagnóstico'}</p>
+            </div>
+            <div className="flex gap-2 w-full sm:w-auto flex-wrap">
+              <a href={"/dashboard/pacientes/" + id + "/historial"}
+                className="border border-[#E0D0C0] text-[#6B4F3A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#FBF7F4] flex items-center gap-2 flex-1 sm:flex-none justify-center transition-colors">
+                🔍 Historial IA
+              </a>
+              <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"}
+                className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#D04F1E] flex items-center gap-2 flex-1 sm:flex-none justify-center transition-colors shadow-sm">
+                🎙️ Nueva sesión
+              </a>
+            </div>
           </div>
-        )}
-      </div>
-      <div className="bg-white border border-gray-200 rounded-2xl p-5">
-        <h2 className="text-sm font-medium text-gray-900 mb-4">Historial de sesiones</h2>
-        {sessions && sessions.length > 0 ? (
-          <div className="flex flex-col divide-y divide-gray-100">
-            {sessions.map((s: any) => (
-              <div key={s.id} className="py-3 flex items-center gap-3">
-                <div className={"w-8 h-8 rounded-lg flex items-center justify-center text-sm shrink-0 " +
-                  (s.status === 'summarized' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700')}>
-                  {s.status === 'summarized' ? '✓' : '⏳'}
+          {patient.notes && (
+            <div className="mt-5 pt-4 border-t border-[#F0E8E0]">
+              <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">Notas</p>
+              <p className="text-sm text-[#6B4F3A]">{patient.notes}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Historial */}
+        <div className="bg-white rounded-3xl p-6 border border-[#F0E8E0]">
+          <h2 className="text-xs font-semibold text-[#A08070] uppercase tracking-widest mb-5">Historial de sesiones</h2>
+          {sessions && sessions.length > 0 ? (
+            <div className="flex flex-col divide-y divide-[#F5EDE8]">
+              {sessions.map((s: any) => (
+                <div key={s.id} className="py-4 flex items-center gap-3">
+                  <div className={"w-9 h-9 rounded-full flex items-center justify-center text-sm shrink-0 " +
+                    (s.status === 'summarized' ? 'bg-[#E8F4E8] text-[#2D6A2D]' : 'bg-[#FDE8C8] text-[#8B4513]')}>
+                    {s.status === 'summarized' ? '✓' : '⏳'}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-[#2D1F14]">
+                      {new Date(s.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                    </p>
+                    <p className="text-xs text-[#A08070] mt-0.5">
+                      {s.status === 'pending' && 'Pendiente de transcripción'}
+                      {s.status === 'transcribed' && 'Transcripta — resumen pendiente'}
+                      {s.status === 'summarized' && 'Sesión completa'}
+                    </p>
+                  </div>
+                  {s.status === 'summarized' && (
+                    <a href={"/dashboard/sesiones/" + s.id}
+                      className="text-xs text-[#E8602C] hover:underline shrink-0 font-medium">
+                      Ver resumen →
+                    </a>
+                  )}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900">
-                    {new Date(s.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
-                    {s.status === 'pending' && 'Pendiente de transcripción'}
-                    {s.status === 'transcribed' && 'Transcripta — resumen pendiente'}
-                    {s.status === 'summarized' && 'Completa'}
-                  </p>
-                </div>
-                {s.status === 'summarized' && (
-                  <a href={"/dashboard/sesiones/" + s.id} className="text-xs text-blue-600 hover:underline shrink-0">
-                    Ver resumen
-                  </a>
-                )}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-8">
-            <p className="text-sm text-gray-500">No hay sesiones todavía.</p>
-            <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"}
-              className="text-sm text-blue-600 mt-1 inline-block hover:underline">
-              + Iniciar primera sesión
-            </a>
-          </div>
-        )}
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-10">
+              <p className="text-2xl mb-2">📋</p>
+              <p className="text-sm text-[#A08070]">No hay sesiones todavía.</p>
+              <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"}
+                className="text-sm text-[#E8602C] mt-1 inline-block hover:underline">
+                + Iniciar primera sesión
+              </a>
+            </div>
+          )}
+        </div>
+
       </div>
     </div>
   )
