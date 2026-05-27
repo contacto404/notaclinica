@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import AgendarButton from './AgendarButton'
+import ReporteButton from './ReporteButton'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -51,6 +52,12 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                 className="border border-[#E0D0C0] text-[#6B4F3A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#FBF7F4] flex items-center gap-2 flex-1 sm:flex-none justify-center transition-colors">
                 🔍 Historial IA
               </a>
+              <ReporteButton
+                patientId={id}
+                patientName={patient.full_name}
+                patientPhone={patient.phone}
+                nextAppointment={nextAppointment}
+              />
               <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"}
                 className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#D04F1E] flex items-center gap-2 flex-1 sm:flex-none justify-center transition-colors shadow-sm">
                 🎙️ Nueva sesión
