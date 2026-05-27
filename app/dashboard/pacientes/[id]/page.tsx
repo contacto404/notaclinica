@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import AgendarButton from './AgendarButton'
 import ReporteButton from './ReporteButton'
 import ImportarHistorialButton from './ImportarHistorialButton'
+import EditarPacienteButton from './EditarPacienteButton'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -42,7 +43,10 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               {patient.full_name?.[0]}
             </div>
             <div className="flex-1 min-w-0">
-              <h1 className="text-xl font-bold text-[#2D1F14]">{patient.full_name}</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-bold text-[#2D1F14]">{patient.full_name}</h1>
+                <EditarPacienteButton patient={patient} />
+              </div>
               <p className="text-sm text-[#A08070] mt-0.5">{patient.diagnosis ?? 'Sin diagnóstico'}</p>
               {patient.phone && (
                 <p className="text-xs text-[#A08070] mt-0.5">📱 {patient.phone}</p>
