@@ -75,85 +75,103 @@ export default function NuevaSesionPage() {
   }
 
   return (
-    <div style={{minHeight:'100vh',background:'#F9FAFB',display:'flex'}}>
-      <div style={{width:'208px',background:'white',borderRight:'1px solid #E5E7EB',minHeight:'100vh',display:'flex',flexDirection:'column'}}>
-        <div style={{padding:'20px 16px',borderBottom:'1px solid #F3F4F6'}}>
-          <span style={{fontSize:'16px',fontWeight:'500',color:'#111827'}}>Nota<span style={{color:'#2563EB'}}>Clínica</span></span>
+    <div className="min-h-screen bg-[#FBF7F4] p-5 md:p-8">
+      <div className="max-w-xl mx-auto">
+
+        <div className="mb-6">
+          <a href={"/dashboard/pacientes/" + patientId} className="text-xs text-[#A08070] hover:text-[#2D1F14] transition-colors font-medium">← Volver</a>
         </div>
-        <nav style={{display:'flex',flexDirection:'column',gap:'4px',padding:'12px'}}>
-          <a href="/dashboard" style={{padding:'8px 12px',borderRadius:'8px',color:'#4B5563',fontSize:'14px',textDecoration:'none'}}>Dashboard</a>
-        </nav>
-      </div>
-      <div style={{flex:1,padding:'28px',maxWidth:'600px'}}>
-        <a href={"/dashboard/pacientes/" + patientId} style={{fontSize:'14px',color:'#6B7280',textDecoration:'none'}}>← Volver</a>
-        <h1 style={{fontSize:'20px',fontWeight:'500',color:'#111827',marginTop:'16px',marginBottom:'24px'}}>Nueva sesión</h1>
+
+        <div className="mb-6">
+          <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1">Sesión</p>
+          <h1 className="text-2xl font-bold text-[#2D1F14]">Nueva sesión</h1>
+        </div>
 
         {step === 'record' && (
-          <div style={{background:'white',border:'1px solid #E5E7EB',borderRadius:'16px',padding:'24px',display:'flex',flexDirection:'column',gap:'24px'}}>
-            <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'16px',padding:'24px 0'}}>
+          <div className="bg-white rounded-3xl border border-[#F0E8E0] p-6 flex flex-col gap-6">
+            <div className="flex flex-col items-center gap-4 py-6">
               {!recording ? (
-                <button onClick={startRecording} style={{width:'80px',height:'80px',borderRadius:'50%',background:'#2563EB',border:'none',fontSize:'28px',cursor:'pointer',color:'white'}}>
+                <button onClick={startRecording}
+                  className="w-24 h-24 rounded-full bg-[#E8602C] text-4xl cursor-pointer text-white flex items-center justify-center hover:bg-[#D04F1E] transition-colors shadow-lg">
                   🎙️
                 </button>
               ) : (
-                <button onClick={stopRecording} style={{width:'80px',height:'80px',borderRadius:'50%',background:'#DC2626',border:'none',fontSize:'20px',cursor:'pointer',color:'white',fontWeight:'bold',letterSpacing:'1px'}}>
+                <button onClick={stopRecording}
+                  className="w-24 h-24 rounded-full bg-red-500 cursor-pointer text-white font-bold text-sm tracking-wider flex items-center justify-center hover:bg-red-600 transition-colors shadow-lg animate-pulse">
                   STOP
                 </button>
               )}
-              <p style={{fontSize:'14px',color:'#6B7280',margin:0}}>
+              <p className="text-sm text-[#A08070]">
                 {recording ? '🔴 Grabando... presioná STOP para detener' : 'Presioná para grabar'}
               </p>
               {audioBlob && !recording && (
-                <p style={{fontSize:'14px',color:'#16A34A',fontWeight:'500',margin:0}}>✓ Audio listo para procesar</p>
+                <p className="text-sm text-[#2D6A2D] font-medium bg-[#E8F4E8] px-4 py-2 rounded-full">✓ Audio listo para procesar</p>
               )}
             </div>
-            <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
-              <div style={{flex:1,height:'1px',background:'#E5E7EB'}} />
-              <span style={{fontSize:'12px',color:'#9CA3AF'}}>o subí un archivo</span>
-              <div style={{flex:1,height:'1px',background:'#E5E7EB'}} />
+
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-px bg-[#F0E8E0]" />
+              <span className="text-xs text-[#A08070]">o subí un archivo</span>
+              <div className="flex-1 h-px bg-[#F0E8E0]" />
             </div>
-            <input type="file" accept="audio/*" onChange={handleFileUpload} style={{fontSize:'14px',color:'#4B5563'}} />
-            {error && <p style={{fontSize:'14px',color:'#DC2626',margin:0}}>{error}</p>}
-            <button
-              onClick={processAudio}
-              disabled={!audioBlob}
-              style={{background: audioBlob ? '#2563EB' : '#BFDBFE',color:'white',border:'none',borderRadius:'8px',padding:'12px',fontSize:'14px',fontWeight:'500',cursor: audioBlob ? 'pointer' : 'not-allowed'}}
-            >
+
+            <input type="file" accept="audio/*" onChange={handleFileUpload}
+              className="text-sm text-[#6B4F3A] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-[#FDE8C8] file:text-[#8B4513] hover:file:bg-[#FDD8A8]" />
+
+            {error && <p className="text-sm text-red-500 bg-red-50 rounded-xl px-4 py-2">{error}</p>}
+
+            <button onClick={processAudio} disabled={!audioBlob}
+              className="bg-[#E8602C] disabled:bg-[#F0D8C8] disabled:text-[#C0A090] text-white rounded-xl py-3 text-sm font-semibold cursor-pointer disabled:cursor-not-allowed hover:bg-[#D04F1E] transition-colors shadow-sm">
               ✨ Transcribir y generar resumen
             </button>
           </div>
         )}
 
         {(step === 'transcribing' || step === 'summarizing') && (
-          <div style={{background:'white',border:'1px solid #E5E7EB',borderRadius:'16px',padding:'40px',display:'flex',flexDirection:'column',alignItems:'center',gap:'16px'}}>
-            <p style={{fontSize:'14px',fontWeight:'500',color:'#111827'}}>
-              {step === 'transcribing' ? 'Transcribiendo con Whisper...' : 'Generando resumen con Claude...'}
-            </p>
+          <div className="bg-white rounded-3xl border border-[#F0E8E0] p-12 flex flex-col items-center gap-5">
+            <div className="w-10 h-10 border-3 border-[#E8602C] border-t-transparent rounded-full animate-spin" />
+            <div className="text-center">
+              <p className="text-sm font-semibold text-[#2D1F14]">
+                {step === 'transcribing' ? 'Transcribiendo audio...' : 'Generando resumen clínico...'}
+              </p>
+              <p className="text-xs text-[#A08070] mt-1">
+                {step === 'transcribing' ? 'Usando Whisper de OpenAI' : 'Usando IA para analizar la sesión'}
+              </p>
+            </div>
           </div>
         )}
 
         {step === 'done' && summary && (
-          <div style={{display:'flex',flexDirection:'column',gap:'16px'}}>
-            <div style={{background:'white',border:'1px solid #E5E7EB',borderRadius:'16px',padding:'24px'}}>
-              <h2 style={{fontSize:'14px',fontWeight:'500',color:'#111827',marginBottom:'16px'}}>📋 Resumen clínico</h2>
-              <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
-                {[['Motivo de consulta', summary.chief_complaint],['Observaciones', summary.observations],['Plan terapéutico', summary.plan],['Próximos pasos', summary.next_steps]].map(([label, value]) => (
-                  <div key={label} style={{background:'#F9FAFB',borderRadius:'8px',padding:'12px'}}>
-                    <p style={{fontSize:'12px',color:'#6B7280',margin:'0 0 4px 0'}}>{label}</p>
-                    <p style={{fontSize:'14px',color:'#111827',margin:0}}>{value}</p>
+          <div className="flex flex-col gap-4">
+            <div className="bg-white rounded-3xl border border-[#F0E8E0] p-6">
+              <h2 className="text-xs font-semibold text-[#A08070] uppercase tracking-widest mb-4">Resumen clínico</h2>
+              <div className="flex flex-col gap-3">
+                {([
+                  ['Motivo de consulta', summary.chief_complaint],
+                  ['Observaciones', summary.observations],
+                  ['Plan terapéutico', summary.plan],
+                  ['Próximos pasos', summary.next_steps]
+                ] as [string, string][]).map(([label, value]) => (
+                  <div key={label} className="bg-[#FBF7F4] rounded-2xl p-4">
+                    <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">{label}</p>
+                    <p className="text-sm text-[#2D1F14] leading-relaxed">{value}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div style={{background:'white',border:'1px solid #E5E7EB',borderRadius:'16px',padding:'24px'}}>
-              <h2 style={{fontSize:'14px',fontWeight:'500',color:'#111827',marginBottom:'12px'}}>📝 Transcripción</h2>
-              <p style={{fontSize:'14px',color:'#374151',lineHeight:'1.6',margin:0}}>{transcription}</p>
+
+            <div className="bg-white rounded-3xl border border-[#F0E8E0] p-6">
+              <h2 className="text-xs font-semibold text-[#A08070] uppercase tracking-widest mb-3">Transcripción</h2>
+              <p className="text-sm text-[#6B4F3A] leading-relaxed">{transcription}</p>
             </div>
-            <a href={"/dashboard/pacientes/" + patientId} style={{background:'#2563EB',color:'white',borderRadius:'8px',padding:'12px',fontSize:'14px',fontWeight:'500',textAlign:'center',textDecoration:'none',display:'block'}}>
+
+            <a href={"/dashboard/pacientes/" + patientId}
+              className="bg-[#E8602C] text-white rounded-xl py-3 text-sm font-semibold text-center hover:bg-[#D04F1E] transition-colors shadow-sm block">
               ✓ Volver al paciente
             </a>
           </div>
         )}
+
       </div>
     </div>
   )
