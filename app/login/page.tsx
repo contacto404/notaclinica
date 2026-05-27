@@ -21,12 +21,8 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) {
-      setError('Credenciales incorrectas.')
-    } else {
-      router.push('/dashboard')
-      router.refresh()
-    }
+    if (error) { setError('Credenciales incorrectas.') }
+    else { router.push('/dashboard'); router.refresh() }
     setLoading(false)
   }
 
@@ -34,10 +30,7 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
-    const { error } = await supabase.auth.signUp({
-      email, password,
-      options: { data: { full_name: name } },
-    })
+    const { error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name } } })
     if (error) { setError(error.message) } else { setMode('login') }
     setLoading(false)
   }
@@ -51,61 +44,86 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-3xl flex rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-        <div className="flex-1 bg-[#0C447C] p-10 flex-col justify-center gap-8 hidden md:flex">
+    <div className="min-h-screen bg-[#FBF7F4] flex items-center justify-center p-4">
+      <div className="w-full max-w-3xl flex rounded-3xl overflow-hidden shadow-lg border border-[#F0E8E0]">
+
+        {/* Panel izquierdo */}
+        <div className="flex-1 bg-[#E8602C] p-10 flex-col justify-between gap-8 hidden md:flex">
           <div>
-            <h1 className="text-2xl font-medium text-white">NotaClínica</h1>
-            <p className="text-[#85B7EB] text-sm mt-2 leading-relaxed">Transcripción y resumen clínico con IA para profesionales de salud mental</p>
+            <h1 className="text-2xl font-bold text-white">NotaClínica</h1>
+            <p className="text-[#FDDCC8] text-sm mt-2 leading-relaxed">Transcripción y resumen clínico con IA para profesionales de salud mental</p>
           </div>
           <div className="flex flex-col gap-3">
             {['Grabá o subí el audio de la consulta','Transcripción automática con Whisper','Resumen clínico generado por IA','Exportá el historial en PDF'].map(f => (
-              <div key={f} className="flex items-center gap-3 text-[#B5D4F4] text-sm">
-                <span className="text-[#5DCAA5]">✓</span> {f}
+              <div key={f} className="flex items-center gap-3 text-[#FDDCC8] text-sm">
+                <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-xs">✓</span>
+                {f}
               </div>
             ))}
           </div>
+          <p className="text-[#FDDCC8] text-xs">Para psicólogos, psiquiatras y terapeutas</p>
         </div>
-        <div className="w-full md:w-[360px] p-10 bg-white flex flex-col justify-center gap-5 flex-shrink-0">
+
+        {/* Panel derecho */}
+        <div className="w-full md:w-[380px] p-10 bg-white flex flex-col justify-center gap-5 flex-shrink-0">
           <div>
-            <h2 className="text-xl font-medium text-gray-900">{mode === 'login' ? 'Iniciar sesión' : 'Crear cuenta'}</h2>
-            <p className="text-sm text-gray-500 mt-1">{mode === 'login' ? 'Accedé a tu cuenta profesional' : 'Registrate gratis'}</p>
+            <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1">
+              {mode === 'login' ? 'Bienvenido' : 'Crear cuenta'}
+            </p>
+            <h2 className="text-2xl font-bold text-[#2D1F14]">
+              {mode === 'login' ? 'Iniciá sesión' : 'Registrate gratis'}
+            </h2>
           </div>
+
           {magicSent ? (
-            <div className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg p-4">Revisá tu email para ingresar.</div>
+            <div className="text-sm text-[#2D6A2D] bg-[#E8F4E8] border border-[#C8E8C8] rounded-2xl p-4">
+              ✓ Revisá tu email para ingresar.
+            </div>
           ) : (
             <form onSubmit={mode === 'login' ? handleLogin : handleRegister} className="flex flex-col gap-4">
               {mode === 'register' && (
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs text-gray-500">Nombre completo</label>
-                  <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Dra. María García" required className="border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#185FA5]" />
+                  <label className="text-xs text-[#A08070] font-medium">Nombre completo</label>
+                  <input type="text" value={name} onChange={e => setName(e.target.value)}
+                    placeholder="Dra. María García" required
+                    className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
                 </div>
               )}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-gray-500">Correo electrónico</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="tu@email.com" required className="border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#185FA5]" />
+                <label className="text-xs text-[#A08070] font-medium">Correo electrónico</label>
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)}
+                  placeholder="tu@email.com" required
+                  className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-gray-500">Contraseña</label>
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" required minLength={6} className="border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#185FA5]" />
+                <label className="text-xs text-[#A08070] font-medium">Contraseña</label>
+                <input type="password" value={password} onChange={e => setPassword(e.target.value)}
+                  placeholder="••••••••" required minLength={6}
+                  className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
               </div>
-              {error && <p className="text-xs text-red-600">{error}</p>}
-              <button type="submit" disabled={loading} className="bg-[#185FA5] text-white rounded-lg py-2.5 text-sm font-medium disabled:opacity-60 hover:bg-[#0C447C]">
+              {error && <p className="text-xs text-red-500">{error}</p>}
+              <button type="submit" disabled={loading}
+                className="bg-[#E8602C] text-white rounded-xl py-3 text-sm font-semibold disabled:opacity-60 hover:bg-[#D04F1E] transition-colors shadow-sm">
                 {loading ? 'Cargando...' : mode === 'login' ? 'Ingresar' : 'Crear cuenta'}
               </button>
             </form>
           )}
+
           <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-gray-100" />
-            <span className="text-xs text-gray-400">o</span>
-            <div className="flex-1 h-px bg-gray-100" />
+            <div className="flex-1 h-px bg-[#F0E8E0]" />
+            <span className="text-xs text-[#A08070]">o</span>
+            <div className="flex-1 h-px bg-[#F0E8E0]" />
           </div>
-          <button onClick={handleMagicLink} disabled={loading} className="border border-gray-200 rounded-lg py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center justify-center gap-2">
+
+          <button onClick={handleMagicLink} disabled={loading}
+            className="border border-[#F0E8E0] rounded-xl py-3 text-sm text-[#6B4F3A] hover:bg-[#FBF7F4] flex items-center justify-center gap-2 transition-colors">
             ✉ Ingresar con magic link
           </button>
-          <p className="text-center text-xs text-gray-500">
+
+          <p className="text-center text-xs text-[#A08070]">
             {mode === 'login' ? '¿No tenés cuenta? ' : '¿Ya tenés cuenta? '}
-            <button onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError('') }} className="text-[#185FA5] hover:underline">
+            <button onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError('') }}
+              className="text-[#E8602C] hover:underline font-medium">
               {mode === 'login' ? 'Registrarte gratis' : 'Iniciar sesión'}
             </button>
           </p>
