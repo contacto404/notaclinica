@@ -153,6 +153,14 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           )}
         </div>
 
+        {/* Exportar historial */}
+        <div className="mt-3 text-center">
+          <a href={"/api/export-historial?patientId=" + id} target="_blank"
+            className="text-xs text-[#A08070] hover:text-[#E8602C] transition-colors underline underline-offset-2">
+            ↓ Exportar historial completo
+          </a>
+        </div>
+
       </div>
     </div>
   )
