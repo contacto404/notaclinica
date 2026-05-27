@@ -1,16 +1,23 @@
 'use client'
+import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
 export default function LogoutButton() {
+  const [loading, setLoading] = useState(false)
   const supabase = createClient()
   const router = useRouter()
 
   async function handleLogout() {
+    setLoading(true)
     await supabase.auth.signOut()
     router.push('/login')
     router.refresh()
   }
+
+  if (loading) return (
+    <p className="text-xs text-gray-400 px-3 py-2">Cerrando sesión...</p>
+  )
 
   return (
     <button
