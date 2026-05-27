@@ -30,9 +30,9 @@ export async function POST(request: NextRequest) {
         },
         {
           type: 'text',
-          text: `Analizá este historial clínico y extraé la información en formato JSON. Respondé SOLO con el JSON, sin texto adicional ni backticks.
+          text: `Analizá este historial clínico y extraé la información en formato JSON. Respondé SOLO con el JSON puro, sin backticks, sin texto adicional, sin markdown.
 
-El JSON debe tener esta estructura:
+El JSON debe tener esta estructura exacta:
 {
   "diagnosticos": ["lista de diagnósticos encontrados"],
   "medicamentos": [{"nombre": "", "dosis": "", "frecuencia": ""}],
@@ -48,9 +48,9 @@ El JSON debe tener esta estructura:
   const text = response.content[0].type === 'text' ? response.content[0].text : ''
 
   try {
-    const extracted = JSON.parse(text)
+    const clean = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+    const extracted = JSON.parse(clean)
 
-    // Guardar sesiones importadas en Supabase
     if (extracted.sesiones && extracted.sesiones.length > 0) {
       for (const sesion of extracted.sesiones) {
         let fecha = new Date()
@@ -80,6 +80,6 @@ El JSON debe tener esta estructura:
 
     return NextResponse.json({ success: true, extracted })
   } catch {
-    return NextResponse.json({ error: 'No se pudo procesar el PDF' }, { status: 500 })
+    return NextResponse.json({ error: 'No se pudo procesar el PDF', raw: text }, { status: 500 })
   }
 }
