@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import AgendarButton from './AgendarButton'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -15,11 +16,17 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
     .from('sessions').select('*, transcriptions(*), summaries(*)')
     .eq('patient_id', id).order('session_date', { ascending: false })
 
+  const { data: appointments } = await supabase
+    .from('appointments').select('*')
+    .eq('patient_id', id).order('appointment_date', { ascending: true })
+
+  const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
+  const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
+
   return (
     <div className="min-h-screen bg-[#FBF7F4] p-5 md:p-8">
       <div className="max-w-3xl mx-auto">
 
-        {/* Volver */}
         <div className="mb-6">
           <a href="/dashboard" className="text-xs text-[#A08070] hover:text-[#2D1F14] transition-colors font-medium">
             ← Volver
@@ -35,6 +42,9 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             <div className="flex-1 min-w-0">
               <h1 className="text-xl font-bold text-[#2D1F14]">{patient.full_name}</h1>
               <p className="text-sm text-[#A08070] mt-0.5">{patient.diagnosis ?? 'Sin diagnóstico'}</p>
+              {patient.phone && (
+                <p className="text-xs text-[#A08070] mt-0.5">📱 {patient.phone}</p>
+              )}
             </div>
             <div className="flex gap-2 w-full sm:w-auto flex-wrap">
               <a href={"/dashboard/pacientes/" + id + "/historial"}
@@ -52,6 +62,41 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">Notas</p>
               <p className="text-sm text-[#6B4F3A]">{patient.notes}</p>
             </div>
+          )}
+        </div>
+
+        {/* Turno */}
+        <div className="bg-white rounded-3xl p-6 mb-4 border border-[#F0E8E0]">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xs font-semibold text-[#A08070] uppercase tracking-widest">Próximo turno</h2>
+            <AgendarButton
+              patientId={id}
+              patientName={patient.full_name}
+              patientPhone={patient.phone}
+              hasAppointment={!!nextAppointment}
+              currentAppointment={nextAppointment}
+              lastSessionId={lastSummarizedSession?.id}
+            />
+          </div>
+          {nextAppointment ? (
+            <div className="bg-[#FDE8C8] rounded-2xl p-4 flex items-center gap-3">
+              <span className="text-2xl">📅</span>
+              <div>
+                <p className="text-sm font-semibold text-[#2D1F14]">
+                  {new Date(nextAppointment.appointment_date).toLocaleDateString('es-AR', {
+                    weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
+                  })}
+                </p>
+                <p className="text-xs text-[#8B4513]">
+                  {new Date(nextAppointment.appointment_date).toLocaleTimeString('es-AR', {
+                    hour: '2-digit', minute: '2-digit'
+                  })}
+                  {nextAppointment.notes && ` · ${nextAppointment.notes}`}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <p className="text-sm text-[#A08070]">No hay turno agendado.</p>
           )}
         </div>
 
