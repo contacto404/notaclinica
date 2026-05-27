@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import AgendarButton from './AgendarButton'
 import ReporteButton from './ReporteButton'
+import ImportarHistorialButton from './ImportarHistorialButton'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -109,7 +110,10 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
 
         {/* Historial */}
         <div className="bg-white rounded-3xl p-6 border border-[#F0E8E0]">
-          <h2 className="text-xs font-semibold text-[#A08070] uppercase tracking-widest mb-5">Historial de sesiones</h2>
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-xs font-semibold text-[#A08070] uppercase tracking-widest">Historial de sesiones</h2>
+            <ImportarHistorialButton patientId={id} />
+          </div>
           {sessions && sessions.length > 0 ? (
             <div className="flex flex-col divide-y divide-[#F5EDE8]">
               {sessions.map((s: any) => (
