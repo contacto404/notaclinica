@@ -15,7 +15,7 @@ export default function AgendarButton({
 }) {
   const [open, setOpen] = useState(false)
   const [date, setDate] = useState('')
-  const [hour, setHour] = useState('')
+  const [hour, setHour] = useState('08')
   const [minute, setMinute] = useState('00')
   const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(false)
@@ -24,7 +24,6 @@ export default function AgendarButton({
 
   const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'))
   const minutes = ['00', '15', '30', '45']
-  const time = hour ? `${hour}:${minute}` : ''
 
   async function handleSave() {
     if (!date || !hour) return
@@ -95,7 +94,6 @@ export default function AgendarButton({
                 <div className="flex gap-2">
                   <select value={hour} onChange={e => setHour(e.target.value)}
                     className="flex-1 border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]">
-                    <option value="">--</option>
                     {hours.map(h => <option key={h} value={h}>{h}hs</option>)}
                   </select>
                   <select value={minute} onChange={e => setMinute(e.target.value)}
@@ -114,12 +112,12 @@ export default function AgendarButton({
             </div>
 
             <div className="flex flex-col gap-2 mt-6">
-              <button onClick={handleSave} disabled={loading || !date || !hour}
+              <button onClick={handleSave} disabled={loading || !date}
                 className="bg-[#E8602C] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#D04F1E] disabled:opacity-50 transition-colors">
                 {loading ? 'Guardando...' : hasAppointment ? 'Guardar nuevo turno' : 'Confirmar turno'}
               </button>
 
-              {patientPhone && date && hour && (
+              {patientPhone && date && (
                 <button onClick={handleWhatsApp}
                   className="bg-[#25D366] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1DA851] transition-colors flex items-center justify-center gap-2">
                   💬 Enviar por WhatsApp
