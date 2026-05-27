@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-5',
       max_tokens: 2000,
       messages: [{
         role: 'user',
@@ -42,18 +42,16 @@ Usá esta estructura (si no encontrás algo, usá array vacío o string vacío):
 
     const text = response.content[0].type === 'text' ? response.content[0].text : '{}'
 
-    // Extraer JSON aunque venga con texto alrededor
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) {
-      return NextResponse.json({ 
-        success: true, 
+      return NextResponse.json({
+        success: true,
         extracted: { diagnosticos: [], medicamentos: [], sesiones: [], indicaciones: '', resumen: 'No se encontró información estructurada en el documento.' }
       })
     }
 
     const extracted = JSON.parse(jsonMatch[0])
 
-    // Guardar sesiones si hay
     if (extracted.sesiones && extracted.sesiones.length > 0) {
       for (const sesion of extracted.sesiones) {
         let fecha = new Date()
