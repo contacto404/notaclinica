@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import EditarResumenButton from './EditarResumenButton'
 
 export default async function SesionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -36,10 +37,23 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
               {new Date(session.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}
             </p>
           </div>
-          <a href={"/api/export-pdf?sessionId=" + id} target="_blank"
-            className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#D04F1E] transition-colors shadow-sm shrink-0">
-            ⬇ Exportar PDF
-          </a>
+          <div className="flex gap-2 flex-wrap">
+            {summary && (
+              <EditarResumenButton
+                summaryId={summary.id}
+                initial={{
+                  chief_complaint: summary.chief_complaint ?? '',
+                  observations: summary.observations ?? '',
+                  plan: summary.plan ?? '',
+                  next_steps: summary.next_steps ?? '',
+                }}
+              />
+            )}
+            <a href={"/api/export-pdf?sessionId=" + id} target="_blank"
+              className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#D04F1E] transition-colors shadow-sm shrink-0">
+              ⬇ Exportar PDF
+            </a>
+          </div>
         </div>
 
         {summary && (
