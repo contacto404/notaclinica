@@ -20,6 +20,7 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
     .from('patients')
     .select('*')
     .eq('id', session.patient_id)
+    .eq('professional_id', user.id)
     .single()
 
   if (!patient) redirect('/dashboard')
