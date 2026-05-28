@@ -51,17 +51,24 @@ export default function LoginPage() {
         <div className="flex-1 bg-[#E8602C] p-10 flex-col justify-between gap-8 hidden md:flex">
           <div>
             <h1 className="text-2xl font-bold text-white">NotaClínica</h1>
-            <p className="text-[#FDDCC8] text-sm mt-2 leading-relaxed">Transcripción y resumen clínico con IA para profesionales de salud mental</p>
+            <p className="text-[#FDDCC8] text-sm mt-2 leading-relaxed">La consulta más organizada de tu carrera</p>
+            <p className="text-[#FDDCC8] text-xs mt-1 leading-relaxed">IA para médicos que quieren enfocarse en sus pacientes, no en el papeleo</p>
           </div>
           <div className="flex flex-col gap-3">
-            {['Grabá o subí el audio de la consulta','Transcripción automática con Whisper','Resumen clínico generado por IA','Exportá el historial en PDF'].map(f => (
+            {[
+              'Ahorrá hasta 30 minutos por consulta',
+              'El historial de tus pacientes, donde estés',
+              'Resúmenes clínicos generados en segundos',
+              'Enviá indicaciones y turnos por WhatsApp',
+              'Importá historiales de cualquier sistema',
+            ].map(f => (
               <div key={f} className="flex items-center gap-3 text-[#FDDCC8] text-sm">
-                <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-xs">✓</span>
+                <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-xs shrink-0">✓</span>
                 {f}
               </div>
             ))}
           </div>
-          <p className="text-[#FDDCC8] text-xs">Para psicólogos, psiquiatras y terapeutas</p>
+          <p className="text-[#FDDCC8] text-xs">Para médicos de todas las especialidades</p>
         </div>
 
         {/* Panel derecho */}
@@ -85,7 +92,7 @@ export default function LoginPage() {
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs text-[#A08070] font-medium">Nombre completo</label>
                   <input type="text" value={name} onChange={e => setName(e.target.value)}
-                    placeholder="Dra. María García" required
+                    placeholder="Dr. Juan García" required
                     className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
                 </div>
               )}
@@ -124,7 +131,7 @@ export default function LoginPage() {
             {mode === 'login' ? '¿No tenés cuenta? ' : '¿Ya tenés cuenta? '}
             <button onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError('') }}
               className="text-[#E8602C] hover:underline font-medium">
-              {mode === 'login' ? 'Registrarte gratis' : 'Iniciar sesión'}
+              {mode === 'login' ? 'Registrate gratis' : 'Iniciar sesión'}
             </button>
           </p>
         </div>
