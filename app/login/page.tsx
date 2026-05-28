@@ -9,7 +9,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [magicSent, setMagicSent] = useState(false)
   const [mode, setMode] = useState<'login' | 'register'>('login')
   const [name, setName] = useState('')
 
@@ -32,14 +31,6 @@ export default function LoginPage() {
     setError('')
     const { error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name } } })
     if (error) { setError(error.message) } else { setMode('login') }
-    setLoading(false)
-  }
-
-  async function handleMagicLink() {
-    if (!email) { setError('Ingresá tu email primero.'); return }
-    setLoading(true)
-    const { error } = await supabase.auth.signInWithOtp({ email })
-    if (error) { setError(error.message) } else { setMagicSent(true) }
     setLoading(false)
   }
 
@@ -82,50 +73,33 @@ export default function LoginPage() {
             </h2>
           </div>
 
-          {magicSent ? (
-            <div className="text-sm text-[#2D6A2D] bg-[#E8F4E8] border border-[#C8E8C8] rounded-2xl p-4">
-              ✓ Revisá tu email para ingresar.
+          <form onSubmit={mode === 'login' ? handleLogin : handleRegister} className="flex flex-col gap-4">
+            {mode === 'register' && (
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs text-[#A08070] font-medium">Nombre completo</label>
+                <input type="text" value={name} onChange={e => setName(e.target.value)}
+                  placeholder="Dr. Juan García" required
+                  className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
+              </div>
+            )}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-[#A08070] font-medium">Correo electrónico</label>
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)}
+                placeholder="tu@email.com" required
+                className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
             </div>
-          ) : (
-            <form onSubmit={mode === 'login' ? handleLogin : handleRegister} className="flex flex-col gap-4">
-              {mode === 'register' && (
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs text-[#A08070] font-medium">Nombre completo</label>
-                  <input type="text" value={name} onChange={e => setName(e.target.value)}
-                    placeholder="Dr. Juan García" required
-                    className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
-                </div>
-              )}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#A08070] font-medium">Correo electrónico</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)}
-                  placeholder="tu@email.com" required
-                  className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#A08070] font-medium">Contraseña</label>
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)}
-                  placeholder="••••••••" required minLength={6}
-                  className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
-              </div>
-              {error && <p className="text-xs text-red-500">{error}</p>}
-              <button type="submit" disabled={loading}
-                className="bg-[#E8602C] text-white rounded-xl py-3 text-sm font-semibold disabled:opacity-60 hover:bg-[#D04F1E] transition-colors shadow-sm">
-                {loading ? 'Cargando...' : mode === 'login' ? 'Ingresar' : 'Crear cuenta'}
-              </button>
-            </form>
-          )}
-
-          <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-[#F0E8E0]" />
-            <span className="text-xs text-[#A08070]">o</span>
-            <div className="flex-1 h-px bg-[#F0E8E0]" />
-          </div>
-
-          <button onClick={handleMagicLink} disabled={loading}
-            className="border border-[#F0E8E0] rounded-xl py-3 text-sm text-[#6B4F3A] hover:bg-[#FBF7F4] flex items-center justify-center gap-2 transition-colors">
-            ✉ Ingresar con magic link
-          </button>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-[#A08070] font-medium">Contraseña</label>
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)}
+                placeholder="••••••••" required minLength={6}
+                className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
+            </div>
+            {error && <p className="text-xs text-red-500">{error}</p>}
+            <button type="submit" disabled={loading}
+              className="bg-[#E8602C] text-white rounded-xl py-3 text-sm font-semibold disabled:opacity-60 hover:bg-[#D04F1E] transition-colors shadow-sm">
+              {loading ? 'Cargando...' : mode === 'login' ? 'Ingresar' : 'Crear cuenta'}
+            </button>
+          </form>
 
           <p className="text-center text-xs text-[#A08070]">
             {mode === 'login' ? '¿No tenés cuenta? ' : '¿Ya tenés cuenta? '}
