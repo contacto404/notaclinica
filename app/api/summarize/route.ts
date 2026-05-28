@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       max_tokens: 1024,
       messages: [{
         role: 'user',
-        content: `Sos un asistente clínico. Analizá la siguiente transcripción de una sesión terapéutica y generá un resumen clínico estructurado.
+        content: `Sos un asistente clínico. Analizá la siguiente transcripción de una consulta médica y generá un resumen clínico estructurado.
 
 Paciente: ${patientName}
 Diagnóstico previo: ${diagnosis || 'No especificado'}
@@ -23,8 +23,8 @@ ${transcription}
 Respondé SOLO con un JSON con esta estructura exacta, sin texto adicional:
 {
   "chief_complaint": "motivo principal de consulta en una oración",
-  "observations": "observaciones clínicas relevantes de la sesión",
-  "plan": "plan terapéutico sugerido",
+  "observations": "observaciones clínicas relevantes de la consulta",
+  "plan": "plan de tratamiento sugerido",
   "next_steps": "próximos pasos concretos"
 }`
       }]

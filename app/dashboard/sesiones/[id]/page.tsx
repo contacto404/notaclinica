@@ -63,7 +63,7 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
               {([
                 ['Motivo de consulta', summary.chief_complaint],
                 ['Observaciones', summary.observations],
-                ['Plan terapéutico', summary.plan],
+                ['Plan de tratamiento', summary.plan],
                 ['Próximos pasos', summary.next_steps]
               ] as [string, string][]).map(([label, value]) => (
                 <div key={label} className="bg-[#FBF7F4] rounded-2xl p-4">

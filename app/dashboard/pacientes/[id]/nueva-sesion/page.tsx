@@ -129,13 +129,13 @@ export default function NuevaSesionPage() {
 
         {(step === 'transcribing' || step === 'summarizing') && (
           <div className="bg-white rounded-3xl border border-[#F0E8E0] p-12 flex flex-col items-center gap-5">
-            <div className="w-10 h-10 border-3 border-[#E8602C] border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-2 border-[#E8602C] border-t-transparent rounded-full animate-spin" />
             <div className="text-center">
               <p className="text-sm font-semibold text-[#2D1F14]">
                 {step === 'transcribing' ? 'Transcribiendo audio...' : 'Generando resumen clínico...'}
               </p>
               <p className="text-xs text-[#A08070] mt-1">
-                {step === 'transcribing' ? 'Usando Whisper de OpenAI' : 'Usando IA para analizar la sesión'}
+                {step === 'transcribing' ? 'Usando Whisper de OpenAI' : 'Usando IA para analizar la consulta'}
               </p>
             </div>
           </div>
@@ -149,7 +149,7 @@ export default function NuevaSesionPage() {
                 {([
                   ['Motivo de consulta', summary.chief_complaint],
                   ['Observaciones', summary.observations],
-                  ['Plan terapéutico', summary.plan],
+                  ['Plan de tratamiento', summary.plan],
                   ['Próximos pasos', summary.next_steps]
                 ] as [string, string][]).map(([label, value]) => (
                   <div key={label} className="bg-[#FBF7F4] rounded-2xl p-4">
