@@ -52,19 +52,19 @@ export default function LoginPage() {
           <div>
             <h1 className="text-2xl font-bold text-white">NotaClínica</h1>
             <p className="text-[#FDDCC8] text-sm mt-2 leading-relaxed">La consulta más organizada de tu carrera</p>
-            <p className="text-[#FDDCC8] text-xs mt-1 leading-relaxed">IA para médicos que quieren enfocarse en sus pacientes, no en el papeleo</p>
+            <p className="text-[#FDDCC8] text-xs mt-1 leading-relaxed">IA para médicos que quieren enfocarse en <strong className="text-white">sus pacientes</strong>, no en el papeleo</p>
           </div>
           <div className="flex flex-col gap-3">
             {[
-              'Ahorrá hasta 30 minutos por consulta',
-              'El historial de tus pacientes, donde estés',
-              'Resúmenes clínicos generados en segundos',
-              'Enviá indicaciones y turnos por WhatsApp',
-              'Importá historiales de cualquier sistema',
-            ].map(f => (
-              <div key={f} className="flex items-center gap-3 text-[#FDDCC8] text-sm">
+              ['Ahorrá hasta ', '30 minutos', ' por consulta'],
+              ['El historial de tus pacientes, ', 'donde estés', ''],
+              ['Resúmenes clínicos generados ', 'en segundos', ''],
+              ['Enviá indicaciones y turnos ', 'por WhatsApp', ''],
+              ['Importá historiales de ', 'cualquier sistema', ''],
+            ].map(([pre, bold, post]) => (
+              <div key={bold} className="flex items-center gap-3 text-[#FDDCC8] text-sm">
                 <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-xs shrink-0">✓</span>
-                {f}
+                <span>{pre}<strong className="text-white">{bold}</strong>{post}</span>
               </div>
             ))}
           </div>
