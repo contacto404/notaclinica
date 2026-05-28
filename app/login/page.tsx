@@ -111,7 +111,7 @@ export default function LoginPage() {
 
           <p className="text-center text-xs text-[#A08070]">
             Al registrarte aceptás nuestra{' '}
-            <a href="/privacidad" className="text-[#E8602C] hover:underline font-medium">
+            <a href="/privacidad" target="_blank" className="text-[#E8602C] hover:underline font-medium">
               Política de Privacidad
             </a>
           </p>
