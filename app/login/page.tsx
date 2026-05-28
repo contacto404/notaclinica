@@ -108,6 +108,14 @@ export default function LoginPage() {
               {mode === 'login' ? 'Registrate gratis' : 'Iniciar sesión'}
             </button>
           </p>
+
+          <p className="text-center text-xs text-[#A08070]">
+            Al registrarte aceptás nuestra{' '}
+            <a href="/privacidad" className="text-[#E8602C] hover:underline font-medium">
+              Política de Privacidad
+            </a>
+          </p>
+
         </div>
       </div>
     </div>
