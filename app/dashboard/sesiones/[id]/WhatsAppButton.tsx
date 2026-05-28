@@ -53,8 +53,6 @@ export default function WhatsAppButton({
     window.open(`https://wa.me/${cleaned}?text=${encodeURIComponent(message)}`, '_blank')
   }
 
-  if (!phone) return null
-
   return (
     <button
       onClick={handleClick}
