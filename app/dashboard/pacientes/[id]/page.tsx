@@ -4,6 +4,7 @@ import AgendarButton from './AgendarButton'
 import ReporteButton from './ReporteButton'
 import ImportarHistorialButton from './ImportarHistorialButton'
 import EditarPacienteButton from './EditarPacienteButton'
+import DarDeBajaButton from './DarDeBajaButton'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -157,12 +158,14 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           )}
         </div>
 
-        {/* Exportar historial */}
-        <div className="mt-3 text-center">
+        {/* Exportar historial y dar de baja */}
+        <div className="mt-3 flex items-center justify-center gap-4">
           <a href={"/api/export-historial?patientId=" + id} target="_blank"
             className="text-xs text-[#A08070] hover:text-[#E8602C] transition-colors underline underline-offset-2">
             ↓ Exportar historial completo
           </a>
+          <span className="text-[#E0D0C0]">·</span>
+          <DarDeBajaButton patientId={id} patientName={patient.full_name} />
         </div>
 
       </div>
