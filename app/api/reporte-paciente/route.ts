@@ -99,13 +99,14 @@ export async function POST(request: NextRequest) {
   if (!user) return NextResponse.json({ error: 'No auth' }, { status: 401 })
 
   const body = await request.json()
-  const { patientId, diagnosis, medications, instructions, nextAppointment } = body
+  const { patientId, sessionId, diagnosis, medications, instructions, nextAppointment } = body
 
   const { data: report, error } = await supabase
     .from('patient_reports')
     .insert({
       patient_id: patientId,
       professional_id: user.id,
+      session_id: sessionId || null,
       diagnosis,
       medications,
       instructions,

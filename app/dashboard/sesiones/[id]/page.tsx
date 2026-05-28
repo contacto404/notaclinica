@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import EditarResumenButton from './EditarResumenButton'
 import WhatsAppButton from './WhatsAppButton'
+import ReporteButton from '@/app/dashboard/pacientes/[id]/ReporteButton'
 
 export default async function SesionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -35,6 +36,12 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
     .gte('appointment_date', new Date().toISOString())
     .order('appointment_date', { ascending: true })
     .limit(1)
+    .maybeSingle()
+
+  const { data: report } = await supabase
+    .from('patient_reports')
+    .select('*')
+    .eq('session_id', id)
     .maybeSingle()
 
   return (
@@ -81,6 +88,13 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
                 nextAppointment={nextAppointment?.appointment_date ?? null}
               />
             )}
+            <ReporteButton
+              patientId={patient.id}
+              patientName={patient.full_name}
+              patientPhone={patient.phone}
+              nextAppointment={nextAppointment ? { appointment_date: nextAppointment.appointment_date } : undefined}
+              sessionId={id}
+            />
             <a href={"/api/export-pdf?sessionId=" + id} target="_blank"
               className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#D04F1E] transition-colors shadow-sm shrink-0">
               ⬇ Exportar PDF
@@ -103,6 +117,48 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
                   <p className="text-sm text-[#2D1F14] leading-relaxed">{value}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {report && (
+          <div className="bg-white rounded-3xl border border-[#F0E8E0] p-6 mb-4">
+            <h2 className="text-xs font-semibold text-[#A08070] uppercase tracking-widest mb-4">Resumen médico</h2>
+            <div className="flex flex-col gap-3">
+              {report.diagnosis && (
+                <div className="bg-[#FBF7F4] rounded-2xl p-4">
+                  <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">Diagnóstico</p>
+                  <p className="text-sm text-[#2D1F14] leading-relaxed">{report.diagnosis}</p>
+                </div>
+              )}
+              {report.medications && report.medications.length > 0 && (
+                <div className="bg-[#FBF7F4] rounded-2xl p-4">
+                  <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-2">Medicamentos</p>
+                  <div className="flex flex-col gap-2">
+                    {report.medications.map((m: any, i: number) => (
+                      <div key={i} className="bg-white rounded-xl p-3">
+                        <p className="text-sm font-semibold text-[#2D1F14]">{m.name}</p>
+                        <p className="text-xs text-[#A08070] mt-0.5">
+                          {m.dose && `${m.dose}`}{m.frequency && ` · ${m.frequency}`}
+                        </p>
+                        {m.notes && <p className="text-xs text-[#A08070] mt-0.5">{m.notes}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {report.instructions && (
+                <div className="bg-[#FBF7F4] rounded-2xl p-4">
+                  <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">Indicaciones</p>
+                  <p className="text-sm text-[#2D1F14] leading-relaxed">{report.instructions}</p>
+                </div>
+              )}
+              <div className="flex justify-end">
+                <a href={`/api/reporte-paciente?reportId=${report.id}`} target="_blank"
+                  className="text-xs text-[#E8602C] hover:underline font-medium">
+                  Ver PDF →
+                </a>
+              </div>
             </div>
           </div>
         )}

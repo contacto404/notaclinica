@@ -2,12 +2,13 @@
 import { useState } from 'react'
 
 export default function ReporteButton({
-  patientId, patientName, patientPhone, nextAppointment
+  patientId, patientName, patientPhone, nextAppointment, sessionId
 }: {
   patientId: string
   patientName: string
   patientPhone?: string
   nextAppointment?: any
+  sessionId?: string
 }) {
   const [open, setOpen] = useState(false)
   const [diagnosis, setDiagnosis] = useState('')
@@ -35,6 +36,7 @@ export default function ReporteButton({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         patientId,
+        sessionId: sessionId || null,
         diagnosis,
         medications: medications.filter(m => m.name),
         instructions,
