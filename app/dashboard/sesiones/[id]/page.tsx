@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import EditarResumenButton from './EditarResumenButton'
+import WhatsAppButton from './WhatsAppButton'
 
 export default async function SesionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -18,6 +19,15 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
   const patient = session.patients
   const summary = session.summaries
   const transcription = session.transcriptions
+
+  const { data: nextAppointment } = await supabase
+    .from('appointments')
+    .select('appointment_date')
+    .eq('patient_id', patient?.id)
+    .gte('appointment_date', new Date().toISOString())
+    .order('appointment_date', { ascending: true })
+    .limit(1)
+    .maybeSingle()
 
   return (
     <div className="min-h-screen bg-[#FBF7F4] p-5 md:p-8">
@@ -47,6 +57,20 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
                   plan: summary.plan ?? '',
                   next_steps: summary.next_steps ?? '',
                 }}
+              />
+            )}
+            {summary && (
+              <WhatsAppButton
+                phone={patient?.phone}
+                patientName={patient?.full_name ?? ''}
+                sessionDate={session.session_date}
+                summary={{
+                  chief_complaint: summary.chief_complaint,
+                  observations: summary.observations,
+                  plan: summary.plan,
+                  next_steps: summary.next_steps,
+                }}
+                nextAppointment={nextAppointment?.appointment_date ?? null}
               />
             )}
             <a href={"/api/export-pdf?sessionId=" + id} target="_blank"
