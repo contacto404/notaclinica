@@ -18,7 +18,9 @@ export default async function DashboardPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1">Bienvenido</p>
-            <h1 className="text-2xl font-semibold text-[#2D1F14]">Tu consulta</h1>
+            <h1 className="text-2xl font-semibold text-[#2D1F14]">
+              {user?.user_metadata?.full_name ?? 'Tu consulta'}
+            </h1>
           </div>
           <a href="/dashboard/pacientes/nuevo"
             className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#D04F1E] transition-colors shadow-sm">
