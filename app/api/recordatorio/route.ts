@@ -1,19 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function GET(request: NextRequest) {
-  // Verificar que viene del cron de Vercel
   const authHeader = request.headers.get('authorization')
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
   }
 
-  const supabase = await createClient()
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
 
-  // Buscar turnos en las próximas 24-25 horas
   const desde = new Date()
   desde.setHours(desde.getHours() + 23)
   const hasta = new Date()
@@ -21,7 +22,7 @@ export async function GET(request: NextRequest) {
 
   const { data: appointments } = await supabase
     .from('appointments')
-    .select('*, patients(*), profiles(*)')
+    .select('*, patients(*)')
     .gte('appointment_date', desde.toISOString())
     .lte('appointment_date', hasta.toISOString())
 
@@ -38,16 +39,14 @@ export async function GET(request: NextRequest) {
       hour: '2-digit', minute: '2-digit'
     })
 
-    // Armar link de WhatsApp
     const phone = patient?.phone?.replace(/\D/g, '') ?? ''
     const mensaje = `Hola ${patient?.full_name}! Te recordamos que mañana tenés consulta médica el ${fecha} a las ${hora}. ¡Te esperamos!`
     const waLink = phone
       ? `https://wa.me/${phone}?text=${encodeURIComponent(mensaje)}`
       : null
 
-    // Obtener email del profesional
-    const { data: { user } } = await supabase.auth.admin.getUserById(apt.professional_id)
-    const emailProfesional = user?.email
+    const { data: userData } = await supabase.auth.admin.getUserById(apt.professional_id)
+    const emailProfesional = userData?.user?.email
 
     if (!emailProfesional) continue
 
