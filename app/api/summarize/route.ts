@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
   try {
     const { transcription, patientName, diagnosis, patientId } = await request.json()
 
-    // Traer las últimas 5 sesiones con resumen del paciente
     let historialTexto = ''
     if (patientId) {
       const { data: sesionesAnteriores } = await supabase
@@ -52,11 +51,19 @@ export async function POST(request: NextRequest) {
       max_tokens: 1024,
       messages: [{
         role: 'user',
-        content: `Sos un asistente clínico. Analizá la siguiente transcripción de una consulta médica y generá un resumen clínico estructurado.
+        content: `Sos un asistente clínico experto. Analizá la siguiente transcripción de una consulta médica entre un médico y su paciente.
 
-Paciente: ${patientName}
-Diagnóstico previo: ${diagnosis || 'No especificado'}
+CONTEXTO:
+- Paciente: ${patientName}
+- Diagnóstico previo: ${diagnosis || 'No especificado'}
 ${historialSection}
+INSTRUCCIONES IMPORTANTES:
+La transcripción contiene el diálogo entre DOS personas: el médico y el paciente. No están etiquetados explícitamente, pero podés inferirlo por el contexto:
+- El MÉDICO hace preguntas clínicas, evalúa síntomas, propone tratamientos y da indicaciones
+- El PACIENTE describe sus síntomas, responde preguntas y relata su experiencia
+
+Analizá el diálogo completo considerando ambos roles para generar un resumen clínico preciso desde la perspectiva del médico.
+
 TRANSCRIPCIÓN DE LA SESIÓN DE HOY:
 ${transcription}
 
@@ -64,10 +71,10 @@ ${historialTexto ? 'Considerá la evolución del paciente respecto a las sesione
 
 Respondé SOLO con un JSON con esta estructura exacta, sin texto adicional:
 {
-  "chief_complaint": "motivo principal de consulta en una oración",
-  "observations": "observaciones clínicas relevantes, incluyendo evolución respecto a sesiones anteriores si corresponde",
-  "plan": "plan de tratamiento sugerido",
-  "next_steps": "próximos pasos concretos"
+  "chief_complaint": "motivo principal de consulta expresado por el paciente en una oración",
+  "observations": "observaciones clínicas del médico basadas en lo que reportó el paciente y lo evaluado en consulta, incluyendo evolución respecto a sesiones anteriores si corresponde",
+  "plan": "plan de tratamiento acordado o indicado por el médico",
+  "next_steps": "próximos pasos concretos indicados por el médico al paciente"
 }`
       }]
     })
