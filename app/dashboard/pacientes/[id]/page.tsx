@@ -38,7 +38,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         </div>
 
         <div className="bg-white rounded-3xl p-6 mb-4 border border-[#F0E8E0]">
-          <div className="flex items-start gap-4 flex-wrap">
+          <div className="flex items-start gap-4">
             <div className="w-16 h-16 rounded-full bg-[#FDE8C8] flex items-center justify-center text-2xl font-bold text-[#E8602C] shrink-0">
               {patient.full_name?.[0]}
             </div>
@@ -52,18 +52,18 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                 <p className="text-xs text-[#A08070] mt-0.5">📱 {patient.phone}</p>
               )}
             </div>
-            <div className="flex gap-2 w-full sm:w-auto flex-wrap">
-              <a href={"/dashboard/pacientes/" + id + "/historial"} className="border border-[#E0D0C0] text-[#6B4F3A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#FBF7F4] flex items-center gap-2 flex-1 sm:flex-none justify-center transition-colors">
-                🔍 Historial IA
-              </a>
-              <ReporteButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} nextAppointment={nextAppointment} />
-              <a href="https://zoom.us/start/videomeeting" target="_blank" rel="noopener noreferrer" className="border border-[#E0D0C0] text-[#6B4F3A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#FBF7F4] flex items-center gap-2 flex-1 sm:flex-none justify-center transition-colors">
-                📹 Videollamada
-              </a>
-              <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#D04F1E] flex items-center gap-2 flex-1 sm:flex-none justify-center transition-colors shadow-sm">
-                🎙️ Nueva sesión
-              </a>
-            </div>
+          </div>
+          <div className="flex gap-2 mt-4 flex-wrap">
+            <a href={"/dashboard/pacientes/" + id + "/historial"} className="border border-[#E0D0C0] text-[#6B4F3A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#FBF7F4] flex items-center gap-2 transition-colors">
+              🔍 Historial IA
+            </a>
+            <ReporteButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} nextAppointment={nextAppointment} />
+            <a href="https://zoom.us/start/videomeeting" target="_blank" rel="noopener noreferrer" className="border border-[#E0D0C0] text-[#6B4F3A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#FBF7F4] flex items-center gap-2 transition-colors">
+              📹 Videollamada
+            </a>
+            <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#D04F1E] flex items-center gap-2 transition-colors shadow-sm">
+              🎙️ Nueva sesión
+            </a>
           </div>
           {patient.notes && (
             <div className="mt-5 pt-4 border-t border-[#F0E8E0]">
