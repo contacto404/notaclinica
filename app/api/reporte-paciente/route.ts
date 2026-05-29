@@ -28,18 +28,18 @@ export async function GET(request: NextRequest) {
 <meta charset="UTF-8">
 <style>
   body { font-family: Arial, sans-serif; margin: 40px; color: #1a1a1a; }
-  .header { border-bottom: 2px solid #E8602C; padding-bottom: 16px; margin-bottom: 24px; }
-  .logo { font-size: 20px; font-weight: bold; color: #E8602C; }
+  .header { border-bottom: 2px solid #2563EB; padding-bottom: 16px; margin-bottom: 24px; }
+  .logo { font-size: 20px; font-weight: bold; color: #2563EB; }
   .title { font-size: 14px; color: #888; margin-top: 4px; }
   .patient-name { font-size: 22px; font-weight: bold; margin-bottom: 4px; }
   .patient-meta { font-size: 14px; color: #666; margin-bottom: 24px; }
   .section { margin-bottom: 20px; }
-  .section-label { font-size: 11px; color: #A08070; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; font-weight: bold; }
-  .section-content { font-size: 14px; line-height: 1.6; background: #FBF7F4; padding: 12px; border-radius: 8px; }
-  .med-row { display: flex; flex-direction: column; padding: 10px 12px; background: #FBF7F4; border-radius: 8px; margin-bottom: 8px; }
+  .section-label { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; font-weight: bold; }
+  .section-content { font-size: 14px; line-height: 1.6; background: #F8FAFC; padding: 12px; border-radius: 8px; }
+  .med-row { display: flex; flex-direction: column; padding: 10px 12px; background: #F8FAFC; border-radius: 8px; margin-bottom: 8px; }
   .med-name { font-weight: bold; font-size: 14px; }
   .med-detail { font-size: 13px; color: #666; margin-top: 2px; }
-  .next-apt { background: #FDE8C8; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: bold; color: #8B4513; text-align: center; }
+  .next-apt { background: #DBEAFE; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: bold; color: #1E40AF; text-align: center; }
   .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; font-size: 12px; color: #aaa; text-align: center; }
 </style>
 </head>

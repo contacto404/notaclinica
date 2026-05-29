@@ -46,20 +46,20 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
     .maybeSingle()
 
   return (
-    <div className="min-h-screen bg-[#FBF7F4] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
       <div className="max-w-2xl mx-auto">
 
         <div className="mb-6">
-          <a href={"/dashboard/pacientes/" + patient.id} className="text-xs text-[#A08070] hover:text-[#2D1F14] transition-colors font-medium">
+          <a href={"/dashboard/pacientes/" + patient.id} className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium">
             ← Volver al paciente
           </a>
         </div>
 
         <div className="flex items-start justify-between gap-4 mb-6 flex-wrap">
           <div>
-            <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1">Sesión</p>
-            <h1 className="text-2xl font-bold text-[#2D1F14]">{patient.full_name}</h1>
-            <p className="text-sm text-[#A08070] mt-0.5">
+            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Sesión</p>
+            <h1 className="text-2xl font-bold text-[#0F172A]">{patient.full_name}</h1>
+            <p className="text-sm text-[#64748B] mt-0.5">
               {new Date(session.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}
             </p>
           </div>
@@ -97,7 +97,7 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
               sessionId={id}
             />
             <a href={"/api/export-pdf?sessionId=" + id} target="_blank"
-              className="bg-[#E8602C] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#D04F1E] transition-colors shadow-sm shrink-0">
+              className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#1D4ED8] transition-colors shadow-sm shrink-0">
               ⬇ Exportar PDF
             </a>
           </div>

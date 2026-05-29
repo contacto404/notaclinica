@@ -35,11 +35,11 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FBF7F4] flex items-center justify-center p-4">
-      <div className="w-full max-w-3xl flex rounded-3xl overflow-hidden shadow-lg border border-[#F0E8E0]">
+    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-4">
+      <div className="w-full max-w-3xl flex rounded-3xl overflow-hidden shadow-lg border border-[#E2E8F0]">
 
         {/* Panel izquierdo */}
-        <div className="flex-1 bg-[#E8602C] p-10 flex-col justify-between gap-8 hidden md:flex">
+        <div className="flex-1 bg-[#2563EB] p-10 flex-col justify-between gap-8 hidden md:flex">
           <div>
             <h1 className="text-2xl font-bold text-white">NotaClínica</h1>
             <p className="text-[#FDDCC8] text-sm mt-2 leading-relaxed">La consulta más organizada de tu carrera</p>
@@ -65,10 +65,10 @@ export default function LoginPage() {
         {/* Panel derecho */}
         <div className="w-full md:w-[380px] p-10 bg-white flex flex-col justify-center gap-5 flex-shrink-0">
           <div>
-            <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1">
+            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">
               {mode === 'login' ? 'Bienvenido' : 'Crear cuenta'}
             </p>
-            <h2 className="text-2xl font-bold text-[#2D1F14]">
+            <h2 className="text-2xl font-bold text-[#0F172A]">
               {mode === 'login' ? 'Iniciá sesión' : 'Registrate gratis'}
             </h2>
           </div>
@@ -76,42 +76,42 @@ export default function LoginPage() {
           <form onSubmit={mode === 'login' ? handleLogin : handleRegister} className="flex flex-col gap-4">
             {mode === 'register' && (
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#A08070] font-medium">Nombre completo</label>
+                <label className="text-xs text-[#64748B] font-medium">Nombre completo</label>
                 <input type="text" value={name} onChange={e => setName(e.target.value)}
                   placeholder="Dr. Juan García" required
-                  className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
+                  className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
               </div>
             )}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#A08070] font-medium">Correo electrónico</label>
+              <label className="text-xs text-[#64748B] font-medium">Correo electrónico</label>
               <input type="email" value={email} onChange={e => setEmail(e.target.value)}
                 placeholder="tu@email.com" required
-                className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
+                className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#A08070] font-medium">Contraseña</label>
+              <label className="text-xs text-[#64748B] font-medium">Contraseña</label>
               <input type="password" value={password} onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••" required minLength={6}
-                className="border border-[#F0E8E0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4]" />
+                className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
             </div>
             {error && <p className="text-xs text-red-500">{error}</p>}
             <button type="submit" disabled={loading}
-              className="bg-[#E8602C] text-white rounded-xl py-3 text-sm font-semibold disabled:opacity-60 hover:bg-[#D04F1E] transition-colors shadow-sm">
+              className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold disabled:opacity-60 hover:bg-[#1D4ED8] transition-colors shadow-sm">
               {loading ? 'Cargando...' : mode === 'login' ? 'Ingresar' : 'Crear cuenta'}
             </button>
           </form>
 
-          <p className="text-center text-xs text-[#A08070]">
+          <p className="text-center text-xs text-[#64748B]">
             {mode === 'login' ? '¿No tenés cuenta? ' : '¿Ya tenés cuenta? '}
             <button onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError('') }}
-              className="text-[#E8602C] hover:underline font-medium">
+              className="text-[#2563EB] hover:underline font-medium">
               {mode === 'login' ? 'Registrate gratis' : 'Iniciar sesión'}
             </button>
           </p>
 
-          <p className="text-center text-xs text-[#A08070]">
+          <p className="text-center text-xs text-[#64748B]">
             Al registrarte aceptás nuestra{' '}
-            <a href="/privacidad" target="_blank" className="text-[#E8602C] hover:underline font-medium">
+            <a href="/privacidad" target="_blank" className="text-[#2563EB] hover:underline font-medium">
               Política de Privacidad
             </a>
           </p>

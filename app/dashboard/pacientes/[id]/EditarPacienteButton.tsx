@@ -42,54 +42,54 @@ export default function EditarPacienteButton({ patient }: {
   return (
     <>
       <button onClick={() => setOpen(true)}
-        className="text-[#A08070] hover:text-[#E8602C] transition-colors p-1 rounded-lg hover:bg-[#FDE8C8]"
+        className="text-[#64748B] hover:text-[#2563EB] transition-colors p-1 rounded-lg hover:bg-[#DBEAFE]"
         title="Editar paciente">
         ✏️
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-sm border border-[#F0E8E0] shadow-xl my-4">
-            <h3 className="text-base font-bold text-[#2D1F14] mb-5">Editar paciente</h3>
+          <div className="bg-white rounded-3xl p-6 w-full max-w-sm border border-[#E2E8F0] shadow-xl my-4">
+            <h3 className="text-base font-bold text-[#0F172A] mb-5">Editar paciente</h3>
 
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Nombre completo *</label>
+                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Nombre completo *</label>
                 <input type="text" value={fields.full_name} onChange={e => setFields(p => ({ ...p, full_name: e.target.value }))}
-                  className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] text-[#2D1F14]" />
+                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Fecha de nacimiento</label>
+                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Fecha de nacimiento</label>
                 <input type="date" value={fields.date_of_birth} onChange={e => setFields(p => ({ ...p, date_of_birth: e.target.value }))}
-                  className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] text-[#2D1F14]" />
+                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Diagnóstico</label>
+                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Diagnóstico</label>
                 <input type="text" value={fields.diagnosis} onChange={e => setFields(p => ({ ...p, diagnosis: e.target.value }))}
                   placeholder="Ansiedad generalizada"
-                  className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] text-[#2D1F14]" />
+                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Teléfono (WhatsApp)</label>
+                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Teléfono (WhatsApp)</label>
                 <input type="tel" value={fields.phone} onChange={e => setFields(p => ({ ...p, phone: e.target.value }))}
                   placeholder="+54 9 11 1234 5678"
-                  className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] text-[#2D1F14]" />
+                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Notas</label>
+                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Notas</label>
                 <textarea value={fields.notes} onChange={e => setFields(p => ({ ...p, notes: e.target.value }))} rows={3}
                   placeholder="Observaciones..."
-                  className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] resize-none text-[#2D1F14]" />
+                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] resize-none text-[#0F172A]" />
               </div>
             </div>
 
             <div className="flex flex-col gap-2 mt-6">
               <button onClick={handleSave} disabled={loading || !fields.full_name}
-                className="bg-[#E8602C] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#D04F1E] disabled:opacity-50 transition-colors">
+                className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1D4ED8] disabled:opacity-50 transition-colors">
                 {loading ? 'Guardando...' : 'Guardar cambios'}
               </button>
               <button onClick={() => setOpen(false)}
-                className="text-sm text-[#A08070] hover:text-[#2D1F14] py-2 transition-colors">
+                className="text-sm text-[#64748B] hover:text-[#0F172A] py-2 transition-colors">
                 Cancelar
               </button>
             </div>

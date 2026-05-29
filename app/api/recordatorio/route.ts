@@ -56,19 +56,19 @@ export async function GET(request: NextRequest) {
       subject: `Recordatorio: ${patient?.full_name} mañana a las ${hora}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 24px;">
-          <h2 style="color: #E8602C;">NotaClínica</h2>
-          <p style="color: #2D1F14;">Tenés una consulta mañana:</p>
-          <div style="background: #FDE8C8; border-radius: 12px; padding: 16px; margin: 16px 0;">
-            <p style="margin: 0; font-weight: bold; color: #2D1F14; font-size: 18px;">${patient?.full_name}</p>
-            <p style="margin: 4px 0 0; color: #8B4513;">${fecha} a las ${hora}</p>
-            ${apt.notes ? `<p style="margin: 4px 0 0; color: #8B4513; font-size: 13px;">${apt.notes}</p>` : ''}
+          <h2 style="color: #2563EB;">NotaClínica</h2>
+          <p style="color: #0F172A;">Tenés una consulta mañana:</p>
+          <div style="background: #DBEAFE; border-radius: 12px; padding: 16px; margin: 16px 0;">
+            <p style="margin: 0; font-weight: bold; color: #0F172A; font-size: 18px;">${patient?.full_name}</p>
+            <p style="margin: 4px 0 0; color: #1E40AF;">${fecha} a las ${hora}</p>
+            ${apt.notes ? `<p style="margin: 4px 0 0; color: #1E40AF; font-size: 13px;">${apt.notes}</p>` : ''}
           </div>
           ${waLink ? `
           <a href="${waLink}" style="display: inline-block; background: #25D366; color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 8px;">
             💬 Enviar recordatorio por WhatsApp
           </a>
-          <p style="color: #A08070; font-size: 12px; margin-top: 8px;">Al tocar el botón se abre WhatsApp con el mensaje listo para enviar.</p>
-          ` : '<p style="color: #A08070; font-size: 13px;">Este paciente no tiene teléfono registrado.</p>'}
+          <p style="color: #64748B; font-size: 12px; margin-top: 8px;">Al tocar el botón se abre WhatsApp con el mensaje listo para enviar.</p>
+          ` : '<p style="color: #64748B; font-size: 13px;">Este paciente no tiene teléfono registrado.</p>'}
         </div>
       `
     })

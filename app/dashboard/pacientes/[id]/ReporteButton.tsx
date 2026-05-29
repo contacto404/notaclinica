@@ -74,63 +74,63 @@ export default function ReporteButton({
   return (
     <>
       <button onClick={() => setOpen(true)}
-        className="border border-[#E0D0C0] text-[#6B4F3A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#FBF7F4] flex items-center gap-2 transition-colors">
+        className="border border-[#E0D0C0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
         📋 Resumen médico
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-lg border border-[#F0E8E0] shadow-xl my-4">
+          <div className="bg-white rounded-3xl p-6 w-full max-w-lg border border-[#E2E8F0] shadow-xl my-4">
 
             {!reportUrl ? (
               <>
-                <h3 className="text-base font-bold text-[#2D1F14] mb-5">Resumen médico — {patientName}</h3>
+                <h3 className="text-base font-bold text-[#0F172A] mb-5">Resumen médico — {patientName}</h3>
 
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Diagnóstico</label>
+                    <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Diagnóstico</label>
                     <textarea value={diagnosis} onChange={e => setDiagnosis(e.target.value)} rows={2}
                       placeholder="Ej: Hipertensión arterial"
-                      className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] resize-none" />
+                      className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] resize-none" />
                   </div>
 
                   <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between">
-                      <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Medicamentos</label>
-                      <button onClick={addMed} className="text-xs text-[#E8602C] font-medium hover:underline">+ Agregar</button>
+                      <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Medicamentos</label>
+                      <button onClick={addMed} className="text-xs text-[#2563EB] font-medium hover:underline">+ Agregar</button>
                     </div>
                     {medications.map((m, i) => (
-                      <div key={i} className="bg-[#FBF7F4] rounded-xl p-3 flex flex-col gap-2">
+                      <div key={i} className="bg-[#F8FAFC] rounded-xl p-3 flex flex-col gap-2">
                         <div className="flex gap-2">
                           <input value={m.name} onChange={e => updateMed(i, 'name', e.target.value)}
                             placeholder="Nombre del medicamento"
-                            className="flex-1 border border-[#F0E8E0] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#E8602C] bg-white" />
-                          <button onClick={() => removeMed(i)} className="text-[#A08070] hover:text-red-500 text-lg px-1">×</button>
+                            className="flex-1 border border-[#E2E8F0] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#2563EB] bg-white" />
+                          <button onClick={() => removeMed(i)} className="text-[#64748B] hover:text-red-500 text-lg px-1">×</button>
                         </div>
                         <div className="flex gap-2">
                           <input value={m.dose} onChange={e => updateMed(i, 'dose', e.target.value)}
                             placeholder="Dosis (ej: 10mg)"
-                            className="flex-1 border border-[#F0E8E0] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#E8602C] bg-white" />
+                            className="flex-1 border border-[#E2E8F0] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#2563EB] bg-white" />
                           <input value={m.frequency} onChange={e => updateMed(i, 'frequency', e.target.value)}
                             placeholder="Frecuencia (ej: 1 vez/día)"
-                            className="flex-1 border border-[#F0E8E0] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#E8602C] bg-white" />
+                            className="flex-1 border border-[#E2E8F0] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#2563EB] bg-white" />
                         </div>
                         <input value={m.notes} onChange={e => updateMed(i, 'notes', e.target.value)}
                           placeholder="Notas (ej: tomar con comida)"
-                          className="border border-[#F0E8E0] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#E8602C] bg-white" />
+                          className="border border-[#E2E8F0] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#2563EB] bg-white" />
                       </div>
                     ))}
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs text-[#A08070] font-medium uppercase tracking-widest">Indicaciones generales</label>
+                    <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Indicaciones generales</label>
                     <textarea value={instructions} onChange={e => setInstructions(e.target.value)} rows={3}
                       placeholder="Ej: Evitar alcohol, descansar 8 horas..."
-                      className="border border-[#F0E8E0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] bg-[#FBF7F4] resize-none" />
+                      className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] resize-none" />
                   </div>
 
                   {nextAppointment && (
-                    <div className="bg-[#FDE8C8] rounded-xl p-3 text-sm text-[#8B4513]">
+                    <div className="bg-[#DBEAFE] rounded-xl p-3 text-sm text-[#1E40AF]">
                       📅 Próxima consulta: <strong>{new Date(nextAppointment.appointment_date).toLocaleDateString('es-AR', { weekday: 'long', day: '2-digit', month: 'long' })}</strong>
                     </div>
                   )}
@@ -138,19 +138,19 @@ export default function ReporteButton({
 
                 <div className="flex flex-col gap-2 mt-6">
                   <button onClick={handleGenerate} disabled={loading}
-                    className="bg-[#E8602C] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#D04F1E] disabled:opacity-50 transition-colors">
+                    className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1D4ED8] disabled:opacity-50 transition-colors">
                     {loading ? 'Generando...' : '📋 Generar resumen'}
                   </button>
                   <button onClick={handleClose}
-                    className="text-sm text-[#A08070] hover:text-[#2D1F14] py-2 transition-colors">
+                    className="text-sm text-[#64748B] hover:text-[#0F172A] py-2 transition-colors">
                     Cancelar
                   </button>
                 </div>
               </>
             ) : (
               <>
-                <h3 className="text-base font-bold text-[#2D1F14] mb-2">✅ Resumen generado</h3>
-                <p className="text-xs text-[#A08070] mb-5">Ahora podés enviarlo al paciente o verlo en el navegador.</p>
+                <h3 className="text-base font-bold text-[#0F172A] mb-2">✅ Resumen generado</h3>
+                <p className="text-xs text-[#64748B] mb-5">Ahora podés enviarlo al paciente o verlo en el navegador.</p>
 
                 <div className="flex flex-col gap-2">
                   {patientPhone && (
@@ -160,11 +160,11 @@ export default function ReporteButton({
                     </button>
                   )}
                   <a href={reportUrl} target="_blank"
-                    className="border border-[#F0E8E0] text-[#6B4F3A] rounded-xl py-3 text-sm font-medium hover:bg-[#FBF7F4] transition-colors flex items-center justify-center gap-2">
+                    className="border border-[#E2E8F0] text-[#475569] rounded-xl py-3 text-sm font-medium hover:bg-[#F8FAFC] transition-colors flex items-center justify-center gap-2">
                     👁 Ver resumen
                   </a>
                   <button onClick={handleClose}
-                    className="text-sm text-[#A08070] hover:text-[#2D1F14] py-2 transition-colors">
+                    className="text-sm text-[#64748B] hover:text-[#0F172A] py-2 transition-colors">
                     Cerrar
                   </button>
                 </div>

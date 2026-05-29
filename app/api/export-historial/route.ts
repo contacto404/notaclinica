@@ -42,19 +42,19 @@ export async function GET(request: NextRequest) {
 <meta charset="UTF-8">
 <style>
   body { font-family: Arial, sans-serif; margin: 40px; color: #1a1a1a; font-size: 13px; }
-  .header { border-bottom: 2px solid #E8602C; padding-bottom: 16px; margin-bottom: 24px; }
-  .logo { font-size: 18px; font-weight: bold; color: #E8602C; }
+  .header { border-bottom: 2px solid #2563EB; padding-bottom: 16px; margin-bottom: 24px; }
+  .logo { font-size: 18px; font-weight: bold; color: #2563EB; }
   .titulo { font-size: 13px; color: #888; margin-top: 2px; }
-  .paciente-nombre { font-size: 22px; font-weight: bold; margin-bottom: 4px; color: #2D1F14; }
-  .paciente-meta { font-size: 13px; color: #A08070; margin-bottom: 8px; }
-  .total { font-size: 12px; color: #A08070; margin-bottom: 28px; }
+  .paciente-nombre { font-size: 22px; font-weight: bold; margin-bottom: 4px; color: #0F172A; }
+  .paciente-meta { font-size: 13px; color: #64748B; margin-bottom: 8px; }
+  .total { font-size: 12px; color: #64748B; margin-bottom: 28px; }
   .sesion { margin-bottom: 20px; }
-  .sesion-fecha { font-size: 14px; font-weight: bold; color: #E8602C; margin-bottom: 10px; }
-  .campo { background: #FBF7F4; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
-  .campo-label { font-size: 10px; color: #A08070; text-transform: uppercase; letter-spacing: 0.08em; font-weight: bold; margin-bottom: 4px; }
-  .campo-valor { font-size: 13px; color: #2D1F14; line-height: 1.5; }
-  .transcripcion { border-left: 3px solid #E8602C; padding-left: 12px; margin-top: 8px; color: #6B4F3A; line-height: 1.6; }
-  .divisor { border: none; border-top: 1px solid #F0E8E0; margin: 24px 0; }
+  .sesion-fecha { font-size: 14px; font-weight: bold; color: #2563EB; margin-bottom: 10px; }
+  .campo { background: #F8FAFC; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+  .campo-label { font-size: 10px; color: #64748B; text-transform: uppercase; letter-spacing: 0.08em; font-weight: bold; margin-bottom: 4px; }
+  .campo-valor { font-size: 13px; color: #0F172A; line-height: 1.5; }
+  .transcripcion { border-left: 3px solid #2563EB; padding-left: 12px; margin-top: 8px; color: #475569; line-height: 1.6; }
+  .divisor { border: none; border-top: 1px solid #E2E8F0; margin: 24px 0; }
   .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; font-size: 11px; color: #aaa; text-align: center; }
 </style>
 </head>
@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
   <div class="paciente-nombre">${patient.full_name}</div>
   <div class="paciente-meta">Diagnóstico: ${patient.diagnosis ?? 'No especificado'}${patient.phone ? ` · ${patient.phone}` : ''}</div>
   <div class="total">${sessions?.length ?? 0} sesiones registradas · Exportado el ${new Date().toLocaleDateString('es-AR')}</div>
-  ${sesionesHTML || '<p style="color:#A08070">No hay sesiones completadas.</p>'}
+  ${sesionesHTML || '<p style="color:#64748B">No hay sesiones completadas.</p>'}
   <div class="footer">Generado por NotaClínica · ${new Date().toLocaleDateString('es-AR')}</div>
 </body>
 </html>`

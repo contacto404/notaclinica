@@ -1,18 +1,18 @@
 export default function PrivacidadPage() {
   return (
-    <div className="min-h-screen bg-[#FBF7F4] p-5 md:p-12">
+    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-12">
       <div className="max-w-2xl mx-auto">
 
         <div className="mb-8">
-          <a href="/login" className="text-xs text-[#A08070] hover:text-[#2D1F14] transition-colors font-medium">
+          <a href="/login" className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium">
             ← Volver
           </a>
         </div>
 
         <div className="mb-8">
-          <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1">Legal</p>
-          <h1 className="text-3xl font-bold text-[#2D1F14]">Política de Privacidad</h1>
-          <p className="text-sm text-[#A08070] mt-1">Última actualización: mayo de 2026</p>
+          <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Legal</p>
+          <h1 className="text-3xl font-bold text-[#0F172A]">Política de Privacidad</h1>
+          <p className="text-sm text-[#64748B] mt-1">Última actualización: mayo de 2026</p>
         </div>
 
         <div className="flex flex-col gap-6">
@@ -27,13 +27,13 @@ export default function PrivacidadPage() {
               content: null,
               extra: (
                 <div className="flex flex-col gap-3">
-                  <div className="bg-[#FBF7F4] rounded-2xl p-4">
-                    <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">Del profesional de salud</p>
-                    <p className="text-sm text-[#2D1F14] leading-relaxed">Nombre, correo electrónico, contraseña e información de perfil profesional.</p>
+                  <div className="bg-[#F8FAFC] rounded-2xl p-4">
+                    <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Del profesional de salud</p>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">Nombre, correo electrónico, contraseña e información de perfil profesional.</p>
                   </div>
-                  <div className="bg-[#FBF7F4] rounded-2xl p-4">
-                    <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">De los pacientes (ingresados por el profesional)</p>
-                    <p className="text-sm text-[#2D1F14] leading-relaxed">Nombre completo, teléfono, fecha de nacimiento, diagnósticos, notas clínicas, transcripciones de sesiones, resúmenes generados por IA y agenda de turnos.</p>
+                  <div className="bg-[#F8FAFC] rounded-2xl p-4">
+                    <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">De los pacientes (ingresados por el profesional)</p>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">Nombre completo, teléfono, fecha de nacimiento, diagnósticos, notas clínicas, transcripciones de sesiones, resúmenes generados por IA y agenda de turnos.</p>
                   </div>
                 </div>
               )
@@ -59,18 +59,18 @@ export default function PrivacidadPage() {
               content: null,
               extra: (
                 <div className="flex flex-col gap-3">
-                  <p className="text-sm text-[#2D1F14] leading-relaxed">El usuario tiene derecho a acceder, rectificar, cancelar y oponerse al tratamiento de sus datos. Para ejercerlos: <span className="text-[#E8602C]">contacto@vibraco.com.uy</span></p>
-                  <div className="bg-[#FBF7F4] rounded-2xl p-4">
-                    <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">Uruguay</p>
-                    <p className="text-sm text-[#2D1F14] leading-relaxed">Ley 18.331 de Protección de Datos Personales. Organismo de control: URCDP.</p>
+                  <p className="text-sm text-[#0F172A] leading-relaxed">El usuario tiene derecho a acceder, rectificar, cancelar y oponerse al tratamiento de sus datos. Para ejercerlos: <span className="text-[#2563EB]">contacto@vibraco.com.uy</span></p>
+                  <div className="bg-[#F8FAFC] rounded-2xl p-4">
+                    <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Uruguay</p>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">Ley 18.331 de Protección de Datos Personales. Organismo de control: URCDP.</p>
                   </div>
-                  <div className="bg-[#FBF7F4] rounded-2xl p-4">
-                    <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">Argentina</p>
-                    <p className="text-sm text-[#2D1F14] leading-relaxed">Ley 25.326 de Protección de Datos Personales. Organismo de control: AAIP.</p>
+                  <div className="bg-[#F8FAFC] rounded-2xl p-4">
+                    <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Argentina</p>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">Ley 25.326 de Protección de Datos Personales. Organismo de control: AAIP.</p>
                   </div>
-                  <div className="bg-[#FBF7F4] rounded-2xl p-4">
-                    <p className="text-xs text-[#A08070] font-medium uppercase tracking-widest mb-1.5">Resto de Latinoamérica</p>
-                    <p className="text-sm text-[#2D1F14] leading-relaxed">Se aplican los principios generales de protección de datos conforme a la legislación local vigente en cada país.</p>
+                  <div className="bg-[#F8FAFC] rounded-2xl p-4">
+                    <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Resto de Latinoamérica</p>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">Se aplican los principios generales de protección de datos conforme a la legislación local vigente en cada país.</p>
                   </div>
                 </div>
               )
@@ -92,16 +92,16 @@ export default function PrivacidadPage() {
               content: 'Para consultas sobre privacidad: contacto@vibraco.com.uy'
             },
           ].map(({ title, content, extra }) => (
-            <div key={title} className="bg-white rounded-3xl border border-[#F0E8E0] p-6">
-              <h2 className="text-sm font-bold text-[#2D1F14] mb-3">{title}</h2>
-              {content && <p className="text-sm text-[#6B4F3A] leading-relaxed">{content}</p>}
+            <div key={title} className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
+              <h2 className="text-sm font-bold text-[#0F172A] mb-3">{title}</h2>
+              {content && <p className="text-sm text-[#475569] leading-relaxed">{content}</p>}
               {extra}
             </div>
           ))}
 
         </div>
 
-        <p className="text-center text-xs text-[#A08070] mt-8">© 2026 Sortiplan SA · NotaClínica</p>
+        <p className="text-center text-xs text-[#64748B] mt-8">© 2026 Sortiplan SA · NotaClínica</p>
 
       </div>
     </div>

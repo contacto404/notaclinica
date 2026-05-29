@@ -21,17 +21,17 @@ export default function SuscripcionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FBF7F4] flex items-center justify-center p-5">
+    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-5">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[#2D1F14] mb-2">NotaClínica Pro</h1>
-          <p className="text-[#A08070]">Documentación clínica con IA para médicos</p>
+          <h1 className="text-3xl font-bold text-[#0F172A] mb-2">NotaClínica Pro</h1>
+          <p className="text-[#64748B]">Documentación clínica con IA para médicos</p>
         </div>
 
-        <div className="bg-white rounded-3xl border border-[#F0E8E0] p-8 mb-4">
+        <div className="bg-white rounded-3xl border border-[#E2E8F0] p-8 mb-4">
           <div className="text-center mb-6">
-            <p className="text-5xl font-bold text-[#2D1F14]">$49<span className="text-xl font-normal text-[#A08070]">/mes</span></p>
-            <p className="text-sm text-[#E8602C] font-medium mt-1">14 días gratis, cancelá cuando quieras</p>
+            <p className="text-5xl font-bold text-[#0F172A]">$49<span className="text-xl font-normal text-[#64748B]">/mes</span></p>
+            <p className="text-sm text-[#2563EB] font-medium mt-1">14 días gratis, cancelá cuando quieras</p>
           </div>
 
           <div className="flex flex-col gap-3 mb-8">
@@ -45,20 +45,20 @@ export default function SuscripcionPage() {
               '✓ Videollamadas integradas',
               '✓ Pacientes ilimitados',
             ].map(f => (
-              <p key={f} className="text-sm text-[#2D1F14]">{f}</p>
+              <p key={f} className="text-sm text-[#0F172A]">{f}</p>
             ))}
           </div>
 
           <button
             onClick={handleSuscribirse}
             disabled={loading}
-            className="w-full bg-[#E8602C] text-white rounded-xl py-4 font-semibold text-base hover:bg-[#D04F1E] transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+            className="w-full bg-[#2563EB] text-white rounded-xl py-4 font-semibold text-base hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
           >
             {loading ? 'Redirigiendo...' : 'Comenzar prueba gratis'}
           </button>
         </div>
 
-        <p className="text-xs text-center text-[#A08070]">
+        <p className="text-xs text-center text-[#64748B]">
           No se requiere tarjeta de crédito para comenzar · Cancelá cuando quieras
         </p>
       </div>
