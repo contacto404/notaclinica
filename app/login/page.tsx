@@ -30,7 +30,7 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
     const { error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name } } })
-    if (error) { setError(error.message) } else { setMode('login') }
+    if (error) { setError(error.message) } else { router.push('/suscripcion') }
     setLoading(false)
   }
 
