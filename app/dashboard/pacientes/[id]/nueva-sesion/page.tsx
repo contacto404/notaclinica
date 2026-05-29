@@ -19,11 +19,14 @@ export default function NuevaSesionPage() {
 
   async function startRecording() {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-    const media = new MediaRecorder(stream)
+    const mimeType = MediaRecorder.isTypeSupported('audio/webm')
+      ? 'audio/webm'
+      : 'audio/mp4'
+    const media = new MediaRecorder(stream, { mimeType })
     mediaRef.current = media
     chunksRef.current = []
     media.ondataavailable = e => chunksRef.current.push(e.data)
-    media.onstop = () => setAudioBlob(new Blob(chunksRef.current, { type: 'audio/webm' }))
+    media.onstop = () => setAudioBlob(new Blob(chunksRef.current, { type: mimeType }))
     media.start()
     setRecording(true)
   }
@@ -48,7 +51,9 @@ export default function NuevaSesionPage() {
       const { data: patient } = await supabase.from('patients').select('full_name, diagnosis').eq('id', patientId).single()
       const { data: session } = await supabase.from('sessions').insert({ patient_id: patientId, status: 'pending' }).select().single()
       const formData = new FormData()
-      formData.append('audio', new Blob([audioBlob], { type: 'audio/webm' }), 'audio.webm')
+      const mimeType = audioBlob.type || 'audio/webm'
+      const extension = mimeType.includes('mp4') ? 'audio.mp4' : 'audio.webm'
+      formData.append('audio', new Blob([audioBlob], { type: mimeType }), extension)
       const transcribeRes = await fetch('/api/transcribe', { method: 'POST', body: formData })
       const transcribeData = await transcribeRes.json()
       if (transcribeData.error) throw new Error(transcribeData.error)
