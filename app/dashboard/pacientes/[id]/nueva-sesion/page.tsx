@@ -60,13 +60,13 @@ export default function NuevaSesionPage() {
       const summarizeRes = await fetch('/api/summarize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ transcription: text, patientName: patient?.full_name, diagnosis: patient?.diagnosis })
+        body: JSON.stringify({ transcription: text, patientName: patient?.full_name, diagnosis: patient?.diagnosis, patientId })
       })
       const summaryData = await summarizeRes.json()
       if (summaryData.error) throw new Error(summaryData.error)
       setSummary(summaryData)
       await supabase.from('summaries').insert({ session_id: session.id, ...summaryData })
-      await supabase.from('sessions').update({ status: 'summarized' }).eq('id', session.id)
+      await supabase.from('sessions').update({ status: 'complete' }).eq('id', session.id)
       setStep('done')
     } catch (err: any) {
       setError(err.message)
