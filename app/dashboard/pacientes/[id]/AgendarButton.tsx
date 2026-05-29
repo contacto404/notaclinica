@@ -71,7 +71,7 @@ export default function AgendarButton({
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-[#25D366] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#1DA851] transition-colors flex items-center gap-1.5">
+        className="bg-[#2563EB] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#1D4ED8] transition-colors flex items-center gap-1.5">
         📅 {hasAppointment ? 'Reagendar' : 'Agendar'}
       </button>
 

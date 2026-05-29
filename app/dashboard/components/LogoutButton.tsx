@@ -13,13 +13,13 @@ export default function LogoutButton() {
   }
 
   if (loading) return (
-    <p className="text-xs text-gray-400 px-3 py-2">Cerrando sesión...</p>
+    <p className="text-xs text-[#64748B] px-3 py-2">Cerrando sesión...</p>
   )
 
   return (
     <button
       onClick={handleLogout}
-      className="text-xs text-red-500 hover:text-red-700 cursor-pointer w-full text-left px-3 py-2 rounded-lg hover:bg-red-50"
+      className="text-xs text-[#64748B] hover:text-[#0F172A] cursor-pointer w-full text-left px-3 py-2 rounded-lg hover:bg-[#E2E8F0]"
     >
       Cerrar sesión
     </button>
