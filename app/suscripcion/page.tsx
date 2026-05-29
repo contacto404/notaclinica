@@ -1,16 +1,19 @@
 'use client'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 export default function SuscripcionPage() {
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
 
   async function handleSuscribirse() {
     setLoading(true)
     try {
       const res = await fetch('/api/create-checkout', { method: 'POST' })
       const data = await res.json()
+      if (res.status === 401) {
+        window.location.href = '/login'
+        return
+      }
+      if (data.error) throw new Error(data.error)
       if (data.url) window.location.href = data.url
     } catch (e) {
       setLoading(false)
