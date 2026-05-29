@@ -48,7 +48,7 @@ export default function NuevaSesionPage() {
       const { data: patient } = await supabase.from('patients').select('full_name, diagnosis').eq('id', patientId).single()
       const { data: session } = await supabase.from('sessions').insert({ patient_id: patientId, status: 'pending' }).select().single()
       const formData = new FormData()
-      formData.append('audio', audioBlob, 'audio.webm')
+      formData.append('audio', audioBlob, 'audio.mp3')
       const transcribeRes = await fetch('/api/transcribe', { method: 'POST', body: formData })
       const transcribeData = await transcribeRes.json()
       if (transcribeData.error) throw new Error(transcribeData.error)
@@ -121,7 +121,7 @@ export default function NuevaSesionPage() {
             {error && <p className="text-sm text-red-500 bg-red-50 rounded-xl px-4 py-2">{error}</p>}
 
             <button onClick={processAudio} disabled={!audioBlob}
-              className="bg-[#2563EB] disabled:bg-[#F0D8C8] disabled:text-[#C0A090] text-white rounded-xl py-3 text-sm font-semibold cursor-pointer disabled:cursor-not-allowed hover:bg-[#1D4ED8] transition-colors shadow-sm">
+              className="bg-[#2563EB] disabled:bg-[#E2E8F0] disabled:text-[#94A3B8] text-white rounded-xl py-3 text-sm font-semibold cursor-pointer disabled:cursor-not-allowed hover:bg-[#1D4ED8] transition-colors shadow-sm">
               ✨ Transcribir y generar resumen
             </button>
           </div>
