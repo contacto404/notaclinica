@@ -27,7 +27,6 @@ export async function POST(request: NextRequest) {
         .limit(5)
 
       if (sesionesAnteriores && sesionesAnteriores.length > 0) {
-        // Invertir para mostrar cronológicamente
         const sesiones = sesionesAnteriores.reverse()
         historialTexto = sesiones
           .filter((s: any) => s.summaries)
