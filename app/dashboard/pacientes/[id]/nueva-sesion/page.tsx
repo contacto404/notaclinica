@@ -48,7 +48,7 @@ export default function NuevaSesionPage() {
       const { data: patient } = await supabase.from('patients').select('full_name, diagnosis').eq('id', patientId).single()
       const { data: session } = await supabase.from('sessions').insert({ patient_id: patientId, status: 'pending' }).select().single()
       const formData = new FormData()
-      formData.append('audio', audioBlob, 'audio.mp3')
+      formData.append('audio', new Blob([audioBlob], { type: 'audio/webm' }), 'audio.webm')
       const transcribeRes = await fetch('/api/transcribe', { method: 'POST', body: formData })
       const transcribeData = await transcribeRes.json()
       if (transcribeData.error) throw new Error(transcribeData.error)
