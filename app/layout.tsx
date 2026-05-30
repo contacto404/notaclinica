@@ -16,8 +16,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="NotaClínica" />
         <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
-      <body>{children}</body>
+      <body>
+        <div style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+          {children}
+        </div>
+      </body>
     </html>
   )
 }
