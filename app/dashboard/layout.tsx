@@ -18,7 +18,7 @@ export default async function DashboardLayout({
 
       {/* Header móvil */}
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 flex items-center justify-between"
-        style={{ paddingTop: 'calc(env(safe-area-inset-top) + 12px)', paddingBottom: '12px' }}>
+        style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)', paddingBottom: '12px' }}>
         <span className="font-bold text-[#0F172A] text-sm">NotaClínica</span>
         <LogoutButton />
       </header>
@@ -52,7 +52,7 @@ export default async function DashboardLayout({
 
       {/* Contenido principal */}
       <main className="md:ml-56 pb-20 md:pb-0 min-h-screen"
-        style={{ paddingTop: 'calc(env(safe-area-inset-top) + 56px)' }}>
+        style={{ paddingTop: 'max(calc(env(safe-area-inset-top) + 56px), 100px)' }}>
         {children}
       </main>
 
