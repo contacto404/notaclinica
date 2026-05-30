@@ -38,29 +38,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  if (user && !isPublic) {
-    const adminSupabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-      { cookies: { getAll: () => [], setAll: () => {} } }
-    )
-
-    const { data: sub } = await adminSupabase
-      .from('subscriptions')
-      .select('status, current_period_end')
-      .eq('user_id', user.id)
-      .eq('status', 'active')
-      .single()
-
-    const isActive = sub && new Date(sub.current_period_end) > new Date()
-
-    if (!isActive) {
-      const url = request.nextUrl.clone()
-      url.pathname = '/suscripcion'
-      return NextResponse.redirect(url)
-    }
-  }
-
   return supabaseResponse
 }
 
