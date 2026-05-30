@@ -25,7 +25,6 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
 
-  // Rutas públicas
   const isPublic = 
     pathname.startsWith('/login') ||
     pathname.startsWith('/registro') ||
@@ -40,16 +39,20 @@ export async function middleware(request: NextRequest) {
   }
 
   if (user && !isPublic) {
-    // Verificar suscripción activa
-    const { data: sub } = await supabase
+    const adminSupabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { cookies: { getAll: () => [], setAll: () => {} } }
+    )
+
+    const { data: sub } = await adminSupabase
       .from('subscriptions')
       .select('status, current_period_end')
       .eq('user_id', user.id)
+      .eq('status', 'active')
       .single()
 
-    const isActive = sub?.status === 'active' && 
-      sub?.current_period_end && 
-      new Date(sub.current_period_end) > new Date()
+    const isActive = sub && new Date(sub.current_period_end) > new Date()
 
     if (!isActive) {
       const url = request.nextUrl.clone()
