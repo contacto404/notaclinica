@@ -1,15 +1,7 @@
-import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { createServerClient } from '@supabase/ssr'
 
 export async function middleware(request: NextRequest) {
-  if (
-    request.nextUrl.pathname.startsWith('/login') ||
-    request.nextUrl.pathname.startsWith('/auth') ||
-    request.nextUrl.pathname.startsWith('/api')
-  ) {
-    return NextResponse.next()
-  }
-
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -31,10 +23,39 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  if (!user) {
+  const pathname = request.nextUrl.pathname
+
+  // Rutas públicas
+  const isPublic = 
+    pathname.startsWith('/login') ||
+    pathname.startsWith('/registro') ||
+    pathname.startsWith('/suscripcion') ||
+    pathname.startsWith('/api/') ||
+    pathname === '/'
+
+  if (!user && !isPublic) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
+  }
+
+  if (user && !isPublic) {
+    // Verificar suscripción activa
+    const { data: sub } = await supabase
+      .from('subscriptions')
+      .select('status, current_period_end')
+      .eq('user_id', user.id)
+      .single()
+
+    const isActive = sub?.status === 'active' && 
+      sub?.current_period_end && 
+      new Date(sub.current_period_end) > new Date()
+
+    if (!isActive) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/suscripcion'
+      return NextResponse.redirect(url)
+    }
   }
 
   return supabaseResponse
