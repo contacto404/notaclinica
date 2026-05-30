@@ -17,7 +17,8 @@ export default async function DashboardLayout({
     <div className="min-h-screen bg-[#F8FAFC]">
 
       {/* Header móvil */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 py-3 flex items-center justify-between">
+      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 flex items-center justify-between"
+        style={{ paddingTop: 'calc(env(safe-area-inset-top) + 12px)', paddingBottom: '12px' }}>
         <span className="font-bold text-[#0F172A] text-sm">NotaClínica</span>
         <LogoutButton />
       </header>
@@ -50,12 +51,14 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Contenido principal */}
-      <main className="md:ml-56 pt-14 md:pt-0 pb-20 md:pb-0 min-h-screen">
+      <main className="md:ml-56 pb-20 md:pb-0 min-h-screen"
+        style={{ paddingTop: 'calc(env(safe-area-inset-top) + 56px)' }}>
         {children}
       </main>
 
       {/* Nav inferior móvil */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#F8FAFC] border-t border-[#E2E8F0] flex">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#F8FAFC] border-t border-[#E2E8F0] flex"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <Link href="/dashboard"
           className="flex-1 flex flex-col items-center justify-center py-3 text-xs text-[#475569] hover:text-[#0F172A] gap-1">
           <span className="text-lg">🏠</span>
