@@ -13,6 +13,10 @@ export default async function DashboardLayout({
 
   if (!user) redirect('/login')
 
+  const { data: sub } = await supabase.from('subscriptions').select('status, current_period_end').eq('user_id', user.id).eq('status', 'active').single()
+  const isActive = sub && new Date(sub.current_period_end) > new Date()
+  if (!isActive) redirect('/suscripcion')
+
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
 
