@@ -24,7 +24,7 @@ export async function POST() {
             id: 'notaclinica-pro',
             title: 'NotaClínica Pro — Suscripción mensual',
             quantity: 1,
-            unit_price: 29,
+            unit_price: 49,
             currency_id: 'USD',
           },
         ],
