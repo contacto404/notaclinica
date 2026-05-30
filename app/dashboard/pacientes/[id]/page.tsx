@@ -26,6 +26,8 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
 
   const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
   const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
+  const lastSummaryText = lastSummarizedSession?.summaries?.[0]?.content ?? null
+  const totalSessions = sessions?.length ?? 0
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
@@ -37,6 +39,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           </a>
         </div>
 
+        {/* Card paciente */}
         <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
           <div className="flex items-start gap-4">
             <div className="w-16 h-16 rounded-full bg-[#DBEAFE] flex items-center justify-center text-2xl font-bold text-[#2563EB] shrink-0">
@@ -73,6 +76,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           )}
         </div>
 
+        {/* Card próximo turno */}
         <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">Próximo turno</h2>
@@ -96,6 +100,56 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           )}
         </div>
 
+        {/* Card briefing pre-consulta */}
+        {lastSummarizedSession && (
+          <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
+            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">🧠 Antes de entrar</h2>
+            <div className="flex flex-col gap-3">
+
+              <div className="flex items-start gap-3">
+                <span className="text-lg mt-0.5">🏥</span>
+                <div>
+                  <p className="text-xs text-[#64748B] font-medium">Diagnóstico</p>
+                  <p className="text-sm text-[#0F172A]">{patient.diagnosis ?? 'No registrado'}</p>
+                </div>
+              </div>
+
+              {patient.medication && (
+                <div className="flex items-start gap-3">
+                  <span className="text-lg mt-0.5">💊</span>
+                  <div>
+                    <p className="text-xs text-[#64748B] font-medium">Medicación</p>
+                    <p className="text-sm text-[#0F172A]">{patient.medication}</p>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-start gap-3">
+                <span className="text-lg mt-0.5">📋</span>
+                <div>
+                  <p className="text-xs text-[#64748B] font-medium">Última sesión</p>
+                  <p className="text-sm text-[#0F172A]">
+                    {new Date(lastSummarizedSession.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                  </p>
+                  {lastSummaryText && (
+                    <p className="text-xs text-[#475569] mt-1 line-clamp-3">{lastSummaryText}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <span className="text-lg mt-0.5">📊</span>
+                <div>
+                  <p className="text-xs text-[#64748B] font-medium">Sesiones totales</p>
+                  <p className="text-sm text-[#0F172A]">{totalSessions} consulta{totalSessions !== 1 ? 's' : ''}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* Card historial de sesiones */}
         <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0]">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">Historial de sesiones</h2>
