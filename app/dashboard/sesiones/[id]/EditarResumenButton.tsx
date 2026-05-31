@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import Toast from '../../components/Toast'
 
 export default function EditarResumenButton({ summaryId, initial }: {
   summaryId: string
@@ -15,6 +16,7 @@ export default function EditarResumenButton({ summaryId, initial }: {
   const [open, setOpen] = useState(false)
   const [fields, setFields] = useState(initial)
   const [loading, setLoading] = useState(false)
+  const [toast, setToast] = useState(false)
   const supabase = createClient()
   const router = useRouter()
 
@@ -28,6 +30,7 @@ export default function EditarResumenButton({ summaryId, initial }: {
     }).eq('id', summaryId)
     setLoading(false)
     setOpen(false)
+    setToast(true)
     router.refresh()
   }
 
@@ -40,6 +43,8 @@ export default function EditarResumenButton({ summaryId, initial }: {
 
   return (
     <>
+      {toast && <Toast message="Resumen guardado" onDone={() => setToast(false)} />}
+
       <button onClick={() => setOpen(true)}
         className="border border-[#E0D0C0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#F8FAFC] transition-colors">
         ✏️ Editar resumen

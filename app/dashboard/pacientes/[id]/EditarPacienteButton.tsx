@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import Toast from '../../components/Toast'
 
 export default function EditarPacienteButton({ patient }: {
   patient: {
@@ -22,6 +23,7 @@ export default function EditarPacienteButton({ patient }: {
     date_of_birth: patient.date_of_birth?.split('T')[0] ?? '',
   })
   const [loading, setLoading] = useState(false)
+  const [toast, setToast] = useState(false)
   const supabase = createClient()
   const router = useRouter()
 
@@ -36,11 +38,14 @@ export default function EditarPacienteButton({ patient }: {
     }).eq('id', patient.id)
     setLoading(false)
     setOpen(false)
+    setToast(true)
     router.refresh()
   }
 
   return (
     <>
+      {toast && <Toast message="Paciente actualizado" onDone={() => setToast(false)} />}
+
       <button onClick={() => setOpen(true)}
         className="text-[#64748B] hover:text-[#2563EB] transition-colors p-1 rounded-lg hover:bg-[#DBEAFE]"
         title="Editar paciente">

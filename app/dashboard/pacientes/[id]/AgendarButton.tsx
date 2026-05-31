@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import Toast from '../../components/Toast'
 
 export default function AgendarButton({
   patientId, patientName, patientPhone, hasAppointment, currentAppointment, lastSessionId
@@ -19,6 +20,7 @@ export default function AgendarButton({
   const [minute, setMinute] = useState('00')
   const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(false)
+  const [toast, setToast] = useState(false)
   const supabase = createClient()
   const router = useRouter()
 
@@ -31,17 +33,7 @@ export default function AgendarButton({
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return
 
-    // Construir fecha en timezone de Uruguay (America/Montevideo)
-    const localDateStr = `${date}T${hour}:${minute}:00`
-    const formatter = new Intl.DateTimeFormat('en-CA', {
-      timeZone: 'America/Montevideo',
-      year: 'numeric', month: '2-digit', day: '2-digit',
-      hour: '2-digit', minute: '2-digit', second: '2-digit',
-      hour12: false
-    })
-    // Calcular offset Uruguay vs UTC
-    const utcDate = new Date(localDateStr + '-03:00')
-    const appointmentDate = utcDate
+    const appointmentDate = new Date(`${date}T${hour}:${minute}:00-03:00`)
 
     if (hasAppointment && currentAppointment) {
       await supabase.from('appointments').update({
@@ -59,6 +51,7 @@ export default function AgendarButton({
 
     setOpen(false)
     setLoading(false)
+    setToast(true)
     router.refresh()
   }
 
@@ -80,6 +73,8 @@ export default function AgendarButton({
 
   return (
     <>
+      {toast && <Toast message="Turno guardado" onDone={() => setToast(false)} />}
+
       <button
         onClick={() => setOpen(true)}
         className="bg-[#2563EB] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#1D4ED8] transition-colors flex items-center gap-1.5">
