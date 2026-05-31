@@ -23,11 +23,8 @@ export async function POST() {
         auto_recurring: {
           frequency: 1,
           frequency_type: 'months',
-          transaction_amount: 49,
-          currency_id: 'USD',
-        },
-        payment_methods_allowed: {
-          payment_types: [{ id: 'credit_card' }, { id: 'debit_card' }],
+          transaction_amount: 2000,
+          currency_id: 'UYU',
         },
         back_url: 'https://notaclinica.vercel.app/dashboard?success=true',
       }),
