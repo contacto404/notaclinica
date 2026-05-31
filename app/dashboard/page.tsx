@@ -15,10 +15,10 @@ export default async function DashboardPage() {
       <div className="max-w-3xl mx-auto">
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-8 gap-4">
-          <div className="min-w-0">
+        <div className="flex items-center justify-between mb-8 gap-3">
+          <div>
             <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Bienvenido</p>
-            <h1 className="text-2xl font-semibold text-[#0F172A] truncate">
+            <h1 className="text-xl font-semibold text-[#0F172A] leading-tight">
               {user?.user_metadata?.full_name ?? 'Tu consulta'}
             </h1>
           </div>
