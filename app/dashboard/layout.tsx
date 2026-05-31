@@ -24,7 +24,8 @@ export default async function DashboardLayout({
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 flex items-center justify-between"
         style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)', paddingBottom: '12px' }}>
         <span className="font-bold text-[#0F172A] text-sm">NotaClínica</span>
-        <LogoutButton />
+        <a href="/dashboard/cuenta" className="text-sm text-[#64748B] hover:text-[#0F172A] transition-colors">Mi cuenta</a>
+              <LogoutButton />
       </header>
 
       {/* Sidebar desktop */}
@@ -50,7 +51,8 @@ export default async function DashboardLayout({
 
         <div className="border-t border-[#E2E8F0] pt-4 mt-4">
           <p className="text-xs text-[#64748B] px-3 mb-2 truncate">{user.email}</p>
-          <LogoutButton />
+          <a href="/dashboard/cuenta" className="text-sm text-[#64748B] hover:text-[#0F172A] transition-colors">Mi cuenta</a>
+              <LogoutButton />
         </div>
       </aside>
 
