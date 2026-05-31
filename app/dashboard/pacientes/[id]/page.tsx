@@ -87,10 +87,16 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               <span className="text-2xl">📅</span>
               <div>
                 <p className="text-sm font-semibold text-[#0F172A]">
-                  {new Date(nextAppointment.appointment_date).toLocaleDateString('es-AR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' })}
+                  {new Date(nextAppointment.appointment_date).toLocaleDateString('es-UY', {
+                    timeZone: 'America/Montevideo',
+                    weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
+                  })}
                 </p>
                 <p className="text-xs text-[#1E40AF]">
-                  {new Date(nextAppointment.appointment_date).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}
+                  {new Date(nextAppointment.appointment_date).toLocaleTimeString('es-UY', {
+                    timeZone: 'America/Montevideo',
+                    hour: '2-digit', minute: '2-digit'
+                  })}
                   {nextAppointment.notes && ` · ${nextAppointment.notes}`}
                 </p>
               </div>
@@ -129,7 +135,10 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                 <div>
                   <p className="text-xs text-[#64748B] font-medium">Última sesión</p>
                   <p className="text-sm text-[#0F172A]">
-                    {new Date(lastSummarizedSession.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                    {new Date(lastSummarizedSession.session_date).toLocaleDateString('es-UY', {
+                      timeZone: 'America/Montevideo',
+                      day: '2-digit', month: 'long', year: 'numeric'
+                    })}
                   </p>
                   {lastSummaryText && (
                     <p className="text-xs text-[#475569] mt-1 line-clamp-3">{lastSummaryText}</p>
@@ -164,7 +173,10 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-[#0F172A]">
-                      {new Date(s.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                      {new Date(s.session_date).toLocaleDateString('es-UY', {
+                        timeZone: 'America/Montevideo',
+                        day: '2-digit', month: 'long', year: 'numeric'
+                      })}
                     </p>
                     <p className="text-xs text-[#64748B] mt-0.5">
                       {s.status === 'pending' && 'Pendiente de transcripción'}
