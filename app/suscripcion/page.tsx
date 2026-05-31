@@ -30,7 +30,7 @@ export default function SuscripcionPage() {
 
         <div className="bg-white rounded-3xl border border-[#E2E8F0] p-8 mb-4">
           <div className="text-center mb-6">
-            <p className="text-5xl font-bold text-[#0F172A]">$49<span className="text-xl font-normal text-[#64748B]">/mes</span></p>
+            <p className="text-5xl font-bold text-[#0F172A]">$49 USD<span className="text-xl font-normal text-[#64748B]">/mes</span></p>
             <p className="text-sm text-[#2563EB] font-medium mt-1">30 días gratis, cancelá cuando quieras</p>
           </div>
 
