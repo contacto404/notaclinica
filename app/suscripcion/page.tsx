@@ -31,7 +31,7 @@ export default function SuscripcionPage() {
         <div className="bg-white rounded-3xl border border-[#E2E8F0] p-8 mb-4">
           <div className="text-center mb-6">
             <p className="text-5xl font-bold text-[#0F172A]">$49<span className="text-xl font-normal text-[#64748B]">/mes</span></p>
-            <p className="text-sm text-[#2563EB] font-medium mt-1">14 días gratis, cancelá cuando quieras</p>
+            <p className="text-sm text-[#2563EB] font-medium mt-1">30 días gratis, cancelá cuando quieras</p>
           </div>
 
           <div className="flex flex-col gap-3 mb-8">
@@ -54,12 +54,12 @@ export default function SuscripcionPage() {
             disabled={loading}
             className="w-full bg-[#2563EB] text-white rounded-xl py-4 font-semibold text-base hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
           >
-            {loading ? 'Redirigiendo...' : 'Comenzar 14 días gratis'}
+            {loading ? 'Redirigiendo...' : 'Comenzar 30 días gratis'}
           </button>
         </div>
 
         <p className="text-xs text-center text-[#64748B]">
-          ✓ 14 días gratis sin tarjeta · Luego $49/mes · Cancelá cuando quieras
+          ✓ 30 días gratis sin tarjeta · Luego $49/mes · Cancelá cuando quieras
         </p>
       </div>
     </div>
