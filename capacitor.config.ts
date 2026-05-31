@@ -7,6 +7,11 @@ const config: CapacitorConfig = {
   server: {
     url: 'https://notaclinica.vercel.app',
     cleartext: false
+  },
+  ios: {
+    scrollEnabled: false,
+    contentInset: 'never',
+    allowsLinkPreview: false
   }
 };
 
