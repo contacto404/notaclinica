@@ -1,3 +1,4 @@
+cat > app/page.tsx << 'ENDOFFILE'
 import Link from 'next/link'
 
 export default function LandingPage() {
@@ -5,7 +6,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white">
 
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur border-b border-[#E2E8F0] safe-area-top px-6 flex items-center justify-between h-16 pt-[env(safe-area-inset-top)]">
+      <nav style={{ paddingTop: 'env(safe-area-inset-top)' }} className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur border-b border-[#E2E8F0] px-6 flex items-center justify-between h-16">
         <span className="font-bold text-[#0F172A] text-xl">NotaClínica</span>
         <div className="flex items-center gap-4">
           <Link href="/login" className="text-sm text-[#64748B] hover:text-[#0F172A] transition-colors">
@@ -136,3 +137,4 @@ export default function LandingPage() {
     </div>
   )
 }
+ENDOFFILE
