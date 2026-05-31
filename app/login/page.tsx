@@ -79,20 +79,20 @@ export default function LoginPage() {
                 <label className="text-xs text-[#64748B] font-medium">Nombre completo</label>
                 <input type="text" value={name} onChange={e => setName(e.target.value)}
                   placeholder="Dr. Juan García" required
-                  className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
+                  className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
               </div>
             )}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-[#64748B] font-medium">Correo electrónico</label>
               <input type="email" value={email} onChange={e => setEmail(e.target.value)}
                 placeholder="tu@email.com" required
-                className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
+                className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-[#64748B] font-medium">Contraseña</label>
               <input type="password" value={password} onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••" required minLength={6}
-                className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
+                className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
             </div>
             {error && <p className="text-xs text-red-500">{error}</p>}
             <button type="submit" disabled={loading}

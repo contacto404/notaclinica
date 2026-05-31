@@ -47,6 +47,16 @@ body {
   position: relative;
 }
 
+input, select, textarea {
+  color: #0F172A;
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: #94A3B8;
+}
+
 .safe-area-top {
   padding-top: env(safe-area-inset-top);
 }
