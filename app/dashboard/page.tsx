@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import OnboardingGuide from './components/OnboardingGuide'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -12,6 +13,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+      <OnboardingGuide />
       <div className="max-w-3xl mx-auto">
 
         {/* Header */}
