@@ -1,5 +1,5 @@
-import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import LogoutButton from './components/LogoutButton'
 
@@ -13,7 +13,13 @@ export default async function DashboardLayout({
 
   if (!user) redirect('/login')
 
-  const { data: sub } = await supabase.from('subscriptions').select('status, current_period_end').eq('user_id', user.id).eq('status', 'active').single()
+  const { data: sub } = await supabase
+    .from('subscriptions')
+    .select('status, current_period_end')
+    .eq('user_id', user.id)
+    .eq('status', 'active')
+    .single()
+
   const isActive = sub && new Date(sub.current_period_end) > new Date()
   if (!isActive) redirect('/suscripcion')
 
@@ -21,11 +27,9 @@ export default async function DashboardLayout({
     <div className="min-h-screen bg-[#F8FAFC]">
 
       {/* Header móvil */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 flex items-center justify-between"
-        style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)', paddingBottom: '12px' }}>
-        <span className="font-bold text-[#0F172A] text-sm">NotaClínica</span>
-        <a href="/dashboard/cuenta" className="text-sm text-[#64748B] hover:text-[#0F172A] transition-colors">Mi cuenta</a>
-              <LogoutButton />
+      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 flex items-center justify-between h-14 safe-area-top">
+        <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
+        <LogoutButton />
       </header>
 
       {/* Sidebar desktop */}
@@ -34,7 +38,7 @@ export default async function DashboardLayout({
           <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
         </div>
 
-        <nav className="flex flex-col gap-1 flex-1">
+        <nav className="flex flex-col gap-1">
           <Link href="/dashboard"
             className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
             🏠 Inicio
@@ -45,26 +49,22 @@ export default async function DashboardLayout({
           </Link>
           <Link href="/dashboard/pacientes/nuevo"
             className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
-            ➕ Nuevo paciente
+            + Nuevo paciente
+          </Link>
+          <Link href="/dashboard/cuenta"
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            ⚙️ Mi cuenta
           </Link>
         </nav>
 
-        <div className="border-t border-[#E2E8F0] pt-4 mt-4">
+        <div className="border-t border-[#E2E8F0] pt-4 mt-auto">
           <p className="text-xs text-[#64748B] px-3 mb-2 truncate">{user.email}</p>
-          <a href="/dashboard/cuenta" className="text-sm text-[#64748B] hover:text-[#0F172A] transition-colors">Mi cuenta</a>
-              <LogoutButton />
+          <LogoutButton />
         </div>
       </aside>
 
-      {/* Contenido principal */}
-      <main className="md:ml-56 pb-20 md:pb-0 min-h-screen"
-        style={{ paddingTop: 'max(calc(env(safe-area-inset-top) + 56px), 100px)' }}>
-        {children}
-      </main>
-
-      {/* Nav inferior móvil */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#F8FAFC] border-t border-[#E2E8F0] flex"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      {/* Navbar móvil bottom */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E2E8F0] flex justify-around items-center h-16 safe-area-bottom">
         <Link href="/dashboard"
           className="flex-1 flex flex-col items-center justify-center py-3 text-xs text-[#475569] hover:text-[#0F172A] gap-1">
           <span className="text-lg">🏠</span>
@@ -77,10 +77,20 @@ export default async function DashboardLayout({
         </Link>
         <Link href="/dashboard/pacientes/nuevo"
           className="flex-1 flex flex-col items-center justify-center py-3 text-xs text-[#475569] hover:text-[#0F172A] gap-1">
-          <span className="text-lg">➕</span>
-          Nuevo paciente
+          <span className="text-lg">+</span>
+          Nuevo
+        </Link>
+        <Link href="/dashboard/cuenta"
+          className="flex-1 flex flex-col items-center justify-center py-3 text-xs text-[#475569] hover:text-[#0F172A] gap-1">
+          <span className="text-lg">⚙️</span>
+          Cuenta
         </Link>
       </nav>
+
+      {/* Contenido */}
+      <main className="md:ml-56 pt-14 md:pt-0 pb-20 md:pb-0">
+        {children}
+      </main>
 
     </div>
   )
