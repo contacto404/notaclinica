@@ -27,9 +27,8 @@ export default async function DashboardLayout({
     <div className="min-h-screen bg-[#F8FAFC]">
 
       {/* Header móvil */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 flex items-center justify-between h-14 safe-area-top">
+      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 flex items-center justify-center h-14 pt-safe">
         <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
-        <LogoutButton />
       </header>
 
       {/* Sidebar desktop */}
@@ -64,25 +63,25 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Navbar móvil bottom */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E2E8F0] flex justify-around items-center h-16 safe-area-bottom">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E2E8F0] flex justify-around items-center h-16 pb-safe">
         <Link href="/dashboard"
-          className="flex-1 flex flex-col items-center justify-center py-3 text-xs text-[#475569] hover:text-[#0F172A] gap-1">
-          <span className="text-lg">🏠</span>
+          className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
+          <span className="text-xl">🏠</span>
           Inicio
         </Link>
         <Link href="/dashboard/agenda"
-          className="flex-1 flex flex-col items-center justify-center py-3 text-xs text-[#475569] hover:text-[#0F172A] gap-1">
-          <span className="text-lg">📅</span>
+          className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
+          <span className="text-xl">📅</span>
           Agenda
         </Link>
         <Link href="/dashboard/pacientes/nuevo"
-          className="flex-1 flex flex-col items-center justify-center py-3 text-xs text-[#475569] hover:text-[#0F172A] gap-1">
-          <span className="text-lg">+</span>
+          className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
+          <span className="text-xl">+</span>
           Nuevo
         </Link>
         <Link href="/dashboard/cuenta"
-          className="flex-1 flex flex-col items-center justify-center py-3 text-xs text-[#475569] hover:text-[#0F172A] gap-1">
-          <span className="text-lg">⚙️</span>
+          className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
+          <span className="text-xl">⚙️</span>
           Cuenta
         </Link>
       </nav>
