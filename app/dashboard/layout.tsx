@@ -27,8 +27,13 @@ export default async function DashboardLayout({
     <div className="min-h-screen bg-[#F8FAFC]">
 
       {/* Header móvil */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0] px-4 flex items-center justify-center h-14 pt-safe">
-        <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
+      <header
+        className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0]"
+        style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)' }}
+      >
+        <div className="px-4 flex items-center justify-center h-14">
+          <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
+        </div>
       </header>
 
       {/* Sidebar desktop */}
@@ -36,7 +41,6 @@ export default async function DashboardLayout({
         <div className="mb-8 px-3">
           <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
         </div>
-
         <nav className="flex flex-col gap-1">
           <Link href="/dashboard"
             className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
@@ -55,7 +59,6 @@ export default async function DashboardLayout({
             ⚙️ Mi cuenta
           </Link>
         </nav>
-
         <div className="border-t border-[#E2E8F0] pt-4 mt-auto">
           <p className="text-xs text-[#64748B] px-3 mb-2 truncate">{user.email}</p>
           <LogoutButton />
@@ -63,7 +66,13 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Navbar móvil bottom */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E2E8F0] flex justify-around items-center h-16 pb-safe">
+      <nav
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E2E8F0] flex justify-around items-center"
+        style={{
+          paddingBottom: 'max(env(safe-area-inset-bottom), 8px)',
+          height: 'calc(max(env(safe-area-inset-bottom), 8px) + 56px)'
+        }}
+      >
         <Link href="/dashboard"
           className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
           <span className="text-xl">🏠</span>
@@ -84,10 +93,20 @@ export default async function DashboardLayout({
           <span className="text-xl">⚙️</span>
           Cuenta
         </Link>
+        <div className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
+          <span className="text-xl">🚪</span>
+          <LogoutButton minimal />
+        </div>
       </nav>
 
       {/* Contenido */}
-      <main className="md:ml-56 pt-14 md:pt-0 pb-20 md:pb-0">
+      <main
+        className="md:ml-56 md:pt-0 overflow-x-hidden"
+        style={{
+          paddingTop: 'calc(max(env(safe-area-inset-top), 44px) + 56px)',
+          paddingBottom: 'calc(max(env(safe-area-inset-bottom), 8px) + 56px)'
+        }}
+      >
         {children}
       </main>
 

@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
-export default function LogoutButton() {
+export default function LogoutButton({ minimal = false }: { minimal?: boolean }) {
   const [loading, setLoading] = useState(false)
   const supabase = createClient()
 
@@ -10,6 +10,17 @@ export default function LogoutButton() {
     setLoading(true)
     await supabase.auth.signOut()
     window.location.href = '/login'
+  }
+
+  if (minimal) {
+    return (
+      <button
+        onClick={handleLogout}
+        className="text-xs text-[#475569]"
+      >
+        {loading ? '...' : 'Salir'}
+      </button>
+    )
   }
 
   if (loading) return (
