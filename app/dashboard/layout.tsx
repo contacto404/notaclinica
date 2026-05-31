@@ -65,7 +65,7 @@ export default async function DashboardLayout({
         </div>
       </aside>
 
-      {/* Navbar móvil bottom */}
+      {/* Navbar móvil bottom — 4 items */}
       <nav
         className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E2E8F0] flex justify-around items-center"
         style={{
@@ -93,10 +93,6 @@ export default async function DashboardLayout({
           <span className="text-xl">⚙️</span>
           Cuenta
         </Link>
-        <div className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
-          <span className="text-xl">🚪</span>
-          <LogoutButton minimal />
-        </div>
       </nav>
 
       {/* Contenido */}

@@ -15,15 +15,15 @@ export default async function DashboardPage() {
       <div className="max-w-3xl mx-auto">
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
+        <div className="flex items-center justify-between mb-8 gap-4">
+          <div className="min-w-0">
             <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Bienvenido</p>
-            <h1 className="text-2xl font-semibold text-[#0F172A]">
+            <h1 className="text-2xl font-semibold text-[#0F172A] truncate">
               {user?.user_metadata?.full_name ?? 'Tu consulta'}
             </h1>
           </div>
           <a href="/dashboard/pacientes/nuevo"
-            className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1D4ED8] transition-colors shadow-sm">
+            className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1D4ED8] transition-colors shadow-sm shrink-0 whitespace-nowrap">
             + Nuevo paciente
           </a>
         </div>
@@ -56,7 +56,7 @@ export default async function DashboardPage() {
                   <p className="text-sm font-semibold text-[#0F172A] truncate">{p.full_name}</p>
                   <p className="text-xs text-[#64748B] mt-0.5">{p.diagnosis ?? 'Sin diagnóstico'}</p>
                 </div>
-                <span className="text-[#D0B8A8] text-lg">›</span>
+                <span className="text-[#D0B8A8] text-lg shrink-0">›</span>
               </a>
             )) : (
               <div className="bg-white border border-dashed border-[#E0D0C0] rounded-2xl px-4 py-12 text-center">

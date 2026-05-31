@@ -7,6 +7,7 @@ export default function CuentaPage() {
   const [sub, setSub] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [cancelling, setCancelling] = useState(false)
+  const [loggingOut, setLoggingOut] = useState(false)
   const [user, setUser] = useState<any>(null)
   const router = useRouter()
   const supabase = createClient()
@@ -33,9 +34,15 @@ export default function CuentaPage() {
     router.push('/suscripcion')
   }
 
+  async function handleLogout() {
+    setLoggingOut(true)
+    await supabase.auth.signOut()
+    window.location.href = '/login'
+  }
+
   if (loading) return <div className="p-6 text-[#64748B]">Cargando...</div>
 
-  const vencimiento = sub?.current_period_end 
+  const vencimiento = sub?.current_period_end
     ? new Date(sub.current_period_end).toLocaleDateString('es-UY', { day: 'numeric', month: 'long', year: 'numeric' })
     : null
 
@@ -83,6 +90,17 @@ export default function CuentaPage() {
             </button>
           </>
         )}
+      </div>
+
+      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6">
+        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-4">Sesión</h2>
+        <button
+          onClick={handleLogout}
+          disabled={loggingOut}
+          className="w-full border border-[#E2E8F0] text-[#475569] rounded-xl py-3 font-medium hover:bg-[#F8FAFC] transition-colors disabled:opacity-50 cursor-pointer"
+        >
+          {loggingOut ? 'Cerrando sesión...' : 'Cerrar sesión'}
+        </button>
       </div>
     </div>
   )
