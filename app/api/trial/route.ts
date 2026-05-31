@@ -30,7 +30,7 @@ export async function POST() {
   await adminSupabase.from('subscriptions').insert({
     user_id: user.id,
     status: 'active',
-    current_period_end: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+    current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date().toISOString(),
   })
 

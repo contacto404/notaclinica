@@ -11,7 +11,7 @@ export default function BienvenidaPage() {
         <h1 className="text-3xl font-bold text-[#0F172A] mb-3">¡Bienvenido a NotaClínica!</h1>
         <p className="text-[#64748B] mb-2">Tu cuenta está lista.</p>
         <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-2xl p-6 mb-8 mt-6">
-          <p className="text-[#1D4ED8] font-semibold text-lg mb-1">14 días gratis</p>
+          <p className="text-[#1D4ED8] font-semibold text-lg mb-1">30 días gratis</p>
           <p className="text-[#3B82F6] text-sm">Sin tarjeta de crédito · Luego $49/mes · Cancelá cuando quieras</p>
         </div>
         <button
