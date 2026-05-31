@@ -3,6 +3,10 @@
     {
       "path": "/api/recordatorio",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/renovacion-aviso",
+      "schedule": "0 10 * * *"
     }
   ]
 }
