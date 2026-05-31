@@ -54,12 +54,12 @@ export default function SuscripcionPage() {
             disabled={loading}
             className="w-full bg-[#2563EB] text-white rounded-xl py-4 font-semibold text-base hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
           >
-            {loading ? 'Redirigiendo...' : 'Comenzar prueba gratis'}
+            {loading ? 'Redirigiendo...' : 'Comenzar 14 días gratis'}
           </button>
         </div>
 
         <p className="text-xs text-center text-[#64748B]">
-          No se requiere tarjeta de crédito para comenzar · Cancelá cuando quieras
+          ✓ 14 días gratis sin tarjeta · Luego $49/mes · Cancelá cuando quieras
         </p>
       </div>
     </div>
