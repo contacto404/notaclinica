@@ -1,4 +1,3 @@
-cat > app/page.tsx << 'ENDOFFILE'
 import Link from 'next/link'
 
 export default function LandingPage() {
