@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import LogoutButton from './components/LogoutButton'
+import NavbarMobile from './components/NavbarMobile'
 
 export default async function DashboardLayout({
   children,
@@ -65,35 +66,7 @@ export default async function DashboardLayout({
         </div>
       </aside>
 
-      {/* Navbar móvil bottom — 4 items */}
-      <nav
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E2E8F0] flex justify-around items-center"
-        style={{
-          paddingBottom: 'max(env(safe-area-inset-bottom), 8px)',
-          height: 'calc(max(env(safe-area-inset-bottom), 8px) + 56px)'
-        }}
-      >
-        <Link href="/dashboard"
-          className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
-          <span className="text-xl">🏠</span>
-          Inicio
-        </Link>
-        <Link href="/dashboard/agenda"
-          className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
-          <span className="text-xl">📅</span>
-          Agenda
-        </Link>
-        <Link href="/dashboard/pacientes/nuevo"
-          className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
-          <span className="text-xl">+</span>
-          Nuevo
-        </Link>
-        <Link href="/dashboard/cuenta"
-          className="flex-1 flex flex-col items-center justify-center py-2 text-xs text-[#475569] gap-1">
-          <span className="text-xl">⚙️</span>
-          Cuenta
-        </Link>
-      </nav>
+      <NavbarMobile />
 
       {/* Contenido */}
       <main
