@@ -15,7 +15,8 @@ export default async function AgendaPage() {
 
   const grouped: Record<string, any[]> = {}
   appointments?.forEach(a => {
-    const date = new Date(a.appointment_date).toLocaleDateString('es-AR', {
+    const date = new Date(a.appointment_date).toLocaleDateString('es-UY', {
+      timeZone: 'America/Montevideo',
       weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
     })
     if (!grouped[date]) grouped[date] = []
@@ -42,7 +43,11 @@ export default async function AgendaPage() {
                       className="bg-white rounded-2xl border border-[#E2E8F0] px-5 py-4 flex items-center gap-4 hover:shadow-md transition-shadow">
                       <div className="bg-[#DBEAFE] rounded-xl px-3 py-2 text-center shrink-0">
                         <p className="text-lg font-bold text-[#2563EB]">
-                          {new Date(a.appointment_date).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}
+                          {new Date(a.appointment_date).toLocaleTimeString('es-UY', {
+                            timeZone: 'America/Montevideo',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
                         </p>
                       </div>
                       <div className="flex-1 min-w-0">

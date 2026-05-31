@@ -31,7 +31,17 @@ export default function AgendarButton({
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return
 
-    const appointmentDate = new Date(`${date}T${hour}:${minute}`)
+    // Construir fecha en timezone de Uruguay (America/Montevideo)
+    const localDateStr = `${date}T${hour}:${minute}:00`
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Montevideo',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false
+    })
+    // Calcular offset Uruguay vs UTC
+    const utcDate = new Date(localDateStr + '-03:00')
+    const appointmentDate = utcDate
 
     if (hasAppointment && currentAppointment) {
       await supabase.from('appointments').update({
@@ -56,7 +66,8 @@ export default function AgendarButton({
     if (!patientPhone) return
     const phone = patientPhone.replace(/\D/g, '')
     const dateFormatted = date && hour
-      ? new Date(`${date}T${hour}:${minute}`).toLocaleDateString('es-AR', {
+      ? new Date(`${date}T${hour}:${minute}:00-03:00`).toLocaleDateString('es-UY', {
+          timeZone: 'America/Montevideo',
           weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
         }) + ` a las ${hour}:${minute}`
       : ''
