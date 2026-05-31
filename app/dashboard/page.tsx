@@ -11,6 +11,46 @@ export default async function DashboardPage() {
     .eq('professional_id', user!.id)
     .order('created_at', { ascending: false })
 
+  // Sesiones este mes
+  const inicioMes = new Date()
+  inicioMes.setDate(1)
+  inicioMes.setHours(0, 0, 0, 0)
+
+  const { count: sesionesEsteMes } = await supabase
+    .from('sessions')
+    .select('*', { count: 'exact', head: true })
+    .eq('professional_id', user!.id)
+    .gte('session_date', inicioMes.toISOString())
+
+  // PDFs exportados (sesiones con status summarized este mes)
+  const { count: pdfsExportados } = await supabase
+    .from('sessions')
+    .select('*', { count: 'exact', head: true })
+    .eq('professional_id', user!.id)
+    .eq('status', 'summarized')
+    .gte('session_date', inicioMes.toISOString())
+
+  // Turnos de hoy
+  const hoyInicio = new Date()
+  hoyInicio.setHours(0, 0, 0, 0)
+  const hoyFin = new Date()
+  hoyFin.setHours(23, 59, 59, 999)
+
+  const { data: turnosHoy } = await supabase
+    .from('appointments')
+    .select('*, patients(*)')
+    .eq('professional_id', user!.id)
+    .gte('appointment_date', hoyInicio.toISOString())
+    .lte('appointment_date', hoyFin.toISOString())
+    .order('appointment_date', { ascending: true })
+
+  // Saludo según hora del día en Montevideo
+  const horaUY = new Date().toLocaleString('en-US', { timeZone: 'America/Montevideo', hour: 'numeric', hour12: false })
+  const hora = parseInt(horaUY)
+  const saludo = hora < 12 ? 'Buenos días' : hora < 19 ? 'Buenas tardes' : 'Buenas noches'
+
+  const nombre = user?.user_metadata?.full_name?.split(' ')[0] ?? 'Doctor'
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
       <OnboardingGuide />
@@ -19,9 +59,9 @@ export default async function DashboardPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8 gap-3">
           <div>
-            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Bienvenido</p>
+            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">{saludo}</p>
             <h1 className="text-xl font-semibold text-[#0F172A] leading-tight">
-              {user?.user_metadata?.full_name ?? 'Tu consulta'}
+              {nombre}
             </h1>
           </div>
           <a href="/dashboard/pacientes/nuevo"
@@ -30,12 +70,39 @@ export default async function DashboardPage() {
           </a>
         </div>
 
+        {/* Turnos hoy */}
+        {turnosHoy && turnosHoy.length > 0 && (
+          <div className="bg-[#FFF7ED] border border-[#FED7AA] rounded-2xl p-4 mb-6">
+            <p className="text-xs font-semibold text-[#C2410C] uppercase tracking-widest mb-3">📅 Hoy</p>
+            <div className="flex flex-col gap-2">
+              {turnosHoy.map((t: any) => (
+                <a key={t.id} href={"/dashboard/pacientes/" + t.patient_id}
+                  className="flex items-center gap-3 bg-white rounded-xl px-3 py-2.5 border border-[#FED7AA] hover:shadow-sm transition-shadow">
+                  <div className="bg-[#FFF7ED] rounded-lg px-2 py-1 text-center shrink-0">
+                    <p className="text-sm font-bold text-[#C2410C]">
+                      {new Date(t.appointment_date).toLocaleTimeString('es-UY', {
+                        timeZone: 'America/Montevideo',
+                        hour: '2-digit', minute: '2-digit'
+                      })}
+                    </p>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-[#0F172A] truncate">{t.patients?.full_name}</p>
+                    {t.notes && <p className="text-xs text-[#64748B]">{t.notes}</p>}
+                  </div>
+                  <span className="text-[#D0B8A8] text-lg shrink-0">›</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3 mb-8">
           {[
             { label: 'Pacientes activos', value: patients?.length ?? 0, color: 'bg-[#DBEAFE]', text: 'text-[#1E40AF]' },
-            { label: 'Sesiones este mes', value: 0, color: 'bg-[#E8F4E8]', text: 'text-[#2D6A2D]' },
-            { label: 'PDFs exportados', value: 0, color: 'bg-[#E8EEF8]', text: 'text-[#2D3F6A]' },
+            { label: 'Sesiones este mes', value: sesionesEsteMes ?? 0, color: 'bg-[#E8F4E8]', text: 'text-[#2D6A2D]' },
+            { label: 'PDFs exportados', value: pdfsExportados ?? 0, color: 'bg-[#E8EEF8]', text: 'text-[#2D3F6A]' },
           ].map(stat => (
             <div key={stat.label} className={`${stat.color} rounded-2xl p-4`}>
               <p className="text-xs text-[#64748B] mb-2 leading-tight">{stat.label}</p>
