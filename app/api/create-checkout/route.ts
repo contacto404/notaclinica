@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server'
-import { MercadoPagoConfig, Preference } from 'mercadopago'
 import { createClient } from '@/lib/supabase/server'
 
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MP_ACCESS_TOKEN_PROD!,
-})
+const MP_ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN_PROD!
 
 export async function POST() {
   const supabase = await createClient()
@@ -15,30 +12,35 @@ export async function POST() {
   }
 
   try {
-    const preference = new Preference(client)
-
-    const response = await preference.create({
-      body: {
-        items: [{
-          id: 'notaclinica-pro',
-          title: 'NotaClínica Pro — Suscripción mensual',
-          quantity: 1,
-          unit_price: 49,
-          currency_id: 'USD',
-        }],
-        payer: { email: user.email },
-        back_urls: {
-          success: 'https://notaclinica.vercel.app/dashboard?success=true',
-          failure: 'https://notaclinica.vercel.app/suscripcion?error=true',
-          pending: 'https://notaclinica.vercel.app/suscripcion?pending=true',
-        },
-        auto_return: 'approved',
-        external_reference: user.id,
-        notification_url: 'https://notaclinica.vercel.app/api/mp-webhook',
+    const response = await fetch('https://api.mercadopago.com/preapproval_plan', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${MP_ACCESS_TOKEN}`,
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        reason: 'NotaClínica Pro — Suscripción mensual',
+        auto_recurring: {
+          frequency: 1,
+          frequency_type: 'months',
+          transaction_amount: 49,
+          currency_id: 'USD',
+        },
+        payment_methods_allowed: {
+          payment_types: [{ id: 'credit_card' }, { id: 'debit_card' }],
+        },
+        back_url: 'https://notaclinica.vercel.app/dashboard?success=true',
+      }),
     })
 
-    return NextResponse.json({ url: response.init_point })
+    const data = await response.json()
+    console.log('MP Preapproval response:', JSON.stringify(data))
+
+    if (!response.ok) {
+      return NextResponse.json({ error: data.message, details: data }, { status: 500 })
+    }
+
+    return NextResponse.json({ url: data.init_point })
   } catch (error: any) {
     console.error('MercadoPago error:', error.message)
     return NextResponse.json({ error: error.message }, { status: 500 })
