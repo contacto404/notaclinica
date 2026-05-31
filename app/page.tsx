@@ -4,10 +4,10 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* Nav — safe area manejado con paddingTop interno */}
+      {/* Nav — safe area con fallback fijo para Capacitor */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur border-b border-[#E2E8F0]">
         <div
-          style={{ paddingTop: 'env(safe-area-inset-top)' }}
+          style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)' }}
           className="px-6 flex items-center justify-between h-14"
         >
           <span className="font-bold text-[#0F172A] text-xl">NotaClínica</span>
@@ -22,9 +22,9 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero — padding compensa safe area + nav (56px) + espacio visual */}
+      {/* Hero — compensa safe area + nav + espacio visual */}
       <section
-        style={{ paddingTop: 'calc(env(safe-area-inset-top) + 56px + 80px)' }}
+        style={{ paddingTop: 'calc(max(env(safe-area-inset-top), 44px) + 56px + 80px)' }}
         className="pb-20 px-6 text-center max-w-4xl mx-auto"
       >
         <div className="inline-block bg-[#EFF6FF] text-[#2563EB] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
