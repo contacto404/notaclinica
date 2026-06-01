@@ -19,13 +19,33 @@ export async function POST(req: NextRequest) {
       const payment = await res.json()
 
       if (payment.status === 'approved') {
-        await adminSupabase.from('subscriptions').upsert({
-          user_id: payment.external_reference,
-          status: 'active',
-          mp_payment_id: String(payment.id),
-          current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-          updated_at: new Date().toISOString(),
-        }, { onConflict: 'user_id' })
+        // Verificar si es pago de sesion (tiene external_reference que es un UUID de payments)
+        const externalRef = payment.external_reference
+
+        // Intentar actualizar como pago de sesion primero
+        const { data: sessionPayment } = await adminSupabase
+          .from('payments')
+          .select('id')
+          .eq('id', externalRef)
+          .single()
+
+        if (sessionPayment) {
+          // Es un pago de sesion
+          await adminSupabase.from('payments').update({
+            status: 'paid',
+            mp_payment_id: String(payment.id),
+            paid_at: new Date().toISOString(),
+          }).eq('id', externalRef)
+        } else {
+          // Es un pago de suscripcion
+          await adminSupabase.from('subscriptions').upsert({
+            user_id: externalRef,
+            status: 'active',
+            mp_payment_id: String(payment.id),
+            current_period_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'user_id' })
+        }
       }
     }
 
