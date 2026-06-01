@@ -31,13 +31,19 @@ export default function ExportPDFButton({ sessionId }: { sessionId: string }) {
 
       {open && (
         <div className="fixed inset-0 z-[200] bg-white flex flex-col">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E2E8F0] bg-white">
-            <span className="font-semibold text-[#0F172A] text-sm">Resumen clínico</span>
+          {/* Barra superior con safe area */}
+          <div
+            className="bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4"
+            style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)' }}
+          >
+            <div className="h-14 flex items-center">
+              <span className="font-semibold text-[#0F172A] text-sm">Resumen clinico</span>
+            </div>
             <button
               onClick={() => setOpen(false)}
-              className="text-[#64748B] hover:text-[#0F172A] text-2xl leading-none px-2"
+              className="h-14 flex items-center text-[#2563EB] font-medium text-sm"
             >
-              ×
+              ← Volver
             </button>
           </div>
           <iframe
