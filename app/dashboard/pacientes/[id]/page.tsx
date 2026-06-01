@@ -6,6 +6,7 @@ import ImportarHistorialButton from './ImportarHistorialButton'
 import EditarPacienteButton from './EditarPacienteButton'
 import DarDeBajaButton from './DarDeBajaButton'
 import CobroButton from './CobroButton'
+import EvolucionChart from './EvolucionChart'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -51,7 +52,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                 <h1 className="text-xl font-bold text-[#0F172A]">{patient.full_name}</h1>
                 <EditarPacienteButton patient={patient} />
               </div>
-              <p className="text-sm text-[#64748B] mt-0.5">{patient.diagnosis ?? 'Sin diagnóstico'}</p>
+              <p className="text-sm text-[#64748B] mt-0.5">{patient.diagnosis ?? 'Sin diagnostico'}</p>
               {patient.phone && (
                 <p className="text-xs text-[#64748B] mt-0.5">📱 {patient.phone}</p>
               )}
@@ -67,7 +68,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             </a>
             <CobroButton patientId={id} patientName={patient.full_name} sessionId={lastSummarizedSession?.id} />
             <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1D4ED8] flex items-center gap-2 transition-colors shadow-sm">
-              🎙️ Nueva sesión
+              🎙️ Nueva sesion
             </a>
           </div>
           {patient.notes && (
@@ -81,7 +82,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {/* Card próximo turno */}
         <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">Próximo turno</h2>
+            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">Proximo turno</h2>
             <AgendarButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} hasAppointment={!!nextAppointment} currentAppointment={nextAppointment} lastSessionId={lastSummarizedSession?.id} />
           </div>
           {nextAppointment ? (
@@ -116,7 +117,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">🏥</span>
                 <div>
-                  <p className="text-xs text-[#64748B] font-medium">Diagnóstico</p>
+                  <p className="text-xs text-[#64748B] font-medium">Diagnostico</p>
                   <p className="text-sm text-[#0F172A]">{patient.diagnosis ?? 'No registrado'}</p>
                 </div>
               </div>
@@ -124,7 +125,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                 <div className="flex items-start gap-3">
                   <span className="text-lg mt-0.5">💊</span>
                   <div>
-                    <p className="text-xs text-[#64748B] font-medium">Medicación</p>
+                    <p className="text-xs text-[#64748B] font-medium">Medicacion</p>
                     <p className="text-sm text-[#0F172A]">{patient.medication}</p>
                   </div>
                 </div>
@@ -132,7 +133,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">📋</span>
                 <div>
-                  <p className="text-xs text-[#64748B] font-medium">Última sesión</p>
+                  <p className="text-xs text-[#64748B] font-medium">Ultima sesion</p>
                   <p className="text-sm text-[#0F172A]">
                     {new Date(lastSummarizedSession.session_date).toLocaleDateString('es-UY', {
                       timeZone: 'America/Montevideo',
@@ -155,6 +156,9 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           </div>
         )}
 
+        {/* Evolucion grafica */}
+        <EvolucionChart sessions={sessions ?? []} />
+
         {/* Card historial de sesiones */}
         <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0]">
           <div className="flex items-center justify-between mb-5">
@@ -176,8 +180,8 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                       })}
                     </p>
                     <p className="text-xs text-[#64748B] mt-0.5">
-                      {s.status === 'pending' && 'Pendiente de transcripción'}
-                      {s.status === 'transcribed' && 'Transcripta — resumen pendiente'}
+                      {s.status === 'pending' && 'Pendiente de transcripcion'}
+                      {s.status === 'transcribed' && 'Transcripta - resumen pendiente'}
                       {s.status === 'summarized' && 'Sesion completa'}
                     </p>
                   </div>
@@ -192,7 +196,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           ) : (
             <div className="text-center py-10">
               <p className="text-2xl mb-2">📋</p>
-              <p className="text-sm text-[#64748B]">No hay sesiones todavía.</p>
+              <p className="text-sm text-[#64748B]">No hay sesiones todavia.</p>
               <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="text-sm text-[#2563EB] mt-1 inline-block hover:underline">
                 + Iniciar primera sesion
               </a>
