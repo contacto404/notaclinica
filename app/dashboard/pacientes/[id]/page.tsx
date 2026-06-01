@@ -5,6 +5,7 @@ import ReporteButton from './ReporteButton'
 import ImportarHistorialButton from './ImportarHistorialButton'
 import EditarPacienteButton from './EditarPacienteButton'
 import DarDeBajaButton from './DarDeBajaButton'
+import CobroButton from './CobroButton'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -64,6 +65,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             <a href="https://zoom.us/start/videomeeting" target="_blank" rel="noopener noreferrer" className="border border-[#E0D0C0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
               📹 Videollamada
             </a>
+            <CobroButton patientId={id} patientName={patient.full_name} sessionId={lastSummarizedSession?.id} />
             <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1D4ED8] flex items-center gap-2 transition-colors shadow-sm">
               🎙️ Nueva sesión
             </a>
@@ -111,7 +113,6 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
             <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">🧠 Antes de entrar</h2>
             <div className="flex flex-col gap-3">
-
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">🏥</span>
                 <div>
@@ -119,7 +120,6 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                   <p className="text-sm text-[#0F172A]">{patient.diagnosis ?? 'No registrado'}</p>
                 </div>
               </div>
-
               {patient.medication && (
                 <div className="flex items-start gap-3">
                   <span className="text-lg mt-0.5">💊</span>
@@ -129,7 +129,6 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                   </div>
                 </div>
               )}
-
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">📋</span>
                 <div>
@@ -145,7 +144,6 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                   )}
                 </div>
               </div>
-
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">📊</span>
                 <div>
@@ -153,7 +151,6 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                   <p className="text-sm text-[#0F172A]">{totalSessions} consulta{totalSessions !== 1 ? 's' : ''}</p>
                 </div>
               </div>
-
             </div>
           </div>
         )}
@@ -181,7 +178,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                     <p className="text-xs text-[#64748B] mt-0.5">
                       {s.status === 'pending' && 'Pendiente de transcripción'}
                       {s.status === 'transcribed' && 'Transcripta — resumen pendiente'}
-                      {s.status === 'summarized' && 'Sesión completa'}
+                      {s.status === 'summarized' && 'Sesion completa'}
                     </p>
                   </div>
                   {s.status === 'summarized' && (
@@ -197,7 +194,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               <p className="text-2xl mb-2">📋</p>
               <p className="text-sm text-[#64748B]">No hay sesiones todavía.</p>
               <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="text-sm text-[#2563EB] mt-1 inline-block hover:underline">
-                + Iniciar primera sesión
+                + Iniciar primera sesion
               </a>
             </div>
           )}
@@ -205,7 +202,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
 
         <div className="mt-3 flex items-center justify-center gap-4">
           <a href={"/api/export-historial?patientId=" + id} target="_blank" className="text-xs text-[#64748B] hover:text-[#2563EB] transition-colors underline underline-offset-2">
-            ↓ Exportar historial completo
+            Exportar historial completo
           </a>
           <span className="text-[#E0D0C0]">·</span>
           <DarDeBajaButton patientId={id} patientName={patient.full_name} />
