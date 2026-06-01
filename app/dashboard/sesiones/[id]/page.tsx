@@ -4,6 +4,7 @@ import EditarResumenButton from './EditarResumenButton'
 import WhatsAppButton from './WhatsAppButton'
 import ReporteButton from '@/app/dashboard/pacientes/[id]/ReporteButton'
 import SesionTabs from './SesionTabs'
+import ExportPDFButton from './ExportPDFButton'
 
 export default async function SesionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -57,10 +58,13 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
 
         <div className="flex items-start justify-between gap-4 mb-6 flex-wrap">
           <div>
-            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Sesión</p>
+            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Sesion</p>
             <h1 className="text-2xl font-bold text-[#0F172A]">{patient.full_name}</h1>
             <p className="text-sm text-[#64748B] mt-0.5">
-              {new Date(session.session_date).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}
+              {new Date(session.session_date).toLocaleDateString('es-UY', {
+                timeZone: 'America/Montevideo',
+                day: '2-digit', month: 'long', year: 'numeric'
+              })}
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
@@ -96,10 +100,7 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
               nextAppointment={nextAppointment ? { appointment_date: nextAppointment.appointment_date } : undefined}
               sessionId={id}
             />
-            <a href={"/api/export-pdf?sessionId=" + id} target="_blank"
-              className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#1D4ED8] transition-colors shadow-sm shrink-0">
-              ⬇ Exportar PDF
-            </a>
+            <ExportPDFButton sessionId={id} />
           </div>
         </div>
 
