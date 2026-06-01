@@ -1,212 +1,203 @@
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-import AgendarButton from './AgendarButton'
-import ReporteButton from './ReporteButton'
-import ImportarHistorialButton from './ImportarHistorialButton'
-import EditarPacienteButton from './EditarPacienteButton'
-import DarDeBajaButton from './DarDeBajaButton'
-import CobroButton from './CobroButton'
+'use client'
+import { useState, useRef } from 'react'
+import { createClient } from '@/lib/supabase/client'
+import { useRouter, useParams } from 'next/navigation'
 
-export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+export default function NuevaSesionPage() {
+  const [recording, setRecording] = useState(false)
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null)
+  const [transcription, setTranscription] = useState('')
+  const [summary, setSummary] = useState<any>(null)
+  const [step, setStep] = useState<'record' | 'transcribing' | 'summarizing' | 'done'>('record')
+  const [error, setError] = useState('')
+  const mediaRef = useRef<MediaRecorder | null>(null)
+  const chunksRef = useRef<Blob[]>([])
+  const supabase = createClient()
+  const router = useRouter()
+  const params = useParams()
+  const patientId = params.id as string
 
-  const { data: patient } = await supabase
-    .from('patients').select('*').eq('id', id).eq('professional_id', user.id).single()
-  if (!patient) redirect('/dashboard')
+  async function startRecording() {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+    const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4'
+    const media = new MediaRecorder(stream, { mimeType })
+    mediaRef.current = media
+    chunksRef.current = []
+    media.ondataavailable = e => chunksRef.current.push(e.data)
+    media.onstop = () => setAudioBlob(new Blob(chunksRef.current, { type: mimeType }))
+    media.start()
+    setRecording(true)
+  }
 
-  const { data: sessions } = await supabase
-    .from('sessions').select('*, transcriptions(*), summaries(*)')
-    .eq('patient_id', id).order('session_date', { ascending: false })
+  function stopRecording() {
+    mediaRef.current?.stop()
+    setRecording(false)
+  }
 
-  const { data: appointments } = await supabase
-    .from('appointments').select('*')
-    .eq('patient_id', id).order('appointment_date', { ascending: true })
+  async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (file) setAudioBlob(file)
+  }
 
-  const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
-  const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
-  const lastSummaryText = lastSummarizedSession?.summaries?.[0]?.content ?? null
-  const totalSessions = sessions?.length ?? 0
+  async function processAudio() {
+    if (!audioBlob) return
+    setStep('transcribing')
+    setError('')
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) { router.push('/login'); return }
+
+      const { data: patient } = await supabase
+        .from('patients')
+        .select('full_name, diagnosis')
+        .eq('id', patientId)
+        .single()
+
+      const { data: session } = await supabase
+        .from('sessions')
+        .insert({ patient_id: patientId, status: 'pending' })
+        .select()
+        .single()
+
+      const formData = new FormData()
+      const mimeType = audioBlob.type || 'audio/webm'
+      const extension = mimeType.includes('mp4') ? 'audio.mp4' : 'audio.webm'
+      formData.append('audio', new Blob([audioBlob], { type: mimeType }), extension)
+
+      const transcribeRes = await fetch('/api/transcribe', { method: 'POST', body: formData })
+      const transcribeData = await transcribeRes.json()
+      if (transcribeData.error) throw new Error(transcribeData.error)
+
+      const text = transcribeData.text
+      setTranscription(text)
+
+      await supabase.from('transcriptions').insert({ session_id: session.id, content: text })
+      await supabase.from('sessions').update({ status: 'transcribed' }).eq('id', session.id)
+
+      setStep('summarizing')
+
+      const summarizeRes = await fetch('/api/summarize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          transcription: text,
+          patientName: patient?.full_name,
+          diagnosis: patient?.diagnosis,
+          patientId,
+          professionalId: user.id
+        })
+      })
+
+      const summaryData = await summarizeRes.json()
+      if (summaryData.error) throw new Error(summaryData.error)
+
+      setSummary(summaryData)
+      await supabase.from('summaries').insert({ session_id: session.id, ...summaryData })
+      await supabase.from('sessions').update({ status: 'complete' }).eq('id', session.id)
+      setStep('done')
+    } catch (err: any) {
+      setError(err.message)
+      setStep('record')
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-xl mx-auto">
 
         <div className="mb-6">
-          <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium">
-            ← Volver
-          </a>
+          <a href={"/dashboard/pacientes/" + patientId} className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium">← Volver</a>
         </div>
 
-        {/* Card paciente */}
-        <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
-          <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-full bg-[#DBEAFE] flex items-center justify-center text-2xl font-bold text-[#2563EB] shrink-0">
-              {patient.full_name?.[0]}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold text-[#0F172A]">{patient.full_name}</h1>
-                <EditarPacienteButton patient={patient} />
-              </div>
-              <p className="text-sm text-[#64748B] mt-0.5">{patient.diagnosis ?? 'Sin diagnóstico'}</p>
-              {patient.phone && (
-                <p className="text-xs text-[#64748B] mt-0.5">📱 {patient.phone}</p>
+        <div className="mb-6">
+          <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Sesion</p>
+          <h1 className="text-2xl font-bold text-[#0F172A]">Nueva sesion</h1>
+        </div>
+
+        {step === 'record' && (
+          <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6 flex flex-col gap-6">
+            <div className="flex flex-col items-center gap-4 py-6">
+              {!recording ? (
+                <button onClick={startRecording}
+                  className="w-24 h-24 rounded-full bg-[#2563EB] text-4xl cursor-pointer text-white flex items-center justify-center hover:bg-[#1D4ED8] transition-colors shadow-lg">
+                  🎙️
+                </button>
+              ) : (
+                <button onClick={stopRecording}
+                  className="w-24 h-24 rounded-full bg-red-500 cursor-pointer text-white font-bold text-sm tracking-wider flex items-center justify-center hover:bg-red-600 transition-colors shadow-lg animate-pulse">
+                  STOP
+                </button>
+              )}
+              <p className="text-sm text-[#64748B]">
+                {recording ? 'Grabando... presiona STOP para detener' : 'Presiona para grabar'}
+              </p>
+              {audioBlob && !recording && (
+                <p className="text-sm text-[#2D6A2D] font-medium bg-[#E8F4E8] px-4 py-2 rounded-full">Audio listo para procesar</p>
               )}
             </div>
-          </div>
-          <div className="flex gap-2 mt-4 flex-wrap">
-            <a href={"/dashboard/pacientes/" + id + "/historial"} className="border border-[#E0D0C0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
-              🔍 Historial IA
-            </a>
-            <ReporteButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} nextAppointment={nextAppointment} />
-            <a href="https://zoom.us/start/videomeeting" target="_blank" rel="noopener noreferrer" className="border border-[#E0D0C0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
-              📹 Videollamada
-            </a>
-            <CobroButton patientId={id} patientName={patient.full_name} sessionId={lastSummarizedSession?.id} />
-            <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1D4ED8] flex items-center gap-2 transition-colors shadow-sm">
-              🎙️ Nueva sesión
-            </a>
-          </div>
-          {patient.notes && (
-            <div className="mt-5 pt-4 border-t border-[#E2E8F0]">
-              <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Notas</p>
-              <p className="text-sm text-[#475569]">{patient.notes}</p>
-            </div>
-          )}
-        </div>
 
-        {/* Card próximo turno */}
-        <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">Próximo turno</h2>
-            <AgendarButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} hasAppointment={!!nextAppointment} currentAppointment={nextAppointment} lastSessionId={lastSummarizedSession?.id} />
-          </div>
-          {nextAppointment ? (
-            <div className="bg-[#DBEAFE] rounded-2xl p-4 flex items-center gap-3">
-              <span className="text-2xl">📅</span>
-              <div>
-                <p className="text-sm font-semibold text-[#0F172A]">
-                  {new Date(nextAppointment.appointment_date).toLocaleDateString('es-UY', {
-                    timeZone: 'America/Montevideo',
-                    weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
-                  })}
-                </p>
-                <p className="text-xs text-[#1E40AF]">
-                  {new Date(nextAppointment.appointment_date).toLocaleTimeString('es-UY', {
-                    timeZone: 'America/Montevideo',
-                    hour: '2-digit', minute: '2-digit'
-                  })}
-                  {nextAppointment.notes && ` · ${nextAppointment.notes}`}
-                </p>
-              </div>
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-px bg-[#E2E8F0]" />
+              <span className="text-xs text-[#64748B]">o subi un archivo</span>
+              <div className="flex-1 h-px bg-[#E2E8F0]" />
             </div>
-          ) : (
-            <p className="text-sm text-[#64748B]">No hay turno agendado.</p>
-          )}
-        </div>
 
-        {/* Card briefing pre-consulta */}
-        {lastSummarizedSession && (
-          <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
-            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">🧠 Antes de entrar</h2>
-            <div className="flex flex-col gap-3">
-              <div className="flex items-start gap-3">
-                <span className="text-lg mt-0.5">🏥</span>
-                <div>
-                  <p className="text-xs text-[#64748B] font-medium">Diagnóstico</p>
-                  <p className="text-sm text-[#0F172A]">{patient.diagnosis ?? 'No registrado'}</p>
-                </div>
-              </div>
-              {patient.medication && (
-                <div className="flex items-start gap-3">
-                  <span className="text-lg mt-0.5">💊</span>
-                  <div>
-                    <p className="text-xs text-[#64748B] font-medium">Medicación</p>
-                    <p className="text-sm text-[#0F172A]">{patient.medication}</p>
-                  </div>
-                </div>
-              )}
-              <div className="flex items-start gap-3">
-                <span className="text-lg mt-0.5">📋</span>
-                <div>
-                  <p className="text-xs text-[#64748B] font-medium">Última sesión</p>
-                  <p className="text-sm text-[#0F172A]">
-                    {new Date(lastSummarizedSession.session_date).toLocaleDateString('es-UY', {
-                      timeZone: 'America/Montevideo',
-                      day: '2-digit', month: 'long', year: 'numeric'
-                    })}
-                  </p>
-                  {lastSummaryText && (
-                    <p className="text-xs text-[#475569] mt-1 line-clamp-3">{lastSummaryText}</p>
-                  )}
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-lg mt-0.5">📊</span>
-                <div>
-                  <p className="text-xs text-[#64748B] font-medium">Sesiones totales</p>
-                  <p className="text-sm text-[#0F172A]">{totalSessions} consulta{totalSessions !== 1 ? 's' : ''}</p>
-                </div>
-              </div>
+            <input type="file" accept="audio/*" onChange={handleFileUpload}
+              className="text-sm text-[#475569] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-[#DBEAFE] file:text-[#1E40AF] hover:file:bg-[#BFDBFE]" />
+
+            {error && <p className="text-sm text-red-500 bg-red-50 rounded-xl px-4 py-2">{error}</p>}
+
+            <button onClick={processAudio} disabled={!audioBlob}
+              className="bg-[#2563EB] disabled:bg-[#E2E8F0] disabled:text-[#94A3B8] text-white rounded-xl py-3 text-sm font-semibold cursor-pointer disabled:cursor-not-allowed hover:bg-[#1D4ED8] transition-colors shadow-sm">
+              Transcribir y generar resumen
+            </button>
+          </div>
+        )}
+
+        {(step === 'transcribing' || step === 'summarizing') && (
+          <div className="bg-white rounded-3xl border border-[#E2E8F0] p-12 flex flex-col items-center gap-5">
+            <div className="w-10 h-10 border-2 border-[#2563EB] border-t-transparent rounded-full animate-spin" />
+            <div className="text-center">
+              <p className="text-sm font-semibold text-[#0F172A]">
+                {step === 'transcribing' ? 'Transcribiendo audio...' : 'Generando resumen clinico...'}
+              </p>
+              <p className="text-xs text-[#64748B] mt-1">
+                {step === 'transcribing' ? 'Usando Whisper de OpenAI' : 'Usando IA para analizar la consulta'}
+              </p>
             </div>
           </div>
         )}
 
-        {/* Card historial de sesiones */}
-        <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0]">
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">Historial de sesiones</h2>
-            <ImportarHistorialButton patientId={id} />
-          </div>
-          {sessions && sessions.length > 0 ? (
-            <div className="flex flex-col divide-y divide-[#F5EDE8]">
-              {sessions.map((s: any) => (
-                <div key={s.id} className="py-4 flex items-center gap-3">
-                  <div className={"w-9 h-9 rounded-full flex items-center justify-center text-sm shrink-0 " + (s.status === 'summarized' ? 'bg-[#E8F4E8] text-[#2D6A2D]' : 'bg-[#DBEAFE] text-[#1E40AF]')}>
-                    {s.status === 'summarized' ? '✓' : '⏳'}
+        {step === 'done' && summary && (
+          <div className="flex flex-col gap-4">
+            <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
+              <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen clinico</h2>
+              <div className="flex flex-col gap-3">
+                {([
+                  ['Motivo de consulta', summary.chief_complaint],
+                  ['Observaciones', summary.observations],
+                  ['Plan de tratamiento', summary.plan],
+                  ['Proximos pasos', summary.next_steps]
+                ] as [string, string][]).map(([label, value]) => (
+                  <div key={label} className="bg-[#F8FAFC] rounded-2xl p-4">
+                    <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">{label}</p>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">{value}</p>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-[#0F172A]">
-                      {new Date(s.session_date).toLocaleDateString('es-UY', {
-                        timeZone: 'America/Montevideo',
-                        day: '2-digit', month: 'long', year: 'numeric'
-                      })}
-                    </p>
-                    <p className="text-xs text-[#64748B] mt-0.5">
-                      {s.status === 'pending' && 'Pendiente de transcripción'}
-                      {s.status === 'transcribed' && 'Transcripta — resumen pendiente'}
-                      {s.status === 'summarized' && 'Sesión completa'}
-                    </p>
-                  </div>
-                  {s.status === 'summarized' && (
-                    <a href={"/dashboard/sesiones/" + s.id} className="text-xs text-[#2563EB] hover:underline shrink-0 font-medium">
-                      Ver resumen →
-                    </a>
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          ) : (
-            <div className="text-center py-10">
-              <p className="text-2xl mb-2">📋</p>
-              <p className="text-sm text-[#64748B]">No hay sesiones todavía.</p>
-              <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="text-sm text-[#2563EB] mt-1 inline-block hover:underline">
-                + Iniciar primera sesión
-              </a>
-            </div>
-          )}
-        </div>
 
-        <div className="mt-3 flex items-center justify-center gap-4">
-          <a href={"/api/export-historial?patientId=" + id} target="_blank" className="text-xs text-[#64748B] hover:text-[#2563EB] transition-colors underline underline-offset-2">
-            ↓ Exportar historial completo
-          </a>
-          <span className="text-[#E0D0C0]">·</span>
-          <DarDeBajaButton patientId={id} patientName={patient.full_name} />
-        </div>
+            <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
+              <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-3">Transcripcion</h2>
+              <p className="text-sm text-[#475569] leading-relaxed">{transcription}</p>
+            </div>
+
+            <a href={"/dashboard/pacientes/" + patientId}
+              className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold text-center hover:bg-[#1D4ED8] transition-colors shadow-sm block">
+              Volver al paciente
+            </a>
+          </div>
+        )}
 
       </div>
     </div>
