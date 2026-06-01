@@ -13,48 +13,187 @@ const especialidades: Record<string, {
   campos: { key: string; label: string }[]
 }> = {
   psicologia: {
-    contexto: `Sos un asistente clínico experto en psicología y salud mental. El médico es psicólogo/a o psiquiatra.
-Enfocate en: estado emocional, patrones de pensamiento, vinculación terapéutica, evolución anímica, mecanismos de defensa, recursos del paciente y adherencia al tratamiento.`,
+    contexto: `Sos un asistente clinico experto en psicologia y salud mental. El medico es psicologo/a o psiquiatra.
+Enfocate en: estado emocional, patrones de pensamiento, vinculacion terapeutica, evolucion animica, mecanismos de defensa, recursos del paciente y adherencia al tratamiento.`,
     campos: [
       { key: 'chief_complaint', label: 'Motivo de consulta' },
-      { key: 'observations', label: 'Estado emocional y observaciones clínicas' },
-      { key: 'plan', label: 'Plan terapéutico' },
-      { key: 'next_steps', label: 'Próximos pasos' },
+      { key: 'observations', label: 'Estado emocional y observaciones clinicas' },
+      { key: 'plan', label: 'Plan terapeutico' },
+      { key: 'next_steps', label: 'Proximos pasos' },
     ]
   },
   clinica: {
-    contexto: `Sos un asistente clínico experto en medicina general. El médico es clínico/a.
-Enfocate en: síntomas actuales, signos vitales mencionados, antecedentes relevantes, diagnóstico diferencial, indicaciones farmacológicas y no farmacológicas.`,
+    contexto: `Sos un asistente clinico experto en medicina general. El medico es clinico/a.
+Enfocate en: sintomas actuales, signos vitales mencionados, antecedentes relevantes, diagnostico diferencial, indicaciones farmacologicas y no farmacologicas.`,
     campos: [
       { key: 'chief_complaint', label: 'Motivo de consulta' },
-      { key: 'observations', label: 'Examen clínico y observaciones' },
+      { key: 'observations', label: 'Examen clinico y observaciones' },
       { key: 'plan', label: 'Plan de tratamiento' },
-      { key: 'next_steps', label: 'Próximos pasos e indicaciones' },
+      { key: 'next_steps', label: 'Proximos pasos e indicaciones' },
     ]
   },
   pediatria: {
-    contexto: `Sos un asistente clínico experto en pediatría. El médico es pediatra.
-Enfocate en: edad y peso del niño si se menciona, desarrollo psicomotor, alimentación, vacunas, síntomas referidos por los padres, y recomendaciones para la familia.`,
+    contexto: `Sos un asistente clinico experto en pediatria. El medico es pediatra.
+Enfocate en: edad y peso del nino si se menciona, desarrollo psicomotor, alimentacion, vacunas, sintomas referidos por los padres, y recomendaciones para la familia.`,
     campos: [
       { key: 'chief_complaint', label: 'Motivo de consulta' },
-      { key: 'observations', label: 'Evaluación pediátrica y observaciones' },
+      { key: 'observations', label: 'Evaluacion pediatrica y observaciones' },
       { key: 'plan', label: 'Plan de tratamiento' },
-      { key: 'next_steps', label: 'Indicaciones para los padres y próximos pasos' },
+      { key: 'next_steps', label: 'Indicaciones para los padres y proximos pasos' },
     ]
   },
   ginecologia: {
-    contexto: `Sos un asistente clínico experto en ginecología y obstetricia.
-Enfocate en: ciclo menstrual, síntomas ginecológicos, antecedentes obstétricos, métodos anticonceptivos, estudios indicados y seguimiento.`,
+    contexto: `Sos un asistente clinico experto en ginecologia y obstetricia.
+Enfocate en: ciclo menstrual, sintomas ginecologicos, antecedentes obstetricos, metodos anticonceptivos, estudios indicados y seguimiento.`,
     campos: [
       { key: 'chief_complaint', label: 'Motivo de consulta' },
-      { key: 'observations', label: 'Examen ginecológico y observaciones' },
+      { key: 'observations', label: 'Examen ginecologico y observaciones' },
       { key: 'plan', label: 'Plan de tratamiento' },
-      { key: 'next_steps', label: 'Estudios y próximos pasos' },
+      { key: 'next_steps', label: 'Estudios y proximos pasos' },
     ]
   },
   traumatologia: {
-    contexto: `Sos un asistente clínico experto en traumatología y ortopedia.
-Enfocate en: zona afectada, mecanismo de lesión, dolor (EVA si se menciona), movilidad, estudios de imagen indicados, tratamiento conservador o quirúrgico y rehabilitación.`,
+    contexto: `Sos un asistente clinico experto en traumatologia y ortopedia.
+Enfocate en: zona afectada, mecanismo de lesion, dolor (EVA si se menciona), movilidad, estudios de imagen indicados, tratamiento conservador o quirurgico y rehabilitacion.`,
     campos: [
       { key: 'chief_complaint', label: 'Motivo de consulta y zona afectada' },
-      { key: 'observations', label: 'Evalu
+      { key: 'observations', label: 'Evaluacion traumatologica' },
+      { key: 'plan', label: 'Plan de tratamiento' },
+      { key: 'next_steps', label: 'Rehabilitacion y proximos pasos' },
+    ]
+  },
+  dermatologia: {
+    contexto: `Sos un asistente clinico experto en dermatologia.
+Enfocate en: descripcion de lesiones, localizacion, tiempo de evolucion, factores desencadenantes, tratamiento topico o sistemico indicado y seguimiento.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta' },
+      { key: 'observations', label: 'Descripcion de lesiones y evaluacion dermatologica' },
+      { key: 'plan', label: 'Plan de tratamiento' },
+      { key: 'next_steps', label: 'Cuidados y proximos pasos' },
+    ]
+  },
+  nutricion: {
+    contexto: `Sos un asistente clinico experto en nutricion y dietetica.
+Enfocate en: peso actual y objetivo si se mencionan, habitos alimentarios, actividad fisica, plan alimentario indicado, suplementacion y adherencia.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta' },
+      { key: 'observations', label: 'Evaluacion nutricional y habitos' },
+      { key: 'plan', label: 'Plan alimentario y tratamiento' },
+      { key: 'next_steps', label: 'Metas y proximos pasos' },
+    ]
+  },
+  kinesiologia: {
+    contexto: `Sos un asistente clinico experto en kinesiologia y fisioterapia.
+Enfocate en: zona de tratamiento, evaluacion funcional, tecnicas aplicadas, ejercicios indicados, evolucion y objetivos de rehabilitacion.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta' },
+      { key: 'observations', label: 'Evaluacion kinesiologica' },
+      { key: 'plan', label: 'Plan de rehabilitacion' },
+      { key: 'next_steps', label: 'Ejercicios y proximos pasos' },
+    ]
+  },
+  general: {
+    contexto: `Sos un asistente clinico experto. Analiza la transcripcion y genera un resumen clinico preciso desde la perspectiva del medico.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta' },
+      { key: 'observations', label: 'Observaciones clinicas' },
+      { key: 'plan', label: 'Plan de tratamiento' },
+      { key: 'next_steps', label: 'Proximos pasos' },
+    ]
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const { transcription, patientName, diagnosis, patientId, professionalId } = await request.json()
+
+    // Obtener especialidad del medico
+    let specialty = 'general'
+    if (professionalId) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('specialty')
+        .eq('id', professionalId)
+        .single()
+      if (profile?.specialty) specialty = profile.specialty
+    }
+
+    const template = especialidades[specialty] ?? especialidades.general
+
+    // Historial de sesiones anteriores
+    let historialTexto = ''
+    if (patientId) {
+      const { data: sesionesAnteriores } = await supabase
+        .from('sessions')
+        .select(`session_date, summaries (chief_complaint, observations, plan, next_steps)`)
+        .eq('patient_id', patientId)
+        .eq('status', 'complete')
+        .order('session_date', { ascending: false })
+        .limit(5)
+
+      if (sesionesAnteriores && sesionesAnteriores.length > 0) {
+        const sesiones = sesionesAnteriores.reverse()
+        historialTexto = sesiones
+          .filter((s: any) => s.summaries)
+          .map((s: any) => {
+            const fecha = new Date(s.session_date).toLocaleDateString('es-UY')
+            const sum = s.summaries
+            return `SESION ${fecha}:
+- Motivo: ${sum.chief_complaint}
+- Observaciones: ${sum.observations}
+- Plan: ${sum.plan}
+- Proximos pasos: ${sum.next_steps}`
+          })
+          .join('\n\n')
+      }
+    }
+
+    const historialSection = historialTexto
+      ? `\nHISTORIAL DE SESIONES ANTERIORES (del mas antiguo al mas reciente):\n${historialTexto}\n`
+      : ''
+
+    const message = await anthropic.messages.create({
+      model: 'claude-sonnet-4-5',
+      max_tokens: 1024,
+      messages: [{
+        role: 'user',
+        content: `${template.contexto}
+
+CONTEXTO:
+- Paciente: ${patientName}
+- Diagnostico previo: ${diagnosis || 'No especificado'}
+- Especialidad: ${specialty}
+${historialSection}
+INSTRUCCIONES:
+La transcripcion contiene el dialogo entre DOS personas: el medico y el paciente. No estan etiquetados explicitamente.
+- El MEDICO hace preguntas clinicas, evalua sintomas, propone tratamientos y da indicaciones
+- El PACIENTE describe sus sintomas, responde preguntas y relata su experiencia
+
+Analiza el dialogo completo considerando ambos roles para generar un resumen clinico preciso desde la perspectiva del medico.
+
+TRANSCRIPCION DE LA SESION DE HOY:
+${transcription}
+
+${historialTexto ? 'Considera la evolucion del paciente respecto a las sesiones anteriores.' : ''}
+
+Responde SOLO con un JSON con esta estructura exacta, sin texto adicional:
+{
+  "chief_complaint": "motivo principal de consulta",
+  "observations": "observaciones clinicas segun la especialidad",
+  "plan": "plan de tratamiento",
+  "next_steps": "proximos pasos concretos"
+}`
+      }]
+    })
+
+    const content = message.content[0]
+    if (content.type !== 'text') throw new Error('Respuesta invalida')
+
+    const clean = content.text.replace(/```json|```/g, '').trim()
+    const summary = JSON.parse(clean)
+
+    return NextResponse.json(summary)
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
