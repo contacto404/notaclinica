@@ -9,6 +9,7 @@ export default function NavbarMobile() {
     { href: '/dashboard', label: 'Inicio', icon: '🏠' },
     { href: '/dashboard/agenda', label: 'Agenda', icon: '📅' },
     { href: '/dashboard/pacientes/nuevo', label: 'Nuevo', icon: '+' },
+    { href: '/dashboard/honorarios', label: 'Cobros', icon: '💳' },
     { href: '/dashboard/cuenta', label: 'Cuenta', icon: '⚙️' },
   ]
 
@@ -24,7 +25,7 @@ export default function NavbarMobile() {
         const active = pathname === item.href
         return (
           <Link key={item.href} href={item.href}
-            className="flex-1 flex flex-col items-center justify-center py-2 gap-1 transition-colors"
+            className="flex-1 flex flex-col items-center justify-center py-2 gap-1 transition-colors relative"
           >
             <span className={`text-xl ${item.label === 'Nuevo' ? `w-8 h-8 flex items-center justify-center rounded-full text-base font-bold ${active ? 'bg-[#2563EB] text-white' : 'bg-[#EFF6FF] text-[#2563EB]'}` : ''}`}>
               {item.icon}

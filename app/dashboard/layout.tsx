@@ -55,6 +55,10 @@ export default async function DashboardLayout({
             className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
             + Nuevo paciente
           </Link>
+          <Link href="/dashboard/honorarios"
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            💳 Honorarios
+          </Link>
           <Link href="/dashboard/cuenta"
             className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
             ⚙️ Mi cuenta
