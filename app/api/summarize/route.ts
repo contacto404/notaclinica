@@ -8,85 +8,53 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-export async function POST(request: NextRequest) {
-  try {
-    const { transcription, patientName, diagnosis, patientId } = await request.json()
-
-    let historialTexto = ''
-    if (patientId) {
-      const { data: sesionesAnteriores } = await supabase
-        .from('sessions')
-        .select(`
-          session_date,
-          summaries (chief_complaint, observations, plan, next_steps)
-        `)
-        .eq('patient_id', patientId)
-        .eq('status', 'complete')
-        .order('session_date', { ascending: false })
-        .limit(5)
-
-      if (sesionesAnteriores && sesionesAnteriores.length > 0) {
-        const sesiones = sesionesAnteriores.reverse()
-        historialTexto = sesiones
-          .filter((s: any) => s.summaries)
-          .map((s: any) => {
-            const fecha = new Date(s.session_date).toLocaleDateString('es-UY')
-            const sum = s.summaries
-            return `SESIÓN ${fecha}:
-- Motivo: ${sum.chief_complaint}
-- Observaciones: ${sum.observations}
-- Plan: ${sum.plan}
-- Próximos pasos: ${sum.next_steps}`
-          })
-          .join('\n\n')
-      }
-    }
-
-    const historialSection = historialTexto
-      ? `\nHISTORIAL DE SESIONES ANTERIORES (del más antiguo al más reciente):\n${historialTexto}\n`
-      : ''
-
-    const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5',
-      max_tokens: 1024,
-      messages: [{
-        role: 'user',
-        content: `Sos un asistente clínico experto. Analizá la siguiente transcripción de una consulta médica entre un médico y su paciente.
-
-CONTEXTO:
-- Paciente: ${patientName}
-- Diagnóstico previo: ${diagnosis || 'No especificado'}
-${historialSection}
-INSTRUCCIONES IMPORTANTES:
-La transcripción contiene el diálogo entre DOS personas: el médico y el paciente. No están etiquetados explícitamente, pero podés inferirlo por el contexto:
-- El MÉDICO hace preguntas clínicas, evalúa síntomas, propone tratamientos y da indicaciones
-- El PACIENTE describe sus síntomas, responde preguntas y relata su experiencia
-
-Analizá el diálogo completo considerando ambos roles para generar un resumen clínico preciso desde la perspectiva del médico.
-
-TRANSCRIPCIÓN DE LA SESIÓN DE HOY:
-${transcription}
-
-${historialTexto ? 'Considerá la evolución del paciente respecto a las sesiones anteriores. Si hay continuidad temática, cambios relevantes o patrones que se mantienen, mencionálos en las observaciones.' : ''}
-
-Respondé SOLO con un JSON con esta estructura exacta, sin texto adicional:
-{
-  "chief_complaint": "motivo principal de consulta expresado por el paciente en una oración",
-  "observations": "observaciones clínicas del médico basadas en lo que reportó el paciente y lo evaluado en consulta, incluyendo evolución respecto a sesiones anteriores si corresponde",
-  "plan": "plan de tratamiento acordado o indicado por el médico",
-  "next_steps": "próximos pasos concretos indicados por el médico al paciente"
-}`
-      }]
-    })
-
-    const content = message.content[0]
-    if (content.type !== 'text') throw new Error('Respuesta inválida')
-
-    const clean = content.text.replace(/```json|```/g, '').trim()
-    const summary = JSON.parse(clean)
-
-    return NextResponse.json(summary)
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-}
+const especialidades: Record<string, {
+  contexto: string
+  campos: { key: string; label: string }[]
+}> = {
+  psicologia: {
+    contexto: `Sos un asistente clínico experto en psicología y salud mental. El médico es psicólogo/a o psiquiatra.
+Enfocate en: estado emocional, patrones de pensamiento, vinculación terapéutica, evolución anímica, mecanismos de defensa, recursos del paciente y adherencia al tratamiento.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta' },
+      { key: 'observations', label: 'Estado emocional y observaciones clínicas' },
+      { key: 'plan', label: 'Plan terapéutico' },
+      { key: 'next_steps', label: 'Próximos pasos' },
+    ]
+  },
+  clinica: {
+    contexto: `Sos un asistente clínico experto en medicina general. El médico es clínico/a.
+Enfocate en: síntomas actuales, signos vitales mencionados, antecedentes relevantes, diagnóstico diferencial, indicaciones farmacológicas y no farmacológicas.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta' },
+      { key: 'observations', label: 'Examen clínico y observaciones' },
+      { key: 'plan', label: 'Plan de tratamiento' },
+      { key: 'next_steps', label: 'Próximos pasos e indicaciones' },
+    ]
+  },
+  pediatria: {
+    contexto: `Sos un asistente clínico experto en pediatría. El médico es pediatra.
+Enfocate en: edad y peso del niño si se menciona, desarrollo psicomotor, alimentación, vacunas, síntomas referidos por los padres, y recomendaciones para la familia.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta' },
+      { key: 'observations', label: 'Evaluación pediátrica y observaciones' },
+      { key: 'plan', label: 'Plan de tratamiento' },
+      { key: 'next_steps', label: 'Indicaciones para los padres y próximos pasos' },
+    ]
+  },
+  ginecologia: {
+    contexto: `Sos un asistente clínico experto en ginecología y obstetricia.
+Enfocate en: ciclo menstrual, síntomas ginecológicos, antecedentes obstétricos, métodos anticonceptivos, estudios indicados y seguimiento.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta' },
+      { key: 'observations', label: 'Examen ginecológico y observaciones' },
+      { key: 'plan', label: 'Plan de tratamiento' },
+      { key: 'next_steps', label: 'Estudios y próximos pasos' },
+    ]
+  },
+  traumatologia: {
+    contexto: `Sos un asistente clínico experto en traumatología y ortopedia.
+Enfocate en: zona afectada, mecanismo de lesión, dolor (EVA si se menciona), movilidad, estudios de imagen indicados, tratamiento conservador o quirúrgico y rehabilitación.`,
+    campos: [
+      { key: 'chief_complaint', label: 'Motivo de consulta y zona afectada' },
+      { key: 'observations', label: 'Evalu

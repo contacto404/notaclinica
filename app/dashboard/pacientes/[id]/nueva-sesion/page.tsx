@@ -48,27 +48,51 @@ export default function NuevaSesionPage() {
     try {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) { router.push('/login'); return }
-      const { data: patient } = await supabase.from('patients').select('full_name, diagnosis').eq('id', patientId).single()
-      const { data: session } = await supabase.from('sessions').insert({ patient_id: patientId, status: 'pending' }).select().single()
+
+      const { data: patient } = await supabase
+        .from('patients')
+        .select('full_name, diagnosis')
+        .eq('id', patientId)
+        .single()
+
+      const { data: session } = await supabase
+        .from('sessions')
+        .insert({ patient_id: patientId, status: 'pending' })
+        .select()
+        .single()
+
       const formData = new FormData()
       const mimeType = audioBlob.type || 'audio/webm'
       const extension = mimeType.includes('mp4') ? 'audio.mp4' : 'audio.webm'
       formData.append('audio', new Blob([audioBlob], { type: mimeType }), extension)
+
       const transcribeRes = await fetch('/api/transcribe', { method: 'POST', body: formData })
       const transcribeData = await transcribeRes.json()
       if (transcribeData.error) throw new Error(transcribeData.error)
+
       const text = transcribeData.text
       setTranscription(text)
+
       await supabase.from('transcriptions').insert({ session_id: session.id, content: text })
       await supabase.from('sessions').update({ status: 'transcribed' }).eq('id', session.id)
+
       setStep('summarizing')
+
       const summarizeRes = await fetch('/api/summarize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ transcription: text, patientName: patient?.full_name, diagnosis: patient?.diagnosis, patientId })
+        body: JSON.stringify({
+          transcription: text,
+          patientName: patient?.full_name,
+          diagnosis: patient?.diagnosis,
+          patientId,
+          professionalId: user.id
+        })
       })
+
       const summaryData = await summarizeRes.json()
       if (summaryData.error) throw new Error(summaryData.error)
+
       setSummary(summaryData)
       await supabase.from('summaries').insert({ session_id: session.id, ...summaryData })
       await supabase.from('sessions').update({ status: 'complete' }).eq('id', session.id)

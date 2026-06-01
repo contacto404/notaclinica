@@ -2,6 +2,19 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import Toast from '../components/Toast'
+
+const ESPECIALIDADES = [
+  { value: 'general', label: 'General / Otra' },
+  { value: 'psicologia', label: 'Psicología / Psiquiatría' },
+  { value: 'clinica', label: 'Clínica médica' },
+  { value: 'pediatria', label: 'Pediatría' },
+  { value: 'ginecologia', label: 'Ginecología / Obstetricia' },
+  { value: 'traumatologia', label: 'Traumatología / Ortopedia' },
+  { value: 'dermatologia', label: 'Dermatología' },
+  { value: 'nutricion', label: 'Nutrición' },
+  { value: 'kinesiologia', label: 'Kinesiología / Fisioterapia' },
+]
 
 export default function CuentaPage() {
   const [sub, setSub] = useState<any>(null)
@@ -9,6 +22,9 @@ export default function CuentaPage() {
   const [cancelling, setCancelling] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
   const [user, setUser] = useState<any>(null)
+  const [specialty, setSpecialty] = useState('general')
+  const [savingSpecialty, setSavingSpecialty] = useState(false)
+  const [toast, setToast] = useState('')
   const router = useRouter()
   const supabase = createClient()
 
@@ -16,6 +32,14 @@ export default function CuentaPage() {
     async function load() {
       const { data: { user } } = await supabase.auth.getUser()
       setUser(user)
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('specialty')
+        .eq('id', user?.id)
+        .single()
+      if (profile?.specialty) setSpecialty(profile.specialty)
+
       const { data } = await supabase
         .from('subscriptions')
         .select('*')
@@ -26,6 +50,15 @@ export default function CuentaPage() {
     }
     load()
   }, [])
+
+  async function handleSaveSpecialty() {
+    setSavingSpecialty(true)
+    await supabase
+      .from('profiles')
+      .upsert({ id: user?.id, specialty, full_name: user?.user_metadata?.full_name })
+    setSavingSpecialty(false)
+    setToast('Especialidad guardada')
+  }
 
   async function handleCancelar() {
     if (!confirm('¿Seguro que querés cancelar tu suscripción? Perderás acceso al vencer el período actual.')) return
@@ -48,11 +81,35 @@ export default function CuentaPage() {
 
   return (
     <div className="p-6 max-w-lg">
+      {toast && <Toast message={toast} onDone={() => setToast('')} />}
+
       <h1 className="text-2xl font-bold text-[#0F172A] mb-6">Mi cuenta</h1>
 
       <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
         <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-4">Perfil</h2>
         <p className="text-[#0F172A] font-medium">{user?.email}</p>
+      </div>
+
+      {/* Especialidad */}
+      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-4">Especialidad</h2>
+        <p className="text-xs text-[#64748B] mb-3">Seleccioná tu especialidad para que la IA adapte los resúmenes clínicos.</p>
+        <select
+          value={specialty}
+          onChange={e => setSpecialty(e.target.value)}
+          className="w-full border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC] mb-4"
+        >
+          {ESPECIALIDADES.map(e => (
+            <option key={e.value} value={e.value}>{e.label}</option>
+          ))}
+        </select>
+        <button
+          onClick={handleSaveSpecialty}
+          disabled={savingSpecialty}
+          className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer"
+        >
+          {savingSpecialty ? 'Guardando...' : 'Guardar especialidad'}
+        </button>
       </div>
 
       <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
