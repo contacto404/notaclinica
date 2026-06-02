@@ -7,6 +7,7 @@ import EditarPacienteButton from './EditarPacienteButton'
 import DarDeBajaButton from './DarDeBajaButton'
 import CobroButton from './CobroButton'
 import EvolucionChart from './EvolucionChart'
+import EscalasEvaluacion from './EscalasEvaluacion'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -25,6 +26,17 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
   const { data: appointments } = await supabase
     .from('appointments').select('*')
     .eq('patient_id', id).order('appointment_date', { ascending: true })
+
+  // Especialidad del profesional: las escalas solo aplican a Psicología / Psiquiatría
+  const { data: profile } = await supabase
+    .from('profiles').select('specialty').eq('id', user.id).single()
+  const showScales = profile?.specialty === 'psicologia'
+
+  const { data: assessments } = showScales
+    ? await supabase
+        .from('scale_assessments').select('*')
+        .eq('patient_id', id).order('assessed_at', { ascending: true })
+    : { data: null }
 
   const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
   const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
@@ -158,6 +170,11 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
 
         {/* Evolucion grafica */}
         <EvolucionChart sessions={sessions ?? []} />
+
+        {/* Escalas de evaluacion (solo Psicologia / Psiquiatria) */}
+        {showScales && (
+          <EscalasEvaluacion patientId={id} assessments={assessments ?? []} />
+        )}
 
         {/* Card historial de sesiones */}
         <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0]">
