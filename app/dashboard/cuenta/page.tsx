@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Toast from '../components/Toast'
+import ThemeToggle from '@/app/components/ThemeToggle'
 
 const ESPECIALIDADES = [
   { value: 'general', label: 'General / Otra' },
@@ -112,6 +113,13 @@ export default function CuentaPage() {
       <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
         <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-4">Perfil</h2>
         <p className="text-[#0F172A] font-medium">{user?.email}</p>
+      </div>
+
+      {/* Apariencia */}
+      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-1">Apariencia</h2>
+        <p className="text-xs text-[#64748B] mb-4">Eleg&iacute; el tema de la app. &laquo;Sistema&raquo; sigue la preferencia de tu dispositivo.</p>
+        <ThemeToggle />
       </div>
 
       {/* Datos profesional */}
