@@ -8,6 +8,7 @@ import DarDeBajaButton from './DarDeBajaButton'
 import CobroButton from './CobroButton'
 import EvolucionChart from './EvolucionChart'
 import EscalasEvaluacion from './EscalasEvaluacion'
+import ConsentimientoButton from './ConsentimientoButton'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -37,6 +38,14 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         .from('scale_assessments').select('*')
         .eq('patient_id', id).order('assessed_at', { ascending: true })
     : { data: null }
+
+  const { data: consent } = await supabase
+    .from('consents')
+    .select('*')
+    .eq('patient_id', id)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
 
   const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
   const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
@@ -71,6 +80,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             </div>
           </div>
           <div className="flex gap-2 mt-4 flex-wrap">
+            <ConsentimientoButton patientId={id} patientName={patient.full_name} professionalId={user.id} consent={consent} />
             <a href={"/dashboard/pacientes/" + id + "/historial"} className="border border-[#E0D0C0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
               🔍 Historial IA
             </a>
