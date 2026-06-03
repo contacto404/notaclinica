@@ -8,7 +8,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur border-b border-[#E2E8F0] dark:border-[#1E293B]">
         <div
           className="px-4 flex items-center justify-between h-14"
-          style={{ paddingTop: "env(safe-area-inset-top)", paddingLeft: "max(env(safe-area-inset-left), 16px)", paddingRight: "max(env(safe-area-inset-right), 16px)", height: "calc(env(safe-area-inset-top) + 56px)" }}
+          style={{ paddingTop: "max(env(safe-area-inset-top), 44px)", paddingLeft: "max(env(safe-area-inset-left), 16px)", paddingRight: "max(env(safe-area-inset-right), 16px)", minHeight: "calc(max(env(safe-area-inset-top), 44px) + 56px)" }}
         >
           <span className="font-bold text-[#0F172A] dark:text-white text-xl">NotaClínica</span>
           <div className="flex items-center gap-3">
@@ -24,7 +24,7 @@ export default function LandingPage() {
 
       {/* Hero — compensa safe area + h-14 (56px) + gap */}
       <section
-        style={{ paddingTop: 'calc(env(safe-area-inset-top) + 56px + 24px)', paddingLeft: 'max(env(safe-area-inset-left), 24px)', paddingRight: 'max(env(safe-area-inset-right), 24px)' }}
+        style={{ paddingTop: 'calc(max(env(safe-area-inset-top), 44px) + 56px + 24px)', paddingLeft: 'max(env(safe-area-inset-left), 24px)', paddingRight: 'max(env(safe-area-inset-right), 24px)' }}
         className="pb-20 px-6 text-center max-w-4xl mx-auto"
       >
         <div className="inline-block bg-[#EFF6FF] text-[#2563EB] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
