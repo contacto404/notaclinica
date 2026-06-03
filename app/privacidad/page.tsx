@@ -12,7 +12,7 @@ export default function PrivacidadPage() {
         <div className="mb-8">
           <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Legal</p>
           <h1 className="text-3xl font-bold text-[#0F172A]">Política de Privacidad</h1>
-          <p className="text-sm text-[#64748B] mt-1">Última actualización: mayo de 2026</p>
+          <p className="text-sm text-[#64748B] mt-1">Última actualización: junio de 2026</p>
         </div>
 
         <div className="flex flex-col gap-6">
@@ -41,6 +41,10 @@ export default function PrivacidadPage() {
             {
               title: '3. Finalidad del tratamiento',
               content: 'Los datos se utilizan exclusivamente para permitir al profesional gestionar su práctica clínica, generar transcripciones y resúmenes de sesiones mediante inteligencia artificial, enviar recordatorios de turnos, y mejorar el funcionamiento de la plataforma. Los datos de pacientes son administrados por el profesional, quien asume la responsabilidad de contar con el consentimiento correspondiente de sus pacientes.'
+            },
+            {
+              title: '3bis. Consentimiento informado',
+              content: 'NotaClínica provee al profesional una herramienta de consentimiento informado digital. El profesional es responsable de obtener el consentimiento explícito de cada paciente antes de iniciar el tratamiento y el uso de herramientas de transcripción con IA. El registro de firma queda almacenado con fecha, hora y nombre del firmante, conforme a la Ley 18.331.'
             },
             {
               title: '4. Base legal',
