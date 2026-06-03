@@ -6,13 +6,13 @@ export default function LandingPage() {
 
       {/* Nav — solo el safe-area real (0 en web, inset del notch en el webview) */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur border-b border-[#E2E8F0]"
+        className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur border-b border-[#E2E8F0] dark:border-[#1E293B]"
         style={{ paddingTop: 'env(safe-area-inset-top)' }}
       >
         <div className="px-6 flex items-center justify-between h-14">
-          <span className="font-bold text-[#0F172A] text-xl">NotaClínica</span>
+          <span className="font-bold text-[#0F172A] dark:text-white text-xl">NotaClínica</span>
           <div className="flex items-center gap-4">
-            <Link href="/login" className="text-sm text-[#64748B] hover:text-[#0F172A] transition-colors">
+            <Link href="/login" className="text-sm text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white transition-colors">
               Iniciar sesión
             </Link>
             <Link href="/login?tab=registro" className="text-sm bg-[#2563EB] text-white px-4 py-2 rounded-xl hover:bg-[#1D4ED8] transition-colors">
