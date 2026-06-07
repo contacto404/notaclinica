@@ -75,6 +75,13 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
         ))}
       </div>
 
+      {/* Acceso a estadísticas */}
+      <a href="/dashboard/estadisticas"
+        className="flex items-center justify-between bg-white rounded-2xl border border-[#E2E8F0] px-4 py-3.5 mb-8 hover:shadow-sm transition-shadow">
+        <span className="text-sm font-medium text-[#0F172A]">📊 Ver estadísticas del consultorio</span>
+        <span className="text-[#94A3B8] text-lg">›</span>
+      </a>
+
       {/* Búsqueda y orden */}
       <div className="flex gap-2 mb-4">
         <input
