@@ -4,6 +4,11 @@
 @source "../lib";
 @source "../components";
 
+/* Safe-area superior: 0 en web/escritorio (sin notch).
+   Solo dentro de Capacitor (html.native) se aplica el piso de 44px. */
+:root { --safe-top: env(safe-area-inset-top); }
+html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
+
 /* ============================================================
    Design tokens — semantic colors for light & dark mode.
    The app uses hardcoded Tailwind arbitrary classes (e.g.

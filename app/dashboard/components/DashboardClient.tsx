@@ -19,14 +19,20 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
       return 0
     })
 
+  const stats = [
+    { label: 'Pacientes activos', value: patients.length, icon: '👥', tint: 'bg-[#DBEAFE] dark:bg-[#1E3A8A]/40', text: 'text-[#1E40AF] dark:text-[#93C5FD]' },
+    { label: 'Sesiones este mes', value: sesionesEsteMes, icon: '🎙️', tint: 'bg-[#E8F4E8] dark:bg-[#14532D]/40', text: 'text-[#2D6A2D] dark:text-[#86EFAC]' },
+    { label: 'PDFs exportados', value: pdfsExportados, icon: '📄', tint: 'bg-[#E8EEF8] dark:bg-[#334155]', text: 'text-[#2D3F6A] dark:text-[#CBD5E1]' },
+  ]
+
   return (
     <div className="max-w-3xl mx-auto">
 
       {/* Header */}
-      <div className="flex items-center justify-between mb-8 gap-3">
+      <div className="flex items-center justify-between mb-6 gap-3">
         <div>
-          <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">{saludo}</p>
-          <h1 className="text-xl font-semibold text-[#0F172A] leading-tight">{nombre}</h1>
+          <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8] font-medium uppercase tracking-widest mb-0.5">{saludo}</p>
+          <h1 className="text-xl font-bold text-[#0F172A] dark:text-white leading-tight">{nombre}</h1>
         </div>
         <a href="/dashboard/pacientes/nuevo"
           className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1D4ED8] transition-colors shadow-sm shrink-0 whitespace-nowrap">
@@ -36,14 +42,17 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
 
       {/* Turnos hoy */}
       {turnosHoy.length > 0 && (
-        <div className="bg-[#FFF7ED] border border-[#FED7AA] rounded-2xl p-4 mb-6">
-          <p className="text-xs font-semibold text-[#C2410C] uppercase tracking-widest mb-3">📅 Hoy</p>
-          <div className="flex flex-col gap-2">
+        <div className="bg-white dark:bg-[#1E293B] border border-[#E2E8F0] dark:border-[#334155] rounded-2xl p-4 mb-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C2410C]" />
+            <p className="text-[11px] font-semibold text-[#C2410C] dark:text-[#FDBA74] uppercase tracking-widest">Turnos de hoy</p>
+          </div>
+          <div className="flex flex-col gap-1.5">
             {turnosHoy.map((t: any) => (
               <a key={t.id} href={"/dashboard/pacientes/" + t.patient_id}
-                className="flex items-center gap-3 bg-white rounded-xl px-3 py-2.5 border border-[#FED7AA] hover:shadow-sm transition-shadow">
-                <div className="bg-[#FFF7ED] rounded-lg px-2 py-1 shrink-0">
-                  <p className="text-sm font-bold text-[#C2410C]">
+                className="flex items-center gap-3 rounded-xl px-3 py-2 hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A] transition-colors">
+                <div className="bg-[#FFF7ED] dark:bg-[#7C2D12]/40 rounded-lg px-2.5 py-1 shrink-0">
+                  <p className="text-sm font-bold text-[#C2410C] dark:text-[#FDBA74] tabular-nums">
                     {new Date(t.appointment_date).toLocaleTimeString('es-UY', {
                       timeZone: 'America/Montevideo',
                       hour: '2-digit', minute: '2-digit'
@@ -51,10 +60,10 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
                   </p>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-[#0F172A] truncate">{t.patients?.full_name}</p>
-                  {t.notes && <p className="text-xs text-[#64748B]">{t.notes}</p>}
+                  <p className="text-sm font-semibold text-[#0F172A] dark:text-white truncate">{t.patients?.full_name}</p>
+                  {t.notes && <p className="text-xs text-[#64748B] dark:text-[#94A3B8] truncate">{t.notes}</p>}
                 </div>
-                <span className="text-[#D0B8A8] text-lg shrink-0">›</span>
+                <span className="text-[#CBD5E1] dark:text-[#475569] text-lg shrink-0">›</span>
               </a>
             ))}
           </div>
@@ -62,73 +71,72 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
       )}
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-8">
-        {[
-          { label: 'Pacientes activos', value: patients.length, color: 'bg-[#DBEAFE]', text: 'text-[#1E40AF]' },
-          { label: 'Sesiones este mes', value: sesionesEsteMes, color: 'bg-[#E8F4E8]', text: 'text-[#2D6A2D]' },
-          { label: 'PDFs exportados', value: pdfsExportados, color: 'bg-[#E8EEF8]', text: 'text-[#2D3F6A]' },
-        ].map(stat => (
-          <div key={stat.label} className={`${stat.color} rounded-2xl p-4`}>
-            <p className="text-xs text-[#64748B] mb-2 leading-tight">{stat.label}</p>
-            <p className={`text-3xl font-bold ${stat.text}`}>{stat.value}</p>
+      <div className="grid grid-cols-3 gap-3 mb-3">
+        {stats.map(stat => (
+          <div key={stat.label} className="bg-white dark:bg-[#1E293B] rounded-2xl border border-[#E2E8F0] dark:border-[#334155] p-3.5">
+            <span className={`w-7 h-7 rounded-lg ${stat.tint} flex items-center justify-center text-sm mb-2.5`}>{stat.icon}</span>
+            <p className={`text-2xl font-bold leading-none ${stat.text}`}>{stat.value}</p>
+            <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8] mt-1.5 leading-tight">{stat.label}</p>
           </div>
         ))}
       </div>
 
       {/* Acceso a estadísticas */}
       <a href="/dashboard/estadisticas"
-        className="flex items-center justify-between bg-white rounded-2xl border border-[#E2E8F0] px-4 py-3.5 mb-8 hover:shadow-sm transition-shadow">
-        <span className="text-sm font-medium text-[#0F172A]">📊 Ver estadísticas del consultorio</span>
-        <span className="text-[#94A3B8] text-lg">›</span>
+        className="flex items-center justify-between bg-white dark:bg-[#1E293B] rounded-2xl border border-[#E2E8F0] dark:border-[#334155] px-4 py-3 mb-6 hover:border-[#2563EB] dark:hover:border-[#2563EB] transition-colors group">
+        <span className="flex items-center gap-2 text-sm font-medium text-[#0F172A] dark:text-white">
+          <span className="text-base">📊</span> Estadísticas del consultorio
+        </span>
+        <span className="text-[#94A3B8] group-hover:text-[#2563EB] text-lg transition-colors">›</span>
       </a>
 
       {/* Búsqueda y orden */}
-      <div className="flex gap-2 mb-4">
-        <input
-          type="text"
-          value={busqueda}
-          onChange={e => setBusqueda(e.target.value)}
-          placeholder="Buscar paciente..."
-          className="flex-1 border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-white"
-        />
-        <select
-          value={orden}
-          onChange={e => setOrden(e.target.value as 'reciente' | 'nombre')}
-          className="border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-white"
-        >
-          <option value="reciente">Reciente</option>
-          <option value="nombre">Nombre</option>
-        </select>
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <h2 className="text-[11px] font-semibold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest shrink-0">Pacientes</h2>
+        <div className="flex gap-2 flex-1 max-w-sm">
+          <input
+            type="text"
+            value={busqueda}
+            onChange={e => setBusqueda(e.target.value)}
+            placeholder="Buscar..."
+            className="flex-1 min-w-0 border border-[#E2E8F0] dark:border-[#334155] rounded-lg px-3 py-2 text-sm text-[#0F172A] dark:text-white outline-none focus:border-[#2563EB] bg-white dark:bg-[#1E293B] placeholder:text-[#94A3B8]"
+          />
+          <select
+            value={orden}
+            onChange={e => setOrden(e.target.value as 'reciente' | 'nombre')}
+            className="border border-[#E2E8F0] dark:border-[#334155] rounded-lg px-2.5 py-2 text-sm text-[#0F172A] dark:text-white outline-none focus:border-[#2563EB] bg-white dark:bg-[#1E293B] shrink-0"
+          >
+            <option value="reciente">Reciente</option>
+            <option value="nombre">Nombre</option>
+          </select>
+        </div>
       </div>
 
       {/* Pacientes */}
-      <div>
-        <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-3">Pacientes recientes</h2>
-        <div className="flex flex-col gap-2">
-          {filtrados.length > 0 ? filtrados.map((p: any) => (
-            <a key={p.id} href={"/dashboard/pacientes/" + p.id}
-              className="bg-white rounded-2xl px-4 py-4 flex items-center gap-4 hover:shadow-md transition-shadow border border-[#E2E8F0]">
-              <div className="w-11 h-11 rounded-full bg-[#DBEAFE] flex items-center justify-center text-base font-semibold text-[#2563EB] shrink-0">
-                {p.full_name?.[0]}
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-[#0F172A] truncate">{p.full_name}</p>
-                <p className="text-xs text-[#64748B] mt-0.5">{p.diagnosis ?? 'Sin diagnóstico'}</p>
-              </div>
-              <span className="text-[#D0B8A8] text-lg shrink-0">›</span>
-            </a>
-          )) : (
-            <div className="bg-white border border-dashed border-[#E0D0C0] rounded-2xl px-4 py-12 text-center">
-              <p className="text-2xl mb-2">{busqueda ? '🔍' : '🌱'}</p>
-              <p className="text-sm text-[#64748B]">{busqueda ? 'No se encontraron pacientes.' : 'Todavía no tenés pacientes.'}</p>
-              {!busqueda && (
-                <a href="/dashboard/pacientes/nuevo" className="text-sm text-[#2563EB] mt-1 inline-block hover:underline">
-                  + Agregar el primero
-                </a>
-              )}
+      <div className="flex flex-col gap-1.5">
+        {filtrados.length > 0 ? filtrados.map((p: any) => (
+          <a key={p.id} href={"/dashboard/pacientes/" + p.id}
+            className="bg-white dark:bg-[#1E293B] rounded-xl px-3.5 py-3 flex items-center gap-3 hover:shadow-sm hover:border-[#CBD5E1] dark:hover:border-[#475569] transition-all border border-[#E2E8F0] dark:border-[#334155]">
+            <div className="w-9 h-9 rounded-full bg-[#DBEAFE] dark:bg-[#1E3A8A]/40 flex items-center justify-center text-sm font-semibold text-[#2563EB] dark:text-[#93C5FD] shrink-0 uppercase">
+              {p.full_name?.[0]}
             </div>
-          )}
-        </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-[#0F172A] dark:text-white truncate">{p.full_name}</p>
+              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] truncate">{p.diagnosis ?? 'Sin diagnóstico'}</p>
+            </div>
+            <span className="text-[#CBD5E1] dark:text-[#475569] text-lg shrink-0">›</span>
+          </a>
+        )) : (
+          <div className="bg-white dark:bg-[#1E293B] border border-dashed border-[#E2E8F0] dark:border-[#334155] rounded-2xl px-4 py-12 text-center">
+            <p className="text-2xl mb-2">{busqueda ? '🔍' : '🌱'}</p>
+            <p className="text-sm text-[#64748B] dark:text-[#94A3B8]">{busqueda ? 'No se encontraron pacientes.' : 'Todavía no tenés pacientes.'}</p>
+            {!busqueda && (
+              <a href="/dashboard/pacientes/nuevo" className="text-sm text-[#2563EB] mt-1 inline-block hover:underline">
+                + Agregar el primero
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

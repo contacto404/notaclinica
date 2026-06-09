@@ -34,7 +34,7 @@ export default function ExportPDFButton({ sessionId }: { sessionId: string }) {
           {/* Barra superior con safe area */}
           <div
             className="bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4"
-            style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)' }}
+            style={{ paddingTop: 'var(--safe-top)' }}
           >
             <div className="h-14 flex items-center">
               <span className="font-semibold text-[#0F172A] text-sm">Resumen clinico</span>

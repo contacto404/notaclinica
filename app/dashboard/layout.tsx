@@ -30,7 +30,7 @@ export default async function DashboardLayout({
       {/* Header móvil */}
       <header
         className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0]"
-        style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)' }}
+        style={{ paddingTop: 'var(--safe-top)' }}
       >
         <div className="px-4 flex items-center justify-center h-14">
           <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
@@ -80,7 +80,7 @@ export default async function DashboardLayout({
       <main
         className="md:ml-56 md:pt-0 overflow-x-hidden"
         style={{
-          paddingTop: 'calc(max(env(safe-area-inset-top), 44px) + 56px)',
+          paddingTop: 'calc(var(--safe-top) + 56px)',
           paddingBottom: 'calc(max(env(safe-area-inset-bottom), 8px) + 56px)'
         }}
       >

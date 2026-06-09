@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     title: 'NotaClínica — Resúmenes clínicos con IA para médicos',
     description:
       'Grabá la consulta y obtené el resumen clínico en segundos. 30 días gratis, sin tarjeta de crédito.',
-    images: [{ url: '/icon-512x512.png', width: 512, height: 512, alt: 'NotaClínica' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'NotaClínica — Resúmenes clínicos con IA' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NotaClínica — Resúmenes clínicos con IA para médicos',
     description:
       'Grabá la consulta y obtené el resumen clínico en segundos. 30 días gratis, sin tarjeta.',
-    images: ['/icon-512x512.png'],
+    images: ['/og-image.png'],
   },
 }
 
@@ -66,7 +66,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur border-b border-[#E2E8F0] dark:border-[#1E293B]">
         <div
           className="px-4 flex items-center justify-between h-14"
-          style={{ paddingTop: 'max(env(safe-area-inset-top), 44px)', paddingLeft: 'max(env(safe-area-inset-left), 16px)', paddingRight: 'max(env(safe-area-inset-right), 16px)', minHeight: 'calc(max(env(safe-area-inset-top), 44px) + 56px)' }}
+          style={{ paddingTop: 'var(--safe-top)', paddingLeft: 'max(env(safe-area-inset-left), 16px)', paddingRight: 'max(env(safe-area-inset-right), 16px)', minHeight: 'calc(var(--safe-top) + 56px)' }}
         >
           <span className="font-bold text-xl tracking-tight">NotaClínica</span>
           <div className="flex items-center gap-3">
@@ -82,7 +82,7 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section
-        style={{ paddingTop: 'calc(max(env(safe-area-inset-top), 44px) + 56px + 56px)', paddingLeft: 'max(env(safe-area-inset-left), 24px)', paddingRight: 'max(env(safe-area-inset-right), 24px)' }}
+        style={{ paddingTop: 'calc(var(--safe-top) + 56px + 56px)', paddingLeft: 'max(env(safe-area-inset-left), 24px)', paddingRight: 'max(env(safe-area-inset-right), 24px)' }}
         className="pb-16 text-center max-w-3xl mx-auto"
       >
         <div className="inline-flex items-center gap-2 bg-[#EFF6FF] dark:bg-[#1E293B] text-[#2563EB] dark:text-[#93C5FD] text-sm font-medium px-4 py-1.5 rounded-full mb-7">
@@ -114,10 +114,12 @@ export default function LandingPage() {
         <div className="max-w-sm mx-auto">
           <div className="rounded-[2.5rem] border border-[#E2E8F0] dark:border-[#334155] bg-[#F8FAFC] dark:bg-[#1E293B] p-3 shadow-xl">
             <div className="rounded-[2rem] bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[#334155] overflow-hidden">
+              {/* barra superior simulada */}
               <div className="px-5 pt-5 pb-3 border-b border-[#F1F5F9] dark:border-[#1E293B]">
                 <p className="text-[10px] uppercase tracking-widest text-[#94A3B8]">Resumen de sesión</p>
                 <p className="text-sm font-semibold mt-0.5">María G. · Psicología</p>
               </div>
+              {/* contenido simulado */}
               <div className="px-5 py-4 space-y-3 text-left">
                 <div>
                   <p className="text-[11px] font-semibold text-[#2563EB] mb-1">Motivo de consulta</p>
@@ -212,26 +214,6 @@ export default function LandingPage() {
                   <h3 className="font-semibold mb-1">{f.title}</h3>
                   <p className="text-sm text-[#64748B] dark:text-[#94A3B8] leading-relaxed">{f.desc}</p>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonios — REEMPLAZAR con testimonios reales antes de publicar */}
-      <section className="py-20 px-6 bg-[#F8FAFC] dark:bg-[#0B1220] border-y border-[#E2E8F0] dark:border-[#1E293B]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-14 tracking-tight">Lo que dicen los profesionales</h2>
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              { quote: 'Testimonio real de un usuario — reemplazar este texto por una cita verdadera.', name: 'Dra. [Nombre]', role: '[Especialidad]' },
-              { quote: 'Testimonio real de un usuario — reemplazar este texto por una cita verdadera.', name: 'Dr. [Nombre]', role: '[Especialidad]' },
-              { quote: 'Testimonio real de un usuario — reemplazar este texto por una cita verdadera.', name: 'Lic. [Nombre]', role: '[Especialidad]' },
-            ].map((t, i) => (
-              <div key={i} className="bg-white dark:bg-[#1E293B] rounded-2xl border border-[#E2E8F0] dark:border-[#334155] p-6">
-                <p className="text-sm text-[#475569] dark:text-[#CBD5E1] leading-relaxed mb-5">“{t.quote}”</p>
-                <p className="text-sm font-semibold">{t.name}</p>
-                <p className="text-xs text-[#94A3B8]">{t.role}</p>
               </div>
             ))}
           </div>

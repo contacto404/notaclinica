@@ -31,6 +31,8 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/suscripcion') ||
     pathname.startsWith('/api/') ||
     pathname.startsWith('/admin') ||
+    pathname === '/manifest.json' ||
+    pathname === '/sw.js' ||
     pathname === '/'
 
   if (!user && !isPublic) {
@@ -43,5 +45,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|manifest.json|sw.js|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
 }

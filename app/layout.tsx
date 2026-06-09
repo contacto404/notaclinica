@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from './components/ThemeProvider'
+import ServiceWorkerRegister from './components/ServiceWorkerRegister'
 
 export const metadata: Metadata = {
   title: 'NotaClínica',
@@ -18,6 +19,9 @@ const themeInitScript = `
     d.dataset.theme = dark ? 'dark' : 'light';
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.setAttribute('content', dark ? '#0F172A' : '#2563EB');
+    if (window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function' && window.Capacitor.isNativePlatform()) {
+      d.classList.add('native');
+    }
   } catch (e) {}
 })();
 `
@@ -28,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2563EB" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="NotaClínica" />
@@ -38,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
         <ThemeProvider>{children}</ThemeProvider>
+        <ServiceWorkerRegister />
       </body>
     </html>
   )

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@supabase/supabase-js'
+import { createClient as createServerClient } from '@/lib/supabase/server'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 const supabase = createClient(
@@ -105,7 +106,21 @@ Enfocate en: zona de tratamiento, evaluacion funcional, tecnicas aplicadas, ejer
 
 export async function POST(request: NextRequest) {
   try {
-    const { transcription, patientName, diagnosis, patientId, professionalId } = await request.json()
+    // Autenticación: solo usuarios logueados
+    const authClient = await createServerClient()
+    const { data: { user } } = await authClient.auth.getUser()
+    if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+
+    const { transcription, patientName, diagnosis, patientId } = await request.json()
+    const professionalId = user.id // derivado del usuario autenticado, nunca del body
+
+    // Verificar que el paciente pertenezca al profesional
+    if (patientId) {
+      const { data: ownsPatient } = await supabase
+        .from('patients').select('id')
+        .eq('id', patientId).eq('professional_id', user.id).single()
+      if (!ownsPatient) return NextResponse.json({ error: 'Paciente no encontrado' }, { status: 403 })
+    }
 
     // Obtener especialidad del medico
     let specialty = 'general'
