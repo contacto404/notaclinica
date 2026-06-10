@@ -61,7 +61,7 @@ export default async function HonorariosPage() {
           <div className="flex flex-col gap-1.5">
             {payments && payments.length > 0 ? payments.map((p: any) => (
               <div key={p.id} className="bg-white rounded-xl border border-[#E2E8F0] px-4 py-3 flex items-center gap-3">
-                <div className={`w-2 h-2 rounded-full shrink-0 ${p.status === 'paid' ? 'bg-green-500' : 'bg-orange-400'}`} />
+                <div className={`w-2 h-2 rounded-full shrink-0 ${p.status === 'paid' ? 'bg-[#0F172A] dark:bg-white' : 'bg-transparent border border-[#94A3B8]'}`} />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-[#0F172A] truncate">{p.patients?.full_name}</p>
                   <p className="text-xs text-[#64748B] mt-0.5 truncate">
@@ -74,7 +74,7 @@ export default async function HonorariosPage() {
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-sm font-bold text-[#0F172A] tabular-nums">${p.amount.toLocaleString('es-UY')}</p>
-                  <p className={`text-xs font-medium ${p.status === 'paid' ? 'text-green-600' : 'text-orange-500'}`}>
+                  <p className={`text-xs font-medium ${p.status === 'paid' ? 'text-[#0F172A] dark:text-white' : 'text-[#94A3B8]'}`}>
                     {p.status === 'paid' ? 'Pagado' : 'Pendiente'}
                   </p>
                 </div>
