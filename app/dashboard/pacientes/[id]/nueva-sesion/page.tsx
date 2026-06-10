@@ -175,7 +175,7 @@ export default function NuevaSesionPage() {
               <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen clinico</h2>
               <div className="flex flex-col gap-3">
                 {summaryFields(summary.format).map(({ key, label }) => (
-                  <div key={key} className="bg-[#F8FAFC] rounded-2xl p-4">
+                  <div key={key} className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">{label}</p>
                     <p className="text-sm text-[#0F172A] leading-relaxed">{summary[key]}</p>
                   </div>

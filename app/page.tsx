@@ -276,16 +276,37 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#E2E8F0] dark:border-[#1E293B] py-8 px-6">
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center">
-          <p className="text-sm text-[#64748B] dark:text-[#94A3B8]">© 2026 NotaClínica · Sortiplan SA · Uruguay</p>
-          <div className="flex items-center gap-4 text-sm">
-            <Link href="/privacidad" className="text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white transition-colors">
-              Privacidad
-            </Link>
-            <Link href="/login" className="text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white transition-colors">
-              Iniciar sesión
-            </Link>
+      <footer className="bg-[#0A0A0A] px-6 py-14 mt-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+            <div className="col-span-2 md:col-span-1">
+              <span className="text-lg font-light tracking-tight lowercase text-white">notaclinica</span>
+              <p className="text-xs text-[#999999] mt-3 leading-relaxed max-w-[220px]">Documentación clínica con IA para profesionales de la salud.</p>
+            </div>
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-white mb-3">Producto</p>
+              <ul className="space-y-2.5 text-sm text-[#999999]">
+                <li><Link href="#como-funciona" className="hover:text-white transition-colors">Cómo funciona</Link></li>
+                <li><Link href="/login?tab=registro" className="hover:text-white transition-colors">Empezar gratis</Link></li>
+                <li><Link href="/login" className="hover:text-white transition-colors">Iniciar sesión</Link></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-white mb-3">Empresa</p>
+              <ul className="space-y-2.5 text-sm text-[#999999]">
+                <li>Sortiplan SA</li>
+                <li><a href="mailto:contacto@vibraco.com.uy" className="hover:text-white transition-colors">Contacto</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-white mb-3">Legal</p>
+              <ul className="space-y-2.5 text-sm text-[#999999]">
+                <li><Link href="/privacidad" className="hover:text-white transition-colors">Privacidad</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-[#222222] pt-6">
+            <p className="text-xs text-[#666666]">© 2026 NotaClínica · Sortiplan SA · Montevideo, Uruguay</p>
           </div>
         </div>
       </footer>

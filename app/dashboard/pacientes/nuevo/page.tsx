@@ -44,41 +44,41 @@ export default function NuevoPacientePage() {
         <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium inline-block mb-5">← Volver</a>
         <div className="mb-5">
           <p className="text-[11px] text-[#64748B] font-medium uppercase tracking-widest mb-0.5">Pacientes</p>
-          <h1 className="text-2xl font-bold text-[#0F172A]">Nuevo paciente</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">Nuevo paciente</h1>
         </div>
         <div className="bg-white rounded-2xl p-5 border border-[#E2E8F0]">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium">Nombre completo *</label>
+              <label className="text-[11px] text-[#64748B] font-medium uppercase tracking-[0.08em]">Nombre completo *</label>
               <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} required
                 placeholder="María González" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium">Fecha de nacimiento</label>
+              <label className="text-[11px] text-[#64748B] font-medium uppercase tracking-[0.08em]">Fecha de nacimiento</label>
               <input type="date" value={fechaNac} onChange={e => setFechaNac(e.target.value)} className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium">Diagnóstico</label>
+              <label className="text-[11px] text-[#64748B] font-medium uppercase tracking-[0.08em]">Diagnóstico</label>
               <input type="text" value={diagnostico} onChange={e => setDiagnostico(e.target.value)}
                 placeholder="Ansiedad generalizada" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium">Teléfono (WhatsApp)</label>
+              <label className="text-[11px] text-[#64748B] font-medium uppercase tracking-[0.08em]">Teléfono (WhatsApp)</label>
               <input type="tel" value={telefono} onChange={e => setTelefono(e.target.value)}
                 placeholder="+54 9 11 1234 5678" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium">Obra social / seguro</label>
+              <label className="text-[11px] text-[#64748B] font-medium uppercase tracking-[0.08em]">Obra social / seguro</label>
               <input type="text" value={obraSocial} onChange={e => setObraSocial(e.target.value)}
                 placeholder="Ej: BPS, SMI, particular" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium">N° de afiliado</label>
+              <label className="text-[11px] text-[#64748B] font-medium uppercase tracking-[0.08em]">N° de afiliado</label>
               <input type="text" value={afiliado} onChange={e => setAfiliado(e.target.value)}
                 placeholder="Número de socio" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium">Notas iniciales</label>
+              <label className="text-[11px] text-[#64748B] font-medium uppercase tracking-[0.08em]">Notas iniciales</label>
               <textarea value={notas} onChange={e => setNotas(e.target.value)} rows={3}
                 placeholder="Observaciones iniciales..."
                 className={inputClass + " resize-none"} />

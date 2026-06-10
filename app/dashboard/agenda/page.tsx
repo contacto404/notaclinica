@@ -38,7 +38,7 @@ export default async function AgendaPage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <p className="text-[11px] text-[#64748B] font-medium uppercase tracking-widest mb-0.5">Calendario</p>
-            <h1 className="text-2xl font-bold text-[#0F172A]">Agenda</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">Agenda</h1>
           </div>
           <WaitlistButton />
         </div>

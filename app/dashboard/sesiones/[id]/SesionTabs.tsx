@@ -44,7 +44,7 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
               <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen clínico</h2>
               <div className="flex flex-col gap-3">
                 {summaryFields(summary.format).map(({ key, label }) => (
-                  <div key={key} className="bg-[#F8FAFC] rounded-2xl p-4">
+                  <div key={key} className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">{label}</p>
                     <p className="text-sm text-[#0F172A] leading-relaxed">{summary[key]}</p>
                   </div>
@@ -58,13 +58,13 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
               <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen médico</h2>
               <div className="flex flex-col gap-3">
                 {report.diagnosis && (
-                  <div className="bg-[#F8FAFC] rounded-2xl p-4">
+                  <div className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Diagnóstico</p>
                     <p className="text-sm text-[#0F172A] leading-relaxed">{report.diagnosis}</p>
                   </div>
                 )}
                 {report.medications && report.medications.length > 0 && (
-                  <div className="bg-[#F8FAFC] rounded-2xl p-4">
+                  <div className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-2">Medicamentos</p>
                     <div className="flex flex-col gap-2">
                       {report.medications.map((m: any, i: number) => (
@@ -80,7 +80,7 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
                   </div>
                 )}
                 {report.instructions && (
-                  <div className="bg-[#F8FAFC] rounded-2xl p-4">
+                  <div className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Indicaciones</p>
                     <p className="text-sm text-[#0F172A] leading-relaxed">{report.instructions}</p>
                   </div>

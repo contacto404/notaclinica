@@ -34,7 +34,7 @@ export default async function HonorariosPage() {
 
         <div className="mb-6">
           <p className="text-[11px] text-[#64748B] font-medium uppercase tracking-widest mb-0.5">Finanzas</p>
-          <h1 className="text-2xl font-bold text-[#0F172A]">Honorarios</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">Honorarios</h1>
         </div>
 
         {/* Resumen del mes */}

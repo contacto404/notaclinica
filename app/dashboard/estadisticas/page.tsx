@@ -110,7 +110,7 @@ export default async function EstadisticasPage() {
 
         <div className="mb-8">
           <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Análisis</p>
-          <h1 className="text-2xl font-bold text-[#0F172A]">Estadísticas</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">Estadísticas</h1>
         </div>
 
         {/* KPIs */}
