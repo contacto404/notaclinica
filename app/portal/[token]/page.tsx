@@ -1,5 +1,6 @@
 import { createClient as createAdmin } from '@supabase/supabase-js'
 import PortalCheckinForm from './PortalCheckinForm'
+import PortalTurnoAcciones from './PortalTurnoAcciones'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -36,7 +37,7 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
   const ahora = new Date()
   const [{ data: turno }, { data: prof }] = await Promise.all([
     admin.from('appointments')
-      .select('appointment_date')
+      .select('appointment_date, status')
       .eq('patient_id', patient.id)
       .gte('appointment_date', ahora.toISOString())
       .order('appointment_date', { ascending: true })
@@ -62,17 +63,7 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
         </div>
 
         {turno && (
-          <div className="bg-white rounded-2xl border border-[#E2E8F0] p-4 mb-5 flex items-center gap-3">
-            <span className="text-2xl">📅</span>
-            <div>
-              <p className="text-[11px] text-[#64748B] uppercase tracking-widest">Tu próximo turno</p>
-              <p className="text-sm font-semibold text-[#0F172A]">
-                {new Date(turno.appointment_date).toLocaleDateString('es-UY', { timeZone: 'America/Montevideo', weekday: 'long', day: '2-digit', month: 'long' })}
-                {' · '}
-                {new Date(turno.appointment_date).toLocaleTimeString('es-UY', { timeZone: 'America/Montevideo', hour: '2-digit', minute: '2-digit' })}
-              </p>
-            </div>
-          </div>
+          <PortalTurnoAcciones token={token} appointmentDate={turno.appointment_date} initialStatus={turno.status} />
         )}
 
         <PortalCheckinForm token={token} />

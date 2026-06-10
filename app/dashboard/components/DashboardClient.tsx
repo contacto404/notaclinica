@@ -1,13 +1,14 @@
 'use client'
 import { useState } from 'react'
+import type { Patient, Appointment } from '@/types/db'
 
 type Alerta = { patientId: string; patientName: string; tipo: string; detalle: string; nivel: 'alta' | 'media' }
 
 export default function DashboardClient({ patients, sesionesEsteMes, pdfsExportados, turnosHoy, alertas = [], saludo, nombre }: {
-  patients: any[]
+  patients: Patient[]
   sesionesEsteMes: number
   pdfsExportados: number
-  turnosHoy: any[]
+  turnosHoy: Appointment[]
   alertas?: Alerta[]
   saludo: string
   nombre: string
@@ -76,7 +77,7 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
             <p className="text-[11px] font-semibold text-[#C2410C] dark:text-[#FDBA74] uppercase tracking-widest">Turnos de hoy</p>
           </div>
           <div className="flex flex-col gap-1.5">
-            {turnosHoy.map((t: any) => (
+            {turnosHoy.map((t) => (
               <a key={t.id} href={"/dashboard/pacientes/" + t.patient_id}
                 className="flex items-center gap-3 rounded-xl px-3 py-2 hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A] transition-colors">
                 <div className="bg-[#FFF7ED] dark:bg-[#7C2D12]/40 rounded-lg px-2.5 py-1 shrink-0">

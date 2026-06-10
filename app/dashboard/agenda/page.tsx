@@ -62,7 +62,15 @@ export default async function AgendaPage() {
                         </p>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-[#0F172A] truncate">{a.patients?.full_name}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-semibold text-[#0F172A] truncate">{a.patients?.full_name}</p>
+                          {a.status === 'cancelled_by_patient' && (
+                            <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md bg-[#FEE2E2] text-[#B91C1C] shrink-0">Canceló</span>
+                          )}
+                          {a.status === 'reschedule_requested' && (
+                            <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md bg-[#FFF7ED] text-[#C2410C] shrink-0">Pide reprogramar</span>
+                          )}
+                        </div>
                         <p className="text-xs text-[#64748B] mt-0.5 truncate">{a.patients?.diagnosis ?? 'Sin diagnóstico'}{a.notes ? ` · ${a.notes}` : ''}</p>
                       </div>
                       <span className="text-[#CBD5E1] dark:text-[#475569] text-lg shrink-0">›</span>

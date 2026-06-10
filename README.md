@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NotaClínica
 
-## Getting Started
+Documentación clínica con IA para profesionales de la salud. Grabá la consulta y obtené un resumen clínico estructurado en segundos.
 
-First, run the development server:
+**Producción:** https://notaclinica.vercel.app
+
+## Stack
+
+- **Framework:** Next.js 16 (App Router) + React 19
+- **Estilos:** Tailwind v4 (con modo claro/oscuro)
+- **Base de datos / auth / storage:** Supabase (PostgreSQL + RLS)
+- **Deploy:** Vercel (deploy automático al pushear a `main`)
+- **Mobile:** Capacitor 8 (iOS + Android) cargando el sitio remoto vía `server.url`
+- **IA — resúmenes:** Anthropic Claude
+- **Transcripción:** OpenAI Whisper
+- **Pagos:** MercadoPago (suscripción Preapproval + cobro por sesión Preference)
+- **Email:** Resend
+
+## Funcionalidades principales
+
+Grabación y transcripción de la consulta, resúmenes con IA por especialidad (incluye formato SOAP), historial clínico con contexto entre sesiones, escalas PHQ-9/GAD-7 con evolución, agenda con recordatorios automáticos, recetas en PDF con firma y QR de validación, portal del paciente (check-ins y gestión de turnos), búsqueda global, alertas clínicas y copiloto con IA, cobros con MercadoPago, panel de admin.
+
+## Desarrollo local
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Variables de entorno (Vercel)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY
+OPENAI_API_KEY
+ANTHROPIC_API_KEY
+RESEND_API_KEY
+CRON_SECRET
+MP_ACCESS_TOKEN_PROD / MP_PUBLIC_KEY_PROD
+MP_ACCESS_TOKEN_TEST / MP_PUBLIC_KEY_TEST
+MP_WEBHOOK_SECRET
+NEXT_PUBLIC_APP_URL
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Base de datos
 
-## Learn More
+Las tablas viven en Supabase. Los scripts SQL para crear/extender tablas están en `supabase/` (correr en el SQL Editor de Supabase). RLS habilitado en todas las tablas con datos de pacientes; las API routes usan la service role key.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git add . && git commit -m "mensaje" && git push     # Vercel deploya solo
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Como la app móvil usa `server.url` remoto, las mejoras de la web llegan al usuario con el push, sin re-subir a las tiendas (salvo cambios nativos).
 
-## Deploy on Vercel
+## Mobile (Capacitor)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx cap sync            # sincroniza config/plugins a iOS y Android
+npx cap open ios        # abre Xcode
+npx cap open android    # abre Android Studio
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+La guía de publicación en App Store / Google Play está en `docs/publicacion-tiendas.md`.
+
+## Estructura
+
+- `app/` — páginas y API routes (App Router)
+- `lib/supabase/` — clientes de Supabase (browser y server)
+- `supabase/` — scripts SQL
+- `docs/` — documentación (publicación, estado, diseño)
+- `ios/`, `android/` — proyectos nativos de Capacitor
+
+## Documentos
+
+- `docs/publicacion-tiendas.md` — guía para publicar en las tiendas
+- `docs/estado-publicacion.md` — estado actual de la publicación
+- `AGENTS.md` — notas para asistentes de IA
+
+© Sortiplan SA · Uruguay
