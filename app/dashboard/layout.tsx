@@ -33,14 +33,14 @@ export default async function DashboardLayout({
         style={{ paddingTop: 'var(--safe-top)' }}
       >
         <div className="px-4 flex items-center justify-center h-14">
-          <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
+          <span className="font-light text-[#0F172A] text-lg tracking-tight lowercase">notaclinica</span>
         </div>
       </header>
 
       {/* Sidebar desktop */}
       <aside className="hidden md:flex flex-col fixed top-0 left-0 h-full w-56 bg-[#F8FAFC] border-r border-[#E2E8F0] py-6 px-3 z-40">
         <div className="mb-8 px-3">
-          <span className="font-bold text-[#0F172A] text-lg">NotaClínica</span>
+          <span className="font-light text-[#0F172A] text-lg tracking-tight lowercase">notaclinica</span>
         </div>
         <nav className="flex flex-col gap-1">
           <Link href="/dashboard"

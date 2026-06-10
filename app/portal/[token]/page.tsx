@@ -55,7 +55,7 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
   return (
     <div className="min-h-screen bg-[#F8FAFC] p-5">
       <div className="max-w-md mx-auto pt-6">
-        <p className="text-center font-bold text-[#0F172A] text-lg mb-6">NotaClínica</p>
+        <p className="text-center font-light text-[#0F172A] text-lg mb-6 tracking-tight lowercase">notaclinica</p>
 
         <div className="mb-5">
           <h1 className="text-2xl font-bold text-[#0F172A]">Hola{primerNombre ? `, ${primerNombre}` : ''} 👋</h1>

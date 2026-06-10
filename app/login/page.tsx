@@ -45,9 +45,9 @@ function LoginForm() {
       <div className="w-full max-w-3xl flex rounded-3xl overflow-hidden shadow-lg border border-[#E2E8F0]">
 
         {/* Panel izquierdo */}
-        <div className="flex-1 bg-[#2563EB] p-10 flex-col justify-between gap-8 hidden md:flex">
+        <div className="flex-1 bg-[#0A0A0A] p-10 flex-col justify-between gap-8 hidden md:flex">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">NotaClínica</h1>
+            <h1 className="text-2xl font-light text-white tracking-tight lowercase">notaclinica</h1>
             <p className="text-[#DBEAFE] text-sm mt-2 leading-relaxed">La consulta más organizada de tu carrera</p>
             <p className="text-[#BFDBFE] text-xs mt-1 leading-relaxed">IA para médicos que quieren enfocarse en <strong className="text-white">sus pacientes</strong>, no en el papeleo</p>
           </div>

@@ -31,6 +31,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" style={{ overflowX: 'hidden' }}>
       <head>
         <meta name="google-site-verification" content="7g9IbVDFemLPuNlQwek2nNAaxMtah7f6jOCac3LIiY0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2563EB" />
         <meta name="mobile-web-app-capable" content="yes" />

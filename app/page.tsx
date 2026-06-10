@@ -68,7 +68,7 @@ export default function LandingPage() {
           className="px-4 flex items-center justify-between h-14"
           style={{ paddingTop: 'var(--safe-top)', paddingLeft: 'max(env(safe-area-inset-left), 16px)', paddingRight: 'max(env(safe-area-inset-right), 16px)', minHeight: 'calc(var(--safe-top) + 56px)' }}
         >
-          <span className="font-bold text-xl tracking-tight">NotaClínica</span>
+          <span className="text-xl font-light tracking-tight lowercase">notaclinica</span>
           <div className="flex items-center gap-3">
             <Link href="/login" className="text-sm text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white transition-colors">
               Iniciar sesión
@@ -265,7 +265,7 @@ export default function LandingPage() {
 
       {/* CTA final */}
       <section className="px-6 pb-20">
-        <div className="max-w-4xl mx-auto bg-[#2563EB] rounded-3xl px-8 py-14 text-center">
+        <div className="max-w-4xl mx-auto bg-[#0A0A0A] rounded-3xl px-8 py-14 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">Dedicá tu tiempo a tus pacientes</h2>
           <p className="text-[#DBEAFE] mb-8 max-w-md mx-auto">Probá NotaClínica 30 días gratis. Sin tarjeta, sin compromiso.</p>
           <Link href="/login?tab=registro"
