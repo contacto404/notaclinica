@@ -51,6 +51,10 @@ export default async function DashboardLayout({
             className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
             📅 Agenda
           </Link>
+          <Link href="/dashboard/buscar"
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            🔍 Buscar
+          </Link>
           <Link href="/dashboard/pacientes/nuevo"
             className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
             + Nuevo paciente

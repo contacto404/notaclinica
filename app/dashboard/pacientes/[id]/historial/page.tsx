@@ -47,7 +47,7 @@ export default function HistorialPage() {
 
         <div className="flex flex-col gap-3 mb-4 flex-1 overflow-y-auto">
           {messages.length === 0 && (
-            <div className="bg-white rounded-3xl border border-[#F0E8E0] p-5">
+            <div className="bg-white rounded-3xl border border-[#E2E8F0] p-5">
               <p className="text-xs font-semibold text-[#A08070] uppercase tracking-widest mb-3">Ejemplos de preguntas</p>
               <ul className="flex flex-col gap-2">
                 {[
@@ -70,7 +70,7 @@ export default function HistorialPage() {
             <div key={i} className={`rounded-2xl px-4 py-3 text-sm ${
               m.role === 'user'
                 ? 'bg-[#E8602C] text-white self-end max-w-xs ml-auto'
-                : 'bg-white border border-[#F0E8E0] text-[#2D1F14]'
+                : 'bg-white border border-[#E2E8F0] text-[#2D1F14]'
             }`}>
               {m.role === 'ai' && <p className="text-xs text-[#A08070] mb-1 font-medium uppercase tracking-widest">IA</p>}
               <p className="leading-relaxed whitespace-pre-wrap">{m.text}</p>
@@ -78,7 +78,7 @@ export default function HistorialPage() {
           ))}
 
           {loading && (
-            <div className="bg-white border border-[#F0E8E0] rounded-2xl px-4 py-3">
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl px-4 py-3">
               <p className="text-xs text-[#A08070] mb-2 font-medium uppercase tracking-widest">IA</p>
               <div className="flex gap-1">
                 <div className="w-2 h-2 bg-[#E8602C] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -96,7 +96,7 @@ export default function HistorialPage() {
             onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleAsk() } }}
             placeholder="Preguntá algo sobre el historial..."
             rows={2}
-            className="flex-1 border border-[#F0E8E0] rounded-2xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] resize-none bg-white text-[#2D1F14] placeholder-[#C0A090]"
+            className="flex-1 border border-[#E2E8F0] rounded-2xl px-4 py-3 text-sm outline-none focus:border-[#E8602C] resize-none bg-white text-[#2D1F14] placeholder-[#C0A090]"
           />
           <button
             onClick={handleAsk}

@@ -104,7 +104,7 @@ export default function ConsentimientoButton({ patientId, patientName, professio
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl p-5 w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
 
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-bold text-[#0F172A]">📋 Consentimiento informado</h2>

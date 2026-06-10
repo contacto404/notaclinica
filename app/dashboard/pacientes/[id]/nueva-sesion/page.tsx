@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter, useParams } from 'next/navigation'
+import { summaryFields } from '@/lib/noteFormat'
 
 export default function NuevaSesionPage() {
   const [recording, setRecording] = useState(false)
@@ -173,15 +174,10 @@ export default function NuevaSesionPage() {
             <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
               <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen clinico</h2>
               <div className="flex flex-col gap-3">
-                {([
-                  ['Motivo de consulta', summary.chief_complaint],
-                  ['Observaciones', summary.observations],
-                  ['Plan de tratamiento', summary.plan],
-                  ['Proximos pasos', summary.next_steps]
-                ] as [string, string][]).map(([label, value]) => (
-                  <div key={label} className="bg-[#F8FAFC] rounded-2xl p-4">
+                {summaryFields(summary.format).map(({ key, label }) => (
+                  <div key={key} className="bg-[#F8FAFC] rounded-2xl p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">{label}</p>
-                    <p className="text-sm text-[#0F172A] leading-relaxed">{value}</p>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">{summary[key]}</p>
                   </div>
                 ))}
               </div>

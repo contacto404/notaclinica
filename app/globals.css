@@ -100,6 +100,26 @@ html[data-theme="dark"] .bg-\[\#E8EEF8\] { background-color: var(--info-bg); }
 html[data-theme="dark"] .text-\[\#1E40AF\],
 html[data-theme="dark"] .text-\[\#2D3F6A\] { color: var(--info-text); }
 
+/* Tinte verde (éxito / cobrado) */
+html[data-theme="dark"] .bg-\[\#E8F4E8\] { background-color: rgba(20, 83, 45, 0.40); }
+html[data-theme="dark"] .text-\[\#2D6A2D\] { color: #86EFAC; }
+/* Tinte naranja (turnos / pendiente) */
+html[data-theme="dark"] .bg-\[\#FFF7ED\] { background-color: rgba(124, 45, 18, 0.32); }
+html[data-theme="dark"] .text-\[\#C2410C\] { color: #FDBA74; }
+html[data-theme="dark"] .border-\[\#FED7AA\] { border-color: rgba(124, 45, 18, 0.55); }
+/* Tinte púrpura (total) */
+html[data-theme="dark"] .bg-\[\#EDE9FE\] { background-color: rgba(76, 29, 149, 0.35); }
+html[data-theme="dark"] .text-\[\#6D28D9\] { color: #C4B5FD; }
+/* Blancos cálidos → superficie oscura */
+html[data-theme="dark"] .bg-\[\#FBF7F4\] { background-color: var(--bg-surface); }
+/* Paleta cálida (textos y bordes) → neutral en oscuro */
+html[data-theme="dark"] .text-\[\#2D1F14\],
+html[data-theme="dark"] .text-\[\#6B4F3A\],
+html[data-theme="dark"] .text-\[\#A08070\] { color: var(--text-secondary); }
+html[data-theme="dark"] .border-\[\#E0D0C0\],
+html[data-theme="dark"] .border-\[\#F0E8E0\],
+html[data-theme="dark"] .border-\[\#F1F5F9\] { border-color: var(--border); }
+
 *,
 *::before,
 *::after {

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@supabase/supabase-js'
 import { createClient as createServerClient } from '@/lib/supabase/server'
+import { summaryPromptFields } from '@/lib/noteFormat'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 const supabase = createClient(
@@ -122,16 +123,22 @@ export async function POST(request: NextRequest) {
       if (!ownsPatient) return NextResponse.json({ error: 'Paciente no encontrado' }, { status: 403 })
     }
 
-    // Obtener especialidad del medico
+    // Obtener especialidad y formato de nota del medico
     let specialty = 'general'
+    let noteFormat: 'standard' | 'soap' = 'standard'
     if (professionalId) {
       const { data: profile } = await supabase
         .from('profiles')
-        .select('specialty')
+        .select('specialty, note_format')
         .eq('id', professionalId)
         .single()
       if (profile?.specialty) specialty = profile.specialty
+      if (profile?.note_format === 'soap') noteFormat = 'soap'
     }
+
+    const jsonStructure = '{\n' +
+      summaryPromptFields(noteFormat).map(f => `  "${f.key}": "${f.desc}"`).join(',\n') +
+      '\n}'
 
     const template = especialidades[specialty] ?? especialidades.general
 
@@ -192,12 +199,7 @@ ${transcription}
 ${historialTexto ? 'Considera la evolucion del paciente respecto a las sesiones anteriores.' : ''}
 
 Responde SOLO con un JSON con esta estructura exacta, sin texto adicional:
-{
-  "chief_complaint": "motivo principal de consulta",
-  "observations": "observaciones clinicas segun la especialidad",
-  "plan": "plan de tratamiento",
-  "next_steps": "proximos pasos concretos"
-}`
+${jsonStructure}`
       }]
     })
 
@@ -207,7 +209,7 @@ Responde SOLO con un JSON con esta estructura exacta, sin texto adicional:
     const clean = content.text.replace(/```json|```/g, '').trim()
     const summary = JSON.parse(clean)
 
-    return NextResponse.json(summary)
+    return NextResponse.json({ ...summary, format: noteFormat })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }

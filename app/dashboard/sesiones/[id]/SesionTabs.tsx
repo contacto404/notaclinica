@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { summaryFields } from '@/lib/noteFormat'
 
 type Props = {
   summary: any
@@ -42,15 +43,10 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
             <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
               <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen clínico</h2>
               <div className="flex flex-col gap-3">
-                {([
-                  ['Motivo de consulta', summary.chief_complaint],
-                  ['Observaciones', summary.observations],
-                  ['Plan de tratamiento', summary.plan],
-                  ['Próximos pasos', summary.next_steps]
-                ] as [string, string][]).map(([label, value]) => (
-                  <div key={label} className="bg-[#F8FAFC] rounded-2xl p-4">
+                {summaryFields(summary.format).map(({ key, label }) => (
+                  <div key={key} className="bg-[#F8FAFC] rounded-2xl p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">{label}</p>
-                    <p className="text-sm text-[#0F172A] leading-relaxed">{value}</p>
+                    <p className="text-sm text-[#0F172A] leading-relaxed">{summary[key]}</p>
                   </div>
                 ))}
               </div>

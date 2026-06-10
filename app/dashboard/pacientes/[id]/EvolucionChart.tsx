@@ -54,7 +54,7 @@ export default function EvolucionChart({ sessions }: { sessions: any[] }) {
   const maxSesiones = Math.max(...porMes.map(m => m.sesiones), 1)
 
   return (
-    <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
+    <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
       <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-5">📈 Evolución</h2>
 
       {/* Stats rápidas */}

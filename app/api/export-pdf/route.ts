@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createClient as createAdmin } from '@supabase/supabase-js'
+import { summaryFields } from '@/lib/noteFormat'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -90,24 +91,11 @@ export async function GET(request: NextRequest) {
     Fecha: ${fechaDoc}
   </div>
 
-  ${summary ? `
+  ${summary ? summaryFields(summary.format).map(f => `
   <div class="section">
-    <div class="section-label">Motivo de consulta</div>
-    <div class="section-content">${summary.chief_complaint ?? '-'}</div>
-  </div>
-  <div class="section">
-    <div class="section-label">Observaciones clinicas</div>
-    <div class="section-content">${summary.observations ?? '-'}</div>
-  </div>
-  <div class="section">
-    <div class="section-label">Plan terapeutico</div>
-    <div class="section-content">${summary.plan ?? '-'}</div>
-  </div>
-  <div class="section">
-    <div class="section-label">Proximos pasos</div>
-    <div class="section-content">${summary.next_steps ?? '-'}</div>
-  </div>
-  ` : ''}
+    <div class="section-label">${f.label}</div>
+    <div class="section-content">${summary[f.key] ?? '-'}</div>
+  </div>`).join('') : ''}
 
   ${transcription ? `
   <div class="section">

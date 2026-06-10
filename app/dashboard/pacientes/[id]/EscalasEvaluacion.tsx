@@ -21,7 +21,7 @@ export default function EscalasEvaluacion({ patientId, assessments }: { patientI
   const router = useRouter()
 
   return (
-    <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
+    <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
       {toast && <Toast message={toast} onDone={() => setToast('')} />}
       <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-5">📋 Escalas de evaluación</h2>
 

@@ -23,43 +23,45 @@ export default function SuscripcionPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-5">
       <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[#0F172A] mb-2">NotaClínica Pro</h1>
-          <p className="text-[#64748B]">Documentación clínica con IA para médicos</p>
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-[#0F172A] mb-1">NotaClínica Pro</h1>
+          <p className="text-sm text-[#64748B]">Documentación clínica con IA para médicos</p>
         </div>
 
-        <div className="bg-white rounded-3xl border border-[#E2E8F0] p-8 mb-4">
+        <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
           <div className="text-center mb-6">
-            <p className="text-5xl font-bold text-[#0F172A]">$49 USD<span className="text-xl font-normal text-[#64748B]">/mes</span></p>
-            <p className="text-sm text-[#2563EB] font-medium mt-1">30 días gratis, cancelá cuando quieras</p>
+            <p className="text-5xl font-bold text-[#0F172A] leading-none">$49<span className="text-xl font-normal text-[#64748B]"> USD/mes</span></p>
+            <p className="text-sm text-[#2563EB] font-medium mt-2">30 días gratis, cancelá cuando quieras</p>
           </div>
 
-          <div className="flex flex-col gap-3 mb-8">
+          <div className="flex flex-col gap-2.5 mb-6">
             {[
-              '✓ Transcripción automática de consultas',
-              '✓ Resúmenes clínicos con IA',
-              '✓ Historial con contexto entre sesiones',
-              '✓ Envío por WhatsApp',
-              '✓ Exportar PDF',
-              '✓ Agenda y recordatorios',
-              '✓ Videollamadas integradas',
-              '✓ Pacientes ilimitados',
+              'Transcripción automática de consultas',
+              'Resúmenes clínicos con IA',
+              'Historial con contexto entre sesiones',
+              'Envío por WhatsApp',
+              'Exportar PDF',
+              'Agenda y recordatorios',
+              'Videollamadas integradas',
+              'Pacientes ilimitados',
             ].map(f => (
-              <p key={f} className="text-sm text-[#0F172A]">{f}</p>
+              <p key={f} className="text-sm text-[#0F172A] flex items-center gap-2">
+                <span className="text-[#2563EB]">✓</span> {f}
+              </p>
             ))}
           </div>
 
           <button
             onClick={handleSuscribirse}
             disabled={loading}
-            className="w-full bg-[#2563EB] text-white rounded-xl py-4 font-semibold text-base hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+            className="w-full bg-[#2563EB] text-white rounded-xl py-3.5 font-semibold text-base hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
           >
             {loading ? 'Redirigiendo...' : 'Comenzar 30 días gratis'}
           </button>
         </div>
 
         <p className="text-xs text-center text-[#64748B]">
-          ✓ 30 días gratis sin tarjeta · Luego $49/mes · Cancelá cuando quieras
+          30 días gratis sin tarjeta · Luego $49/mes · Cancelá cuando quieras
         </p>
       </div>
     </div>

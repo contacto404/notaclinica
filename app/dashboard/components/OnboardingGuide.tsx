@@ -54,7 +54,7 @@ export default function OnboardingGuide() {
       />
 
       {/* Card */}
-      <div className="relative bg-white rounded-3xl p-8 mx-6 max-w-sm w-full shadow-2xl">
+      <div className="relative bg-white rounded-2xl p-6 mx-6 max-w-sm w-full shadow-2xl">
 
         {/* Cerrar */}
         <button

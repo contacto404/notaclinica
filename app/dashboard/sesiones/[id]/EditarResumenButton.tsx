@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Toast from '../../components/Toast'
+import { summaryFields } from '@/lib/noteFormat'
 
-export default function EditarResumenButton({ summaryId, initial }: {
+export default function EditarResumenButton({ summaryId, initial, format }: {
   summaryId: string
   initial: {
     chief_complaint: string
@@ -12,6 +13,7 @@ export default function EditarResumenButton({ summaryId, initial }: {
     plan: string
     next_steps: string
   }
+  format?: string | null
 }) {
   const [open, setOpen] = useState(false)
   const [fields, setFields] = useState(initial)
@@ -34,25 +36,21 @@ export default function EditarResumenButton({ summaryId, initial }: {
     router.refresh()
   }
 
-  const labels: [keyof typeof fields, string][] = [
-    ['chief_complaint', 'Motivo de consulta'],
-    ['observations', 'Observaciones'],
-    ['plan', 'Plan terapéutico'],
-    ['next_steps', 'Próximos pasos'],
-  ]
+  const labels: [keyof typeof fields, string][] =
+    summaryFields(format).map(f => [f.key, f.label])
 
   return (
     <>
       {toast && <Toast message="Resumen guardado" onDone={() => setToast(false)} />}
 
       <button onClick={() => setOpen(true)}
-        className="border border-[#E0D0C0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#F8FAFC] transition-colors">
+        className="border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#F8FAFC] transition-colors">
         ✏️ Editar resumen
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-lg border border-[#E2E8F0] shadow-xl my-4">
+          <div className="bg-white rounded-2xl p-5 w-full max-w-lg border border-[#E2E8F0] shadow-xl my-4">
             <h3 className="text-base font-bold text-[#0F172A] mb-5">Editar resumen clínico</h3>
 
             <div className="flex flex-col gap-4">

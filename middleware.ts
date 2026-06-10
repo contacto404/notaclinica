@@ -31,6 +31,8 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/suscripcion') ||
     pathname.startsWith('/api/') ||
     pathname.startsWith('/admin') ||
+    pathname.startsWith('/verificar') ||
+    pathname === '/privacidad' ||
     pathname === '/manifest.json' ||
     pathname === '/sw.js' ||
     pathname === '/'

@@ -125,7 +125,7 @@ export default async function EstadisticasPage() {
         </div>
 
         {/* Sesiones por mes */}
-        <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
           <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-5">📈 Sesiones por mes</h2>
           {completadas.length > 0 ? (
             <div className="flex items-end gap-2 h-28">
@@ -146,7 +146,7 @@ export default async function EstadisticasPage() {
         </div>
 
         {/* Ingresos por mes */}
-        <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
           <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-5">💰 Ingresos por mes (UYU)</h2>
           {cobradoTotal > 0 ? (
             <div className="flex items-end gap-2 h-28">
@@ -169,7 +169,7 @@ export default async function EstadisticasPage() {
         </div>
 
         {/* Resumen pacientes */}
-        <div className="bg-white rounded-3xl p-6 mb-4 border border-[#E2E8F0]">
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
           <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">👥 Pacientes</h2>
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#DBEAFE] rounded-2xl p-3 text-center">
@@ -188,7 +188,7 @@ export default async function EstadisticasPage() {
         </div>
 
         {/* Resumen cobros */}
-        <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0]">
+        <div className="bg-white rounded-2xl p-5 border border-[#E2E8F0]">
           <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">💳 Cobros</h2>
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#E8F4E8] rounded-2xl p-3 text-center">

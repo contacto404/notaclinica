@@ -41,7 +41,7 @@ export default function WaitlistButton() {
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-sm border border-[#E2E8F0] shadow-xl">
+          <div className="bg-white rounded-2xl p-5 w-full max-w-sm border border-[#E2E8F0] shadow-xl">
             <h3 className="text-base font-bold text-[#0F172A] mb-5">Agregar a lista de espera</h3>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">

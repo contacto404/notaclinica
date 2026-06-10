@@ -74,13 +74,13 @@ export default function ReporteButton({
   return (
     <>
       <button onClick={() => setOpen(true)}
-        className="border border-[#E0D0C0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
+        className="border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
         📋 Resumen médico
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-lg border border-[#E2E8F0] shadow-xl my-4">
+          <div className="bg-white rounded-2xl p-5 w-full max-w-lg border border-[#E2E8F0] shadow-xl my-4">
 
             {!reportUrl ? (
               <>

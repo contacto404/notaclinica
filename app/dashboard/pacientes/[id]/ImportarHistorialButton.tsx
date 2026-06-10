@@ -40,13 +40,13 @@ export default function ImportarHistorialButton({ patientId }: { patientId: stri
   return (
     <>
       <button onClick={() => setOpen(true)}
-        className="border border-[#E0D0C0] text-[#475569] px-4 py-2 rounded-xl text-xs font-medium hover:bg-[#F8FAFC] flex items-center gap-1.5 transition-colors">
+        className="border border-[#E2E8F0] text-[#475569] px-4 py-2 rounded-xl text-xs font-medium hover:bg-[#F8FAFC] flex items-center gap-1.5 transition-colors">
         📂 Importar historial
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 w-full max-w-lg border border-[#E2E8F0] shadow-xl">
+          <div className="bg-white rounded-2xl p-5 w-full max-w-lg border border-[#E2E8F0] shadow-xl">
 
             {!result ? (
               <>

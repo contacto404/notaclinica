@@ -71,6 +71,7 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
             {summary && (
               <EditarResumenButton
                 summaryId={summary.id}
+                format={summary.format}
                 initial={{
                   chief_complaint: summary.chief_complaint ?? '',
                   observations: summary.observations ?? '',

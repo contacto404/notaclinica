@@ -32,46 +32,42 @@ export default function NuevoPacientePage() {
     setLoading(false)
   }
 
+  const inputClass = "border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]"
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
       <div className="max-w-lg mx-auto">
-        <div className="mb-6">
-          <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium">← Volver</a>
-        </div>
-        <div className="mb-6">
-          <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Pacientes</p>
+        <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium inline-block mb-5">← Volver</a>
+        <div className="mb-5">
+          <p className="text-[11px] text-[#64748B] font-medium uppercase tracking-widest mb-0.5">Pacientes</p>
           <h1 className="text-2xl font-bold text-[#0F172A]">Nuevo paciente</h1>
         </div>
-        <div className="bg-white rounded-3xl p-6 border border-[#E2E8F0]">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        <div className="bg-white rounded-2xl p-5 border border-[#E2E8F0]">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Nombre completo *</label>
+              <label className="text-xs text-[#64748B] font-medium">Nombre completo *</label>
               <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} required
-                placeholder="María González"
-                className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
+                placeholder="María González" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Fecha de nacimiento</label>
-              <input type="date" value={fechaNac} onChange={e => setFechaNac(e.target.value)}
-                className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
+              <label className="text-xs text-[#64748B] font-medium">Fecha de nacimiento</label>
+              <input type="date" value={fechaNac} onChange={e => setFechaNac(e.target.value)} className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Diagnóstico</label>
+              <label className="text-xs text-[#64748B] font-medium">Diagnóstico</label>
               <input type="text" value={diagnostico} onChange={e => setDiagnostico(e.target.value)}
-                placeholder="Ansiedad generalizada"
-                className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
+                placeholder="Ansiedad generalizada" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Teléfono (WhatsApp)</label>
+              <label className="text-xs text-[#64748B] font-medium">Teléfono (WhatsApp)</label>
               <input type="tel" value={telefono} onChange={e => setTelefono(e.target.value)}
-                placeholder="+54 9 11 1234 5678"
-                className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
+                placeholder="+54 9 11 1234 5678" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Notas iniciales</label>
+              <label className="text-xs text-[#64748B] font-medium">Notas iniciales</label>
               <textarea value={notas} onChange={e => setNotas(e.target.value)} rows={3}
                 placeholder="Observaciones iniciales..."
-                className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] resize-none text-[#0F172A]" />
+                className={inputClass + " resize-none"} />
             </div>
             {error && <p className="text-xs text-red-500">{error}</p>}
             <button type="submit" disabled={loading}
