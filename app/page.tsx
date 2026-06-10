@@ -50,6 +50,26 @@ const FEATURES = [
   { icon: '📅', title: 'Agenda integrada', desc: 'Turnos con recordatorio automático por email 24 horas antes y lista de espera.' },
 ]
 
+const PROBLEMAS = [
+  { icon: '⏳', title: '30 minutos por paciente', desc: 'Entre notas, evoluciones y resúmenes, cada consulta sigue mucho después de que el paciente se fue.' },
+  { icon: '✍️', title: 'Notas a las apuradas', desc: 'Escribís de memoria, horas más tarde, y se pierden detalles clínicos que importan.' },
+  { icon: '😮‍💨', title: 'Menos pacientes, más cansancio', desc: 'El tiempo administrativo te saca horas de atención y energía que deberían ir a tu práctica.' },
+]
+
+const ANTES = [
+  'Notas escritas a mano después de cada consulta',
+  'Hasta 30 minutos de papeleo por paciente',
+  'Detalles que se pierden al escribir de memoria',
+  'Fines de semana poniéndote al día con la documentación',
+]
+
+const DESPUES = [
+  'Grabás la consulta y el resumen se arma solo',
+  'Resumen clínico estructurado en menos de 30 segundos',
+  'Todo queda registrado, fiel a lo que pasó en la sesión',
+  'Salís del consultorio con la documentación terminada',
+]
+
 const FAQS = [
   { q: '¿Mis datos y los de mis pacientes están seguros?', a: 'Sí. La información viaja cifrada y se almacena de forma privada. Cada profesional solo accede a sus propios pacientes.' },
   { q: '¿Necesito instalar algo?', a: 'No. Funciona desde el navegador y también podés instalarla como app en tu iPhone o Android.' },
@@ -90,11 +110,11 @@ export default function LandingPage() {
           30 días gratis · Sin tarjeta de crédito
         </div>
         <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-[1.1] tracking-tight">
-          Tu consulta, documentada<br />
-          <span className="text-[#2563EB]">en segundos</span>
+          Dejá de escribir notas<br />
+          <span className="text-[#2563EB]">después de cada consulta</span>
         </h1>
         <p className="text-lg md:text-xl text-[#64748B] dark:text-[#94A3B8] mb-10 max-w-xl mx-auto leading-relaxed">
-          NotaClínica graba la consulta y genera el resumen clínico con IA. Vos te enfocás en el paciente, nosotros nos ocupamos del papeleo.
+          NotaClínica graba la sesión y arma el resumen clínico con IA en segundos. Recuperá las horas que perdés en papeleo y dedicáselas a tus pacientes.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link href="/login?tab=registro"
@@ -151,6 +171,57 @@ export default function LandingPage() {
             </div>
           </div>
           <p className="text-center text-xs text-[#94A3B8] mt-4">Vista real del resumen generado tras una consulta</p>
+        </div>
+      </section>
+
+      {/* El problema */}
+      <section className="py-20 px-6 max-w-4xl mx-auto">
+        <p className="text-xs text-[#94A3B8] font-medium uppercase tracking-[0.12em] text-center mb-3">El problema</p>
+        <h2 className="text-3xl font-bold text-center mb-3 tracking-tight max-w-2xl mx-auto">
+          El papeleo te roba la mejor parte de tu trabajo
+        </h2>
+        <p className="text-[#64748B] dark:text-[#94A3B8] text-center mb-14 max-w-xl mx-auto">
+          Documentar a mano cada consulta te cuesta horas que deberían ser para tus pacientes.
+        </p>
+        <div className="grid md:grid-cols-3 gap-6">
+          {PROBLEMAS.map(p => (
+            <div key={p.title} className="text-center">
+              <span className="text-3xl">{p.icon}</span>
+              <h3 className="font-semibold mt-4 mb-2">{p.title}</h3>
+              <p className="text-sm text-[#64748B] dark:text-[#94A3B8] leading-relaxed">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Antes / Después */}
+      <section className="py-16 px-6 bg-[#F8FAFC] dark:bg-[#0B1220] border-y border-[#E2E8F0] dark:border-[#1E293B]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 tracking-tight">Tu día cambia de raíz</h2>
+          <div className="grid md:grid-cols-2 gap-5">
+            {/* Antes */}
+            <div className="bg-white dark:bg-[#1E293B] rounded-3xl border border-[#E2E8F0] dark:border-[#334155] p-7">
+              <p className="text-xs font-medium uppercase tracking-[0.1em] text-[#94A3B8] mb-5">Sin NotaClínica</p>
+              <ul className="flex flex-col gap-3.5">
+                {ANTES.map(a => (
+                  <li key={a} className="flex items-start gap-3 text-sm text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
+                    <span className="text-[#94A3B8] shrink-0 mt-0.5">✕</span> {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* Después */}
+            <div className="bg-white dark:bg-[#1E293B] rounded-3xl border-2 border-[#2563EB] p-7 shadow-sm">
+              <p className="text-xs font-medium uppercase tracking-[0.1em] text-[#2563EB] mb-5">Con NotaClínica</p>
+              <ul className="flex flex-col gap-3.5">
+                {DESPUES.map(d => (
+                  <li key={d} className="flex items-start gap-3 text-sm text-[#0F172A] dark:text-white leading-relaxed font-medium">
+                    <span className="text-[#2563EB] shrink-0 mt-0.5">✓</span> {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -263,8 +334,31 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Confianza / riesgo cero */}
+      <section className="py-16 px-6 bg-[#F8FAFC] dark:bg-[#0B1220] border-y border-[#E2E8F0] dark:border-[#1E293B]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-3 tracking-tight">Probala sin ningún riesgo</h2>
+          <p className="text-[#64748B] dark:text-[#94A3B8] text-center mb-12 max-w-xl mx-auto text-sm">
+            Empezás gratis y decidís después. Tus datos y los de tus pacientes, siempre protegidos.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-5">
+            {[
+              { icon: '🔒', title: 'Privado y cifrado', desc: 'La información viaja cifrada y cada profesional accede solo a sus propios pacientes.' },
+              { icon: '🎁', title: '30 días gratis', desc: 'Sin tarjeta de crédito para empezar. Cancelás cuando quieras, sin penalidades.' },
+              { icon: '🇺🇾', title: 'Hecho en Uruguay', desc: 'Pensado para la práctica clínica local, con soporte directo en tu idioma.' },
+            ].map(t => (
+              <div key={t.title} className="bg-white dark:bg-[#1E293B] rounded-2xl border border-[#E2E8F0] dark:border-[#334155] p-6 text-center">
+                <span className="text-2xl">{t.icon}</span>
+                <h3 className="font-semibold mt-3 mb-1.5 text-sm">{t.title}</h3>
+                <p className="text-xs text-[#64748B] dark:text-[#94A3B8] leading-relaxed">{t.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA final */}
-      <section className="px-6 pb-20">
+      <section className="px-6 pb-20 pt-20">
         <div className="max-w-4xl mx-auto bg-[#0A0A0A] rounded-3xl px-8 py-14 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">Dedicá tu tiempo a tus pacientes</h2>
           <p className="text-[#DBEAFE] mb-8 max-w-md mx-auto">Probá NotaClínica 30 días gratis. Sin tarjeta, sin compromiso.</p>
