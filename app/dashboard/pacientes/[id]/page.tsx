@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import AgendarButton from './AgendarButton'
 import ReporteButton from './ReporteButton'
 import RecetaButton from './RecetaButton'
+import CopilotoCard from './CopilotoCard'
 import ImportarHistorialButton from './ImportarHistorialButton'
 import EditarPacienteButton from './EditarPacienteButton'
 import DarDeBajaButton from './DarDeBajaButton'
@@ -179,6 +180,9 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             </div>
           </div>
         )}
+
+        {/* Copiloto clínico (IA) */}
+        <CopilotoCard patientId={id} />
 
         {/* Evolucion grafica */}
         <EvolucionChart sessions={sessions ?? []} />

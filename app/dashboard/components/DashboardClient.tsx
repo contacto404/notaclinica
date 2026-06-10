@@ -1,11 +1,14 @@
 'use client'
 import { useState } from 'react'
 
-export default function DashboardClient({ patients, sesionesEsteMes, pdfsExportados, turnosHoy, saludo, nombre }: {
+type Alerta = { patientId: string; patientName: string; tipo: string; detalle: string; nivel: 'alta' | 'media' }
+
+export default function DashboardClient({ patients, sesionesEsteMes, pdfsExportados, turnosHoy, alertas = [], saludo, nombre }: {
   patients: any[]
   sesionesEsteMes: number
   pdfsExportados: number
   turnosHoy: any[]
+  alertas?: Alerta[]
   saludo: string
   nombre: string
 }) {
@@ -39,6 +42,31 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
           + Nuevo paciente
         </a>
       </div>
+
+      {/* Alertas clínicas */}
+      {alertas.length > 0 && (
+        <div className="bg-white dark:bg-[#1E293B] border border-[#E2E8F0] dark:border-[#334155] rounded-2xl p-4 mb-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626]" />
+            <p className="text-[11px] font-semibold text-[#B91C1C] dark:text-[#FCA5A5] uppercase tracking-widest">Alertas clínicas</p>
+          </div>
+          <div className="flex flex-col gap-1.5">
+            {alertas.map((a, i) => (
+              <a key={i} href={"/dashboard/pacientes/" + a.patientId}
+                className="flex items-center gap-3 rounded-xl px-3 py-2 hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A] transition-colors">
+                <span className={`text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-md shrink-0 ${a.nivel === 'alta' ? 'bg-[#FEE2E2] text-[#B91C1C] dark:bg-[#7F1D1D]/50 dark:text-[#FCA5A5]' : 'bg-[#FFF7ED] text-[#C2410C] dark:bg-[#7C2D12]/40 dark:text-[#FDBA74]'}`}>
+                  {a.tipo}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-[#0F172A] dark:text-white truncate">{a.patientName}</p>
+                  <p className="text-xs text-[#64748B] dark:text-[#94A3B8] truncate">{a.detalle}</p>
+                </div>
+                <span className="text-[#CBD5E1] dark:text-[#475569] text-lg shrink-0">›</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Turnos hoy */}
       {turnosHoy.length > 0 && (
