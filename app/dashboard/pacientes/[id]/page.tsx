@@ -4,6 +4,7 @@ import AgendarButton from './AgendarButton'
 import ReporteButton from './ReporteButton'
 import RecetaButton from './RecetaButton'
 import CopilotoCard from './CopilotoCard'
+import PortalLinkButton from './PortalLinkButton'
 import ImportarHistorialButton from './ImportarHistorialButton'
 import EditarPacienteButton from './EditarPacienteButton'
 import DarDeBajaButton from './DarDeBajaButton'
@@ -49,6 +50,13 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
     .limit(1)
     .maybeSingle()
 
+  const { data: checkins } = await supabase
+    .from('checkins')
+    .select('mood, anxiety, note, created_at')
+    .eq('patient_id', id)
+    .order('created_at', { ascending: false })
+    .limit(5)
+
   const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
   const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
   const lastSummaryText = lastSummarizedSession?.summaries?.[0]?.content ?? null
@@ -91,6 +99,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             </a>
             <ReporteButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} nextAppointment={nextAppointment} />
             <RecetaButton patientId={id} patientName={patient.full_name} />
+            <PortalLinkButton token={patient.portal_token} patientPhone={patient.phone} />
             <a href="https://zoom.us/start/videomeeting" target="_blank" rel="noopener noreferrer" className="border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
               📹 Videollamada
             </a>
@@ -180,6 +189,29 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                   <p className="text-sm text-[#0F172A]">{totalSessions} consulta{totalSessions !== 1 ? 's' : ''}</p>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Check-ins del portal */}
+        {checkins && checkins.length > 0 && (
+          <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
+            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">📲 Registros del paciente</h2>
+            <div className="flex flex-col gap-2.5">
+              {checkins.map((c: any, i: number) => (
+                <div key={i} className="bg-[#F8FAFC] rounded-xl p-3">
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <div className="flex gap-3">
+                      {c.mood != null && <span className="text-xs font-medium text-[#0F172A]">Ánimo <span className="text-[#2563EB] font-bold">{c.mood}/10</span></span>}
+                      {c.anxiety != null && <span className="text-xs font-medium text-[#0F172A]">Ansiedad <span className="text-[#2563EB] font-bold">{c.anxiety}/10</span></span>}
+                    </div>
+                    <span className="text-[11px] text-[#94A3B8] shrink-0">
+                      {new Date(c.created_at).toLocaleDateString('es-UY', { timeZone: 'America/Montevideo', day: '2-digit', month: 'short' })}
+                    </span>
+                  </div>
+                  {c.note && <p className="text-xs text-[#475569] leading-relaxed">{c.note}</p>}
+                </div>
+              ))}
             </div>
           </div>
         )}

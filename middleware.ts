@@ -32,6 +32,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/api/') ||
     pathname.startsWith('/admin') ||
     pathname.startsWith('/verificar') ||
+    pathname.startsWith('/portal') ||
     pathname === '/privacidad' ||
     pathname === '/manifest.json' ||
     pathname === '/sw.js' ||
