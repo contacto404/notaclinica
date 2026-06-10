@@ -25,7 +25,7 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
   let notas: any[] = []
 
   if (hasQuery) {
-    const like = `%${q}%`
+    const like = `*${q}*`
     const [{ data: pData }, { data: sData }] = await Promise.all([
       supabase.from('patients')
         .select('id, full_name, diagnosis, medication, notes')

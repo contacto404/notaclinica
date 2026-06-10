@@ -1,25 +1,23 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function LoginPage() {
+function LoginForm() {
+  const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [mode, setMode] = useState<'login' | 'register'>('login')
+  // Abre en modo registro si se llega desde la landing (?tab=registro)
+  const [mode, setMode] = useState<'login' | 'register'>(
+    searchParams.get('tab') === 'registro' ? 'register' : 'login'
+  )
   const [name, setName] = useState('')
 
   const supabase = createClient()
   const router = useRouter()
-
-  // Abrir en modo registro si se llega desde la landing (?tab=registro)
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('tab') === 'registro') setMode('register')
-  }, [])
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
@@ -124,5 +122,13 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   )
 }

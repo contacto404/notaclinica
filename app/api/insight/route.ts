@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     // Verificar que el paciente sea del profesional
     const { data: patient } = await admin
       .from('patients')
-      .select('full_name, diagnosis, medication')
+      .select('*')
       .eq('id', patientId)
       .eq('professional_id', user.id)
       .single()
