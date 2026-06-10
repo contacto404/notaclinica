@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export type Theme = 'light' | 'dark' | 'system'
 type Resolved = 'light' | 'dark'
@@ -40,6 +41,9 @@ function applyTheme(resolved: Resolved) {
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('system')
   const [resolved, setResolved] = useState<Resolved>('light')
+  const pathname = usePathname()
+  // La landing ("/") siempre se muestra en claro; el modo oscuro es solo para la app.
+  const forceLight = pathname === '/'
 
   // Sync React state with what the no-FOUC inline script already applied.
   useEffect(() => {
@@ -50,12 +54,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const r = resolve(stored)
     setThemeState(stored)
     setResolved(r)
-    applyTheme(r)
-  }, [])
+    applyTheme(forceLight ? 'light' : r)
+  }, [forceLight])
+
+  // Force light on the landing; restore the user's theme elsewhere (handles
+  // client-side navigation between landing and app).
+  useEffect(() => {
+    applyTheme(forceLight ? 'light' : resolve(theme))
+  }, [forceLight, theme])
 
   // When following the system, react to OS-level changes live.
   useEffect(() => {
-    if (theme !== 'system') return
+    if (theme !== 'system' || forceLight) return
     const mq = window.matchMedia('(prefers-color-scheme: dark)')
     const handler = () => {
       const r: Resolved = mq.matches ? 'dark' : 'light'
