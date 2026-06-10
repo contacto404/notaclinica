@@ -12,6 +12,8 @@ export default function EditarPacienteButton({ patient }: {
     phone?: string
     notes?: string
     date_of_birth?: string
+    insurance_provider?: string
+    insurance_member_id?: string
   }
 }) {
   const [open, setOpen] = useState(false)
@@ -21,6 +23,8 @@ export default function EditarPacienteButton({ patient }: {
     phone: patient.phone ?? '',
     notes: patient.notes ?? '',
     date_of_birth: patient.date_of_birth?.split('T')[0] ?? '',
+    insurance_provider: patient.insurance_provider ?? '',
+    insurance_member_id: patient.insurance_member_id ?? '',
   })
   const [loading, setLoading] = useState(false)
   const [toast, setToast] = useState(false)
@@ -35,6 +39,8 @@ export default function EditarPacienteButton({ patient }: {
       phone: fields.phone || null,
       notes: fields.notes || null,
       date_of_birth: fields.date_of_birth || null,
+      insurance_provider: fields.insurance_provider || null,
+      insurance_member_id: fields.insurance_member_id || null,
     }).eq('id', patient.id)
     setLoading(false)
     setOpen(false)
@@ -78,6 +84,18 @@ export default function EditarPacienteButton({ patient }: {
                 <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Teléfono (WhatsApp)</label>
                 <input type="tel" value={fields.phone} onChange={e => setFields(p => ({ ...p, phone: e.target.value }))}
                   placeholder="+54 9 11 1234 5678"
+                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Obra social / seguro</label>
+                <input type="text" value={fields.insurance_provider} onChange={e => setFields(p => ({ ...p, insurance_provider: e.target.value }))}
+                  placeholder="Ej: BPS, SMI, particular"
+                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">N° de afiliado</label>
+                <input type="text" value={fields.insurance_member_id} onChange={e => setFields(p => ({ ...p, insurance_member_id: e.target.value }))}
+                  placeholder="Número de socio"
                   className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] text-[#0F172A]" />
               </div>
               <div className="flex flex-col gap-1.5">

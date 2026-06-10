@@ -79,6 +79,9 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               {patient.phone && (
                 <p className="text-xs text-[#64748B] mt-0.5">📱 {patient.phone}</p>
               )}
+              {patient.insurance_provider && (
+                <p className="text-xs text-[#64748B] mt-0.5">🏥 {patient.insurance_provider}{patient.insurance_member_id ? ` · Afiliado ${patient.insurance_member_id}` : ''}</p>
+              )}
             </div>
           </div>
           <div className="flex gap-2 mt-4 flex-wrap">

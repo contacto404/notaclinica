@@ -8,6 +8,8 @@ export default function NuevoPacientePage() {
   const [fechaNac, setFechaNac] = useState('')
   const [diagnostico, setDiagnostico] = useState('')
   const [telefono, setTelefono] = useState('')
+  const [obraSocial, setObraSocial] = useState('')
+  const [afiliado, setAfiliado] = useState('')
   const [notas, setNotas] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -26,6 +28,8 @@ export default function NuevoPacientePage() {
       date_of_birth: fechaNac || null,
       diagnosis: diagnostico || null,
       phone: telefono || null,
+      insurance_provider: obraSocial || null,
+      insurance_member_id: afiliado || null,
       notes: notas || null,
     })
     if (error) { setError(error.message) } else { router.push('/dashboard') }
@@ -62,6 +66,16 @@ export default function NuevoPacientePage() {
               <label className="text-xs text-[#64748B] font-medium">Teléfono (WhatsApp)</label>
               <input type="tel" value={telefono} onChange={e => setTelefono(e.target.value)}
                 placeholder="+54 9 11 1234 5678" className={inputClass} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-[#64748B] font-medium">Obra social / seguro</label>
+              <input type="text" value={obraSocial} onChange={e => setObraSocial(e.target.value)}
+                placeholder="Ej: BPS, SMI, particular" className={inputClass} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-[#64748B] font-medium">N° de afiliado</label>
+              <input type="text" value={afiliado} onChange={e => setAfiliado(e.target.value)}
+                placeholder="Número de socio" className={inputClass} />
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-xs text-[#64748B] font-medium">Notas iniciales</label>
