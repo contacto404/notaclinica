@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" style={{ overflowX: 'hidden' }}>
       <head>
-        <meta name="google-site-verification" content="amg8eOfxn6NmnD1-VmP0E6h8txyJW8XZHZvVS4xqB1Q" />
+        <meta name="google-site-verification" content="7g9IbVDFemLPuNlQwek2nNAaxMtah7f6jOCac3LIiY0" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2563EB" />
         <meta name="mobile-web-app-capable" content="yes" />
