@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* El variant `dark:` de Tailwind sigue el atributo data-theme de la app
+   (toggle en "Mi cuenta"), NO el modo oscuro del sistema operativo.
+   Así el tema de la app controla todo de forma consistente. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @source "../app";
 @source "../lib";
 @source "../components";
