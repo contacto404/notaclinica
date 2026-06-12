@@ -131,12 +131,12 @@ export default function PromoPage() {
               <p className="text-[13px] text-[#9A9A9A] mt-5">Desde US$49/mes · Cancelás cuando quieras · Sin tarjeta para probar</p>
             </div>
 
-            {/* Captura real del producto */}
+            {/* El producto en uso real */}
             <div className="flex justify-center md:justify-end">
               <img
-                src="/screenshots/app-estadisticas.png"
-                alt="Pantalla de NotaClínica mostrando estadísticas y retención de pacientes"
-                className="w-[230px] sm:w-[260px] rounded-[2rem] shadow-2xl ring-1 ring-white/15"
+                src="/screenshots/consulta.jpg"
+                alt="Profesional usando NotaClínica en el celular durante una consulta"
+                className="w-[280px] sm:w-[340px] rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
               />
             </div>
           </div>
