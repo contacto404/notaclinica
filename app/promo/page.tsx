@@ -54,7 +54,7 @@ const ESPECIALIDADES = [
 const CONFIANZA = [
   { title: 'Privado y cifrado', desc: 'La información viaja cifrada y cada profesional accede solo a sus pacientes (Ley 18.331).' },
   { title: '30 días gratis', desc: 'Sin tarjeta para empezar. Cancelás cuando quieras, sin penalidades.' },
-  { title: 'Hecho en Uruguay', desc: 'Pensado para la práctica clínica local, con soporte directo en tu idioma.' },
+  { title: 'Soporte directo', desc: 'Hablás directo con el equipo cuando lo necesitás, sin call centers ni demoras.' },
 ]
 
 // Reemplazá por testimonios REALES de profesionales (con nombre, especialidad y, si querés, foto).
@@ -147,8 +147,6 @@ export default function PromoPage() {
       <section className="px-5 pt-7">
         <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-sm text-[#525252]">
           <span>🔒 Datos cifrados</span>
-          <span className="text-[#D4D4D4]">·</span>
-          <span>🇺🇾 Hecho en Uruguay</span>
           <span className="text-[#D4D4D4]">·</span>
           <span>🩺 Todas las especialidades</span>
           <span className="text-[#D4D4D4]">·</span>
