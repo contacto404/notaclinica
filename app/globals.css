@@ -12,6 +12,13 @@
 /* Safe-area superior: 0 en web/escritorio (sin notch).
    Solo dentro de Capacitor (html.native) se aplica el piso de 44px. */
 :root { --safe-top: env(safe-area-inset-top); }
+
+/* Apple y Google exigen que las suscripciones digitales se cobren con su propio
+   sistema de pago. En la app nativa (html.native) ocultamos el flujo de pago:
+   el alta/pago se hace desde la web. */
+html.native [data-hide-in-app] { display: none !important; }
+[data-show-in-app] { display: none !important; }
+html.native [data-show-in-app] { display: revert !important; }
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
 
 /* ============================================================

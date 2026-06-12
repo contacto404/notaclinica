@@ -346,11 +346,15 @@ export default function CuentaPage() {
           <>
             <p className="text-[#64748B] mb-4">No tenes una suscripcion activa.</p>
             <button
+              data-hide-in-app
               onClick={() => router.push('/suscripcion')}
               className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors cursor-pointer"
             >
               Suscribirme
             </button>
+            <p data-show-in-app className="text-sm text-[#64748B] leading-relaxed">
+              Activá o gestioná tu suscripción desde NotaClínica en el navegador. Acá podés seguir usando tu cuenta normalmente.
+            </p>
           </>
         )}
       </div>

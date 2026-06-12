@@ -28,7 +28,16 @@ export default function SuscripcionPage() {
           <p className="text-sm text-[#64748B]">Documentación clínica con IA para médicos</p>
         </div>
 
-        <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
+        {/* En la app nativa no se puede cobrar por fuera de Apple/Google: mostramos una nota. */}
+        <div data-show-in-app className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4 text-center">
+          <p className="text-3xl mb-3">🌐</p>
+          <p className="text-base font-semibold text-[#0F172A] mb-1">Activá tu plan desde la web</p>
+          <p className="text-sm text-[#64748B] leading-relaxed">
+            Para comenzar tu prueba o suscribirte, ingresá a NotaClínica desde el navegador de tu computadora o celular. Después iniciá sesión acá con la misma cuenta y tenés todo disponible.
+          </p>
+        </div>
+
+        <div data-hide-in-app className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
           <div className="text-center mb-6">
             <p className="text-5xl font-bold text-[#0F172A] leading-none">$49<span className="text-xl font-normal text-[#64748B]"> USD/mes</span></p>
             <p className="text-sm text-[#2563EB] font-medium mt-2">30 días gratis, cancelá cuando quieras</p>
@@ -60,7 +69,7 @@ export default function SuscripcionPage() {
           </button>
         </div>
 
-        <p className="text-xs text-center text-[#64748B]">
+        <p data-hide-in-app className="text-xs text-center text-[#64748B]">
           30 días gratis sin tarjeta · Luego $49/mes · Cancelá cuando quieras
         </p>
       </div>
