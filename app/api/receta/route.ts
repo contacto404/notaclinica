@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
   )
   const { data: profile } = await admin
     .from('profiles')
-    .select('professional_name, identification, title, full_name')
+    .select('professional_name, identification, title, full_name, signature_url')
     .eq('id', user.id)
     .single()
 
@@ -58,8 +58,8 @@ export async function GET(request: NextRequest) {
 <meta charset="UTF-8">
 <style>
   body { font-family: Arial, sans-serif; margin: 40px; color: #1a1a1a; }
-  .header { border-bottom: 2px solid #185FA5; padding-bottom: 16px; margin-bottom: 24px; }
-  .logo { font-size: 20px; font-weight: bold; color: #185FA5; }
+  .header { border-bottom: 2px solid #0A0A0A; padding-bottom: 16px; margin-bottom: 24px; }
+  .logo { font-size: 20px; font-weight: bold; color: #0A0A0A; }
   .title { font-size: 15px; color: #555; margin-top: 4px; }
   .patient-name { font-size: 22px; font-weight: bold; margin-bottom: 4px; }
   .patient-meta { font-size: 14px; color: #666; margin-bottom: 28px; }
@@ -67,6 +67,7 @@ export async function GET(request: NextRequest) {
   .indicaciones { font-size: 15px; line-height: 1.8; white-space: pre-wrap; background: #f5f7fa; padding: 18px; border-radius: 8px; min-height: 120px; }
   .bottom { margin-top: 48px; display: flex; justify-content: space-between; align-items: flex-end; }
   .firma-linea { border-bottom: 1px solid #333; width: 260px; height: 40px; margin-bottom: 8px; }
+  .firma-img { display: block; max-height: 70px; max-width: 260px; object-fit: contain; margin-bottom: 4px; }
   .firma-datos { font-size: 13px; color: #333; line-height: 1.7; }
   .qr { text-align: center; font-size: 10px; color: #999; }
   .qr img { display: block; margin-bottom: 4px; }
@@ -90,7 +91,9 @@ export async function GET(request: NextRequest) {
 
   <div class="bottom">
     <div>
-      <div class="firma-linea"></div>
+      ${profile?.signature_url
+        ? `<img class="firma-img" src="${profile.signature_url}" alt="Firma" />`
+        : `<div class="firma-linea"></div>`}
       <div class="firma-datos">${firmaLineas}<br>Fecha: ${fecha}</div>
     </div>
     <div class="qr">

@@ -57,6 +57,14 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
     .order('created_at', { ascending: false })
     .limit(5)
 
+  const { data: preconsulta } = await supabase
+    .from('preconsultas')
+    .select('motivo, antecedentes, medicacion, created_at')
+    .eq('patient_id', id)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
   const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
   const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
   const lastSummaryText = lastSummarizedSession?.summaries?.[0]?.content ?? null
@@ -145,6 +153,36 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             <p className="text-sm text-[#64748B]">No hay turno agendado.</p>
           )}
         </div>
+
+        {/* Pre-consulta enviada por el paciente */}
+        {preconsulta && (
+          <div className="bg-white rounded-2xl p-5 mb-4 border-l-2 border-[#0A0A0A] dark:border-white border-y border-r border-[#E2E8F0]">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">📝 Pre-consulta del paciente</h2>
+              <span className="text-[11px] text-[#94A3B8] shrink-0">
+                {new Date(preconsulta.created_at).toLocaleDateString('es-UY', { timeZone: 'America/Montevideo', day: '2-digit', month: 'short' })}
+              </span>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div>
+                <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Motivo de consulta</p>
+                <p className="text-sm text-[#0F172A] leading-relaxed">{preconsulta.motivo}</p>
+              </div>
+              {preconsulta.antecedentes && (
+                <div>
+                  <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Antecedentes</p>
+                  <p className="text-sm text-[#0F172A] leading-relaxed">{preconsulta.antecedentes}</p>
+                </div>
+              )}
+              {preconsulta.medicacion && (
+                <div>
+                  <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Medicación actual</p>
+                  <p className="text-sm text-[#0F172A] leading-relaxed">{preconsulta.medicacion}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Card briefing pre-consulta */}
         {lastSummarizedSession && (

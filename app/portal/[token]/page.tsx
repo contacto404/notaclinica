@@ -1,6 +1,7 @@
 import { createClient as createAdmin } from '@supabase/supabase-js'
 import PortalCheckinForm from './PortalCheckinForm'
 import PortalTurnoAcciones from './PortalTurnoAcciones'
+import PortalPreconsultaForm from './PortalPreconsultaForm'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -65,6 +66,8 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
         {turno && (
           <PortalTurnoAcciones token={token} appointmentDate={turno.appointment_date} initialStatus={turno.status} />
         )}
+
+        {turno && <PortalPreconsultaForm token={token} />}
 
         <PortalCheckinForm token={token} />
 

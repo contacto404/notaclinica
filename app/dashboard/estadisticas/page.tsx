@@ -80,6 +80,17 @@ export default async function EstadisticasPage() {
 
   const turnos7dias = turnosProximos?.length ?? 0
 
+  // --- Retención: pacientes que volvieron (2+ sesiones) sobre los que tuvieron al menos una ---
+  const sesionesPorPaciente = new Map<string, number>()
+  completadas.forEach(s => {
+    sesionesPorPaciente.set(s.patient_id, (sesionesPorPaciente.get(s.patient_id) ?? 0) + 1)
+  })
+  const pacientesConSesion = sesionesPorPaciente.size
+  const pacientesRecurrentes = Array.from(sesionesPorPaciente.values()).filter(n => n >= 2).length
+  const tasaRetorno = pacientesConSesion > 0
+    ? Math.round((pacientesRecurrentes / pacientesConSesion) * 100)
+    : 0
+
   // --- Series mensuales (últimos 6 meses) ---
   const meses = lastSixMonths()
 
@@ -108,9 +119,17 @@ export default async function EstadisticasPage() {
     <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
       <div className="max-w-2xl mx-auto">
 
-        <div className="mb-8">
-          <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Análisis</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">Estadísticas</h1>
+        <div className="flex items-start justify-between mb-8 gap-3">
+          <div>
+            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Análisis</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">Estadísticas</h1>
+          </div>
+          <a
+            href="/dashboard/reporte"
+            className="shrink-0 bg-[#2563EB] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#1D4ED8] transition-colors"
+          >
+            📄 Reporte mensual
+          </a>
         </div>
 
         {/* KPIs */}
@@ -122,6 +141,27 @@ export default async function EstadisticasPage() {
               <p className="text-xs text-[#64748B] mt-1">{k.sub}</p>
             </div>
           ))}
+        </div>
+
+        {/* Retención */}
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
+          <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">🔁 Retención de pacientes</h2>
+          {pacientesConSesion > 0 ? (
+            <>
+              <div className="flex items-end justify-between mb-3">
+                <p className="text-3xl font-bold text-[#0F172A] leading-none">{tasaRetorno}%</p>
+                <p className="text-xs text-[#64748B]">pacientes con 2+ sesiones</p>
+              </div>
+              <div className="w-full h-2.5 rounded-full bg-[#E2E8F0] overflow-hidden">
+                <div className="h-full bg-[#2563EB] rounded-full transition-all" style={{ width: `${tasaRetorno}%` }} />
+              </div>
+              <p className="text-xs text-[#64748B] mt-2.5">
+                {pacientesRecurrentes} de {pacientesConSesion} pacientes volvieron a consultar.
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-[#64748B] text-center py-6">Todavía no hay sesiones para calcular retención.</p>
+          )}
         </div>
 
         {/* Sesiones por mes */}

@@ -31,9 +31,65 @@ export default function CuentaPage() {
   const [title, setTitle] = useState('')
   const [identification, setIdentification] = useState('')
   const [savingProfile, setSavingProfile] = useState(false)
+  const [signatureUrl, setSignatureUrl] = useState('')
+  const [savingSignature, setSavingSignature] = useState(false)
+  const [signatureError, setSignatureError] = useState('')
   const [toast, setToast] = useState('')
   const router = useRouter()
   const supabase = createClient()
+
+  // Redimensiona la imagen de firma a un PNG chico (data URL) antes de guardarla.
+  function fileToSignatureDataUrl(file: File, maxW = 420): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        const img = new window.Image()
+        img.onload = () => {
+          const scale = Math.min(1, maxW / img.width)
+          const w = Math.round(img.width * scale)
+          const h = Math.round(img.height * scale)
+          const canvas = document.createElement('canvas')
+          canvas.width = w
+          canvas.height = h
+          const ctx = canvas.getContext('2d')
+          if (!ctx) return reject(new Error('No se pudo procesar la imagen'))
+          ctx.drawImage(img, 0, 0, w, h)
+          resolve(canvas.toDataURL('image/png'))
+        }
+        img.onerror = () => reject(new Error('Archivo de imagen inválido'))
+        img.src = reader.result as string
+      }
+      reader.onerror = () => reject(new Error('No se pudo leer el archivo'))
+      reader.readAsDataURL(file)
+    })
+  }
+
+  async function handleSignatureFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setSignatureError('')
+    if (!file.type.startsWith('image/')) {
+      setSignatureError('Subí un archivo de imagen (PNG o JPG).')
+      return
+    }
+    try {
+      const dataUrl = await fileToSignatureDataUrl(file)
+      setSignatureUrl(dataUrl)
+    } catch (err: any) {
+      setSignatureError(err.message || 'No se pudo procesar la imagen')
+    }
+  }
+
+  async function handleSaveSignature() {
+    setSavingSignature(true)
+    await supabase.from('profiles').upsert({
+      id: user?.id,
+      signature_url: signatureUrl || null,
+      full_name: user?.user_metadata?.full_name
+    })
+    setSavingSignature(false)
+    setToast(signatureUrl ? 'Firma guardada' : 'Firma eliminada')
+  }
 
   useEffect(() => {
     async function load() {
@@ -42,7 +98,7 @@ export default function CuentaPage() {
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('specialty, professional_name, title, identification, full_name, note_format')
+        .select('specialty, professional_name, title, identification, full_name, note_format, signature_url')
         .eq('id', user?.id)
         .single()
 
@@ -52,6 +108,7 @@ export default function CuentaPage() {
       else if (profile?.full_name) setProfessionalName(profile.full_name)
       if (profile?.title) setTitle(profile.title)
       if (profile?.identification) setIdentification(profile.identification)
+      if (profile?.signature_url) setSignatureUrl(profile.signature_url)
 
       const { data } = await supabase
         .from('subscriptions')
@@ -178,6 +235,42 @@ export default function CuentaPage() {
           className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer"
         >
           {savingProfile ? 'Guardando...' : 'Guardar datos profesionales'}
+        </button>
+      </div>
+
+      {/* Firma */}
+      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-1">Firma</h2>
+        <p className="text-xs text-[#64748B] mb-4">Subí una imagen de tu firma (PNG con fondo transparente queda mejor). Aparece en las recetas y PDFs exportados.</p>
+
+        {signatureUrl ? (
+          <div className="mb-4">
+            <div className="border border-[#E2E8F0] rounded-xl bg-[#F8FAFC] p-4 flex items-center justify-center">
+              <img src={signatureUrl} alt="Firma" className="max-h-24 object-contain" />
+            </div>
+            <button
+              onClick={() => { setSignatureUrl(''); }}
+              className="text-xs text-red-600 hover:text-red-700 mt-2 cursor-pointer"
+            >
+              Quitar firma
+            </button>
+          </div>
+        ) : (
+          <label className="flex flex-col items-center justify-center gap-2 border border-dashed border-[#CBD5E1] rounded-xl bg-[#F8FAFC] py-8 px-4 mb-4 cursor-pointer hover:border-[#2563EB] transition-colors">
+            <span className="text-2xl">✍️</span>
+            <span className="text-sm text-[#64748B]">Tocá para subir tu firma</span>
+            <input type="file" accept="image/*" onChange={handleSignatureFile} className="hidden" />
+          </label>
+        )}
+
+        {signatureError && <p className="text-xs text-red-500 mb-3">{signatureError}</p>}
+
+        <button
+          onClick={handleSaveSignature}
+          disabled={savingSignature}
+          className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer"
+        >
+          {savingSignature ? 'Guardando...' : 'Guardar firma'}
         </button>
       </div>
 
