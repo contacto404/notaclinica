@@ -12,6 +12,8 @@ import CobroButton from './CobroButton'
 import EvolucionChart from './EvolucionChart'
 import EscalasEvaluacion from './EscalasEvaluacion'
 import ConsentimientoButton from './ConsentimientoButton'
+import PlanTratamiento from './PlanTratamiento'
+import { showsScales } from '@/lib/scales'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -34,7 +36,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
   // Especialidad del profesional: las escalas solo aplican a Psicología / Psiquiatría
   const { data: profile } = await supabase
     .from('profiles').select('specialty').eq('id', user.id).single()
-  const showScales = profile?.specialty === 'psicologia'
+  const showScales = showsScales(profile?.specialty)
 
   const { data: assessments } = showScales
     ? await supabase
@@ -64,6 +66,14 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
     .order('created_at', { ascending: false })
     .limit(1)
     .maybeSingle()
+
+  const { data: goals } = showScales
+    ? await supabase
+        .from('treatment_goals')
+        .select('id, title, status, created_at, achieved_at')
+        .eq('patient_id', id)
+        .order('created_at', { ascending: true })
+    : { data: null }
 
   const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
   const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
@@ -260,7 +270,12 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {/* Evolucion grafica */}
         <EvolucionChart sessions={sessions ?? []} />
 
-        {/* Escalas de evaluacion (solo Psicologia / Psiquiatria) */}
+        {/* Plan de tratamiento (perfiles de salud mental) */}
+        {showScales && (
+          <PlanTratamiento patientId={id} goals={goals ?? []} />
+        )}
+
+        {/* Escalas de evaluacion (perfiles de salud mental) */}
         {showScales && (
           <EscalasEvaluacion patientId={id} assessments={assessments ?? []} />
         )}

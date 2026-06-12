@@ -51,8 +51,16 @@ export default function EscalasEvaluacion({ patientId, assessments }: { patientI
 function ScaleBlock({ scale, history, onNew }: { scale: ScaleDef; history: any[]; onNew: () => void }) {
   const asc = [...history].sort((a, b) => String(a.assessed_at).localeCompare(String(b.assessed_at)))
   const latest = asc[asc.length - 1]
+  const first = asc[0]
   const latestSev = latest ? scale.severity(latest.score) : null
   const chart = asc.slice(-8)
+  // Progreso clínico: en PHQ-9/GAD-7 un puntaje menor es mejor.
+  const delta = asc.length >= 2 ? latest.score - first.score : 0
+  const progreso = delta < 0
+    ? { arrow: '↓', color: '#16A34A', text: `Bajó ${Math.abs(delta)} ${Math.abs(delta) === 1 ? 'punto' : 'puntos'} desde el inicio — mejora` }
+    : delta > 0
+      ? { arrow: '↑', color: '#DC2626', text: `Subió ${delta} ${delta === 1 ? 'punto' : 'puntos'} desde el inicio — a seguir de cerca` }
+      : { arrow: '→', color: '#64748B', text: 'Sin cambios desde la primera evaluación' }
 
   return (
     <div>
@@ -78,6 +86,14 @@ function ScaleBlock({ scale, history, onNew }: { scale: ScaleDef; history: any[]
             <span className={'text-xs font-medium px-2.5 py-1 rounded-full ' + latestSev!.pill}>{latestSev!.label}</span>
             <span className="text-xs text-[#94A3B8] ml-auto">{formatDate(latest.assessed_at)}</span>
           </div>
+
+          {asc.length >= 2 && (
+            <div className="flex items-center gap-2 mb-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] px-3 py-2.5">
+              <span className="text-lg font-bold leading-none" style={{ color: progreso.color }}>{progreso.arrow}</span>
+              <p className="text-xs text-[#475569] flex-1">{progreso.text}</p>
+              <span className="text-xs font-semibold text-[#94A3B8] shrink-0">{first.score} → {latest.score}</span>
+            </div>
+          )}
 
           {chart.length > 1 && (
             <div className="mb-4">
@@ -109,6 +125,9 @@ function ScaleBlock({ scale, history, onNew }: { scale: ScaleDef; history: any[]
                   <span className="font-semibold text-[#0F172A]">
                     {a.score}<span className="text-[#94A3B8] font-normal">/{scale.max}</span>
                   </span>
+                  {a.source === 'patient' && (
+                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EEF2FF] text-[#4338CA]">paciente</span>
+                  )}
                   <span className={'text-xs font-medium px-2 py-0.5 rounded-full ml-auto ' + sev.pill}>{sev.label}</span>
                 </div>
               )

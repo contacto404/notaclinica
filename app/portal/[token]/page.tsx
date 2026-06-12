@@ -2,6 +2,8 @@ import { createClient as createAdmin } from '@supabase/supabase-js'
 import PortalCheckinForm from './PortalCheckinForm'
 import PortalTurnoAcciones from './PortalTurnoAcciones'
 import PortalPreconsultaForm from './PortalPreconsultaForm'
+import PortalEscalaForm from './PortalEscalaForm'
+import { showsScales } from '@/lib/scales'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -45,12 +47,13 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
       .limit(1)
       .maybeSingle(),
     admin.from('profiles')
-      .select('professional_name, full_name')
+      .select('professional_name, full_name, specialty')
       .eq('id', patient.professional_id)
       .maybeSingle(),
   ])
 
   const profNombre = prof?.professional_name || prof?.full_name || 'tu profesional'
+  const showScales = showsScales(prof?.specialty)
   const primerNombre = (patient.full_name ?? '').split(' ')[0]
 
   return (
@@ -68,6 +71,8 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
         )}
 
         {turno && <PortalPreconsultaForm token={token} />}
+
+        {showScales && <PortalEscalaForm token={token} />}
 
         <PortalCheckinForm token={token} />
 
