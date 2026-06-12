@@ -64,6 +64,7 @@ Usá esta estructura (si no encontrás algo, usá array vacío o string vacío):
         }
         const { data: sessionData } = await supabase.from('sessions').insert({
           patient_id: patientId,
+          professional_id: user.id,
           status: 'summarized',
           session_date: fecha.toISOString(),
         }).select().single()

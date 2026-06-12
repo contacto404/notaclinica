@@ -56,7 +56,7 @@ export default function NuevaSesionPage() {
 
       const { data: session } = await supabase
         .from('sessions')
-        .insert({ patient_id: patientId, status: 'pending' })
+        .insert({ patient_id: patientId, professional_id: user.id, status: 'pending' })
         .select()
         .single()
 
