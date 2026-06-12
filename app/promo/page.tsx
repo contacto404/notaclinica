@@ -20,6 +20,19 @@ export const metadata: Metadata = {
 
 const HERO_TAGS = ['Resúmenes con IA', 'Escalas y evolución', 'Recetas con QR', 'Portal del paciente']
 
+const TRANSCRIPT = [
+  { who: 'Profesional', text: '¿Cómo venís durmiendo esta semana?' },
+  { who: 'Paciente', text: 'Mejor, aunque todavía me cuesta arrancar el día.' },
+  { who: 'Profesional', text: '¿Y los episodios de ansiedad?' },
+  { who: 'Paciente', text: 'Bajaron bastante desde que ajustamos la medicación.' },
+]
+
+const RESUMEN = [
+  { label: 'Motivo', text: 'Seguimiento de ansiedad e insomnio.' },
+  { label: 'Evolución', text: 'Mejora del sueño; episodios de ansiedad en disminución con la medicación ajustada.' },
+  { label: 'Plan', text: 'Mantener el esquema actual y reforzar técnicas de higiene del sueño.' },
+]
+
 const PASOS = [
   { num: '01', title: 'Grabá la consulta', desc: 'Un botón desde el celular. Funciona durante la sesión, sin interrumpir al paciente.' },
   { num: '02', title: 'La IA documenta', desc: 'Transcripción completa y resumen clínico estructurado según tu especialidad, en segundos.' },
@@ -92,6 +105,67 @@ export default function PromoPage() {
               Empezar gratis <span className="text-lg leading-none">›</span>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* En acción: médico-paciente → resumen con IA */}
+      <section className="px-3 sm:px-5 pt-24">
+        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-[#A3A3A3] mb-3">En acción</p>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-12 max-w-2xl">De la conversación al resumen clínico</h2>
+
+          <div className="rounded-[2rem] border border-[#EDEDED] bg-[#FAFAFA] p-4 sm:p-8">
+            <div className="bg-white rounded-3xl border border-[#EDEDED] shadow-sm overflow-hidden">
+              {/* Barra superior de la sesión */}
+              <div className="flex items-center justify-between px-5 sm:px-7 py-4 border-b border-[#F0F0F0]">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-[#0A0A0A] animate-pulse" />
+                  <span className="text-sm font-medium">Grabando sesión</span>
+                </div>
+                <span className="text-xs text-[#737373]">María G. · Psicología · 12:48</span>
+              </div>
+
+              {/* Cuerpo: conversación + resumen */}
+              <div className="grid md:grid-cols-2 gap-7 sm:gap-9 p-5 sm:p-7">
+                {/* Conversación médico-paciente */}
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.14em] text-[#A3A3A3] mb-4">Conversación</p>
+                  <div className="flex flex-col gap-3">
+                    {TRANSCRIPT.map((t, i) => {
+                      const paciente = t.who === 'Paciente'
+                      return (
+                        <div key={i} className={paciente ? 'pl-6' : 'pr-6'}>
+                          <p className="text-[10px] uppercase tracking-[0.12em] text-[#A3A3A3] mb-1">{t.who}</p>
+                          <div className={
+                            'rounded-2xl px-4 py-2.5 text-sm leading-snug ' +
+                            (paciente
+                              ? 'bg-[#F5F5F5] text-[#0A0A0A]'
+                              : 'bg-[#0A0A0A] text-white')
+                          }>
+                            {t.text}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                {/* Resumen con IA */}
+                <div className="md:border-l md:border-[#F0F0F0] md:pl-9">
+                  <p className="text-[11px] uppercase tracking-[0.14em] text-[#A3A3A3] mb-4">Resumen con IA</p>
+                  <div className="flex flex-col gap-3">
+                    {RESUMEN.map(r => (
+                      <div key={r.label} className="bg-[#FAFAFA] rounded-r-xl border-l-2 border-[#0A0A0A] px-4 py-2.5">
+                        <p className="text-[10px] uppercase tracking-[0.12em] text-[#A3A3A3] mb-1">{r.label}</p>
+                        <p className="text-sm text-[#0A0A0A] leading-snug">{r.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="text-center text-xs text-[#A3A3A3] mt-4">Vista ilustrativa: la sesión se graba y la IA arma el resumen en segundos.</p>
         </div>
       </section>
 
