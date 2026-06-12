@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createClient as createAdmin } from '@supabase/supabase-js'
 import Link from 'next/link'
 import LogoutButton from './components/LogoutButton'
 import NavbarMobile from './components/NavbarMobile'
@@ -14,14 +15,32 @@ export default async function DashboardLayout({
 
   if (!user) redirect('/login')
 
+  // Suscripción del usuario (cualquier estado)
   const { data: sub } = await supabase
     .from('subscriptions')
     .select('status, current_period_end')
     .eq('user_id', user.id)
-    .eq('status', 'active')
-    .single()
+    .maybeSingle()
 
-  const isActive = sub && new Date(sub.current_period_end) > new Date()
+  let isActive = !!sub && sub.status === 'active' && new Date(sub.current_period_end) > new Date()
+
+  // Primera vez sin suscripción: otorgar 30 días de prueba gratis (sin tarjeta).
+  // Solo aplica si el usuario NUNCA tuvo suscripción; si venció o la canceló, va al paywall.
+  if (!sub) {
+    const admin = createAdmin(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+    const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+    await admin.from('subscriptions').upsert({
+      user_id: user.id,
+      status: 'active',
+      current_period_end: periodEnd,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'user_id', ignoreDuplicates: true })
+    isActive = true
+  }
+
   if (!isActive) redirect('/suscripcion')
 
   return (
