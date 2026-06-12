@@ -42,8 +42,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('system')
   const [resolved, setResolved] = useState<Resolved>('light')
   const pathname = usePathname()
-  // La landing ("/") siempre se muestra en claro; el modo oscuro es solo para la app.
-  const forceLight = pathname === '/'
+  // Las páginas públicas de marketing ("/" y "/promo") siempre se muestran en claro;
+  // el modo oscuro es solo para la app.
+  const forceLight = pathname === '/' || pathname.startsWith('/promo')
 
   // Sync React state with what the no-FOUC inline script already applied.
   useEffect(() => {

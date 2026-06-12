@@ -15,8 +15,9 @@ const themeInitScript = `
   try {
     var path = window.location.pathname;
     var t = localStorage.getItem('theme') || 'system';
-    // La landing ("/") es siempre clara; el modo oscuro queda solo para la app.
-    var dark = path === '/' ? false : (t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches));
+    // Las páginas públicas de marketing son siempre claras; el modo oscuro queda para la app.
+    var lightOnly = path === '/' || path.indexOf('/promo') === 0;
+    var dark = lightOnly ? false : (t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches));
     var d = document.documentElement;
     d.dataset.theme = dark ? 'dark' : 'light';
     var m = document.querySelector('meta[name="theme-color"]');
