@@ -61,15 +61,20 @@ export default function PromoPage() {
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur">
         <div
-          className="px-4 sm:px-6 flex items-center justify-between h-14"
-          style={{ paddingTop: 'var(--safe-top)', minHeight: 'calc(var(--safe-top) + 56px)' }}
+          className="flex items-center justify-between gap-3 h-14"
+          style={{
+            paddingTop: 'var(--safe-top)',
+            paddingLeft: 'max(env(safe-area-inset-left), 16px)',
+            paddingRight: 'max(env(safe-area-inset-right), 16px)',
+            minHeight: 'calc(var(--safe-top) + 56px)',
+          }}
         >
-          <span className="text-xl font-light tracking-tight lowercase">notaclinica</span>
-          <div className="flex items-center gap-2">
-            <Link href="/login" className="text-sm font-medium text-[#0A0A0A] bg-[#F0F0F0] px-4 py-2 rounded-full hover:bg-[#E5E5E5] transition-colors">
+          <span className="text-lg sm:text-xl font-light tracking-tight lowercase shrink-0">notaclinica</span>
+          <div className="flex items-center gap-2 shrink-0">
+            <Link href="/login" className="hidden sm:inline-flex text-sm font-medium text-[#0A0A0A] bg-[#F0F0F0] px-4 py-2 rounded-full hover:bg-[#E5E5E5] transition-colors">
               Iniciar sesión
             </Link>
-            <Link href="/login?tab=registro" className="text-sm font-medium bg-[#0A0A0A] text-white px-4 py-2 rounded-full hover:bg-[#262626] transition-colors">
+            <Link href="/login?tab=registro" className="text-[13px] sm:text-sm font-medium bg-[#0A0A0A] text-white px-3.5 sm:px-4 py-2 rounded-full hover:bg-[#262626] transition-colors whitespace-nowrap">
               Empezar gratis
             </Link>
           </div>
@@ -235,6 +240,48 @@ export default function PromoPage() {
                 <p className="text-sm text-[#525252] leading-relaxed">{t.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Descargá la app */}
+      <section className="px-3 sm:px-5 pt-24">
+        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-[#A3A3A3] mb-3">Descargá la app</p>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-6 max-w-2xl">Usala donde estés</h2>
+          <p className="text-[#525252] leading-relaxed max-w-xl mb-10">
+            Funciona desde el navegador y se instala como app en tu celular. En iPhone: <span className="text-[#0A0A0A]">Compartir → Agregar a inicio</span>. En Android: <span className="text-[#0A0A0A]">Instalar app</span>.
+          </p>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <Link href="/login?tab=registro"
+              className="inline-flex items-center justify-center gap-1.5 bg-[#0A0A0A] text-white px-7 py-3.5 rounded-full font-semibold text-base hover:bg-[#262626] transition-colors">
+              Usar gratis ahora <span className="text-lg leading-none">›</span>
+            </Link>
+
+            <div className="flex items-center gap-3">
+              {/* App Store — próximamente */}
+              <div className="relative flex items-center gap-3 border border-[#E5E5E5] rounded-2xl px-5 py-2.5 opacity-80 select-none">
+                <svg viewBox="0 0 384 512" className="w-6 h-6 fill-[#0A0A0A] shrink-0" aria-hidden="true">
+                  <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                </svg>
+                <div className="text-left leading-tight">
+                  <p className="text-[10px] text-[#737373]">Próximamente en</p>
+                  <p className="text-sm font-semibold text-[#0A0A0A]">App Store</p>
+                </div>
+              </div>
+
+              {/* Google Play — próximamente */}
+              <div className="relative flex items-center gap-3 border border-[#E5E5E5] rounded-2xl px-5 py-2.5 opacity-80 select-none">
+                <svg viewBox="0 0 512 512" className="w-5 h-5 fill-[#0A0A0A] shrink-0" aria-hidden="true">
+                  <path d="M47 32C37 37 31 47 31 60v392c0 13 6 23 16 28l228-224L47 32zm262 196 57-56-238-138c-9-5-18-6-26-3l207 197zm0 56L101 481c8 3 17 2 26-3l238-138-56-56zm65-65 75-44c20-12 20-39 0-51l-75-43-62 61 62 61z"/>
+                </svg>
+                <div className="text-left leading-tight">
+                  <p className="text-[10px] text-[#737373]">Próximamente en</p>
+                  <p className="text-sm font-semibold text-[#0A0A0A]">Google Play</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
