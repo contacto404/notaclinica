@@ -7,10 +7,15 @@ import { useEffect } from 'react'
 export default function MotionProvider() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const els = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'))
+
+    // Fallback: navegadores muy viejos sin IntersectionObserver → mostrar todo.
+    if (!('IntersectionObserver' in window)) return
+
     const root = document.documentElement
     root.classList.add('reveal-on')
 
-    const els = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'))
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -20,17 +25,11 @@ export default function MotionProvider() {
           }
         })
       },
-      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
     )
     els.forEach((el) => io.observe(el))
 
-    // Por las dudas: revelar todo después de unos segundos.
-    const t = setTimeout(() => els.forEach((el) => el.classList.add('is-visible')), 2600)
-
-    return () => {
-      io.disconnect()
-      clearTimeout(t)
-    }
+    return () => io.disconnect()
   }, [])
 
   return null
