@@ -21,10 +21,10 @@ html.native [data-hide-in-app] { display: none !important; }
 html.native [data-show-in-app] { display: revert !important; }
 
 /* Motion de /promo — sutil, profesional, respetando reduce-motion */
-@keyframes promoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-22px); } }
+@keyframes promoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @keyframes promoGlow { 0%, 100% { transform: translate(0, 0); opacity: .5; } 50% { transform: translate(70px, 40px); opacity: 1; } }
 @keyframes promoZoom { from { transform: scale(1.18); } to { transform: scale(1); } }
-.promo-float { animation: promoFloat 4.5s ease-in-out infinite; }
+.promo-float { animation: promoFloat 6s ease-in-out infinite; }
 .promo-glow { animation: promoGlow 9s ease-in-out infinite; }
 .promo-kenburns { animation: promoZoom 1.8s cubic-bezier(.16,1,.3,1) forwards; }
 

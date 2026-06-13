@@ -169,7 +169,7 @@ export default function PromoPage() {
               <img
                 src="/screenshots/consulta.jpg"
                 alt="Profesional usando NotaClínica en el celular durante una consulta"
-                className="w-[280px] sm:w-[340px] rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
+                className="promo-float w-[280px] sm:w-[340px] rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
               />
             </div>
           </div>
