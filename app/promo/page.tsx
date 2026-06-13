@@ -3,6 +3,7 @@ import Link from 'next/link'
 import EspecialidadesDemo from './EspecialidadesDemo'
 import MotionProvider from './MotionProvider'
 import HeroImage from './HeroImage'
+import SpotlightReveal from './SpotlightReveal'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://notaclinica.vercel.app'),
@@ -236,6 +237,16 @@ export default function PromoPage() {
             </div>
           </div>
           <p className="text-center text-xs text-[#A3A3A3] mt-4">Vista ilustrativa: la sesión se graba y la IA arma el resumen en segundos.</p>
+        </div>
+      </section>
+
+      {/* Spotlight: del papel a la IA */}
+      <section className="px-3 sm:px-5 pt-24">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>Del papel a la IA</p>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-3 max-w-2xl">Pasá el cursor sobre la nota</h2>
+          <p className="text-[#525252] leading-relaxed max-w-xl mb-10">Por debajo de la nota escrita a las apuradas, NotaClínica ya tiene el resumen estructurado. Movés el cursor y lo revelás.</p>
+          <SpotlightReveal />
         </div>
       </section>
 
