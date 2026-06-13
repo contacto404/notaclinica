@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import EspecialidadesDemo from './EspecialidadesDemo'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://notaclinica.vercel.app'),
@@ -46,11 +47,6 @@ const FEATURES = [
   { title: 'Agenda y honorarios', desc: 'Turnos con recordatorio automático, lista de espera y control de cobros.' },
 ]
 
-const ESPECIALIDADES = [
-  'Psicología', 'Psiquiatría', 'Medicina clínica', 'Pediatría',
-  'Nutrición', 'Ginecología', 'Dermatología', 'Kinesiología',
-]
-
 const CONFIANZA = [
   { title: 'Privado y cifrado', desc: 'La información viaja cifrada y cada profesional accede solo a sus pacientes (Ley 18.331).' },
   { title: '30 días gratis', desc: 'Sin tarjeta para empezar. Cancelás cuando quieras, sin penalidades.' },
@@ -68,13 +64,45 @@ const FAQS = [
   { q: '¿Para qué especialidades sirve?', a: 'Los resúmenes se adaptan a tu especialidad: psicología, psiquiatría, medicina clínica, pediatría, nutrición y más. Lo configurás en un clic.' },
   { q: '¿Mis datos y los de mis pacientes están seguros?', a: 'Sí. La información viaja cifrada y cada profesional accede únicamente a sus propios pacientes. Cumplimos con la Ley 18.331 de protección de datos.' },
   { q: '¿Necesito instalar algo?', a: 'No. Funciona desde el navegador y también se puede instalar como app en tu iPhone o Android.' },
+  { q: '¿Cuánto tarda en generar el resumen?', a: 'Segundos. Apenas termina la transcripción, la IA devuelve el resumen clínico estructurado, listo para que lo revises.' },
+  { q: '¿En qué idioma funciona la transcripción?', a: 'Está optimizada para español, incluido el de Uruguay y la región. Transcribe la consulta y redacta el resumen en español.' },
+  { q: '¿Cumple con las normativas de datos de salud?', a: 'La información viaja cifrada y cada profesional accede solo a sus propios pacientes. Cumplimos con la Ley 18.331 de protección de datos de Uruguay. Para requisitos específicos de otros países, escribinos y lo vemos.' },
 ]
 
 const kicker = 'text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-3'
 
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'NotaClínica',
+      applicationCategory: 'MedicalApplication',
+      operatingSystem: 'Web, iOS, Android',
+      description: 'NotaClínica graba la consulta y la IA arma el resumen clínico en segundos. Documentación clínica con IA para profesionales de la salud.',
+      url: 'https://notaclinica.vercel.app/promo',
+      offers: {
+        '@type': 'Offer',
+        price: '49',
+        priceCurrency: 'USD',
+        description: '30 días gratis, sin tarjeta. Luego US$49/mes.',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map(f => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+}
+
 export default function PromoPage() {
   return (
     <div className="min-h-screen bg-white text-[#0A0A0A]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
 
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur">
@@ -128,7 +156,7 @@ export default function PromoPage() {
                   Ver cómo funciona
                 </Link>
               </div>
-              <p className="text-[13px] text-[#9A9A9A] mt-5">Desde US$49/mes · Cancelás cuando quieras · Sin tarjeta para probar</p>
+              <p className="text-[13px] text-[#9A9A9A] mt-5">30 días gratis · Sin tarjeta · Cancelás cuando quieras</p>
             </div>
 
             {/* El producto en uso real */}
@@ -256,15 +284,20 @@ export default function PromoPage() {
           <p className="text-[#C8C8C8] leading-relaxed max-w-xl mx-auto mb-9">
             Los resúmenes se redactan con la estructura propia de cada práctica. Y para salud mental sumás escalas PHQ-9 y GAD-7, lectura del progreso y plan de tratamiento por objetivos. Vos elegís el formato.
           </p>
-          <div className="flex flex-wrap justify-center gap-2.5 max-w-2xl mx-auto">
-            {ESPECIALIDADES.map(e => (
-              <span key={e} className="text-sm text-[#D4D4D4] border border-white/15 rounded-full px-4 py-1.5">{e}</span>
-            ))}
-          </div>
           <Link href="/login?tab=registro"
-            className="inline-flex items-center gap-1.5 mt-10 bg-white text-[#0A0A0A] pl-6 pr-5 py-3.5 rounded-full font-semibold hover:bg-[#EDEDED] transition-colors">
+            className="inline-flex items-center gap-1.5 bg-white text-[#0A0A0A] pl-6 pr-5 py-3.5 rounded-full font-semibold hover:bg-[#EDEDED] transition-colors">
             Probarlo gratis <span className="text-lg leading-none">›</span>
           </Link>
+        </div>
+      </section>
+
+      {/* Ejemplo interactivo por especialidad */}
+      <section className="px-3 sm:px-5 pt-24">
+        <div className="max-w-3xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>Un ejemplo por especialidad</p>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-3 max-w-2xl">Tocá tu especialidad y mirá el resumen</h2>
+          <p className="text-[#525252] leading-relaxed max-w-xl mb-10">El mismo motor, adaptado a la estructura de cada práctica clínica.</p>
+          <EspecialidadesDemo />
         </div>
       </section>
 
@@ -299,6 +332,46 @@ export default function PromoPage() {
                 <p className="text-sm text-[#525252] leading-relaxed">{t.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Precio */}
+      <section id="precio" className="px-3 sm:px-5 pt-24 scroll-mt-20">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>Precio</p>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-3 max-w-2xl">Un plan simple, sin sorpresas</h2>
+          <p className="text-[#525252] leading-relaxed max-w-xl mb-10">Probás 30 días gratis, sin tarjeta. Si te sirve, seguís por un precio menor al de una consulta. Cancelás cuando quieras.</p>
+
+          <div className="grid md:grid-cols-[1.3fr_1fr] gap-4">
+            {/* Plan individual */}
+            <div className="bg-[#0A0A0A] text-white rounded-3xl p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#9A9A9A] mb-4">NotaClínica Pro</p>
+              <p className="text-5xl font-medium tracking-tight">US$49<span className="text-lg text-[#9A9A9A] font-normal"> /mes</span></p>
+              <p className="text-sm text-[#C8C8C8] mt-2 mb-7">El equivalente a una consulta. 30 días gratis para empezar.</p>
+              <ul className="flex flex-col gap-2.5 mb-8">
+                {['Pacientes y sesiones ilimitados', 'Transcripción y resúmenes con IA', 'Escalas, evolución y plan de tratamiento', 'Recetas y PDF con tu firma', 'Agenda, portal del paciente y honorarios', 'Soporte directo'].map(f => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-[#EDEDED]">
+                    <span className="text-white mt-0.5">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/login?tab=registro"
+                className="inline-flex items-center justify-center gap-1.5 bg-white text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#EDEDED] transition-colors">
+                Empezar 30 días gratis <span className="text-lg leading-none">›</span>
+              </Link>
+            </div>
+
+            {/* Clínicas */}
+            <div className="border border-[#E5E5E5] rounded-3xl p-8 flex flex-col">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-4">Clínicas y equipos</p>
+              <h3 className="text-xl font-semibold mb-2">¿Varios profesionales?</h3>
+              <p className="text-sm text-[#525252] leading-relaxed mb-6">Armamos un plan a medida para tu clínica o consultorio con varios profesionales. Escribinos y lo vemos juntos.</p>
+              <a href="mailto:contacto@vibraco.com.uy"
+                className="mt-auto inline-flex items-center justify-center gap-1.5 border border-[#0A0A0A] text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#FAFAFA] transition-colors">
+                Hablar con nosotros
+              </a>
+            </div>
           </div>
         </div>
       </section>
