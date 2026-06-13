@@ -156,7 +156,7 @@ export default function PromoPage() {
                   Ver cómo funciona
                 </Link>
               </div>
-              <p className="text-[13px] text-[#9A9A9A] mt-5">30 días gratis · Sin tarjeta · Cancelás cuando quieras</p>
+              <p className="text-[13px] text-[#9A9A9A] mt-5">Cancelás cuando quieras, sin compromiso</p>
             </div>
 
             {/* El producto en uso real */}
@@ -178,7 +178,7 @@ export default function PromoPage() {
           <span className="text-[#D4D4D4]">·</span>
           <span>🩺 Todas las especialidades</span>
           <span className="text-[#D4D4D4]">·</span>
-          <span>🎁 30 días gratis, sin tarjeta</span>
+          <span>⏱️ Resumen en segundos</span>
         </div>
       </section>
 
