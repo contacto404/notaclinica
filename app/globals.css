@@ -23,21 +23,24 @@ html.native [data-show-in-app] { display: revert !important; }
 /* Motion de /promo — sutil, profesional, respetando reduce-motion */
 @keyframes promoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 @keyframes promoGlow { 0%, 100% { transform: translate(0, 0); opacity: .45; } 50% { transform: translate(36px, 22px); opacity: .85; } }
+@keyframes promoZoom { from { transform: scale(1.12); } to { transform: scale(1); } }
 .promo-float { animation: promoFloat 5.5s ease-in-out infinite; }
 .promo-glow { animation: promoGlow 9s ease-in-out infinite; }
+.promo-kenburns { animation: promoZoom 1.8s cubic-bezier(.16,1,.3,1) forwards; }
 
-/* Reveal al hacer scroll. Solo aplica con html.reveal-on (lo agrega el JS),
-   así sin JS o con reduce-motion el contenido se ve siempre. */
+/* Reveal al hacer scroll con blur-rise. Solo aplica con html.reveal-on (lo agrega
+   el JS), así sin JS o con reduce-motion el contenido se ve siempre. */
 html.reveal-on [data-reveal] {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity .6s ease, transform .7s cubic-bezier(.2,.7,.3,1);
-  will-change: opacity, transform;
+  filter: blur(10px);
+  transition: opacity .7s ease, transform .8s cubic-bezier(.16,1,.3,1), filter .8s ease;
+  will-change: opacity, transform, filter;
 }
-html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; }
+html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; filter: blur(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .promo-float, .promo-glow { animation: none; }
+  .promo-float, .promo-glow, .promo-kenburns { animation: none; }
 }
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
 
