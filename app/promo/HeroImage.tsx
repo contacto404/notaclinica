@@ -26,7 +26,7 @@ export default function HeroImage() {
     const r = e.currentTarget.getBoundingClientRect()
     const px = (e.clientX - r.left) / r.width - 0.5
     const py = (e.clientY - r.top) / r.height - 0.5
-    target.current = { rx: -py * 12, ry: px * 12 }
+    target.current = { rx: -py * 15, ry: px * 15 }
   }
   function onLeave() {
     target.current = { rx: 0, ry: 0 }

@@ -137,7 +137,7 @@ export default function PromoPage() {
           style={{ background: 'radial-gradient(120% 90% at 78% 12%, #2b2b2b 0%, #141414 45%, #0a0a0a 100%)' }}
         >
           {/* Glow animado de fondo */}
-          <div className="promo-glow pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(38% 42% at 68% 18%, rgba(255,255,255,0.10), transparent 70%)' }} />
+          <div className="promo-glow pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(42% 46% at 66% 18%, rgba(255,255,255,0.18), transparent 70%)' }} />
 
           <div className="relative z-10 grid md:grid-cols-2 gap-10 md:gap-8 items-center">
             {/* Texto */}
