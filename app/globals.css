@@ -19,6 +19,18 @@
 html.native [data-hide-in-app] { display: none !important; }
 [data-show-in-app] { display: none !important; }
 html.native [data-show-in-app] { display: revert !important; }
+
+/* Animaciones del hero de /promo — sutiles y respetando reduce-motion */
+@keyframes promoFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes promoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes promoGlow { 0%, 100% { transform: translate(0, 0); opacity: .45; } 50% { transform: translate(36px, 22px); opacity: .85; } }
+.promo-in { opacity: 0; animation: promoFadeUp .7s cubic-bezier(.2,.7,.3,1) forwards; }
+.promo-float { animation: promoFloat 5.5s ease-in-out infinite; }
+.promo-glow { animation: promoGlow 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .promo-in { opacity: 1; animation: none; }
+  .promo-float, .promo-glow { animation: none; }
+}
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
 
 /* ============================================================

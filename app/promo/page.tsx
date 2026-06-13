@@ -133,20 +133,23 @@ export default function PromoPage() {
           className="relative rounded-[2rem] overflow-hidden p-7 sm:p-14"
           style={{ background: 'radial-gradient(120% 90% at 78% 12%, #2b2b2b 0%, #141414 45%, #0a0a0a 100%)' }}
         >
-          <div className="grid md:grid-cols-2 gap-10 md:gap-8 items-center">
+          {/* Glow animado de fondo */}
+          <div className="promo-glow pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(38% 42% at 68% 18%, rgba(255,255,255,0.10), transparent 70%)' }} />
+
+          <div className="relative z-10 grid md:grid-cols-2 gap-10 md:gap-8 items-center">
             {/* Texto */}
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 bg-white/10 text-white text-xs font-medium px-3.5 py-1.5 rounded-full mb-7 backdrop-blur">
+              <div className="promo-in inline-flex items-center gap-2 bg-white/10 text-white text-xs font-medium px-3.5 py-1.5 rounded-full mb-7 backdrop-blur" style={{ animationDelay: '0.05s' }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-white" />
                 30 días gratis · Sin tarjeta
               </div>
-              <h1 className="text-[2.4rem] leading-[1.06] sm:text-5xl md:text-6xl font-medium tracking-tight text-white mb-6">
+              <h1 className="promo-in text-[2.4rem] leading-[1.06] sm:text-5xl md:text-6xl font-medium tracking-tight text-white mb-6" style={{ animationDelay: '0.12s' }}>
                 Terminá la consulta con la nota clínica ya lista
               </h1>
-              <p className="text-base sm:text-lg text-[#C8C8C8] max-w-md leading-relaxed mb-8">
+              <p className="promo-in text-base sm:text-lg text-[#C8C8C8] max-w-md leading-relaxed mb-8" style={{ animationDelay: '0.2s' }}>
                 ¿Todavía escribís la historia clínica después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. Las horas de papeleo quedan para vos.
               </p>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              <div className="promo-in flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4" style={{ animationDelay: '0.28s' }}>
                 <Link href="/login?tab=registro"
                   className="inline-flex items-center justify-center gap-1.5 bg-white text-[#0A0A0A] pl-7 pr-6 py-4 rounded-full font-semibold text-base hover:bg-[#EDEDED] transition-colors shadow-lg">
                   Empezar 30 días gratis <span className="text-lg leading-none">›</span>
@@ -156,15 +159,15 @@ export default function PromoPage() {
                   Ver cómo funciona
                 </Link>
               </div>
-              <p className="text-[13px] text-[#9A9A9A] mt-5">Cancelás cuando quieras, sin compromiso</p>
+              <p className="promo-in text-[13px] text-[#9A9A9A] mt-5" style={{ animationDelay: '0.34s' }}>Cancelás cuando quieras, sin compromiso</p>
             </div>
 
             {/* El producto en uso real */}
-            <div className="flex justify-center md:justify-end">
+            <div className="promo-in flex justify-center md:justify-end" style={{ animationDelay: '0.22s' }}>
               <img
                 src="/screenshots/consulta.jpg"
                 alt="Profesional usando NotaClínica en el celular durante una consulta"
-                className="w-[280px] sm:w-[340px] rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
+                className="promo-float w-[280px] sm:w-[340px] rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
               />
             </div>
           </div>
