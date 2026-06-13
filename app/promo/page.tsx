@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import EspecialidadesDemo from './EspecialidadesDemo'
+import MotionProvider from './MotionProvider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://notaclinica.vercel.app'),
@@ -103,6 +104,7 @@ export default function PromoPage() {
   return (
     <div className="min-h-screen bg-white text-[#0A0A0A]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
+      <MotionProvider />
 
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur">
@@ -139,17 +141,17 @@ export default function PromoPage() {
           <div className="relative z-10 grid md:grid-cols-2 gap-10 md:gap-8 items-center">
             {/* Texto */}
             <div className="max-w-xl">
-              <div className="promo-in inline-flex items-center gap-2 bg-white/10 text-white text-xs font-medium px-3.5 py-1.5 rounded-full mb-7 backdrop-blur" style={{ animationDelay: '0.05s' }}>
+              <div data-reveal className="inline-flex items-center gap-2 bg-white/10 text-white text-xs font-medium px-3.5 py-1.5 rounded-full mb-7 backdrop-blur" style={{ transitionDelay: '0.05s' }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-white" />
                 30 días gratis · Sin tarjeta
               </div>
-              <h1 className="promo-in text-[2.4rem] leading-[1.06] sm:text-5xl md:text-6xl font-medium tracking-tight text-white mb-6" style={{ animationDelay: '0.12s' }}>
+              <h1 data-reveal className="text-[2.4rem] leading-[1.06] sm:text-5xl md:text-6xl font-medium tracking-tight text-white mb-6" style={{ transitionDelay: '0.12s' }}>
                 Terminá la consulta con la nota clínica ya lista
               </h1>
-              <p className="promo-in text-base sm:text-lg text-[#C8C8C8] max-w-md leading-relaxed mb-8" style={{ animationDelay: '0.2s' }}>
+              <p data-reveal className="text-base sm:text-lg text-[#C8C8C8] max-w-md leading-relaxed mb-8" style={{ transitionDelay: '0.2s' }}>
                 ¿Todavía escribís la historia clínica después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. Las horas de papeleo quedan para vos.
               </p>
-              <div className="promo-in flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4" style={{ animationDelay: '0.28s' }}>
+              <div data-reveal className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4" style={{ transitionDelay: '0.28s' }}>
                 <Link href="/login?tab=registro"
                   className="inline-flex items-center justify-center gap-1.5 bg-white text-[#0A0A0A] pl-7 pr-6 py-4 rounded-full font-semibold text-base hover:bg-[#EDEDED] transition-colors shadow-lg">
                   Empezar 30 días gratis <span className="text-lg leading-none">›</span>
@@ -159,11 +161,11 @@ export default function PromoPage() {
                   Ver cómo funciona
                 </Link>
               </div>
-              <p className="promo-in text-[13px] text-[#9A9A9A] mt-5" style={{ animationDelay: '0.34s' }}>Cancelás cuando quieras, sin compromiso</p>
+              <p data-reveal className="text-[13px] text-[#9A9A9A] mt-5" style={{ transitionDelay: '0.34s' }}>Cancelás cuando quieras, sin compromiso</p>
             </div>
 
             {/* El producto en uso real */}
-            <div className="promo-in flex justify-center md:justify-end" style={{ animationDelay: '0.22s' }}>
+            <div data-reveal className="flex justify-center md:justify-end" style={{ transitionDelay: '0.22s' }}>
               <img
                 src="/screenshots/consulta.jpg"
                 alt="Profesional usando NotaClínica en el celular durante una consulta"
@@ -187,7 +189,7 @@ export default function PromoPage() {
 
       {/* En acción: médico-paciente → resumen con IA */}
       <section className="px-3 sm:px-5 pt-20">
-        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>En acción</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-12 max-w-2xl">De la conversación al resumen clínico</h2>
 
@@ -242,7 +244,7 @@ export default function PromoPage() {
 
       {/* En 3 pasos */}
       <section id="como-funciona" className="px-3 sm:px-5 pt-24 pb-4 scroll-mt-20">
-        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Cómo funciona</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">De la charla a la historia clínica</h2>
           <div className="grid md:grid-cols-3 gap-x-10 gap-y-10">
@@ -260,7 +262,7 @@ export default function PromoPage() {
 
       {/* Features */}
       <section className="px-3 sm:px-5 pt-24">
-        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Producto</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">Una sola app para toda la consulta</h2>
           <div className="grid md:grid-cols-3 gap-4">
@@ -277,6 +279,7 @@ export default function PromoPage() {
       {/* Adaptado a tu especialidad — tile oscuro */}
       <section className="px-3 sm:px-5 pt-24">
         <div
+          data-reveal
           className="rounded-[2rem] overflow-hidden px-7 sm:px-16 py-20 text-center"
           style={{ background: 'radial-gradient(110% 120% at 50% 0%, #232323 0%, #121212 50%, #0a0a0a 100%)' }}
         >
@@ -296,7 +299,7 @@ export default function PromoPage() {
 
       {/* Ejemplo interactivo por especialidad */}
       <section className="px-3 sm:px-5 pt-24">
-        <div className="max-w-3xl mx-auto px-2 sm:px-4">
+        <div data-reveal className="max-w-3xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Un ejemplo por especialidad</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-3 max-w-2xl">Tocá tu especialidad y mirá el resumen</h2>
           <p className="text-[#525252] leading-relaxed max-w-xl mb-10">El mismo motor, adaptado a la estructura de cada práctica clínica.</p>
@@ -307,7 +310,7 @@ export default function PromoPage() {
       {/* Testimonios — se muestra solo cuando hay testimonios reales cargados */}
       {TESTIMONIOS.length > 0 && (
         <section className="px-3 sm:px-5 pt-24">
-          <div className="max-w-5xl mx-auto px-2 sm:px-4">
+          <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
             <p className={kicker}>Lo que dicen</p>
             <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">Profesionales que ya lo usan</h2>
             <div className="grid md:grid-cols-3 gap-4">
@@ -325,7 +328,7 @@ export default function PromoPage() {
 
       {/* Confianza */}
       <section className="px-3 sm:px-5 pt-24">
-        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Sin riesgo</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">Probalo sin ningún compromiso</h2>
           <div className="grid md:grid-cols-3 gap-4">
@@ -341,7 +344,7 @@ export default function PromoPage() {
 
       {/* Precio */}
       <section id="precio" className="px-3 sm:px-5 pt-24 scroll-mt-20">
-        <div className="max-w-4xl mx-auto px-2 sm:px-4">
+        <div data-reveal className="max-w-4xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Precio</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-3 max-w-2xl">Un plan simple, sin sorpresas</h2>
           <p className="text-[#525252] leading-relaxed max-w-xl mb-10">Probás 30 días gratis, sin tarjeta. Si te sirve, seguís por un precio menor al de una consulta. Cancelás cuando quieras.</p>
@@ -381,7 +384,7 @@ export default function PromoPage() {
 
       {/* FAQ */}
       <section className="px-3 sm:px-5 pt-24">
-        <div className="max-w-3xl mx-auto px-2 sm:px-4">
+        <div data-reveal className="max-w-3xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Preguntas frecuentes</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-12 max-w-2xl">Antes de empezar</h2>
           <div className="flex flex-col gap-3">
@@ -400,7 +403,7 @@ export default function PromoPage() {
 
       {/* Descargá la app */}
       <section className="px-3 sm:px-5 pt-24">
-        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Descargá la app</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-6 max-w-2xl">Usala donde estés</h2>
           <p className="text-[#525252] leading-relaxed max-w-xl mb-10">
@@ -441,6 +444,7 @@ export default function PromoPage() {
       {/* CTA final */}
       <section className="px-3 sm:px-5 pt-24 pb-5">
         <div
+          data-reveal
           className="rounded-[2rem] overflow-hidden px-7 sm:px-16 py-20 text-center"
           style={{ background: 'radial-gradient(110% 120% at 50% 100%, #242424 0%, #121212 55%, #0a0a0a 100%)' }}
         >

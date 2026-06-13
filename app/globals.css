@@ -20,15 +20,23 @@ html.native [data-hide-in-app] { display: none !important; }
 [data-show-in-app] { display: none !important; }
 html.native [data-show-in-app] { display: revert !important; }
 
-/* Animaciones del hero de /promo — sutiles y respetando reduce-motion */
-@keyframes promoFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+/* Motion de /promo — sutil, profesional, respetando reduce-motion */
 @keyframes promoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 @keyframes promoGlow { 0%, 100% { transform: translate(0, 0); opacity: .45; } 50% { transform: translate(36px, 22px); opacity: .85; } }
-.promo-in { opacity: 0; animation: promoFadeUp .7s cubic-bezier(.2,.7,.3,1) forwards; }
 .promo-float { animation: promoFloat 5.5s ease-in-out infinite; }
 .promo-glow { animation: promoGlow 9s ease-in-out infinite; }
+
+/* Reveal al hacer scroll. Solo aplica con html.reveal-on (lo agrega el JS),
+   así sin JS o con reduce-motion el contenido se ve siempre. */
+html.reveal-on [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+  will-change: opacity, transform;
+}
+html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
-  .promo-in { opacity: 1; animation: none; }
   .promo-float, .promo-glow { animation: none; }
 }
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
