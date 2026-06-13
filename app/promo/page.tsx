@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import EspecialidadesDemo from './EspecialidadesDemo'
 import MotionProvider from './MotionProvider'
-import HeroImage from './HeroImage'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://notaclinica.vercel.app'),
@@ -167,7 +166,11 @@ export default function PromoPage() {
 
             {/* El producto en uso real */}
             <div data-reveal className="flex justify-center md:justify-end" style={{ transitionDelay: '0.22s' }}>
-              <HeroImage />
+              <img
+                src="/screenshots/consulta.jpg"
+                alt="Profesional usando NotaClínica en el celular durante una consulta"
+                className="w-[280px] sm:w-[340px] rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
+              />
             </div>
           </div>
         </div>
