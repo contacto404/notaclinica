@@ -213,7 +213,7 @@ export default function PromoPage() {
         >
           <div className="promo-marquee">
             {[...ESPECIALIDADES_MARQUEE, ...ESPECIALIDADES_MARQUEE].map((e, i) => (
-              <span key={i} className="text-lg sm:text-2xl font-medium text-[#C4C4C4] mr-12 whitespace-nowrap">{e}</span>
+              <span key={i} className="text-lg sm:text-2xl font-medium text-[#0A0A0A] mr-12 whitespace-nowrap">{e}</span>
             ))}
           </div>
         </div>
