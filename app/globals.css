@@ -28,6 +28,11 @@ html.native [data-show-in-app] { display: revert !important; }
 .promo-glow { animation: promoGlow 9s ease-in-out infinite; }
 .promo-kenburns { animation: promoZoom 1.8s cubic-bezier(.16,1,.3,1) forwards; }
 
+/* Marquee (scroll horizontal infinito) — la lista va duplicada x2 para loop sin corte */
+@keyframes promoMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.promo-marquee { display: flex; width: max-content; animation: promoMarquee 38s linear infinite; }
+.promo-marquee:hover { animation-play-state: paused; }
+
 /* Reveal al hacer scroll con blur-rise. Solo aplica con html.reveal-on (lo agrega
    el JS), así sin JS o con reduce-motion el contenido se ve siempre. */
 html.reveal-on [data-reveal] {
@@ -40,7 +45,7 @@ html.reveal-on [data-reveal] {
 html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; filter: blur(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .promo-float, .promo-glow, .promo-kenburns { animation: none; }
+  .promo-float, .promo-glow, .promo-kenburns, .promo-marquee { animation: none; }
 }
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
 

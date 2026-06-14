@@ -61,6 +61,13 @@ const STATS = [
   { value: '100%', label: 'bajo tu revisión y edición' },
 ]
 
+// Marquee de especialidades (placeholder hasta tener logos de clientes reales)
+const ESPECIALIDADES_MARQUEE = [
+  'Psicología', 'Psiquiatría', 'Medicina clínica', 'Pediatría', 'Ginecología',
+  'Traumatología', 'Dermatología', 'Nutrición', 'Kinesiología', 'Cardiología',
+  'Neurología', 'Fonoaudiología',
+]
+
 // Reemplazá por testimonios REALES de profesionales (con nombre, especialidad y, si querés, foto).
 // La sección se muestra automáticamente cuando este arreglo tiene contenido.
 const TESTIMONIOS: { quote: string; name: string; role: string }[] = []
@@ -191,6 +198,24 @@ export default function PromoPage() {
           <span>🩺 Todas las especialidades</span>
           <span className="text-[#D4D4D4]">·</span>
           <span>⏱️ Resumen en segundos</span>
+        </div>
+      </section>
+
+      {/* Marquee de especialidades (cambiar por logos de clientes cuando los haya) */}
+      <section className="pt-14 overflow-hidden">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-7">Para profesionales de todas las especialidades</p>
+        <div
+          className="relative"
+          style={{
+            WebkitMaskImage: 'linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)',
+            maskImage: 'linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)',
+          }}
+        >
+          <div className="promo-marquee">
+            {[...ESPECIALIDADES_MARQUEE, ...ESPECIALIDADES_MARQUEE].map((e, i) => (
+              <span key={i} className="text-lg sm:text-2xl font-medium text-[#C4C4C4] mr-12 whitespace-nowrap">{e}</span>
+            ))}
+          </div>
         </div>
       </section>
 
