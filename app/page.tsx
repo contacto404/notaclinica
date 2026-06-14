@@ -389,7 +389,7 @@ export default function LandingPage() {
               <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-white mb-3">Empresa</p>
               <ul className="space-y-2.5 text-sm text-[#999999]">
                 <li>Sortiplan SA</li>
-                <li><a href="mailto:sortiplasa@gmail.com" className="hover:text-white transition-colors">Contacto</a></li>
+                <li><a href="mailto:sortiplansa@gmail.com" className="hover:text-white transition-colors">Contacto</a></li>
               </ul>
             </div>
             <div>

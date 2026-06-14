@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import EspecialidadesDemo from './EspecialidadesDemo'
 import MotionProvider from './MotionProvider'
+import DemoEnAccion from './DemoEnAccion'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://notaclinica.vercel.app'),
@@ -19,19 +20,6 @@ export const metadata: Metadata = {
     images: [{ url: '/og-promo.png', width: 1200, height: 630, alt: 'NotaClínica — Terminá la consulta con la nota clínica ya lista' }],
   },
 }
-
-const TRANSCRIPT = [
-  { who: 'Profesional', text: '¿Cómo venís durmiendo esta semana?' },
-  { who: 'Paciente', text: 'Mejor, aunque todavía me cuesta arrancar el día.' },
-  { who: 'Profesional', text: '¿Y los episodios de ansiedad?' },
-  { who: 'Paciente', text: 'Bajaron bastante desde que ajustamos la medicación.' },
-]
-
-const RESUMEN = [
-  { label: 'Motivo', text: 'Seguimiento de ansiedad e insomnio.' },
-  { label: 'Evolución', text: 'Mejora del sueño; episodios de ansiedad en disminución con la medicación ajustada.' },
-  { label: 'Plan', text: 'Mantener el esquema actual y reforzar técnicas de higiene del sueño.' },
-]
 
 const PASOS = [
   { num: '01', title: 'Grabá la consulta', desc: 'Un botón desde el celular. Funciona durante la sesión, sin interrumpir al paciente.' },
@@ -225,51 +213,7 @@ export default function PromoPage() {
           <p className={kicker}>En acción</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-12 max-w-2xl">De la conversación al resumen clínico</h2>
 
-          <div className="rounded-[2rem] border border-[#EDEDED] bg-[#FAFAFA] p-4 sm:p-8">
-            <div className="bg-white rounded-3xl border border-[#EDEDED] shadow-sm overflow-hidden">
-              <div className="flex items-center justify-between px-5 sm:px-7 py-4 border-b border-[#F0F0F0]">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-[#0A0A0A] animate-pulse" />
-                  <span className="text-sm font-medium">Grabando sesión</span>
-                </div>
-                <span className="text-xs text-[#737373]">María G. · Psicología · 12:48</span>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-7 sm:gap-9 p-5 sm:p-7">
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.14em] text-[#6B6B6B] mb-4 font-semibold">Conversación</p>
-                  <div className="flex flex-col gap-3">
-                    {TRANSCRIPT.map((t, i) => {
-                      const paciente = t.who === 'Paciente'
-                      return (
-                        <div key={i} className={paciente ? 'pl-6' : 'pr-6'}>
-                          <p className="text-[10px] uppercase tracking-[0.12em] text-[#A3A3A3] mb-1">{t.who}</p>
-                          <div className={
-                            'rounded-2xl px-4 py-2.5 text-sm leading-snug ' +
-                            (paciente ? 'bg-[#F5F5F5] text-[#0A0A0A]' : 'bg-[#0A0A0A] text-white')
-                          }>
-                            {t.text}
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                <div className="md:border-l md:border-[#F0F0F0] md:pl-9">
-                  <p className="text-[11px] uppercase tracking-[0.14em] text-[#6B6B6B] mb-4 font-semibold">Resumen con IA</p>
-                  <div className="flex flex-col gap-3">
-                    {RESUMEN.map(r => (
-                      <div key={r.label} className="bg-[#FAFAFA] rounded-r-xl border-l-2 border-[#0A0A0A] px-4 py-2.5">
-                        <p className="text-[10px] uppercase tracking-[0.12em] text-[#A3A3A3] mb-1">{r.label}</p>
-                        <p className="text-sm text-[#0A0A0A] leading-snug">{r.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <DemoEnAccion />
           <p className="text-center text-xs text-[#A3A3A3] mt-4">Vista ilustrativa: la sesión se graba y la IA arma el resumen en segundos.</p>
         </div>
       </section>
@@ -422,7 +366,7 @@ export default function PromoPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-4">Clínicas y equipos</p>
               <h3 className="text-xl font-semibold mb-2">¿Varios profesionales?</h3>
               <p className="text-sm text-[#525252] leading-relaxed mb-6">Armamos un plan a medida para tu clínica o consultorio con varios profesionales. Escribinos y lo vemos juntos.</p>
-              <a href="mailto:sortiplasa@gmail.com"
+              <a href="mailto:sortiplansa@gmail.com"
                 className="mt-auto inline-flex items-center justify-center gap-1.5 border border-[#0A0A0A] text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#FAFAFA] transition-colors">
                 Hablar con nosotros
               </a>
@@ -525,7 +469,7 @@ export default function PromoPage() {
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Contacto</p>
               <ul className="space-y-2 text-sm text-[#737373]">
-                <li><a href="mailto:sortiplasa@gmail.com" className="hover:text-[#0A0A0A] transition-colors">sortiplasa@gmail.com</a></li>
+                <li><a href="mailto:sortiplansa@gmail.com" className="hover:text-[#0A0A0A] transition-colors">sortiplansa@gmail.com</a></li>
                 <li><a href="https://wa.me/598" target="_blank" rel="noopener noreferrer" className="hover:text-[#0A0A0A] transition-colors">WhatsApp</a></li>
                 <li><Link href="/privacidad" className="hover:text-[#0A0A0A] transition-colors">Privacidad</Link></li>
               </ul>

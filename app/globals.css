@@ -33,6 +33,12 @@ html.native [data-show-in-app] { display: revert !important; }
 .promo-marquee { display: flex; width: max-content; animation: promoMarquee 38s linear infinite; }
 .promo-marquee:hover { animation-play-state: paused; }
 
+/* Demo animado: onda de grabación + cursor de tipeo */
+@keyframes promoWave { 0%, 100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
+.promo-wave-bar { width: 3px; height: 22px; border-radius: 9999px; background: #0A0A0A; transform-origin: center; animation: promoWave .9s ease-in-out infinite; }
+@keyframes promoBlink { 50% { opacity: 0; } }
+.promo-caret { display: inline-block; width: 2px; height: 1em; background: #0A0A0A; vertical-align: -2px; margin-left: 1px; animation: promoBlink 1s steps(1) infinite; }
+
 /* Reveal al hacer scroll con blur-rise. Solo aplica con html.reveal-on (lo agrega
    el JS), así sin JS o con reduce-motion el contenido se ve siempre. */
 html.reveal-on [data-reveal] {
@@ -45,7 +51,7 @@ html.reveal-on [data-reveal] {
 html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; filter: blur(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .promo-float, .promo-glow, .promo-kenburns, .promo-marquee { animation: none; }
+  .promo-float, .promo-glow, .promo-kenburns, .promo-marquee, .promo-wave-bar, .promo-caret { animation: none; }
 }
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
 
