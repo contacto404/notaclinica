@@ -51,7 +51,14 @@ const FEATURES = [
 const CONFIANZA = [
   { title: 'Privado y cifrado', desc: 'La información viaja cifrada y cada profesional accede solo a sus pacientes (Ley 18.331).' },
   { title: '30 días gratis', desc: 'Sin tarjeta para empezar. Cancelás cuando quieras, sin penalidades.' },
-  { title: 'Soporte directo', desc: 'Hablás directo con el equipo cuando lo necesitás, sin call centers ni demoras.' },
+  { title: 'Te acompañamos uno a uno', desc: 'Te ayudamos a configurarlo y a documentar tu primera sesión. Soporte directo, sin call centers.' },
+]
+
+const STATS = [
+  { value: '~2 h', label: 'menos de papeleo por semana' },
+  { value: '<30 s', label: 'para el resumen clínico' },
+  { value: '10→2 min', label: 'por nota, de ~10 a menos de 2' },
+  { value: '100%', label: 'bajo tu revisión y edición' },
 ]
 
 // Reemplazá por testimonios REALES de profesionales (con nombre, especialidad y, si querés, foto).
@@ -149,7 +156,7 @@ export default function PromoPage() {
                 Terminá la consulta con la nota clínica ya lista
               </h1>
               <p data-reveal className="text-base sm:text-lg text-[#C8C8C8] max-w-md leading-relaxed mb-8" style={{ transitionDelay: '0.2s' }}>
-                ¿Todavía escribís la historia clínica después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. Las horas de papeleo quedan para vos.
+                ¿Todavía escribís la historia clínica después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. Volvés a estar presente con tu paciente, no con la pantalla.
               </p>
               <div data-reveal className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4" style={{ transitionDelay: '0.28s' }}>
                 <Link href="/login?tab=registro"
@@ -239,6 +246,23 @@ export default function PromoPage() {
             </div>
           </div>
           <p className="text-center text-xs text-[#A3A3A3] mt-4">Vista ilustrativa: la sesión se graba y la IA arma el resumen en segundos.</p>
+        </div>
+      </section>
+
+      {/* Números — estimaciones honestas */}
+      <section className="px-3 sm:px-5 pt-24">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>El impacto</p>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-12 max-w-2xl">Menos pantalla, más paciente</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-9">
+            {STATS.map(s => (
+              <div key={s.label}>
+                <p className="text-4xl md:text-5xl font-medium tracking-tight">{s.value}</p>
+                <p className="text-sm text-[#525252] mt-2 leading-snug">{s.label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-[11px] text-[#A3A3A3] mt-8">Estimaciones según uso típico. Tu experiencia puede variar.</p>
         </div>
       </section>
 
