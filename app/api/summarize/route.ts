@@ -209,7 +209,44 @@ ${jsonStructure}`
     const clean = content.text.replace(/```json|```/g, '').trim()
     const summary = JSON.parse(clean)
 
-    return NextResponse.json({ ...summary, format: noteFormat })
+    // Diálogo separado por hablante (aislado: si falla, el resumen igual se devuelve).
+    let dialogue: { speaker: 'profesional' | 'paciente'; text: string }[] = []
+    try {
+      const dialogueMsg = await anthropic.messages.create({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 8192,
+        messages: [{
+          role: 'user',
+          content: `Separá esta transcripción de una consulta clínica en turnos de diálogo entre el PROFESIONAL y el PACIENTE.
+- El PROFESIONAL hace preguntas clínicas, evalúa síntomas, propone tratamientos y da indicaciones.
+- El PACIENTE describe sus síntomas, responde y relata su experiencia.
+Reglas: no inventes ni resumas; usá el texto real, solo segmentado y atribuido al hablante. Si hay dudas, hacé tu mejor estimación. Agrupá frases consecutivas del mismo hablante en un solo turno.
+
+TRANSCRIPCION:
+${transcription}
+
+Respondé SOLO con un JSON array, sin texto adicional:
+[{"speaker":"profesional","text":"..."},{"speaker":"paciente","text":"..."}]`
+        }]
+      })
+      const dContent = dialogueMsg.content[0]
+      if (dContent.type === 'text') {
+        const dClean = dContent.text.replace(/```json|```/g, '').trim()
+        const parsed = JSON.parse(dClean)
+        if (Array.isArray(parsed)) {
+          dialogue = parsed
+            .filter((t: any) => t && typeof t.text === 'string')
+            .map((t: any) => ({
+              speaker: t.speaker === 'paciente' ? 'paciente' : 'profesional',
+              text: String(t.text),
+            }))
+        }
+      }
+    } catch {
+      dialogue = []
+    }
+
+    return NextResponse.json({ ...summary, format: noteFormat, dialogue })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }

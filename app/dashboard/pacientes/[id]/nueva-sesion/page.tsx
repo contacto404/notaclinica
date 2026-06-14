@@ -89,11 +89,17 @@ export default function NuevaSesionPage() {
         })
       })
 
-      const summaryData = await summarizeRes.json()
-      if (summaryData.error) throw new Error(summaryData.error)
+      const summaryResponse = await summarizeRes.json()
+      if (summaryResponse.error) throw new Error(summaryResponse.error)
+
+      // Separamos el diálogo (va en transcriptions, no en summaries)
+      const { dialogue, ...summaryData } = summaryResponse
 
       setSummary(summaryData)
       await supabase.from('summaries').insert({ session_id: session.id, ...summaryData })
+      if (dialogue && dialogue.length > 0) {
+        await supabase.from('transcriptions').update({ dialogue }).eq('session_id', session.id)
+      }
       await supabase.from('sessions').update({ status: 'complete' }).eq('id', session.id)
       setStep('done')
     } catch (err: any) {

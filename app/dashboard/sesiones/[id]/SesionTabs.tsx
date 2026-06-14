@@ -14,21 +14,24 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
 
   const tabs = [
     { key: 'resumen', label: 'Resumen' },
-    { key: 'transcripcion', label: 'Transcripción' },
+    { key: 'transcripcion', label: 'Conversación' },
   ] as const
+
+  const dialogue: { speaker: 'profesional' | 'paciente'; text: string }[] =
+    Array.isArray(transcription?.dialogue) ? transcription.dialogue : []
 
   return (
     <div>
       {/* Tabs */}
-      <div className="flex gap-1 bg-white border border-[#E2E8F0] rounded-2xl p-1 mb-4">
+      <div className="flex gap-1 bg-[#FAFAFA] border border-[#EDEDED] rounded-2xl p-1 mb-4">
         {tabs.map(t => (
           <button
             key={t.key}
             onClick={() => setTab(t.key)}
             className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-colors cursor-pointer ${
               tab === t.key
-                ? 'bg-[#2563EB] text-white shadow-sm'
-                : 'text-[#64748B] hover:text-[#0F172A]'
+                ? 'bg-[#0A0A0A] text-white shadow-sm'
+                : 'text-[#737373] hover:text-[#0A0A0A]'
             }`}
           >
             {t.label}
@@ -40,7 +43,7 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
       {tab === 'resumen' && (
         <div className="flex flex-col gap-4">
           {summary && (
-            <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
+            <div className="bg-white rounded-3xl border border-[#EDEDED] p-6">
               <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen clínico</h2>
               <div className="flex flex-col gap-3">
                 {summaryFields(summary.format).map(({ key, label }) => (
@@ -54,17 +57,17 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
           )}
 
           {report && (
-            <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
+            <div className="bg-white rounded-3xl border border-[#EDEDED] p-6">
               <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen médico</h2>
               <div className="flex flex-col gap-3">
                 {report.diagnosis && (
-                  <div className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
+                  <div className="bg-[#FAFAFA] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Diagnóstico</p>
                     <p className="text-sm text-[#0F172A] leading-relaxed">{report.diagnosis}</p>
                   </div>
                 )}
                 {report.medications && report.medications.length > 0 && (
-                  <div className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
+                  <div className="bg-[#FAFAFA] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-2">Medicamentos</p>
                     <div className="flex flex-col gap-2">
                       {report.medications.map((m: any, i: number) => (
@@ -80,7 +83,7 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
                   </div>
                 )}
                 {report.instructions && (
-                  <div className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
+                  <div className="bg-[#FAFAFA] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
                     <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Indicaciones</p>
                     <p className="text-sm text-[#0F172A] leading-relaxed">{report.instructions}</p>
                   </div>
@@ -99,12 +102,34 @@ export default function SesionTabs({ summary, transcription, report, sessionId }
 
       {/* Transcripción */}
       {tab === 'transcripcion' && (
-        <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
-          <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Transcripción</h2>
-          {transcription ? (
-            <p className="text-sm text-[#475569] leading-relaxed border-l-2 border-[#2563EB] pl-4">
-              {transcription.content}
-            </p>
+        <div className="bg-white rounded-3xl border border-[#EDEDED] p-6">
+          <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Conversación</h2>
+          {dialogue.length > 0 ? (
+            <>
+              <div className="flex flex-col gap-3">
+                {dialogue.map((t, i) => {
+                  const paciente = t.speaker === 'paciente'
+                  return (
+                    <div key={i} className={paciente ? 'pl-6' : 'pr-6'}>
+                      <p className="text-[10px] uppercase tracking-[0.12em] text-[#A3A3A3] mb-1">
+                        {paciente ? 'Paciente' : 'Profesional'}
+                      </p>
+                      <div className={'rounded-2xl px-4 py-2.5 text-sm leading-snug ' + (paciente ? 'bg-[#F5F5F5] text-[#0A0A0A]' : 'bg-[#0A0A0A] text-white')}>
+                        {t.text}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+              <p className="text-xs text-[#94A3B8] mt-4">Conversación reconstruida automáticamente con IA · revisá antes de usar.</p>
+            </>
+          ) : transcription ? (
+            <>
+              <p className="text-sm text-[#475569] leading-relaxed border-l-2 border-[#0A0A0A] pl-4 whitespace-pre-line">
+                {transcription.content}
+              </p>
+              <p className="text-xs text-[#94A3B8] mt-4">Transcripción automática de la sesión · revisá antes de usar.</p>
+            </>
           ) : (
             <p className="text-sm text-[#64748B]">No hay transcripción disponible.</p>
           )}
