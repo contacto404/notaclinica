@@ -39,6 +39,16 @@ html.native [data-show-in-app] { display: revert !important; }
 @keyframes promoBlink { 50% { opacity: 0; } }
 .promo-caret { display: inline-block; width: 2px; height: 1em; background: #0A0A0A; vertical-align: -2px; margin-left: 1px; animation: promoBlink 1s steps(1) infinite; }
 
+/* Barrido brillante (shimmer monocromo) sobre una palabra del hero */
+@keyframes promoShiny { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
+.promo-shiny {
+  background-image: linear-gradient(110deg, #8F8F8F 0%, #8F8F8F 35%, #FFFFFF 50%, #8F8F8F 65%, #8F8F8F 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  animation: promoShiny 5s linear infinite;
+}
+
 /* Reveal al hacer scroll con blur-rise. Solo aplica con html.reveal-on (lo agrega
    el JS), así sin JS o con reduce-motion el contenido se ve siempre. */
 html.reveal-on [data-reveal] {
@@ -51,7 +61,7 @@ html.reveal-on [data-reveal] {
 html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; filter: blur(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .promo-float, .promo-glow, .promo-kenburns, .promo-marquee, .promo-wave-bar, .promo-caret { animation: none; }
+  .promo-float, .promo-glow, .promo-kenburns, .promo-marquee, .promo-wave-bar, .promo-caret, .promo-shiny { animation: none; }
 }
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
 
