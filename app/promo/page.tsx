@@ -397,7 +397,7 @@ export default function PromoPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-4">Clínicas y equipos</p>
               <h3 className="text-xl font-semibold mb-2">¿Varios profesionales?</h3>
               <p className="text-sm text-[#525252] leading-relaxed mb-6">Armamos un plan a medida para tu clínica o consultorio con varios profesionales. Escribinos y lo vemos juntos.</p>
-              <a href="mailto:contacto@vibraco.com.uy"
+              <a href="mailto:sortiplasa@gmail.com"
                 className="mt-auto inline-flex items-center justify-center gap-1.5 border border-[#0A0A0A] text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#FAFAFA] transition-colors">
                 Hablar con nosotros
               </a>
@@ -500,7 +500,7 @@ export default function PromoPage() {
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Contacto</p>
               <ul className="space-y-2 text-sm text-[#737373]">
-                <li><a href="mailto:contacto@vibraco.com.uy" className="hover:text-[#0A0A0A] transition-colors">contacto@vibraco.com.uy</a></li>
+                <li><a href="mailto:sortiplasa@gmail.com" className="hover:text-[#0A0A0A] transition-colors">sortiplasa@gmail.com</a></li>
                 <li><a href="https://wa.me/598" target="_blank" rel="noopener noreferrer" className="hover:text-[#0A0A0A] transition-colors">WhatsApp</a></li>
                 <li><Link href="/privacidad" className="hover:text-[#0A0A0A] transition-colors">Privacidad</Link></li>
               </ul>
