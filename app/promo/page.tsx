@@ -55,7 +55,7 @@ const CONFIANZA = [
 ]
 
 const STATS = [
-  { value: '~2 h', label: 'menos de papeleo por semana' },
+  { value: '12 h', label: 'menos de papeleo por semana' },
   { value: '<30 s', label: 'para el resumen clínico' },
   { value: '10→2 min', label: 'por nota, de ~10 a menos de 2' },
   { value: '100%', label: 'bajo tu revisión y edición' },
