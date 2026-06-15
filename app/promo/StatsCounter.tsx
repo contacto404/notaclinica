@@ -15,7 +15,9 @@ function parse(value: string) {
 
 function StatValue({ value }: { value: string }) {
   const { prefix, num, suffix, decimals } = parse(value)
-  const [display, setDisplay] = useState(num === null ? value : prefix + '0' + suffix)
+  // Arranca en el valor final (a prueba de fallos: si el observer no dispara,
+  // igual se ve correcto). Al entrar al viewport, anima de 0 al valor.
+  const [display, setDisplay] = useState(value)
   const ref = useRef<HTMLParagraphElement>(null)
   const done = useRef(false)
 
@@ -30,6 +32,7 @@ function StatValue({ value }: { value: string }) {
       entries.forEach(e => {
         if (!e.isIntersecting || done.current) return
         done.current = true
+        setDisplay(prefix + (0).toFixed(decimals) + suffix)
         const duration = 1100
         const start = performance.now()
         const tick = (now: number) => {
@@ -42,7 +45,7 @@ function StatValue({ value }: { value: string }) {
         }
         requestAnimationFrame(tick)
       })
-    }, { threshold: 0.5 })
+    }, { threshold: 0.3, rootMargin: '0px 0px -8% 0px' })
     io.observe(el)
     return () => io.disconnect()
   }, [value, num, prefix, suffix, decimals])
