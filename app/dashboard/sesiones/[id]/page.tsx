@@ -58,7 +58,7 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
 
         <div className="flex items-start justify-between gap-4 mb-6 flex-wrap">
           <div>
-            <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Sesion</p>
+            <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Sesión</p>
             <h1 className="text-2xl font-bold text-[#0A0A0A]">{patient.full_name}</h1>
             <p className="text-sm text-[#6E6E73] mt-0.5">
               {new Date(session.session_date).toLocaleDateString('es-UY', {

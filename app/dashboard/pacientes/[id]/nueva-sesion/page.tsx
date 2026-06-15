@@ -117,8 +117,8 @@ export default function NuevaSesionPage() {
         </div>
 
         <div className="mb-6">
-          <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Sesion</p>
-          <h1 className="text-2xl font-bold text-[#0A0A0A]">Nueva sesion</h1>
+          <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Sesión</p>
+          <h1 className="text-2xl font-bold text-[#0A0A0A]">Nueva sesión</h1>
         </div>
 
         {step === 'record' && (

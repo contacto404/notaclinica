@@ -4,6 +4,7 @@ import { createClient as createAdmin } from '@supabase/supabase-js'
 import Link from 'next/link'
 import LogoutButton from './components/LogoutButton'
 import NavbarMobile from './components/NavbarMobile'
+import ThemeToggle from '@/app/components/ThemeToggle'
 
 export default async function DashboardLayout({
   children,
@@ -92,6 +93,7 @@ export default async function DashboardLayout({
           </Link>
         </nav>
         <div className="border-t border-[#EDEDED] pt-4 mt-auto">
+          <div className="px-1 mb-3"><ThemeToggle /></div>
           <p className="text-xs text-[#6E6E73] px-3 mb-2 truncate">{user.email}</p>
           <LogoutButton />
         </div>

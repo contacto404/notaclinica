@@ -1,8 +1,9 @@
 'use client'
 import { useMemo } from 'react'
+import { isSessionDone } from '@/lib/sessionStatus'
 
 export default function EvolucionChart({ sessions }: { sessions: any[] }) {
-  const completadas = sessions.filter(s => s.status === 'summarized')
+  const completadas = sessions.filter(isSessionDone)
 
   // Sesiones por mes
   const porMes = useMemo(() => {
@@ -73,7 +74,7 @@ export default function EvolucionChart({ sessions }: { sessions: any[] }) {
           <p className={`text-2xl font-bold ${diasDesdeUltima && diasDesdeUltima > 30 ? 'text-[#C2410C]' : 'text-[#2D3F6A]'}`}>
             {diasDesdeUltima !== null ? `${diasDesdeUltima}d` : '-'}
           </p>
-          <p className="text-xs text-[#6E6E73] mt-0.5">Desde ultima sesion</p>
+          <p className="text-xs text-[#6E6E73] mt-0.5">Desde última sesión</p>
         </div>
       </div>
 
@@ -100,7 +101,7 @@ export default function EvolucionChart({ sessions }: { sessions: any[] }) {
       {diasDesdeUltima !== null && diasDesdeUltima > 30 && (
         <div className="mt-4 bg-[#FFF7ED] border border-[#FED7AA] rounded-2xl px-4 py-3">
           <p className="text-xs text-[#C2410C] font-medium">
-            ⚠️ Hace {diasDesdeUltima} dias que {' '}
+            ⚠️ Hace {diasDesdeUltima} días que {' '}
             {diasDesdeUltima > 60 ? 'no tiene consultas' : 'no viene a consulta'}
           </p>
         </div>

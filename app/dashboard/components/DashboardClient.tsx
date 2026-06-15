@@ -25,7 +25,7 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
 
   const stats = [
     { label: 'Pacientes activos', value: patients.length, icon: '👥', tint: 'bg-[#F0F0F0] dark:bg-[#0A0A0A]/40', text: 'text-[#0A0A0A] dark:text-[#FFFFFF]' },
-    { label: 'Sesiones este mes', value: sesionesEsteMes, icon: '🎙️', tint: 'bg-[#E8F4E8] dark:bg-[#14532D]/40', text: 'text-[#2D6A2D] dark:text-[#86EFAC]' },
+    { label: 'Sesiones este mes', value: sesionesEsteMes, icon: '🗓️', tint: 'bg-[#E8F4E8] dark:bg-[#14532D]/40', text: 'text-[#2D6A2D] dark:text-[#86EFAC]' },
     { label: 'PDFs exportados', value: pdfsExportados, icon: '📄', tint: 'bg-[#E8EEF8] dark:bg-[#262626]', text: 'text-[#2D3F6A] dark:text-[#D2D2D7]' },
   ]
 

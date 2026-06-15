@@ -204,7 +204,11 @@ export default async function EstadisticasPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-[#6E6E73] text-center py-6">Todavía no hay cobros registrados.</p>
+            <div className="rounded-2xl border border-dashed border-[#D2D2D7] bg-[#F5F5F7] px-4 py-10 text-center">
+              <p className="text-2xl mb-2">💰</p>
+              <p className="text-sm text-[#6E6E73]">Todavía no hay cobros registrados.</p>
+              <p className="text-xs text-[#A3A3A3] mt-1">Usá “Cobrar sesión” en el perfil del paciente y tus ingresos aparecerán acá.</p>
+            </div>
           )}
         </div>
 

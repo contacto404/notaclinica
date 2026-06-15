@@ -16,10 +16,12 @@ export default async function DashboardPage() {
   inicioMes.setDate(1)
   inicioMes.setHours(0, 0, 0, 0)
 
+  // Sesiones completadas este mes (mismo criterio que Estadísticas)
   const { count: sesionesEsteMes } = await supabase
     .from('sessions')
     .select('*', { count: 'exact', head: true })
     .eq('professional_id', user!.id)
+    .in('status', ['summarized', 'complete', 'signed'])
     .gte('session_date', inicioMes.toISOString())
 
   const { count: pdfsExportados } = await supabase
@@ -96,7 +98,10 @@ export default async function DashboardPage() {
   const horaUY = new Date().toLocaleString('en-US', { timeZone: 'America/Montevideo', hour: 'numeric', hour12: false })
   const hora = parseInt(horaUY)
   const saludo = hora < 12 ? 'Buenos días' : hora < 19 ? 'Buenas tardes' : 'Buenas noches'
-  const nombre = user?.user_metadata?.full_name?.split(' ')[0] ?? 'Doctor'
+  const nombre =
+    user?.user_metadata?.full_name?.split(' ')[0] ||
+    user?.email?.split('@')[0] ||
+    'Doctor'
 
   return (
     <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">

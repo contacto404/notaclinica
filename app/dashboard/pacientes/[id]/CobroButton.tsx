@@ -74,7 +74,7 @@ export default function CobroButton({ patientId, patientName, sessionId }: {
       <button
         onClick={() => setOpen(true)}
         className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
-        💳 Cobrar sesión
+        🧾 Cobrar sesión
       </button>
 
       {open && (
@@ -121,7 +121,7 @@ export default function CobroButton({ patientId, patientName, sessionId }: {
                 disabled={loading || !amount}
                 className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors"
               >
-                {loading ? 'Generando...' : '💳 Generar link de pago'}
+                {loading ? 'Generando...' : '🧾 Generar link de pago'}
               </button>
               <button
                 onClick={() => setOpen(false)}

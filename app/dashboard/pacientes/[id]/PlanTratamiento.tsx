@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { capitalizar, normalizarComparacion } from '@/lib/sessionStatus'
 
 type Goal = {
   id: string
@@ -23,8 +24,14 @@ export default function PlanTratamiento({ patientId, goals }: { patientId: strin
   const logrados = goals.filter(g => g.status === 'achieved')
 
   async function agregar() {
-    const clean = title.trim()
+    const clean = capitalizar(title)
     if (!clean || adding) return
+    // Evitar duplicados (ignora tildes, mayúsculas y espacios)
+    const existe = goals.some(g => normalizarComparacion(g.title) === normalizarComparacion(clean))
+    if (existe) {
+      alert('Ya existe un objetivo igual o muy parecido.')
+      return
+    }
     setAdding(true)
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) { setAdding(false); return }

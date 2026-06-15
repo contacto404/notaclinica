@@ -14,6 +14,7 @@ import EscalasEvaluacion from './EscalasEvaluacion'
 import ConsentimientoButton from './ConsentimientoButton'
 import PlanTratamiento from './PlanTratamiento'
 import { showsScales } from '@/lib/scales'
+import { isSessionDone, capitalizar } from '@/lib/sessionStatus'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -76,9 +77,11 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
     : { data: null }
 
   const nextAppointment = appointments?.find(a => new Date(a.appointment_date) > new Date())
-  const lastSummarizedSession = sessions?.find(s => s.status === 'summarized')
+  const completadas = (sessions ?? []).filter(isSessionDone)
+  const lastSummarizedSession = completadas[0]
   const lastSummaryText = lastSummarizedSession?.summaries?.[0]?.content ?? null
-  const totalSessions = sessions?.length ?? 0
+  const totalSessions = completadas.length
+  const diagnosticoNorm = patient.diagnosis ? capitalizar(patient.diagnosis) : null
 
   return (
     <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
@@ -101,7 +104,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                 <h1 className="text-xl font-bold text-[#0A0A0A]">{patient.full_name}</h1>
                 <EditarPacienteButton patient={patient} />
               </div>
-              <p className="text-sm text-[#6E6E73] mt-0.5">{patient.diagnosis ?? 'Sin diagnostico'}</p>
+              <p className="text-sm text-[#6E6E73] mt-0.5">{diagnosticoNorm ?? 'Sin diagnóstico'}</p>
               {patient.phone && (
                 <p className="text-xs text-[#6E6E73] mt-0.5">📱 {patient.phone}</p>
               )}
@@ -123,7 +126,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             </a>
             <CobroButton patientId={id} patientName={patient.full_name} sessionId={lastSummarizedSession?.id} />
             <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#0A0A0A] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#262626] flex items-center gap-2 transition-colors shadow-sm">
-              🎙️ Nueva sesion
+              🎙️ Nueva sesión
             </a>
           </div>
           {patient.notes && (
@@ -137,7 +140,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {/* Card próximo turno */}
         <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest">Proximo turno</h2>
+            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest">Próximo turno</h2>
             <AgendarButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} hasAppointment={!!nextAppointment} currentAppointment={nextAppointment} lastSessionId={lastSummarizedSession?.id} />
           </div>
           {nextAppointment ? (
@@ -202,15 +205,15 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">🏥</span>
                 <div>
-                  <p className="text-xs text-[#6E6E73] font-medium">Diagnostico</p>
-                  <p className="text-sm text-[#0A0A0A]">{patient.diagnosis ?? 'No registrado'}</p>
+                  <p className="text-xs text-[#6E6E73] font-medium">Diagnóstico</p>
+                  <p className="text-sm text-[#0A0A0A]">{diagnosticoNorm ?? 'No registrado'}</p>
                 </div>
               </div>
               {patient.medication && (
                 <div className="flex items-start gap-3">
                   <span className="text-lg mt-0.5">💊</span>
                   <div>
-                    <p className="text-xs text-[#6E6E73] font-medium">Medicacion</p>
+                    <p className="text-xs text-[#6E6E73] font-medium">Medicación</p>
                     <p className="text-sm text-[#0A0A0A]">{patient.medication}</p>
                   </div>
                 </div>
@@ -218,7 +221,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">📋</span>
                 <div>
-                  <p className="text-xs text-[#6E6E73] font-medium">Ultima sesion</p>
+                  <p className="text-xs text-[#6E6E73] font-medium">Última sesión</p>
                   <p className="text-sm text-[#0A0A0A]">
                     {new Date(lastSummarizedSession.session_date).toLocaleDateString('es-UY', {
                       timeZone: 'America/Montevideo',
@@ -254,7 +257,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                       {c.anxiety != null && <span className="text-xs font-medium text-[#0A0A0A]">Ansiedad <span className="text-[#0A0A0A] font-bold">{c.anxiety}/10</span></span>}
                     </div>
                     <span className="text-[11px] text-[#A3A3A3] shrink-0">
-                      {new Date(c.created_at).toLocaleDateString('es-UY', { timeZone: 'America/Montevideo', day: '2-digit', month: 'short' })}
+                      {new Date(c.created_at).toLocaleString('es-UY', { timeZone: 'America/Montevideo', day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
                   {c.note && <p className="text-xs text-[#6E6E73] leading-relaxed">{c.note}</p>}
@@ -288,10 +291,12 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           </div>
           {sessions && sessions.length > 0 ? (
             <div className="flex flex-col divide-y divide-[#EDEDED]">
-              {sessions.map((s: any) => (
-                <div key={s.id} className="py-4 flex items-center gap-3">
-                  <div className={"w-9 h-9 rounded-full flex items-center justify-center text-sm shrink-0 " + (s.status === 'summarized' ? 'bg-[#E8F4E8] text-[#2D6A2D]' : 'bg-[#F0F0F0] text-[#0A0A0A]')}>
-                    {s.status === 'summarized' ? '✓' : '⏳'}
+              {sessions.map((s: any) => {
+                const done = isSessionDone(s)
+                return (
+                <a key={s.id} href={"/dashboard/sesiones/" + s.id} className="py-4 flex items-center gap-3 -mx-2 px-2 rounded-xl hover:bg-[#F5F5F7] transition-colors">
+                  <div className={"w-9 h-9 rounded-full flex items-center justify-center text-sm shrink-0 " + (done ? 'bg-[#E8F4E8] text-[#2D6A2D]' : s.status === 'transcribed' ? 'bg-[#FFF7ED] text-[#C2410C]' : 'bg-[#F0F0F0] text-[#0A0A0A]')}>
+                    {done ? '✓' : '⏳'}
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-[#0A0A0A]">
@@ -301,35 +306,36 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                       })}
                     </p>
                     <p className="text-xs text-[#6E6E73] mt-0.5">
-                      {s.status === 'pending' && 'Pendiente de transcripcion'}
-                      {s.status === 'transcribed' && 'Transcripta - resumen pendiente'}
-                      {s.status === 'summarized' && 'Sesion completa'}
+                      {s.status === 'pending' && 'Pendiente de transcripción'}
+                      {s.status === 'transcribed' && 'Transcripta'}
+                      {done && 'Sesión completa'}
                     </p>
                   </div>
-                  {s.status === 'summarized' && (
-                    <a href={"/dashboard/sesiones/" + s.id} className="text-xs text-[#0A0A0A] hover:underline shrink-0 font-medium">
-                      Ver resumen →
-                    </a>
+                  {s.status === 'transcribed' && (
+                    <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-md shrink-0 bg-[#FFF7ED] text-[#C2410C]">
+                      Resumen pendiente
+                    </span>
                   )}
-                </div>
-              ))}
+                  <span className="text-[#D2D2D7] text-lg shrink-0">›</span>
+                </a>
+                )
+              })}
             </div>
           ) : (
             <div className="text-center py-10">
               <p className="text-2xl mb-2">📋</p>
-              <p className="text-sm text-[#6E6E73]">No hay sesiones todavia.</p>
+              <p className="text-sm text-[#6E6E73]">No hay sesiones todavía.</p>
               <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="text-sm text-[#0A0A0A] mt-1 inline-block hover:underline">
-                + Iniciar primera sesion
+                + Iniciar primera sesión
               </a>
             </div>
           )}
         </div>
 
-        <div className="mt-3 flex items-center justify-center gap-4">
-          <a href={"/api/export-historial?patientId=" + id} target="_blank" className="text-xs text-[#6E6E73] hover:text-[#0A0A0A] transition-colors underline underline-offset-2">
-            Exportar historial completo
+        <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <a href={"/api/export-historial?patientId=" + id} target="_blank" className="inline-flex items-center gap-2 border border-[#EDEDED] text-[#0A0A0A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] transition-colors">
+            ⬇️ Exportar historial completo
           </a>
-          <span className="text-[#D2D2D7]">·</span>
           <DarDeBajaButton patientId={id} patientName={patient.full_name} />
         </div>
 

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { capitalizar } from '@/lib/sessionStatus'
 
 export default function NuevoPacientePage() {
   const [nombre, setNombre] = useState('')
@@ -20,14 +21,21 @@ export default function NuevoPacientePage() {
     e.preventDefault()
     setLoading(true)
     setError('')
+    // Validación de teléfono (se usa para WhatsApp): dígitos con código de país opcional
+    const telLimpio = telefono.trim()
+    if (telLimpio && !/^\+?[\d\s()-]{7,}$/.test(telLimpio)) {
+      setError('El teléfono debe ser un número válido (ej: +54 9 11 1234 5678).')
+      setLoading(false)
+      return
+    }
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) { router.push('/login'); return }
     const { error } = await supabase.from('patients').insert({
       professional_id: user.id,
-      full_name: nombre,
+      full_name: capitalizar(nombre),
       date_of_birth: fechaNac || null,
-      diagnosis: diagnostico || null,
-      phone: telefono || null,
+      diagnosis: diagnostico ? capitalizar(diagnostico) : null,
+      phone: telLimpio || null,
       insurance_provider: obraSocial || null,
       insurance_member_id: afiliado || null,
       notes: notas || null,

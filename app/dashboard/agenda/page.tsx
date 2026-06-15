@@ -21,12 +21,15 @@ export default async function AgendaPage() {
     .eq('professional_id', user.id)
     .order('created_at', { ascending: true })
 
+  const fmtFecha = (d: Date) => d.toLocaleDateString('es-UY', {
+    timeZone: 'America/Montevideo',
+    weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
+  })
+  const hoyStr = fmtFecha(new Date())
+
   const grouped: Record<string, any[]> = {}
   appointments?.forEach(a => {
-    const date = new Date(a.appointment_date).toLocaleDateString('es-UY', {
-      timeZone: 'America/Montevideo',
-      weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
-    })
+    const date = fmtFecha(new Date(a.appointment_date))
     if (!grouped[date]) grouped[date] = []
     grouped[date].push(a)
   })
@@ -45,9 +48,14 @@ export default async function AgendaPage() {
 
         {Object.keys(grouped).length > 0 ? (
           <div className="flex flex-col gap-5 mb-6">
-            {Object.entries(grouped).map(([date, turns]) => (
+            {Object.entries(grouped).map(([date, turns]) => {
+              const esHoy = date === hoyStr
+              return (
               <div key={date}>
-                <p className="text-[11px] font-semibold text-[#6E6E73] uppercase tracking-widest mb-2.5 capitalize">{date}</p>
+                <div className="flex items-center gap-2 mb-2.5">
+                  <p className={"text-[11px] font-semibold uppercase tracking-widest capitalize " + (esHoy ? 'text-[#0A0A0A]' : 'text-[#6E6E73]')}>{date}</p>
+                  {esHoy && <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md bg-[#0A0A0A] text-white">Hoy</span>}
+                </div>
                 <div className="flex flex-col gap-1.5">
                   {turns.map((a: any) => (
                     <a key={a.id} href={"/dashboard/pacientes/" + a.patient_id}
@@ -78,7 +86,8 @@ export default async function AgendaPage() {
                   ))}
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         ) : (
           <div className="bg-white rounded-2xl border border-[#EDEDED] p-12 text-center mb-6">

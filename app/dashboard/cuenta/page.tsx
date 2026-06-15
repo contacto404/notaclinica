@@ -157,7 +157,9 @@ export default function CuentaPage() {
   }
 
   async function handleCancelar() {
-    if (!confirm('Seguro que queres cancelar tu suscripcion? Perderas acceso al vencer el periodo actual.')) return
+    if (!confirm('¿Seguro que querés cancelar tu suscripción?\n\nVas a perder el acceso a NotaClínica al vencer el período ya pagado. Tus datos se conservan y podés reactivar cuando quieras.')) return
+    // Doble confirmación para una acción irreversible
+    if (!confirm('Confirmá una vez más: cancelar la suscripción.')) return
     setCancelling(true)
     await fetch('/api/cancel-subscription', { method: 'POST' })
     router.push('/suscripcion')
@@ -169,7 +171,12 @@ export default function CuentaPage() {
     window.location.href = '/login'
   }
 
-  if (loading) return <div className="p-6 text-[#6E6E73]">Cargando...</div>
+  if (loading) return (
+    <div className="min-h-screen bg-[#F5F5F7] flex flex-col items-center justify-center gap-4">
+      <div className="w-9 h-9 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin" />
+      <p className="text-sm text-[#6E6E73]">Cargando tu cuenta…</p>
+    </div>
+  )
 
   const vencimiento = sub?.current_period_end
     ? new Date(sub.current_period_end).toLocaleDateString('es-UY', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -339,12 +346,12 @@ export default function CuentaPage() {
               disabled={cancelling}
               className="w-full border border-red-300 text-red-600 rounded-xl py-3 font-medium hover:bg-red-50 transition-colors disabled:opacity-50 cursor-pointer"
             >
-              {cancelling ? 'Cancelando...' : 'Cancelar suscripcion'}
+              {cancelling ? 'Cancelando...' : 'Cancelar suscripción'}
             </button>
           </>
         ) : (
           <>
-            <p className="text-[#6E6E73] mb-4">No tenes una suscripcion activa.</p>
+            <p className="text-[#6E6E73] mb-4">No tenés una suscripción activa.</p>
             <button
               data-hide-in-app
               onClick={() => router.push('/suscripcion')}
@@ -360,7 +367,7 @@ export default function CuentaPage() {
       </div>
 
       <div className="bg-white rounded-2xl border border-[#EDEDED] p-6">
-        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-4">Sesion</h2>
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-4">Sesión</h2>
         <button
           onClick={handleLogout}
           disabled={loggingOut}
