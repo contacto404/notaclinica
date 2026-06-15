@@ -72,6 +72,12 @@ const FAQS = [
   { q: '¿Cumple con las normativas de datos de salud?', a: 'La información viaja cifrada y cada profesional accede solo a sus propios pacientes. Cumplimos con la Ley 18.331 de protección de datos de Uruguay. Para requisitos específicos de otros países, escribinos y lo vemos.' },
 ]
 
+const CASOS = [
+  { title: 'En el consultorio', img: '/casos/consultorio.jpg' },
+  { title: 'Por telemedicina', img: '/casos/telemedicina.jpg' },
+  { title: 'A domicilio', img: '/casos/domicilio.jpg' },
+]
+
 const kicker = 'text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-3'
 
 const JSON_LD = {
@@ -263,6 +269,27 @@ export default function PromoPage() {
               <div key={f.title} className="bg-[#FAFAFA] rounded-3xl border border-[#EDEDED] p-7 hover:border-[#D4D4D4] transition-colors">
                 <h3 className="text-base font-semibold mb-2">{f.title}</h3>
                 <p className="text-sm text-[#525252] leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Casos de uso — funciona en cualquier contexto */}
+      <section className="px-3 sm:px-5 pt-24">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>Donde sea</p>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">Funciona en cualquier contexto</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {CASOS.map(c => (
+              <div key={c.title} className="group relative rounded-3xl overflow-hidden aspect-[3/4] bg-[#0A0A0A]">
+                <img
+                  src={c.img}
+                  alt={c.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.35) 45%, transparent 72%)' }} />
+                <h3 className="absolute bottom-6 left-6 right-6 text-xl font-medium text-white">{c.title}</h3>
               </div>
             ))}
           </div>
