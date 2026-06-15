@@ -372,15 +372,15 @@ export default function PromoPage() {
           className="relative rounded-[2rem] overflow-hidden px-7 sm:px-14 py-16 md:py-20"
           style={{ background: 'radial-gradient(120% 100% at 82% 18%, #242424 0%, #131313 50%, #0a0a0a 100%)' }}
         >
-          <div className="relative z-10 grid md:grid-cols-[1.5fr_1fr] gap-12 items-center">
+          <div className="relative z-10 grid md:grid-cols-[2.4fr_1fr] gap-12 items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A] mb-5">Seguridad</p>
-              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-white mb-8 max-w-lg leading-tight">
+              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-white mb-9 leading-tight">
                 Un socio seguro en el que confiar
               </h2>
-              <ul className="flex flex-col gap-5 max-w-lg">
+              <ul className="grid sm:grid-cols-2 gap-x-12 gap-y-5">
                 {SEGURIDAD.map(s => (
-                  <li key={s} className="flex items-start gap-3 border-b border-white/10 pb-5 last:border-b-0 last:pb-0">
+                  <li key={s} className="flex items-start gap-3">
                     <span className="text-white mt-0.5 shrink-0">✓</span>
                     <span className="text-sm sm:text-base text-[#EDEDED] leading-relaxed">{s}</span>
                   </li>
@@ -390,7 +390,7 @@ export default function PromoPage() {
 
             {/* Visual: candado con ondas */}
             <div className="hidden md:flex items-center justify-center">
-              <svg viewBox="0 0 200 200" className="w-44 h-44" aria-hidden="true">
+              <svg viewBox="0 0 200 200" className="w-48 h-48" aria-hidden="true">
                 <circle cx="100" cy="100" r="92" fill="none" stroke="#fff" strokeOpacity="0.05" />
                 <circle cx="100" cy="100" r="70" fill="none" stroke="#fff" strokeOpacity="0.09" />
                 <circle cx="100" cy="100" r="48" fill="none" stroke="#fff" strokeOpacity="0.14" />
