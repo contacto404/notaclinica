@@ -109,24 +109,24 @@ export default async function EstadisticasPage() {
   const maxIngresos = Math.max(...ingresosPorMes.map(m => m.valor), 1)
 
   const kpis = [
-    { label: 'Pacientes activos', sub: 'con sesión en 60 días', value: pacientesActivos, bg: 'bg-[#DBEAFE]', text: 'text-[#1E40AF]' },
+    { label: 'Pacientes activos', sub: 'con sesión en 60 días', value: pacientesActivos, bg: 'bg-[#F0F0F0]', text: 'text-[#0A0A0A]' },
     { label: 'Sesiones este mes', sub: 'completadas', value: sesionesEsteMes, bg: 'bg-[#E8F4E8]', text: 'text-[#2D6A2D]' },
     { label: 'Cobrado este mes', sub: 'UYU', value: `$${cobradoMes.toLocaleString('es-UY')}`, bg: 'bg-[#EDE9FE]', text: 'text-[#6D28D9]' },
     { label: 'Turnos próximos', sub: '7 días', value: turnos7dias, bg: 'bg-[#E8EEF8]', text: 'text-[#2D3F6A]' },
   ]
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
       <div className="max-w-2xl mx-auto">
 
         <div className="flex items-start justify-between mb-8 gap-3">
           <div>
-            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Análisis</p>
-            <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">Estadísticas</h1>
+            <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Análisis</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] tracking-tight">Estadísticas</h1>
           </div>
           <a
             href="/dashboard/reporte"
-            className="shrink-0 bg-[#2563EB] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#1D4ED8] transition-colors"
+            className="shrink-0 bg-[#0A0A0A] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#262626] transition-colors"
           >
             📄 Reporte mensual
           </a>
@@ -136,58 +136,58 @@ export default async function EstadisticasPage() {
         <div className="grid grid-cols-2 gap-3 mb-8">
           {kpis.map(k => (
             <div key={k.label} className={`${k.bg} rounded-2xl p-4`}>
-              <p className="text-xs text-[#64748B] mb-2 leading-tight">{k.label}</p>
+              <p className="text-xs text-[#6E6E73] mb-2 leading-tight">{k.label}</p>
               <p className={`text-2xl font-bold ${k.text}`}>{k.value}</p>
-              <p className="text-xs text-[#64748B] mt-1">{k.sub}</p>
+              <p className="text-xs text-[#6E6E73] mt-1">{k.sub}</p>
             </div>
           ))}
         </div>
 
         {/* Retención */}
-        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
-          <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">🔁 Retención de pacientes</h2>
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">🔁 Retención de pacientes</h2>
           {pacientesConSesion > 0 ? (
             <>
               <div className="flex items-end justify-between mb-3">
-                <p className="text-3xl font-bold text-[#0F172A] leading-none">{tasaRetorno}%</p>
-                <p className="text-xs text-[#64748B]">pacientes con 2+ sesiones</p>
+                <p className="text-3xl font-bold text-[#0A0A0A] leading-none">{tasaRetorno}%</p>
+                <p className="text-xs text-[#6E6E73]">pacientes con 2+ sesiones</p>
               </div>
-              <div className="w-full h-2.5 rounded-full bg-[#E2E8F0] overflow-hidden">
-                <div className="h-full bg-[#2563EB] rounded-full transition-all" style={{ width: `${tasaRetorno}%` }} />
+              <div className="w-full h-2.5 rounded-full bg-[#EDEDED] overflow-hidden">
+                <div className="h-full bg-[#0A0A0A] rounded-full transition-all" style={{ width: `${tasaRetorno}%` }} />
               </div>
-              <p className="text-xs text-[#64748B] mt-2.5">
+              <p className="text-xs text-[#6E6E73] mt-2.5">
                 {pacientesRecurrentes} de {pacientesConSesion} pacientes volvieron a consultar.
               </p>
             </>
           ) : (
-            <p className="text-sm text-[#64748B] text-center py-6">Todavía no hay sesiones para calcular retención.</p>
+            <p className="text-sm text-[#6E6E73] text-center py-6">Todavía no hay sesiones para calcular retención.</p>
           )}
         </div>
 
         {/* Sesiones por mes */}
-        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
-          <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-5">📈 Sesiones por mes</h2>
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5">📈 Sesiones por mes</h2>
           {completadas.length > 0 ? (
             <div className="flex items-end gap-2 h-28">
               {sesionesPorMes.map((m, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                  <p className="text-xs font-semibold text-[#2563EB]">{m.valor}</p>
+                  <p className="text-xs font-semibold text-[#0A0A0A]">{m.valor}</p>
                   <div
-                    className="w-full bg-[#2563EB] rounded-t-lg transition-all"
+                    className="w-full bg-[#0A0A0A] rounded-t-lg transition-all"
                     style={{ height: `${(m.valor / maxSesiones) * 80}px`, minHeight: m.valor > 0 ? '8px' : '2px' }}
                   />
-                  <p className="text-xs text-[#94A3B8] text-center leading-tight">{m.label}</p>
+                  <p className="text-xs text-[#A3A3A3] text-center leading-tight">{m.label}</p>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-[#64748B] text-center py-6">Todavía no hay sesiones registradas.</p>
+            <p className="text-sm text-[#6E6E73] text-center py-6">Todavía no hay sesiones registradas.</p>
           )}
         </div>
 
         {/* Ingresos por mes */}
-        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
-          <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-5">💰 Ingresos por mes (UYU)</h2>
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5">💰 Ingresos por mes (UYU)</h2>
           {cobradoTotal > 0 ? (
             <div className="flex items-end gap-2 h-28">
               {ingresosPorMes.map((m, i) => (
@@ -199,49 +199,49 @@ export default async function EstadisticasPage() {
                     className="w-full bg-[#34A853] rounded-t-lg transition-all"
                     style={{ height: `${(m.valor / maxIngresos) * 80}px`, minHeight: m.valor > 0 ? '8px' : '2px' }}
                   />
-                  <p className="text-xs text-[#94A3B8] text-center leading-tight">{m.label}</p>
+                  <p className="text-xs text-[#A3A3A3] text-center leading-tight">{m.label}</p>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-[#64748B] text-center py-6">Todavía no hay cobros registrados.</p>
+            <p className="text-sm text-[#6E6E73] text-center py-6">Todavía no hay cobros registrados.</p>
           )}
         </div>
 
         {/* Resumen pacientes */}
-        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
-          <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">👥 Pacientes</h2>
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">👥 Pacientes</h2>
           <div className="grid grid-cols-3 gap-3">
-            <div className="bg-[#DBEAFE] rounded-2xl p-3 text-center">
-              <p className="text-2xl font-bold text-[#1E40AF]">{pacs.length}</p>
-              <p className="text-xs text-[#64748B] mt-0.5">Total</p>
+            <div className="bg-[#F0F0F0] rounded-2xl p-3 text-center">
+              <p className="text-2xl font-bold text-[#0A0A0A]">{pacs.length}</p>
+              <p className="text-xs text-[#6E6E73] mt-0.5">Total</p>
             </div>
             <div className="bg-[#E8F4E8] rounded-2xl p-3 text-center">
               <p className="text-2xl font-bold text-[#2D6A2D]">{pacientesActivos}</p>
-              <p className="text-xs text-[#64748B] mt-0.5">Activos</p>
+              <p className="text-xs text-[#6E6E73] mt-0.5">Activos</p>
             </div>
             <div className="bg-[#E8EEF8] rounded-2xl p-3 text-center">
               <p className="text-2xl font-bold text-[#2D3F6A]">{pacientesNuevosMes}</p>
-              <p className="text-xs text-[#64748B] mt-0.5">Nuevos este mes</p>
+              <p className="text-xs text-[#6E6E73] mt-0.5">Nuevos este mes</p>
             </div>
           </div>
         </div>
 
         {/* Resumen cobros */}
-        <div className="bg-white rounded-2xl p-5 border border-[#E2E8F0]">
-          <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">💳 Cobros</h2>
+        <div className="bg-white rounded-2xl p-5 border border-[#EDEDED]">
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">💳 Cobros</h2>
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#E8F4E8] rounded-2xl p-3 text-center">
               <p className="text-xl font-bold text-[#2D6A2D]">${cobradoMes.toLocaleString('es-UY')}</p>
-              <p className="text-xs text-[#64748B] mt-0.5">Cobrado este mes</p>
+              <p className="text-xs text-[#6E6E73] mt-0.5">Cobrado este mes</p>
             </div>
             <div className="bg-[#FFF7ED] rounded-2xl p-3 text-center">
               <p className="text-xl font-bold text-[#C2410C]">${pendienteMes.toLocaleString('es-UY')}</p>
-              <p className="text-xs text-[#64748B] mt-0.5">Pendiente este mes</p>
+              <p className="text-xs text-[#6E6E73] mt-0.5">Pendiente este mes</p>
             </div>
             <div className="bg-[#EDE9FE] rounded-2xl p-3 text-center">
               <p className="text-xl font-bold text-[#6D28D9]">${cobradoTotal.toLocaleString('es-UY')}</p>
-              <p className="text-xs text-[#64748B] mt-0.5">Cobrado total</p>
+              <p className="text-xs text-[#6E6E73] mt-0.5">Cobrado total</p>
             </div>
           </div>
         </div>

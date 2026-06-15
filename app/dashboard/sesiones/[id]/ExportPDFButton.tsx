@@ -24,7 +24,7 @@ export default function ExportPDFButton({ sessionId }: { sessionId: string }) {
       <button
         onClick={handleExport}
         disabled={loading}
-        className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#1D4ED8] transition-colors shadow-sm shrink-0 disabled:opacity-60"
+        className="bg-[#0A0A0A] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#262626] transition-colors shadow-sm shrink-0 disabled:opacity-60"
       >
         {loading ? 'Generando...' : '⬇ Exportar PDF'}
       </button>
@@ -33,15 +33,15 @@ export default function ExportPDFButton({ sessionId }: { sessionId: string }) {
         <div className="fixed inset-0 z-[200] bg-white flex flex-col">
           {/* Barra superior con safe area */}
           <div
-            className="bg-white border-b border-[#E2E8F0] flex items-center justify-between px-4"
+            className="bg-white border-b border-[#EDEDED] flex items-center justify-between px-4"
             style={{ paddingTop: 'var(--safe-top)' }}
           >
             <div className="h-14 flex items-center">
-              <span className="font-semibold text-[#0F172A] text-sm">Resumen clinico</span>
+              <span className="font-semibold text-[#0A0A0A] text-sm">Resumen clinico</span>
             </div>
             <button
               onClick={() => setOpen(false)}
-              className="h-14 flex items-center text-[#2563EB] font-medium text-sm"
+              className="h-14 flex items-center text-[#0A0A0A] font-medium text-sm"
             >
               ← Volver
             </button>

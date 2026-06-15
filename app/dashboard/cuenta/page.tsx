@@ -169,7 +169,7 @@ export default function CuentaPage() {
     window.location.href = '/login'
   }
 
-  if (loading) return <div className="p-6 text-[#64748B]">Cargando...</div>
+  if (loading) return <div className="p-6 text-[#6E6E73]">Cargando...</div>
 
   const vencimiento = sub?.current_period_end
     ? new Date(sub.current_period_end).toLocaleDateString('es-UY', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -179,73 +179,73 @@ export default function CuentaPage() {
     <div className="p-6 max-w-lg">
       {toast && <Toast message={toast} onDone={() => setToast('')} />}
 
-      <h1 className="text-2xl font-bold text-[#0F172A] mb-6">Mi cuenta</h1>
+      <h1 className="text-2xl font-bold text-[#0A0A0A] mb-6">Mi cuenta</h1>
 
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
-        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-4">Perfil</h2>
-        <p className="text-[#0F172A] font-medium">{user?.email}</p>
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-4">Perfil</h2>
+        <p className="text-[#0A0A0A] font-medium">{user?.email}</p>
       </div>
 
       {/* Apariencia */}
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
-        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-1">Apariencia</h2>
-        <p className="text-xs text-[#64748B] mb-4">Eleg&iacute; el tema de la app. &laquo;Sistema&raquo; sigue la preferencia de tu dispositivo.</p>
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-1">Apariencia</h2>
+        <p className="text-xs text-[#6E6E73] mb-4">Eleg&iacute; el tema de la app. &laquo;Sistema&raquo; sigue la preferencia de tu dispositivo.</p>
         <ThemeToggle />
       </div>
 
       {/* Datos profesional */}
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
-        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-1">Datos del profesional</h2>
-        <p className="text-xs text-[#64748B] mb-4">Aparecen al pie de cada PDF exportado.</p>
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-1">Datos del profesional</h2>
+        <p className="text-xs text-[#6E6E73] mb-4">Aparecen al pie de cada PDF exportado.</p>
         <div className="flex flex-col gap-3 mb-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Nombre profesional</label>
+            <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Nombre profesional</label>
             <input
               type="text"
               value={professionalName}
               onChange={e => setProfessionalName(e.target.value)}
               placeholder="Dr. Bruno De Crescenzo"
-              className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]"
+              className="border border-[#EDEDED] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]"
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Titulo (opcional)</label>
+            <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Titulo (opcional)</label>
             <input
               type="text"
               value={title}
               onChange={e => setTitle(e.target.value)}
               placeholder="Medico clinico, Psicologo, Terapeuta..."
-              className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]"
+              className="border border-[#EDEDED] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]"
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Numero de identificacion (opcional)</label>
+            <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Numero de identificacion (opcional)</label>
             <input
               type="text"
               value={identification}
               onChange={e => setIdentification(e.target.value)}
               placeholder="Cedula, matricula, registro..."
-              className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]"
+              className="border border-[#EDEDED] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]"
             />
           </div>
         </div>
         <button
           onClick={handleSaveProfile}
           disabled={savingProfile}
-          className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer"
+          className="w-full bg-[#0A0A0A] text-white rounded-xl py-3 font-medium hover:bg-[#262626] transition-colors disabled:opacity-50 cursor-pointer"
         >
           {savingProfile ? 'Guardando...' : 'Guardar datos profesionales'}
         </button>
       </div>
 
       {/* Firma */}
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
-        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-1">Firma</h2>
-        <p className="text-xs text-[#64748B] mb-4">Subí una imagen de tu firma (PNG con fondo transparente queda mejor). Aparece en las recetas y PDFs exportados.</p>
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-1">Firma</h2>
+        <p className="text-xs text-[#6E6E73] mb-4">Subí una imagen de tu firma (PNG con fondo transparente queda mejor). Aparece en las recetas y PDFs exportados.</p>
 
         {signatureUrl ? (
           <div className="mb-4">
-            <div className="border border-[#E2E8F0] rounded-xl bg-[#F8FAFC] p-4 flex items-center justify-center">
+            <div className="border border-[#EDEDED] rounded-xl bg-[#F5F5F7] p-4 flex items-center justify-center">
               <img src={signatureUrl} alt="Firma" className="max-h-24 object-contain" />
             </div>
             <button
@@ -256,9 +256,9 @@ export default function CuentaPage() {
             </button>
           </div>
         ) : (
-          <label className="flex flex-col items-center justify-center gap-2 border border-dashed border-[#CBD5E1] rounded-xl bg-[#F8FAFC] py-8 px-4 mb-4 cursor-pointer hover:border-[#2563EB] transition-colors">
+          <label className="flex flex-col items-center justify-center gap-2 border border-dashed border-[#D2D2D7] rounded-xl bg-[#F5F5F7] py-8 px-4 mb-4 cursor-pointer hover:border-[#0A0A0A] transition-colors">
             <span className="text-2xl">✍️</span>
-            <span className="text-sm text-[#64748B]">Tocá para subir tu firma</span>
+            <span className="text-sm text-[#6E6E73]">Tocá para subir tu firma</span>
             <input type="file" accept="image/*" onChange={handleSignatureFile} className="hidden" />
           </label>
         )}
@@ -268,20 +268,20 @@ export default function CuentaPage() {
         <button
           onClick={handleSaveSignature}
           disabled={savingSignature}
-          className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer"
+          className="w-full bg-[#0A0A0A] text-white rounded-xl py-3 font-medium hover:bg-[#262626] transition-colors disabled:opacity-50 cursor-pointer"
         >
           {savingSignature ? 'Guardando...' : 'Guardar firma'}
         </button>
       </div>
 
       {/* Especialidad */}
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
-        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-1">Especialidad</h2>
-        <p className="text-xs text-[#64748B] mb-3">La IA adapta los resumenes clinicos segun tu especialidad.</p>
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-1">Especialidad</h2>
+        <p className="text-xs text-[#6E6E73] mb-3">La IA adapta los resumenes clinicos segun tu especialidad.</p>
         <select
           value={specialty}
           onChange={e => setSpecialty(e.target.value)}
-          className="w-full border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC] mb-4"
+          className="w-full border border-[#EDEDED] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-[#F5F5F7] mb-4"
         >
           {ESPECIALIDADES.map(e => (
             <option key={e.value} value={e.value}>{e.label}</option>
@@ -290,49 +290,49 @@ export default function CuentaPage() {
         <button
           onClick={handleSaveSpecialty}
           disabled={savingSpecialty}
-          className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer"
+          className="w-full bg-[#0A0A0A] text-white rounded-xl py-3 font-medium hover:bg-[#262626] transition-colors disabled:opacity-50 cursor-pointer"
         >
           {savingSpecialty ? 'Guardando...' : 'Guardar especialidad'}
         </button>
       </div>
 
       {/* Formato de nota */}
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
-        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-1">Formato de nota</h2>
-        <p className="text-xs text-[#64748B] mb-3">Cómo se estructuran los resúmenes clínicos. No afecta las notas ya creadas.</p>
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-1">Formato de nota</h2>
+        <p className="text-xs text-[#6E6E73] mb-3">Cómo se estructuran los resúmenes clínicos. No afecta las notas ya creadas.</p>
         <select
           value={noteFormat}
           onChange={e => setNoteFormat(e.target.value)}
-          className="w-full border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC] mb-2"
+          className="w-full border border-[#EDEDED] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-[#F5F5F7] mb-2"
         >
           <option value="standard">Estándar — Motivo, Observaciones, Plan, Próximos pasos</option>
           <option value="soap">SOAP — Subjetivo, Objetivo, Análisis, Plan</option>
         </select>
-        <p className="text-[11px] text-[#94A3B8] mb-4">SOAP es el formato habitual en medicina y psiquiatría.</p>
+        <p className="text-[11px] text-[#A3A3A3] mb-4">SOAP es el formato habitual en medicina y psiquiatría.</p>
         <button
           onClick={handleSaveFormat}
           disabled={savingFormat}
-          className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer"
+          className="w-full bg-[#0A0A0A] text-white rounded-xl py-3 font-medium hover:bg-[#262626] transition-colors disabled:opacity-50 cursor-pointer"
         >
           {savingFormat ? 'Guardando...' : 'Guardar formato'}
         </button>
       </div>
 
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 mb-4">
-        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-4">Suscripcion</h2>
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 mb-4">
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-4">Suscripcion</h2>
         {sub?.status === 'active' ? (
           <>
             <div className="flex justify-between items-center mb-2">
-              <span className="text-[#0F172A]">Plan</span>
-              <span className="text-[#2563EB] font-semibold">NotaClinica Pro</span>
+              <span className="text-[#0A0A0A]">Plan</span>
+              <span className="text-[#0A0A0A] font-semibold">NotaClinica Pro</span>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <span className="text-[#0F172A]">Estado</span>
+              <span className="text-[#0A0A0A]">Estado</span>
               <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-1 rounded-full">Activa</span>
             </div>
             <div className="flex justify-between items-center mb-6">
-              <span className="text-[#0F172A]">Vence</span>
-              <span className="text-[#64748B]">{vencimiento}</span>
+              <span className="text-[#0A0A0A]">Vence</span>
+              <span className="text-[#6E6E73]">{vencimiento}</span>
             </div>
             <button
               onClick={handleCancelar}
@@ -344,27 +344,27 @@ export default function CuentaPage() {
           </>
         ) : (
           <>
-            <p className="text-[#64748B] mb-4">No tenes una suscripcion activa.</p>
+            <p className="text-[#6E6E73] mb-4">No tenes una suscripcion activa.</p>
             <button
               data-hide-in-app
               onClick={() => router.push('/suscripcion')}
-              className="w-full bg-[#2563EB] text-white rounded-xl py-3 font-medium hover:bg-[#1D4ED8] transition-colors cursor-pointer"
+              className="w-full bg-[#0A0A0A] text-white rounded-xl py-3 font-medium hover:bg-[#262626] transition-colors cursor-pointer"
             >
               Suscribirme
             </button>
-            <p data-show-in-app className="text-sm text-[#64748B] leading-relaxed">
+            <p data-show-in-app className="text-sm text-[#6E6E73] leading-relaxed">
               Activá o gestioná tu suscripción desde NotaClínica en el navegador. Acá podés seguir usando tu cuenta normalmente.
             </p>
           </>
         )}
       </div>
 
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6">
-        <h2 className="text-sm font-semibold text-[#64748B] uppercase tracking-wide mb-4">Sesion</h2>
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6">
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-4">Sesion</h2>
         <button
           onClick={handleLogout}
           disabled={loggingOut}
-          className="w-full border border-[#E2E8F0] text-[#475569] rounded-xl py-3 font-medium hover:bg-[#F8FAFC] transition-colors disabled:opacity-50 cursor-pointer"
+          className="w-full border border-[#EDEDED] text-[#6E6E73] rounded-xl py-3 font-medium hover:bg-[#F5F5F7] transition-colors disabled:opacity-50 cursor-pointer"
         >
           {loggingOut ? 'Cerrando sesion...' : 'Cerrar sesion'}
         </button>

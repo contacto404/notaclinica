@@ -23,13 +23,13 @@ export default function WaitlistItem({ item }: { item: any }) {
     : null
 
   return (
-    <div className="bg-white rounded-2xl border border-[#E2E8F0] px-4 py-4 flex items-center gap-3">
+    <div className="bg-white rounded-2xl border border-[#EDEDED] px-4 py-4 flex items-center gap-3">
       <div className="w-9 h-9 rounded-full bg-[#FFF7ED] flex items-center justify-center text-sm shrink-0">
         ⏳
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-[#0F172A] truncate">{item.full_name}</p>
-        <p className="text-xs text-[#64748B] mt-0.5">
+        <p className="text-sm font-semibold text-[#0A0A0A] truncate">{item.full_name}</p>
+        <p className="text-xs text-[#6E6E73] mt-0.5">
           {item.reason && `${item.reason} · `}Desde {fecha}
         </p>
       </div>
@@ -43,7 +43,7 @@ export default function WaitlistItem({ item }: { item: any }) {
         <button
           onClick={handleRemove}
           disabled={removing}
-          className="text-[#94A3B8] hover:text-red-500 transition-colors text-lg leading-none px-1"
+          className="text-[#A3A3A3] hover:text-red-500 transition-colors text-lg leading-none px-1"
         >
           ×
         </button>

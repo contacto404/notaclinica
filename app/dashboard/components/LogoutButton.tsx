@@ -16,7 +16,7 @@ export default function LogoutButton({ minimal = false }: { minimal?: boolean })
     return (
       <button
         onClick={handleLogout}
-        className="text-xs text-[#475569]"
+        className="text-xs text-[#6E6E73]"
       >
         {loading ? '...' : 'Salir'}
       </button>
@@ -24,13 +24,13 @@ export default function LogoutButton({ minimal = false }: { minimal?: boolean })
   }
 
   if (loading) return (
-    <p className="text-xs text-[#64748B] px-3 py-2">Cerrando sesión...</p>
+    <p className="text-xs text-[#6E6E73] px-3 py-2">Cerrando sesión...</p>
   )
 
   return (
     <button
       onClick={handleLogout}
-      className="text-xs text-[#64748B] hover:text-[#0F172A] cursor-pointer w-full text-left px-3 py-2 rounded-lg hover:bg-[#E2E8F0]"
+      className="text-xs text-[#6E6E73] hover:text-[#0A0A0A] cursor-pointer w-full text-left px-3 py-2 rounded-lg hover:bg-[#EDEDED]"
     >
       Cerrar sesión
     </button>

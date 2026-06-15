@@ -38,12 +38,12 @@ export default function PortalTurnoAcciones({ token, appointmentDate, initialSta
   }
 
   return (
-    <div className="bg-white dark:bg-[#1E293B] rounded-2xl border border-[#E2E8F0] dark:border-[#334155] p-4 mb-5">
+    <div className="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#EDEDED] dark:border-[#262626] p-4 mb-5">
       <div className="flex items-center gap-3">
         <span className="text-2xl">📅</span>
         <div className="flex-1 min-w-0">
-          <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest">Tu próximo turno</p>
-          <p className="text-sm font-semibold text-[#0F172A] dark:text-white capitalize">{fecha} · {hora}</p>
+          <p className="text-[11px] text-[#6E6E73] dark:text-[#A3A3A3] uppercase tracking-widest">Tu próximo turno</p>
+          <p className="text-sm font-semibold text-[#0A0A0A] dark:text-white capitalize">{fecha} · {hora}</p>
         </div>
       </div>
 
@@ -51,7 +51,7 @@ export default function PortalTurnoAcciones({ token, appointmentDate, initialSta
         <p className="text-xs text-[#C2410C] dark:text-[#FDBA74] mt-3">Cancelaste este turno. Si necesitás otro, escribile a tu profesional.</p>
       )}
       {status === 'reschedule_requested' && (
-        <p className="text-xs text-[#2563EB] dark:text-[#93C5FD] mt-3">Pediste otro horario. Tu profesional se va a contactar para reprogramar.</p>
+        <p className="text-xs text-[#0A0A0A] dark:text-[#FFFFFF] mt-3">Pediste otro horario. Tu profesional se va a contactar para reprogramar.</p>
       )}
 
       {status === 'scheduled' && (
@@ -59,7 +59,7 @@ export default function PortalTurnoAcciones({ token, appointmentDate, initialSta
           {error && <p className="text-xs text-red-500 mt-3">{error}</p>}
           <div className="flex gap-2 mt-4">
             <button onClick={() => accion('reschedule')} disabled={loading}
-              className="flex-1 border border-[#E2E8F0] dark:border-[#334155] text-[#475569] dark:text-[#CBD5E1] rounded-xl py-2.5 text-sm font-medium hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A] disabled:opacity-60 transition-colors">
+              className="flex-1 border border-[#EDEDED] dark:border-[#262626] text-[#6E6E73] dark:text-[#D2D2D7] rounded-xl py-2.5 text-sm font-medium hover:bg-[#F5F5F7] dark:hover:bg-[#0A0A0A] disabled:opacity-60 transition-colors">
               Pedir otro horario
             </button>
             <button onClick={() => accion('cancel')} disabled={loading}

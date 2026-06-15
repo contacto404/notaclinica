@@ -27,11 +27,11 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
 
   if (!patient) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-5">
-        <div className="max-w-sm w-full bg-white rounded-2xl border border-[#E2E8F0] p-6 text-center">
+      <div className="min-h-screen bg-[#F5F5F7] flex items-center justify-center p-5">
+        <div className="max-w-sm w-full bg-white rounded-2xl border border-[#EDEDED] p-6 text-center">
           <div className="w-12 h-12 rounded-full bg-[#FFF7ED] flex items-center justify-center text-2xl mx-auto mb-4">⚠️</div>
-          <p className="text-base font-bold text-[#0F172A] mb-1">Enlace no válido</p>
-          <p className="text-xs text-[#64748B]">Este enlace no es correcto o fue dado de baja. Pedile uno nuevo a tu profesional.</p>
+          <p className="text-base font-bold text-[#0A0A0A] mb-1">Enlace no válido</p>
+          <p className="text-xs text-[#6E6E73]">Este enlace no es correcto o fue dado de baja. Pedile uno nuevo a tu profesional.</p>
         </div>
       </div>
     )
@@ -57,13 +57,13 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
   const primerNombre = (patient.full_name ?? '').split(' ')[0]
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5">
+    <div className="min-h-screen bg-[#F5F5F7] p-5">
       <div className="max-w-md mx-auto pt-6">
-        <p className="text-center font-light text-[#0F172A] text-lg mb-6 tracking-tight lowercase">notaclinica</p>
+        <p className="text-center font-light text-[#0A0A0A] text-lg mb-6 tracking-tight lowercase">notaclinica</p>
 
         <div className="mb-5">
-          <h1 className="text-2xl font-bold text-[#0F172A]">Hola{primerNombre ? `, ${primerNombre}` : ''} 👋</h1>
-          <p className="text-sm text-[#64748B] mt-1">Espacio de seguimiento con {profNombre}.</p>
+          <h1 className="text-2xl font-bold text-[#0A0A0A]">Hola{primerNombre ? `, ${primerNombre}` : ''} 👋</h1>
+          <p className="text-sm text-[#6E6E73] mt-1">Espacio de seguimiento con {profNombre}.</p>
         </div>
 
         {turno && (
@@ -76,7 +76,7 @@ export default async function PortalPage({ params }: { params: Promise<{ token: 
 
         <PortalCheckinForm token={token} />
 
-        <p className="text-center text-[11px] text-[#94A3B8] mt-6">Lo que registres acá lo ve únicamente {profNombre}.</p>
+        <p className="text-center text-[11px] text-[#A3A3A3] mt-6">Lo que registres acá lo ve únicamente {profNombre}.</p>
       </div>
     </div>
   )

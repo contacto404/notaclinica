@@ -54,42 +54,42 @@ export default function EvolucionChart({ sessions }: { sessions: any[] }) {
   const maxSesiones = Math.max(...porMes.map(m => m.sesiones), 1)
 
   return (
-    <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
-      <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-5">📈 Evolución</h2>
+    <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
+      <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5">📈 Evolución</h2>
 
       {/* Stats rápidas */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="bg-[#DBEAFE] rounded-2xl p-3 text-center">
-          <p className="text-2xl font-bold text-[#1E40AF]">{completadas.length}</p>
-          <p className="text-xs text-[#64748B] mt-0.5">Sesiones totales</p>
+        <div className="bg-[#F0F0F0] rounded-2xl p-3 text-center">
+          <p className="text-2xl font-bold text-[#0A0A0A]">{completadas.length}</p>
+          <p className="text-xs text-[#6E6E73] mt-0.5">Sesiones totales</p>
         </div>
         <div className="bg-[#E8F4E8] rounded-2xl p-3 text-center">
           <p className="text-2xl font-bold text-[#2D6A2D]">
             {frecuenciaPromedio ? `${frecuenciaPromedio}d` : '-'}
           </p>
-          <p className="text-xs text-[#64748B] mt-0.5">Frecuencia promedio</p>
+          <p className="text-xs text-[#6E6E73] mt-0.5">Frecuencia promedio</p>
         </div>
         <div className={`rounded-2xl p-3 text-center ${diasDesdeUltima && diasDesdeUltima > 30 ? 'bg-[#FFF7ED]' : 'bg-[#E8EEF8]'}`}>
           <p className={`text-2xl font-bold ${diasDesdeUltima && diasDesdeUltima > 30 ? 'text-[#C2410C]' : 'text-[#2D3F6A]'}`}>
             {diasDesdeUltima !== null ? `${diasDesdeUltima}d` : '-'}
           </p>
-          <p className="text-xs text-[#64748B] mt-0.5">Desde ultima sesion</p>
+          <p className="text-xs text-[#6E6E73] mt-0.5">Desde ultima sesion</p>
         </div>
       </div>
 
       {/* Grafico de barras */}
       {porMes.length > 1 && (
         <div>
-          <p className="text-xs text-[#64748B] font-medium mb-3">Sesiones por mes</p>
+          <p className="text-xs text-[#6E6E73] font-medium mb-3">Sesiones por mes</p>
           <div className="flex items-end gap-2 h-24">
             {porMes.map((m, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                <p className="text-xs font-semibold text-[#2563EB]">{m.sesiones}</p>
+                <p className="text-xs font-semibold text-[#0A0A0A]">{m.sesiones}</p>
                 <div
-                  className="w-full bg-[#2563EB] rounded-t-lg transition-all"
+                  className="w-full bg-[#0A0A0A] rounded-t-lg transition-all"
                   style={{ height: `${(m.sesiones / maxSesiones) * 64}px`, minHeight: '8px' }}
                 />
-                <p className="text-xs text-[#94A3B8] text-center leading-tight">{m.mes}</p>
+                <p className="text-xs text-[#A3A3A3] text-center leading-tight">{m.mes}</p>
               </div>
             ))}
           </div>

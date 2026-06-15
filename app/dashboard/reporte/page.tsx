@@ -44,20 +44,20 @@ export default async function ReporteMensualPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
       <div className="max-w-2xl mx-auto">
 
         <div className="mb-6">
-          <a href="/dashboard/estadisticas" className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium inline-block mb-4">← Volver a estadísticas</a>
+          <a href="/dashboard/estadisticas" className="text-xs text-[#6E6E73] hover:text-[#0A0A0A] transition-colors font-medium inline-block mb-4">← Volver a estadísticas</a>
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Reporte de eficiencia</p>
-              <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight capitalize">{mesLabel}</h1>
+              <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Reporte de eficiencia</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] tracking-tight capitalize">{mesLabel}</h1>
             </div>
             <a
               href="/api/reporte-mensual"
               target="_blank"
-              className="shrink-0 bg-[#2563EB] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#1D4ED8] transition-colors"
+              className="shrink-0 bg-[#0A0A0A] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#262626] transition-colors"
             >
               📄 Exportar PDF
             </a>
@@ -78,15 +78,15 @@ export default async function ReporteMensualPage() {
         {/* KPIs */}
         <div className="grid grid-cols-2 gap-3 mb-4">
           {kpis.map(k => (
-            <div key={k.label} className="bg-white rounded-2xl border border-[#E2E8F0] p-4">
-              <p className="text-xs text-[#64748B] mb-2 leading-tight">{k.label}</p>
-              <p className="text-2xl font-bold text-[#0F172A]">{k.value}</p>
-              <p className="text-xs text-[#64748B] mt-1">{k.sub}</p>
+            <div key={k.label} className="bg-white rounded-2xl border border-[#EDEDED] p-4">
+              <p className="text-xs text-[#6E6E73] mb-2 leading-tight">{k.label}</p>
+              <p className="text-2xl font-bold text-[#0A0A0A]">{k.value}</p>
+              <p className="text-xs text-[#6E6E73] mt-1">{k.sub}</p>
             </div>
           ))}
         </div>
 
-        <p className="text-[11px] text-[#94A3B8] leading-relaxed">
+        <p className="text-[11px] text-[#A3A3A3] leading-relaxed">
           El cálculo asume un ahorro de {MIN_AHORRADOS_POR_SESION} minutos por sesión documentada con IA (de ~10 a ~2 minutos por historia clínica). El PDF es ideal para compartir con la dirección de la clínica.
         </p>
 

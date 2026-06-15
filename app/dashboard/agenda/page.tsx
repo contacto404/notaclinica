@@ -32,13 +32,13 @@ export default async function AgendaPage() {
   })
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
       <div className="max-w-2xl mx-auto">
 
         <div className="flex items-center justify-between mb-6">
           <div>
-            <p className="text-[11px] text-[#64748B] font-medium uppercase tracking-widest mb-0.5">Calendario</p>
-            <h1 className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">Agenda</h1>
+            <p className="text-[11px] text-[#6E6E73] font-medium uppercase tracking-widest mb-0.5">Calendario</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] tracking-tight">Agenda</h1>
           </div>
           <WaitlistButton />
         </div>
@@ -47,13 +47,13 @@ export default async function AgendaPage() {
           <div className="flex flex-col gap-5 mb-6">
             {Object.entries(grouped).map(([date, turns]) => (
               <div key={date}>
-                <p className="text-[11px] font-semibold text-[#64748B] uppercase tracking-widest mb-2.5 capitalize">{date}</p>
+                <p className="text-[11px] font-semibold text-[#6E6E73] uppercase tracking-widest mb-2.5 capitalize">{date}</p>
                 <div className="flex flex-col gap-1.5">
                   {turns.map((a: any) => (
                     <a key={a.id} href={"/dashboard/pacientes/" + a.patient_id}
-                      className="bg-white rounded-xl border border-[#E2E8F0] px-4 py-3 flex items-center gap-3 hover:shadow-sm hover:border-[#CBD5E1] dark:hover:border-[#475569] transition-all">
-                      <div className="bg-[#DBEAFE] rounded-lg px-2.5 py-1.5 text-center shrink-0">
-                        <p className="text-base font-bold text-[#2563EB] tabular-nums leading-none">
+                      className="bg-white rounded-xl border border-[#EDEDED] px-4 py-3 flex items-center gap-3 hover:shadow-sm hover:border-[#D2D2D7] dark:hover:border-[#6E6E73] transition-all">
+                      <div className="bg-[#F0F0F0] rounded-lg px-2.5 py-1.5 text-center shrink-0">
+                        <p className="text-base font-bold text-[#0A0A0A] tabular-nums leading-none">
                           {new Date(a.appointment_date).toLocaleTimeString('es-UY', {
                             timeZone: 'America/Montevideo',
                             hour: '2-digit',
@@ -63,7 +63,7 @@ export default async function AgendaPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <p className="text-sm font-semibold text-[#0F172A] truncate">{a.patients?.full_name}</p>
+                          <p className="text-sm font-semibold text-[#0A0A0A] truncate">{a.patients?.full_name}</p>
                           {a.status === 'cancelled_by_patient' && (
                             <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md bg-[#FEE2E2] text-[#B91C1C] shrink-0">Canceló</span>
                           )}
@@ -71,9 +71,9 @@ export default async function AgendaPage() {
                             <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md bg-[#FFF7ED] text-[#C2410C] shrink-0">Pide reprogramar</span>
                           )}
                         </div>
-                        <p className="text-xs text-[#64748B] mt-0.5 truncate">{a.patients?.diagnosis ?? 'Sin diagnóstico'}{a.notes ? ` · ${a.notes}` : ''}</p>
+                        <p className="text-xs text-[#6E6E73] mt-0.5 truncate">{a.patients?.diagnosis ?? 'Sin diagnóstico'}{a.notes ? ` · ${a.notes}` : ''}</p>
                       </div>
-                      <span className="text-[#CBD5E1] dark:text-[#475569] text-lg shrink-0">›</span>
+                      <span className="text-[#D2D2D7] dark:text-[#6E6E73] text-lg shrink-0">›</span>
                     </a>
                   ))}
                 </div>
@@ -81,17 +81,17 @@ export default async function AgendaPage() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-[#E2E8F0] p-12 text-center mb-6">
+          <div className="bg-white rounded-2xl border border-[#EDEDED] p-12 text-center mb-6">
             <p className="text-3xl mb-3">📅</p>
-            <p className="text-sm font-semibold text-[#0F172A]">No hay turnos próximos</p>
-            <p className="text-xs text-[#64748B] mt-1">Los turnos que agendes aparecerán acá</p>
+            <p className="text-sm font-semibold text-[#0A0A0A]">No hay turnos próximos</p>
+            <p className="text-xs text-[#6E6E73] mt-1">Los turnos que agendes aparecerán acá</p>
           </div>
         )}
 
         {/* Lista de espera */}
         {waitlist && waitlist.length > 0 && (
           <div>
-            <p className="text-[11px] font-semibold text-[#64748B] uppercase tracking-widest mb-2.5">Lista de espera</p>
+            <p className="text-[11px] font-semibold text-[#6E6E73] uppercase tracking-widest mb-2.5">Lista de espera</p>
             <div className="flex flex-col gap-1.5">
               {waitlist.map((w: any) => (
                 <WaitlistItem key={w.id} item={w} />

@@ -109,24 +109,24 @@ export default function NuevaSesionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
       <div className="max-w-xl mx-auto">
 
         <div className="mb-6">
-          <a href={"/dashboard/pacientes/" + patientId} className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium">← Volver</a>
+          <a href={"/dashboard/pacientes/" + patientId} className="text-xs text-[#6E6E73] hover:text-[#0A0A0A] transition-colors font-medium">← Volver</a>
         </div>
 
         <div className="mb-6">
-          <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Sesion</p>
-          <h1 className="text-2xl font-bold text-[#0F172A]">Nueva sesion</h1>
+          <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Sesion</p>
+          <h1 className="text-2xl font-bold text-[#0A0A0A]">Nueva sesion</h1>
         </div>
 
         {step === 'record' && (
-          <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6 flex flex-col gap-6">
+          <div className="bg-white rounded-3xl border border-[#EDEDED] p-6 flex flex-col gap-6">
             <div className="flex flex-col items-center gap-4 py-6">
               {!recording ? (
                 <button onClick={startRecording}
-                  className="w-24 h-24 rounded-full bg-[#2563EB] text-4xl cursor-pointer text-white flex items-center justify-center hover:bg-[#1D4ED8] transition-colors shadow-lg">
+                  className="w-24 h-24 rounded-full bg-[#0A0A0A] text-4xl cursor-pointer text-white flex items-center justify-center hover:bg-[#262626] transition-colors shadow-lg">
                   🎙️
                 </button>
               ) : (
@@ -135,7 +135,7 @@ export default function NuevaSesionPage() {
                   STOP
                 </button>
               )}
-              <p className="text-sm text-[#64748B]">
+              <p className="text-sm text-[#6E6E73]">
                 {recording ? 'Grabando... presiona STOP para detener' : 'Presiona para grabar'}
               </p>
               {audioBlob && !recording && (
@@ -144,31 +144,31 @@ export default function NuevaSesionPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="flex-1 h-px bg-[#E2E8F0]" />
-              <span className="text-xs text-[#64748B]">o subi un archivo</span>
-              <div className="flex-1 h-px bg-[#E2E8F0]" />
+              <div className="flex-1 h-px bg-[#EDEDED]" />
+              <span className="text-xs text-[#6E6E73]">o subi un archivo</span>
+              <div className="flex-1 h-px bg-[#EDEDED]" />
             </div>
 
             <input type="file" accept="audio/*" onChange={handleFileUpload}
-              className="text-sm text-[#475569] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-[#DBEAFE] file:text-[#1E40AF] hover:file:bg-[#BFDBFE]" />
+              className="text-sm text-[#6E6E73] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-[#F0F0F0] file:text-[#0A0A0A] hover:file:bg-[#E5E5E5]" />
 
             {error && <p className="text-sm text-red-500 bg-red-50 rounded-xl px-4 py-2">{error}</p>}
 
             <button onClick={processAudio} disabled={!audioBlob}
-              className="bg-[#2563EB] disabled:bg-[#E2E8F0] disabled:text-[#94A3B8] text-white rounded-xl py-3 text-sm font-semibold cursor-pointer disabled:cursor-not-allowed hover:bg-[#1D4ED8] transition-colors shadow-sm">
+              className="bg-[#0A0A0A] disabled:bg-[#EDEDED] disabled:text-[#A3A3A3] text-white rounded-xl py-3 text-sm font-semibold cursor-pointer disabled:cursor-not-allowed hover:bg-[#262626] transition-colors shadow-sm">
               Transcribir y generar resumen
             </button>
           </div>
         )}
 
         {(step === 'transcribing' || step === 'summarizing') && (
-          <div className="bg-white rounded-3xl border border-[#E2E8F0] p-12 flex flex-col items-center gap-5">
-            <div className="w-10 h-10 border-2 border-[#2563EB] border-t-transparent rounded-full animate-spin" />
+          <div className="bg-white rounded-3xl border border-[#EDEDED] p-12 flex flex-col items-center gap-5">
+            <div className="w-10 h-10 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin" />
             <div className="text-center">
-              <p className="text-sm font-semibold text-[#0F172A]">
+              <p className="text-sm font-semibold text-[#0A0A0A]">
                 {step === 'transcribing' ? 'Transcribiendo audio...' : 'Generando resumen clinico...'}
               </p>
-              <p className="text-xs text-[#64748B] mt-1">
+              <p className="text-xs text-[#6E6E73] mt-1">
                 {step === 'transcribing' ? 'Usando Whisper de OpenAI' : 'Usando IA para analizar la consulta'}
               </p>
             </div>
@@ -177,25 +177,25 @@ export default function NuevaSesionPage() {
 
         {step === 'done' && summary && (
           <div className="flex flex-col gap-4">
-            <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
-              <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">Resumen clinico</h2>
+            <div className="bg-white rounded-3xl border border-[#EDEDED] p-6">
+              <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">Resumen clinico</h2>
               <div className="flex flex-col gap-3">
                 {summaryFields(summary.format).map(({ key, label }) => (
-                  <div key={key} className="bg-[#F8FAFC] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
-                    <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">{label}</p>
-                    <p className="text-sm text-[#0F172A] leading-relaxed">{summary[key]}</p>
+                  <div key={key} className="bg-[#F5F5F7] rounded-r-xl border-l-2 border-[#0A0A0A] dark:border-white p-4">
+                    <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1.5">{label}</p>
+                    <p className="text-sm text-[#0A0A0A] leading-relaxed">{summary[key]}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6">
-              <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-3">Transcripcion</h2>
-              <p className="text-sm text-[#475569] leading-relaxed">{transcription}</p>
+            <div className="bg-white rounded-3xl border border-[#EDEDED] p-6">
+              <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-3">Transcripcion</h2>
+              <p className="text-sm text-[#6E6E73] leading-relaxed">{transcription}</p>
             </div>
 
             <a href={"/dashboard/pacientes/" + patientId}
-              className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold text-center hover:bg-[#1D4ED8] transition-colors shadow-sm block">
+              className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold text-center hover:bg-[#262626] transition-colors shadow-sm block">
               Volver al paciente
             </a>
           </div>

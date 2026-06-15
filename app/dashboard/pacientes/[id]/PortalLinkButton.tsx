@@ -24,26 +24,26 @@ export default function PortalLinkButton({ token, patientPhone }: { token: strin
   return (
     <>
       <button onClick={() => setOpen(true)}
-        className="border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
+        className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
         🔗 Portal
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" onClick={() => setOpen(false)}>
-          <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 max-w-md w-full" onClick={e => e.stopPropagation()}>
+          <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 max-w-md w-full" onClick={e => e.stopPropagation()}>
             <div className="mb-4">
-              <p className="text-[11px] text-[#64748B] font-medium uppercase tracking-widest mb-0.5">Portal del paciente</p>
-              <h2 className="text-lg font-bold text-[#0F172A]">Compartir acceso</h2>
+              <p className="text-[11px] text-[#6E6E73] font-medium uppercase tracking-widest mb-0.5">Portal del paciente</p>
+              <h2 className="text-lg font-bold text-[#0A0A0A]">Compartir acceso</h2>
             </div>
-            <p className="text-sm text-[#64748B] mb-4">El paciente abre este link (sin registrarse) para ver su próximo turno y registrar cómo viene entre sesiones.</p>
+            <p className="text-sm text-[#6E6E73] mb-4">El paciente abre este link (sin registrarse) para ver su próximo turno y registrar cómo viene entre sesiones.</p>
 
-            <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-xs text-[#475569] break-all mb-3">
+            <div className="bg-[#F5F5F7] border border-[#EDEDED] rounded-xl px-3 py-2.5 text-xs text-[#6E6E73] break-all mb-3">
               {url}
             </div>
 
             <div className="flex gap-2">
               <button onClick={copiar}
-                className="flex-1 border border-[#E2E8F0] text-[#475569] rounded-xl py-2.5 text-sm font-medium hover:bg-[#F8FAFC] transition-colors">
+                className="flex-1 border border-[#EDEDED] text-[#6E6E73] rounded-xl py-2.5 text-sm font-medium hover:bg-[#F5F5F7] transition-colors">
                 {copied ? '¡Copiado!' : 'Copiar link'}
               </button>
               <a href={waHref} target="_blank" rel="noopener noreferrer"
@@ -53,7 +53,7 @@ export default function PortalLinkButton({ token, patientPhone }: { token: strin
             </div>
 
             <button onClick={() => setOpen(false)}
-              className="w-full text-sm text-[#64748B] hover:text-[#0F172A] py-2 mt-3 transition-colors">
+              className="w-full text-sm text-[#6E6E73] hover:text-[#0A0A0A] py-2 mt-3 transition-colors">
               Cerrar
             </button>
           </div>

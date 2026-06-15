@@ -45,10 +45,10 @@ export default function PortalEscalaForm({ token }: { token: string }) {
   // Todas completadas
   if (pending.length === 0) {
     return (
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 text-center mb-4">
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 text-center mb-4">
         <div className="w-12 h-12 rounded-full bg-[#E8F4E8] flex items-center justify-center text-2xl mx-auto mb-3">✓</div>
-        <p className="text-base font-bold text-[#0F172A] mb-1">¡Gracias!</p>
-        <p className="text-sm text-[#64748B]">Tus cuestionarios llegaron a tu profesional.</p>
+        <p className="text-base font-bold text-[#0A0A0A] mb-1">¡Gracias!</p>
+        <p className="text-sm text-[#6E6E73]">Tus cuestionarios llegaron a tu profesional.</p>
       </div>
     )
   }
@@ -56,18 +56,18 @@ export default function PortalEscalaForm({ token }: { token: string }) {
   // Respondiendo una escala
   if (def) {
     return (
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-5 mb-4">
+      <div className="bg-white rounded-2xl border border-[#EDEDED] p-5 mb-4">
         <div className="flex items-center justify-between mb-1">
-          <p className="text-[11px] text-[#64748B] uppercase tracking-widest">{def.name} · {def.topic}</p>
-          <button onClick={() => { setSelected(null); setError('') }} className="text-xs text-[#94A3B8] hover:text-[#64748B] cursor-pointer">Volver</button>
+          <p className="text-[11px] text-[#6E6E73] uppercase tracking-widest">{def.name} · {def.topic}</p>
+          <button onClick={() => { setSelected(null); setError('') }} className="text-xs text-[#A3A3A3] hover:text-[#6E6E73] cursor-pointer">Volver</button>
         </div>
-        <p className="text-sm text-[#64748B] mb-5">{def.intro}</p>
+        <p className="text-sm text-[#6E6E73] mb-5">{def.intro}</p>
 
         <div className="flex flex-col gap-5">
           {def.questions.map((q, qi) => (
             <div key={qi}>
-              <p className="text-sm text-[#0F172A] mb-2">
-                <span className="text-[#94A3B8] font-medium">{qi + 1}.</span> {q}
+              <p className="text-sm text-[#0A0A0A] mb-2">
+                <span className="text-[#A3A3A3] font-medium">{qi + 1}.</span> {q}
               </p>
               <div className="grid grid-cols-2 gap-2">
                 {OPTIONS.map(opt => {
@@ -80,11 +80,11 @@ export default function PortalEscalaForm({ token }: { token: string }) {
                       className={
                         'text-left text-xs rounded-xl px-3 py-2 border transition-colors cursor-pointer ' +
                         (active
-                          ? 'bg-[#2563EB] text-white border-[#2563EB]'
-                          : 'bg-[#F8FAFC] text-[#475569] border-[#E2E8F0] hover:bg-[#E2E8F0]')
+                          ? 'bg-[#0A0A0A] text-white border-[#0A0A0A]'
+                          : 'bg-[#F5F5F7] text-[#6E6E73] border-[#EDEDED] hover:bg-[#EDEDED]')
                       }
                     >
-                      <span className={'font-bold mr-1 ' + (active ? 'text-white' : 'text-[#94A3B8]')}>{opt.value}</span>
+                      <span className={'font-bold mr-1 ' + (active ? 'text-white' : 'text-[#A3A3A3]')}>{opt.value}</span>
                       {opt.label}
                     </button>
                   )
@@ -96,7 +96,7 @@ export default function PortalEscalaForm({ token }: { token: string }) {
           {error && <p className="text-sm text-red-500">{error}</p>}
 
           <button onClick={enviar} disabled={!answered || loading}
-            className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1D4ED8] disabled:opacity-60 transition-colors">
+            className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-60 transition-colors">
             {loading ? 'Enviando…' : answered ? 'Enviar cuestionario' : `Respondé las ${def.questions.length} preguntas`}
           </button>
         </div>
@@ -106,18 +106,18 @@ export default function PortalEscalaForm({ token }: { token: string }) {
 
   // Selección de escala
   return (
-    <div className="bg-white rounded-2xl border border-[#E2E8F0] p-5 mb-4">
-      <p className="text-[11px] text-[#64748B] uppercase tracking-widest mb-1">Cuestionarios</p>
-      <p className="text-sm text-[#64748B] mb-4">Ayudá a tu profesional a seguir tu evolución. Toma 2 minutos.</p>
+    <div className="bg-white rounded-2xl border border-[#EDEDED] p-5 mb-4">
+      <p className="text-[11px] text-[#6E6E73] uppercase tracking-widest mb-1">Cuestionarios</p>
+      <p className="text-sm text-[#6E6E73] mb-4">Ayudá a tu profesional a seguir tu evolución. Toma 2 minutos.</p>
       <div className="flex flex-col gap-2">
         {pending.map(s => (
           <button key={s.id} onClick={() => pick(s.id)}
-            className="flex items-center justify-between border border-[#E2E8F0] rounded-xl px-4 py-3 text-left hover:border-[#2563EB] transition-colors cursor-pointer">
+            className="flex items-center justify-between border border-[#EDEDED] rounded-xl px-4 py-3 text-left hover:border-[#0A0A0A] transition-colors cursor-pointer">
             <div>
-              <p className="text-sm font-semibold text-[#0F172A]">{s.topic}</p>
-              <p className="text-xs text-[#64748B]">{s.name} · {s.questions.length} preguntas</p>
+              <p className="text-sm font-semibold text-[#0A0A0A]">{s.topic}</p>
+              <p className="text-xs text-[#6E6E73]">{s.name} · {s.questions.length} preguntas</p>
             </div>
-            <span className="text-[#94A3B8]">›</span>
+            <span className="text-[#A3A3A3]">›</span>
           </button>
         ))}
       </div>

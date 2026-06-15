@@ -40,27 +40,27 @@ export default function ImportarHistorialButton({ patientId }: { patientId: stri
   return (
     <>
       <button onClick={() => setOpen(true)}
-        className="border border-[#E2E8F0] text-[#475569] px-4 py-2 rounded-xl text-xs font-medium hover:bg-[#F8FAFC] flex items-center gap-1.5 transition-colors">
+        className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2 rounded-xl text-xs font-medium hover:bg-[#F5F5F7] flex items-center gap-1.5 transition-colors">
         📂 Importar historial
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-5 w-full max-w-lg border border-[#E2E8F0] shadow-xl">
+          <div className="bg-white rounded-2xl p-5 w-full max-w-lg border border-[#EDEDED] shadow-xl">
 
             {!result ? (
               <>
-                <h3 className="text-base font-bold text-[#0F172A] mb-2">Importar historial anterior</h3>
-                <p className="text-xs text-[#64748B] mb-5">Subí un PDF de otra app o sistema. La IA va a extraer diagnósticos, medicamentos y sesiones automáticamente.</p>
+                <h3 className="text-base font-bold text-[#0A0A0A] mb-2">Importar historial anterior</h3>
+                <p className="text-xs text-[#6E6E73] mb-5">Subí un PDF de otra app o sistema. La IA va a extraer diagnósticos, medicamentos y sesiones automáticamente.</p>
 
                 <div
                   onClick={() => fileRef.current?.click()}
-                  className="border-2 border-dashed border-[#E2E8F0] rounded-2xl p-8 text-center cursor-pointer hover:border-[#2563EB] transition-colors mb-4">
+                  className="border-2 border-dashed border-[#EDEDED] rounded-2xl p-8 text-center cursor-pointer hover:border-[#0A0A0A] transition-colors mb-4">
                   <p className="text-3xl mb-2">📄</p>
-                  <p className="text-sm font-medium text-[#0F172A]">
+                  <p className="text-sm font-medium text-[#0A0A0A]">
                     {file ? file.name : 'Tocá para seleccionar un PDF'}
                   </p>
-                  <p className="text-xs text-[#64748B] mt-1">Solo archivos PDF</p>
+                  <p className="text-xs text-[#6E6E73] mt-1">Solo archivos PDF</p>
                   <input ref={fileRef} type="file" accept=".pdf" className="hidden"
                     onChange={e => setFile(e.target.files?.[0] ?? null)} />
                 </div>
@@ -69,58 +69,58 @@ export default function ImportarHistorialButton({ patientId }: { patientId: stri
 
                 <div className="flex flex-col gap-2">
                   <button onClick={handleImport} disabled={!file || loading}
-                    className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1D4ED8] disabled:opacity-50 transition-colors">
+                    className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors">
                     {loading ? '🔄 Procesando con IA...' : '✨ Importar y extraer datos'}
                   </button>
                   <button onClick={() => setOpen(false)}
-                    className="text-sm text-[#64748B] hover:text-[#0F172A] py-2 transition-colors">
+                    className="text-sm text-[#6E6E73] hover:text-[#0A0A0A] py-2 transition-colors">
                     Cancelar
                   </button>
                 </div>
               </>
             ) : (
               <>
-                <h3 className="text-base font-bold text-[#0F172A] mb-1">✅ Historial importado</h3>
-                <p className="text-xs text-[#64748B] mb-4">Se encontró y guardó la siguiente información:</p>
+                <h3 className="text-base font-bold text-[#0A0A0A] mb-1">✅ Historial importado</h3>
+                <p className="text-xs text-[#6E6E73] mb-4">Se encontró y guardó la siguiente información:</p>
 
                 <div className="flex flex-col gap-3 max-h-80 overflow-y-auto">
                   {result.resumen && (
-                    <div className="bg-[#F8FAFC] rounded-2xl p-4">
-                      <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Resumen</p>
-                      <p className="text-sm text-[#0F172A]">{result.resumen}</p>
+                    <div className="bg-[#F5F5F7] rounded-2xl p-4">
+                      <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Resumen</p>
+                      <p className="text-sm text-[#0A0A0A]">{result.resumen}</p>
                     </div>
                   )}
                   {result.diagnosticos?.length > 0 && (
-                    <div className="bg-[#F8FAFC] rounded-2xl p-4">
-                      <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Diagnósticos</p>
+                    <div className="bg-[#F5F5F7] rounded-2xl p-4">
+                      <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Diagnósticos</p>
                       {result.diagnosticos.map((d: string, i: number) => (
-                        <p key={i} className="text-sm text-[#0F172A]">· {d}</p>
+                        <p key={i} className="text-sm text-[#0A0A0A]">· {d}</p>
                       ))}
                     </div>
                   )}
                   {result.medicamentos?.length > 0 && (
-                    <div className="bg-[#F8FAFC] rounded-2xl p-4">
-                      <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Medicamentos</p>
+                    <div className="bg-[#F5F5F7] rounded-2xl p-4">
+                      <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Medicamentos</p>
                       {result.medicamentos.map((m: any, i: number) => (
-                        <p key={i} className="text-sm text-[#0F172A]">· {m.nombre} {m.dosis} {m.frecuencia}</p>
+                        <p key={i} className="text-sm text-[#0A0A0A]">· {m.nombre} {m.dosis} {m.frecuencia}</p>
                       ))}
                     </div>
                   )}
                   {result.sesiones?.length > 0 && (
-                    <div className="bg-[#F8FAFC] rounded-2xl p-4">
-                      <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">{result.sesiones.length} sesiones importadas</p>
+                    <div className="bg-[#F5F5F7] rounded-2xl p-4">
+                      <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">{result.sesiones.length} sesiones importadas</p>
                       {result.sesiones.slice(0, 3).map((s: any, i: number) => (
-                        <p key={i} className="text-sm text-[#0F172A]">· {s.fecha}: {s.notas?.slice(0, 60)}...</p>
+                        <p key={i} className="text-sm text-[#0A0A0A]">· {s.fecha}: {s.notas?.slice(0, 60)}...</p>
                       ))}
                       {result.sesiones.length > 3 && (
-                        <p className="text-xs text-[#64748B] mt-1">y {result.sesiones.length - 3} más...</p>
+                        <p className="text-xs text-[#6E6E73] mt-1">y {result.sesiones.length - 3} más...</p>
                       )}
                     </div>
                   )}
                 </div>
 
                 <button onClick={handleDone}
-                  className="w-full mt-4 bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1D4ED8] transition-colors">
+                  className="w-full mt-4 bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] transition-colors">
                   Ver historial actualizado
                 </button>
               </>

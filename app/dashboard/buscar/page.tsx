@@ -45,12 +45,12 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
   const totalResultados = patients.length + notas.length
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
       <div className="max-w-2xl mx-auto">
 
         <div className="mb-5">
-          <p className="text-[11px] text-[#64748B] font-medium uppercase tracking-widest mb-0.5">Búsqueda</p>
-          <h1 className="text-2xl font-bold text-[#0F172A]">Buscar en todo</h1>
+          <p className="text-[11px] text-[#6E6E73] font-medium uppercase tracking-widest mb-0.5">Búsqueda</p>
+          <h1 className="text-2xl font-bold text-[#0A0A0A]">Buscar en todo</h1>
         </div>
 
         <form method="get" className="mb-6">
@@ -60,41 +60,41 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
             defaultValue={rawQ ?? ''}
             autoFocus
             placeholder="Nombre, diagnóstico, medicación o texto de una sesión…"
-            className="w-full border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-white"
+            className="w-full border border-[#EDEDED] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-white"
           />
         </form>
 
         {!hasQuery ? (
-          <div className="bg-white rounded-2xl border border-[#E2E8F0] p-10 text-center">
+          <div className="bg-white rounded-2xl border border-[#EDEDED] p-10 text-center">
             <p className="text-2xl mb-2">🔍</p>
-            <p className="text-sm text-[#64748B]">Escribí al menos 2 caracteres para buscar en pacientes y notas de sesión.</p>
+            <p className="text-sm text-[#6E6E73]">Escribí al menos 2 caracteres para buscar en pacientes y notas de sesión.</p>
           </div>
         ) : totalResultados === 0 ? (
-          <div className="bg-white rounded-2xl border border-[#E2E8F0] p-10 text-center">
+          <div className="bg-white rounded-2xl border border-[#EDEDED] p-10 text-center">
             <p className="text-2xl mb-2">🫥</p>
-            <p className="text-sm font-semibold text-[#0F172A]">Sin resultados para “{q}”</p>
-            <p className="text-xs text-[#64748B] mt-1">Probá con otro término.</p>
+            <p className="text-sm font-semibold text-[#0A0A0A]">Sin resultados para “{q}”</p>
+            <p className="text-xs text-[#6E6E73] mt-1">Probá con otro término.</p>
           </div>
         ) : (
           <div className="flex flex-col gap-6">
 
             {patients.length > 0 && (
               <div>
-                <h2 className="text-[11px] font-semibold text-[#64748B] uppercase tracking-widest mb-2.5">Pacientes ({patients.length})</h2>
+                <h2 className="text-[11px] font-semibold text-[#6E6E73] uppercase tracking-widest mb-2.5">Pacientes ({patients.length})</h2>
                 <div className="flex flex-col gap-1.5">
                   {patients.map(p => (
                     <a key={p.id} href={"/dashboard/pacientes/" + p.id}
-                      className="bg-white rounded-xl border border-[#E2E8F0] px-3.5 py-3 flex items-center gap-3 hover:shadow-sm hover:border-[#CBD5E1] dark:hover:border-[#475569] transition-all">
-                      <div className="w-9 h-9 rounded-full bg-[#DBEAFE] flex items-center justify-center text-sm font-semibold text-[#2563EB] shrink-0 uppercase">
+                      className="bg-white rounded-xl border border-[#EDEDED] px-3.5 py-3 flex items-center gap-3 hover:shadow-sm hover:border-[#D2D2D7] dark:hover:border-[#6E6E73] transition-all">
+                      <div className="w-9 h-9 rounded-full bg-[#F0F0F0] flex items-center justify-center text-sm font-semibold text-[#0A0A0A] shrink-0 uppercase">
                         {p.full_name?.[0]}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-[#0F172A] truncate">{p.full_name}</p>
-                        <p className="text-xs text-[#64748B] truncate">
+                        <p className="text-sm font-semibold text-[#0A0A0A] truncate">{p.full_name}</p>
+                        <p className="text-xs text-[#6E6E73] truncate">
                           {[p.diagnosis, p.medication].filter(Boolean).join(' · ') || 'Sin diagnóstico'}
                         </p>
                       </div>
-                      <span className="text-[#CBD5E1] dark:text-[#475569] text-lg shrink-0">›</span>
+                      <span className="text-[#D2D2D7] dark:text-[#6E6E73] text-lg shrink-0">›</span>
                     </a>
                   ))}
                 </div>
@@ -103,7 +103,7 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
 
             {notas.length > 0 && (
               <div>
-                <h2 className="text-[11px] font-semibold text-[#64748B] uppercase tracking-widest mb-2.5">En notas de sesión ({notas.length})</h2>
+                <h2 className="text-[11px] font-semibold text-[#6E6E73] uppercase tracking-widest mb-2.5">En notas de sesión ({notas.length})</h2>
                 <div className="flex flex-col gap-1.5">
                   {notas.map((n: any, i: number) => {
                     const ses = n.sessions
@@ -112,14 +112,14 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
                       excerpt(n.plan, q) || excerpt(n.next_steps, q)
                     return (
                       <a key={i} href={"/dashboard/sesiones/" + ses?.id}
-                        className="bg-white rounded-xl border border-[#E2E8F0] px-4 py-3 block hover:shadow-sm hover:border-[#CBD5E1] dark:hover:border-[#475569] transition-all">
+                        className="bg-white rounded-xl border border-[#EDEDED] px-4 py-3 block hover:shadow-sm hover:border-[#D2D2D7] dark:hover:border-[#6E6E73] transition-all">
                         <div className="flex items-center justify-between gap-2 mb-1">
-                          <p className="text-sm font-semibold text-[#0F172A] truncate">{ses?.patients?.full_name}</p>
-                          <p className="text-[11px] text-[#94A3B8] shrink-0">
+                          <p className="text-sm font-semibold text-[#0A0A0A] truncate">{ses?.patients?.full_name}</p>
+                          <p className="text-[11px] text-[#A3A3A3] shrink-0">
                             {ses?.session_date ? new Date(ses.session_date).toLocaleDateString('es-UY', { timeZone: 'America/Montevideo', day: '2-digit', month: 'short', year: '2-digit' }) : ''}
                           </p>
                         </div>
-                        {frag && <p className="text-xs text-[#64748B] line-clamp-2">{frag}</p>}
+                        {frag && <p className="text-xs text-[#6E6E73] line-clamp-2">{frag}</p>}
                       </a>
                     )
                   })}

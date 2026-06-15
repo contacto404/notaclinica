@@ -73,37 +73,37 @@ export default function CobroButton({ patientId, patientName, sessionId }: {
 
       <button
         onClick={() => setOpen(true)}
-        className="border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
+        className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
         💳 Cobrar sesión
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-5 w-full max-w-sm border border-[#E2E8F0] shadow-xl">
-            <h3 className="text-base font-bold text-[#0F172A] mb-5">
+          <div className="bg-white rounded-2xl p-5 w-full max-w-sm border border-[#EDEDED] shadow-xl">
+            <h3 className="text-base font-bold text-[#0A0A0A] mb-5">
               Cobrar sesión — {patientName}
             </h3>
 
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Monto (UYU)</label>
+                <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Monto (UYU)</label>
                 <input
                   type="number"
                   value={amount}
                   onChange={e => setAmount(e.target.value)}
                   placeholder="Ej: 1500"
                   min="1"
-                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]"
+                  className="border border-[#EDEDED] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]"
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Descripción (opcional)</label>
+                <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Descripción (opcional)</label>
                 <input
                   type="text"
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                   placeholder={`Consulta - ${patientName}`}
-                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]"
+                  className="border border-[#EDEDED] rounded-xl px-4 py-3 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]"
                 />
               </div>
             </div>
@@ -119,13 +119,13 @@ export default function CobroButton({ patientId, patientName, sessionId }: {
               <button
                 onClick={handleCobrar}
                 disabled={loading || !amount}
-                className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1D4ED8] disabled:opacity-50 transition-colors"
+                className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors"
               >
                 {loading ? 'Generando...' : '💳 Generar link de pago'}
               </button>
               <button
                 onClick={() => setOpen(false)}
-                className="text-sm text-[#64748B] hover:text-[#0F172A] py-2 transition-colors"
+                className="text-sm text-[#6E6E73] hover:text-[#0A0A0A] py-2 transition-colors"
               >
                 Cancelar
               </button>

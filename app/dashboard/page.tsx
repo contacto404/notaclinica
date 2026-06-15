@@ -99,7 +99,7 @@ export default async function DashboardPage() {
   const nombre = user?.user_metadata?.full_name?.split(' ')[0] ?? 'Doctor'
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
       <OnboardingGuide />
       <DashboardClient
         patients={patients ?? []}

@@ -59,7 +59,7 @@ export default function OnboardingGuide() {
         {/* Cerrar */}
         <button
           onClick={cerrar}
-          className="absolute top-4 right-4 text-[#94A3B8] hover:text-[#475569] text-xl leading-none"
+          className="absolute top-4 right-4 text-[#A3A3A3] hover:text-[#6E6E73] text-xl leading-none"
         >
           ×
         </button>
@@ -70,7 +70,7 @@ export default function OnboardingGuide() {
             <div
               key={i}
               className={`h-1 rounded-full flex-1 transition-colors ${
-                i <= paso ? 'bg-[#2563EB]' : 'bg-[#E2E8F0]'
+                i <= paso ? 'bg-[#0A0A0A]' : 'bg-[#EDEDED]'
               }`}
             />
           ))}
@@ -82,10 +82,10 @@ export default function OnboardingGuide() {
         </div>
 
         {/* Contenido */}
-        <h2 className="text-xl font-bold text-[#0F172A] mb-3">
+        <h2 className="text-xl font-bold text-[#0A0A0A] mb-3">
           {actual.titulo}
         </h2>
-        <p className="text-[#475569] text-sm leading-relaxed mb-8">
+        <p className="text-[#6E6E73] text-sm leading-relaxed mb-8">
           {actual.descripcion}
         </p>
 
@@ -94,14 +94,14 @@ export default function OnboardingGuide() {
           {paso > 0 && (
             <button
               onClick={() => setPaso(paso - 1)}
-              className="flex-1 border border-[#E2E8F0] text-[#475569] py-3 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] transition-colors"
+              className="flex-1 border border-[#EDEDED] text-[#6E6E73] py-3 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] transition-colors"
             >
               Anterior
             </button>
           )}
           <button
             onClick={siguiente}
-            className="flex-1 bg-[#2563EB] text-white py-3 rounded-xl text-sm font-semibold hover:bg-[#1D4ED8] transition-colors"
+            className="flex-1 bg-[#0A0A0A] text-white py-3 rounded-xl text-sm font-semibold hover:bg-[#262626] transition-colors"
           >
             {paso < pasos.length - 1 ? 'Siguiente →' : '¡Empezar!'}
           </button>
@@ -111,7 +111,7 @@ export default function OnboardingGuide() {
         {paso < pasos.length - 1 && (
           <button
             onClick={cerrar}
-            className="w-full text-center text-xs text-[#94A3B8] mt-4 hover:text-[#64748B]"
+            className="w-full text-center text-xs text-[#A3A3A3] mt-4 hover:text-[#6E6E73]"
           >
             Saltar guía
           </button>

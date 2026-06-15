@@ -21,22 +21,22 @@ export default function DarDeBajaButton({ patientId, patientName }: {
   return (
     <>
       <button onClick={() => setOpen(true)}
-        className="text-xs text-[#64748B] hover:text-red-500 transition-colors underline underline-offset-2">
+        className="text-xs text-[#6E6E73] hover:text-red-500 transition-colors underline underline-offset-2">
         🗑 Dar de baja paciente
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-5 w-full max-w-sm border border-[#E2E8F0] shadow-xl">
-            <h3 className="text-base font-bold text-[#0F172A] mb-2">¿Dar de baja a {patientName}?</h3>
-            <p className="text-sm text-[#64748B] mb-6">Esta acción eliminará al paciente y todo su historial de sesiones. No se puede deshacer.</p>
+          <div className="bg-white rounded-2xl p-5 w-full max-w-sm border border-[#EDEDED] shadow-xl">
+            <h3 className="text-base font-bold text-[#0A0A0A] mb-2">¿Dar de baja a {patientName}?</h3>
+            <p className="text-sm text-[#6E6E73] mb-6">Esta acción eliminará al paciente y todo su historial de sesiones. No se puede deshacer.</p>
             <div className="flex flex-col gap-2">
               <button onClick={handleDelete} disabled={loading}
                 className="bg-red-500 text-white rounded-xl py-3 text-sm font-semibold hover:bg-red-600 disabled:opacity-50 transition-colors">
                 {loading ? 'Eliminando...' : 'Sí, dar de baja'}
               </button>
               <button onClick={() => setOpen(false)}
-                className="text-sm text-[#64748B] hover:text-[#0F172A] py-2 transition-colors">
+                className="text-sm text-[#6E6E73] hover:text-[#0A0A0A] py-2 transition-colors">
                 Cancelar
               </button>
             </div>

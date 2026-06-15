@@ -15,7 +15,7 @@ export default function NavbarMobile() {
 
   return (
     <nav
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E2E8F0] flex justify-around items-center"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#EDEDED] flex justify-around items-center"
       style={{
         paddingBottom: 'max(env(safe-area-inset-bottom), 8px)',
         height: 'calc(max(env(safe-area-inset-bottom), 8px) + 56px)'
@@ -27,13 +27,13 @@ export default function NavbarMobile() {
           <Link key={item.href} href={item.href}
             className="flex-1 flex flex-col items-center justify-center py-2 gap-1 transition-colors relative"
           >
-            <span className={`text-xl ${item.label === 'Nuevo' ? `w-8 h-8 flex items-center justify-center rounded-full text-base font-bold ${active ? 'bg-[#2563EB] text-white' : 'bg-[#EFF6FF] text-[#2563EB]'}` : ''}`}>
+            <span className={`text-xl ${item.label === 'Nuevo' ? `w-8 h-8 flex items-center justify-center rounded-full text-base font-bold ${active ? 'bg-[#0A0A0A] text-white' : 'bg-[#F5F5F7] text-[#0A0A0A]'}` : ''}`}>
               {item.icon}
             </span>
-            <span className={`text-xs font-medium ${active ? 'text-[#2563EB]' : 'text-[#94A3B8]'}`}>
+            <span className={`text-xs font-medium ${active ? 'text-[#0A0A0A]' : 'text-[#A3A3A3]'}`}>
               {item.label}
             </span>
-            {active && <span className="absolute bottom-0 w-8 h-0.5 bg-[#2563EB] rounded-full" />}
+            {active && <span className="absolute bottom-0 w-8 h-0.5 bg-[#0A0A0A] rounded-full" />}
           </Link>
         )
       })}

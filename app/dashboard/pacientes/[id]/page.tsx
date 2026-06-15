@@ -81,76 +81,76 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
   const totalSessions = sessions?.length ?? 0
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
       <div className="max-w-3xl mx-auto">
 
         <div className="mb-6">
-          <a href="/dashboard" className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium inline-block">
+          <a href="/dashboard" className="text-xs text-[#6E6E73] hover:text-[#0A0A0A] transition-colors font-medium inline-block">
             ← Volver
           </a>
         </div>
 
         {/* Card paciente */}
-        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
           <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-full bg-[#DBEAFE] flex items-center justify-center text-2xl font-bold text-[#2563EB] shrink-0">
+            <div className="w-16 h-16 rounded-full bg-[#F0F0F0] flex items-center justify-center text-2xl font-bold text-[#0A0A0A] shrink-0">
               {patient.full_name?.[0]}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold text-[#0F172A]">{patient.full_name}</h1>
+                <h1 className="text-xl font-bold text-[#0A0A0A]">{patient.full_name}</h1>
                 <EditarPacienteButton patient={patient} />
               </div>
-              <p className="text-sm text-[#64748B] mt-0.5">{patient.diagnosis ?? 'Sin diagnostico'}</p>
+              <p className="text-sm text-[#6E6E73] mt-0.5">{patient.diagnosis ?? 'Sin diagnostico'}</p>
               {patient.phone && (
-                <p className="text-xs text-[#64748B] mt-0.5">📱 {patient.phone}</p>
+                <p className="text-xs text-[#6E6E73] mt-0.5">📱 {patient.phone}</p>
               )}
               {patient.insurance_provider && (
-                <p className="text-xs text-[#64748B] mt-0.5">🏥 {patient.insurance_provider}{patient.insurance_member_id ? ` · Afiliado ${patient.insurance_member_id}` : ''}</p>
+                <p className="text-xs text-[#6E6E73] mt-0.5">🏥 {patient.insurance_provider}{patient.insurance_member_id ? ` · Afiliado ${patient.insurance_member_id}` : ''}</p>
               )}
             </div>
           </div>
           <div className="flex gap-2 mt-4 flex-wrap">
             <ConsentimientoButton patientId={id} patientName={patient.full_name} professionalId={user.id} consent={consent} />
-            <a href={"/dashboard/pacientes/" + id + "/historial"} className="border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
+            <a href={"/dashboard/pacientes/" + id + "/historial"} className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
               🔍 Historial IA
             </a>
             <ReporteButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} nextAppointment={nextAppointment} />
             <RecetaButton patientId={id} patientName={patient.full_name} />
             <PortalLinkButton token={patient.portal_token} patientPhone={patient.phone} />
-            <a href="https://zoom.us/start/videomeeting" target="_blank" rel="noopener noreferrer" className="border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] flex items-center gap-2 transition-colors">
+            <a href="https://zoom.us/start/videomeeting" target="_blank" rel="noopener noreferrer" className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
               📹 Videollamada
             </a>
             <CobroButton patientId={id} patientName={patient.full_name} sessionId={lastSummarizedSession?.id} />
-            <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1D4ED8] flex items-center gap-2 transition-colors shadow-sm">
+            <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#0A0A0A] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#262626] flex items-center gap-2 transition-colors shadow-sm">
               🎙️ Nueva sesion
             </a>
           </div>
           {patient.notes && (
-            <div className="mt-5 pt-4 border-t border-[#E2E8F0]">
-              <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1.5">Notas</p>
-              <p className="text-sm text-[#475569]">{patient.notes}</p>
+            <div className="mt-5 pt-4 border-t border-[#EDEDED]">
+              <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1.5">Notas</p>
+              <p className="text-sm text-[#6E6E73]">{patient.notes}</p>
             </div>
           )}
         </div>
 
         {/* Card próximo turno */}
-        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
+        <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">Proximo turno</h2>
+            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest">Proximo turno</h2>
             <AgendarButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} hasAppointment={!!nextAppointment} currentAppointment={nextAppointment} lastSessionId={lastSummarizedSession?.id} />
           </div>
           {nextAppointment ? (
-            <div className="bg-[#DBEAFE] rounded-2xl p-4 flex items-center gap-3">
+            <div className="bg-[#F0F0F0] rounded-2xl p-4 flex items-center gap-3">
               <span className="text-2xl">📅</span>
               <div>
-                <p className="text-sm font-semibold text-[#0F172A]">
+                <p className="text-sm font-semibold text-[#0A0A0A]">
                   {new Date(nextAppointment.appointment_date).toLocaleDateString('es-UY', {
                     timeZone: 'America/Montevideo',
                     weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
                   })}
                 </p>
-                <p className="text-xs text-[#1E40AF]">
+                <p className="text-xs text-[#0A0A0A]">
                   {new Date(nextAppointment.appointment_date).toLocaleTimeString('es-UY', {
                     timeZone: 'America/Montevideo',
                     hour: '2-digit', minute: '2-digit'
@@ -160,34 +160,34 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               </div>
             </div>
           ) : (
-            <p className="text-sm text-[#64748B]">No hay turno agendado.</p>
+            <p className="text-sm text-[#6E6E73]">No hay turno agendado.</p>
           )}
         </div>
 
         {/* Pre-consulta enviada por el paciente */}
         {preconsulta && (
-          <div className="bg-white rounded-2xl p-5 mb-4 border-l-2 border-[#0A0A0A] dark:border-white border-y border-r border-[#E2E8F0]">
+          <div className="bg-white rounded-2xl p-5 mb-4 border-l-2 border-[#0A0A0A] dark:border-white border-y border-r border-[#EDEDED]">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">📝 Pre-consulta del paciente</h2>
-              <span className="text-[11px] text-[#94A3B8] shrink-0">
+              <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest">📝 Pre-consulta del paciente</h2>
+              <span className="text-[11px] text-[#A3A3A3] shrink-0">
                 {new Date(preconsulta.created_at).toLocaleDateString('es-UY', { timeZone: 'America/Montevideo', day: '2-digit', month: 'short' })}
               </span>
             </div>
             <div className="flex flex-col gap-3">
               <div>
-                <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Motivo de consulta</p>
-                <p className="text-sm text-[#0F172A] leading-relaxed">{preconsulta.motivo}</p>
+                <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Motivo de consulta</p>
+                <p className="text-sm text-[#0A0A0A] leading-relaxed">{preconsulta.motivo}</p>
               </div>
               {preconsulta.antecedentes && (
                 <div>
-                  <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Antecedentes</p>
-                  <p className="text-sm text-[#0F172A] leading-relaxed">{preconsulta.antecedentes}</p>
+                  <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Antecedentes</p>
+                  <p className="text-sm text-[#0A0A0A] leading-relaxed">{preconsulta.antecedentes}</p>
                 </div>
               )}
               {preconsulta.medicacion && (
                 <div>
-                  <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Medicación actual</p>
-                  <p className="text-sm text-[#0F172A] leading-relaxed">{preconsulta.medicacion}</p>
+                  <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Medicación actual</p>
+                  <p className="text-sm text-[#0A0A0A] leading-relaxed">{preconsulta.medicacion}</p>
                 </div>
               )}
             </div>
@@ -196,45 +196,45 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
 
         {/* Card briefing pre-consulta */}
         {lastSummarizedSession && (
-          <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
-            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">🧠 Antes de entrar</h2>
+          <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
+            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">🧠 Antes de entrar</h2>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">🏥</span>
                 <div>
-                  <p className="text-xs text-[#64748B] font-medium">Diagnostico</p>
-                  <p className="text-sm text-[#0F172A]">{patient.diagnosis ?? 'No registrado'}</p>
+                  <p className="text-xs text-[#6E6E73] font-medium">Diagnostico</p>
+                  <p className="text-sm text-[#0A0A0A]">{patient.diagnosis ?? 'No registrado'}</p>
                 </div>
               </div>
               {patient.medication && (
                 <div className="flex items-start gap-3">
                   <span className="text-lg mt-0.5">💊</span>
                   <div>
-                    <p className="text-xs text-[#64748B] font-medium">Medicacion</p>
-                    <p className="text-sm text-[#0F172A]">{patient.medication}</p>
+                    <p className="text-xs text-[#6E6E73] font-medium">Medicacion</p>
+                    <p className="text-sm text-[#0A0A0A]">{patient.medication}</p>
                   </div>
                 </div>
               )}
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">📋</span>
                 <div>
-                  <p className="text-xs text-[#64748B] font-medium">Ultima sesion</p>
-                  <p className="text-sm text-[#0F172A]">
+                  <p className="text-xs text-[#6E6E73] font-medium">Ultima sesion</p>
+                  <p className="text-sm text-[#0A0A0A]">
                     {new Date(lastSummarizedSession.session_date).toLocaleDateString('es-UY', {
                       timeZone: 'America/Montevideo',
                       day: '2-digit', month: 'long', year: 'numeric'
                     })}
                   </p>
                   {lastSummaryText && (
-                    <p className="text-xs text-[#475569] mt-1 line-clamp-3">{lastSummaryText}</p>
+                    <p className="text-xs text-[#6E6E73] mt-1 line-clamp-3">{lastSummaryText}</p>
                   )}
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-lg mt-0.5">📊</span>
                 <div>
-                  <p className="text-xs text-[#64748B] font-medium">Sesiones totales</p>
-                  <p className="text-sm text-[#0F172A]">{totalSessions} consulta{totalSessions !== 1 ? 's' : ''}</p>
+                  <p className="text-xs text-[#6E6E73] font-medium">Sesiones totales</p>
+                  <p className="text-sm text-[#0A0A0A]">{totalSessions} consulta{totalSessions !== 1 ? 's' : ''}</p>
                 </div>
               </div>
             </div>
@@ -243,21 +243,21 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
 
         {/* Check-ins del portal */}
         {checkins && checkins.length > 0 && (
-          <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
-            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest mb-4">📲 Registros del paciente</h2>
+          <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
+            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">📲 Registros del paciente</h2>
             <div className="flex flex-col gap-2.5">
               {checkins.map((c: any, i: number) => (
-                <div key={i} className="bg-[#F8FAFC] rounded-xl p-3">
+                <div key={i} className="bg-[#F5F5F7] rounded-xl p-3">
                   <div className="flex items-center justify-between gap-2 mb-1">
                     <div className="flex gap-3">
-                      {c.mood != null && <span className="text-xs font-medium text-[#0F172A]">Ánimo <span className="text-[#2563EB] font-bold">{c.mood}/10</span></span>}
-                      {c.anxiety != null && <span className="text-xs font-medium text-[#0F172A]">Ansiedad <span className="text-[#2563EB] font-bold">{c.anxiety}/10</span></span>}
+                      {c.mood != null && <span className="text-xs font-medium text-[#0A0A0A]">Ánimo <span className="text-[#0A0A0A] font-bold">{c.mood}/10</span></span>}
+                      {c.anxiety != null && <span className="text-xs font-medium text-[#0A0A0A]">Ansiedad <span className="text-[#0A0A0A] font-bold">{c.anxiety}/10</span></span>}
                     </div>
-                    <span className="text-[11px] text-[#94A3B8] shrink-0">
+                    <span className="text-[11px] text-[#A3A3A3] shrink-0">
                       {new Date(c.created_at).toLocaleDateString('es-UY', { timeZone: 'America/Montevideo', day: '2-digit', month: 'short' })}
                     </span>
                   </div>
-                  {c.note && <p className="text-xs text-[#475569] leading-relaxed">{c.note}</p>}
+                  {c.note && <p className="text-xs text-[#6E6E73] leading-relaxed">{c.note}</p>}
                 </div>
               ))}
             </div>
@@ -281,33 +281,33 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         )}
 
         {/* Card historial de sesiones */}
-        <div className="bg-white rounded-2xl p-5 border border-[#E2E8F0]">
+        <div className="bg-white rounded-2xl p-5 border border-[#EDEDED]">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">Historial de sesiones</h2>
+            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest">Historial de sesiones</h2>
             <ImportarHistorialButton patientId={id} />
           </div>
           {sessions && sessions.length > 0 ? (
-            <div className="flex flex-col divide-y divide-[#E2E8F0]">
+            <div className="flex flex-col divide-y divide-[#EDEDED]">
               {sessions.map((s: any) => (
                 <div key={s.id} className="py-4 flex items-center gap-3">
-                  <div className={"w-9 h-9 rounded-full flex items-center justify-center text-sm shrink-0 " + (s.status === 'summarized' ? 'bg-[#E8F4E8] text-[#2D6A2D]' : 'bg-[#DBEAFE] text-[#1E40AF]')}>
+                  <div className={"w-9 h-9 rounded-full flex items-center justify-center text-sm shrink-0 " + (s.status === 'summarized' ? 'bg-[#E8F4E8] text-[#2D6A2D]' : 'bg-[#F0F0F0] text-[#0A0A0A]')}>
                     {s.status === 'summarized' ? '✓' : '⏳'}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-[#0F172A]">
+                    <p className="text-sm font-semibold text-[#0A0A0A]">
                       {new Date(s.session_date).toLocaleDateString('es-UY', {
                         timeZone: 'America/Montevideo',
                         day: '2-digit', month: 'long', year: 'numeric'
                       })}
                     </p>
-                    <p className="text-xs text-[#64748B] mt-0.5">
+                    <p className="text-xs text-[#6E6E73] mt-0.5">
                       {s.status === 'pending' && 'Pendiente de transcripcion'}
                       {s.status === 'transcribed' && 'Transcripta - resumen pendiente'}
                       {s.status === 'summarized' && 'Sesion completa'}
                     </p>
                   </div>
                   {s.status === 'summarized' && (
-                    <a href={"/dashboard/sesiones/" + s.id} className="text-xs text-[#2563EB] hover:underline shrink-0 font-medium">
+                    <a href={"/dashboard/sesiones/" + s.id} className="text-xs text-[#0A0A0A] hover:underline shrink-0 font-medium">
                       Ver resumen →
                     </a>
                   )}
@@ -317,8 +317,8 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           ) : (
             <div className="text-center py-10">
               <p className="text-2xl mb-2">📋</p>
-              <p className="text-sm text-[#64748B]">No hay sesiones todavia.</p>
-              <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="text-sm text-[#2563EB] mt-1 inline-block hover:underline">
+              <p className="text-sm text-[#6E6E73]">No hay sesiones todavia.</p>
+              <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="text-sm text-[#0A0A0A] mt-1 inline-block hover:underline">
                 + Iniciar primera sesion
               </a>
             </div>
@@ -326,10 +326,10 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         </div>
 
         <div className="mt-3 flex items-center justify-center gap-4">
-          <a href={"/api/export-historial?patientId=" + id} target="_blank" className="text-xs text-[#64748B] hover:text-[#2563EB] transition-colors underline underline-offset-2">
+          <a href={"/api/export-historial?patientId=" + id} target="_blank" className="text-xs text-[#6E6E73] hover:text-[#0A0A0A] transition-colors underline underline-offset-2">
             Exportar historial completo
           </a>
-          <span className="text-[#CBD5E1]">·</span>
+          <span className="text-[#D2D2D7]">·</span>
           <DarDeBajaButton patientId={id} patientName={patient.full_name} />
         </div>
 

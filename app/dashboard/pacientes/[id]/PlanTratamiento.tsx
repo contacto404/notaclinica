@@ -60,23 +60,23 @@ export default function PlanTratamiento({ patientId, goals }: { patientId: strin
   function GoalRow({ g }: { g: Goal }) {
     const achieved = g.status === 'achieved'
     return (
-      <div className="py-2.5 flex items-center gap-3 border-b border-[#E2E8F0] last:border-b-0">
+      <div className="py-2.5 flex items-center gap-3 border-b border-[#EDEDED] last:border-b-0">
         <button
           onClick={() => toggle(g)}
           disabled={busyId === g.id}
           className={
             'w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 cursor-pointer transition-colors ' +
-            (achieved ? 'bg-[#0A0A0A] border-[#0A0A0A] text-white' : 'border-[#CBD5E1] hover:border-[#0A0A0A]')
+            (achieved ? 'bg-[#0A0A0A] border-[#0A0A0A] text-white' : 'border-[#D2D2D7] hover:border-[#0A0A0A]')
           }
           aria-label={achieved ? 'Marcar como activo' : 'Marcar como logrado'}
         >
           {achieved && <span className="text-[11px] leading-none">✓</span>}
         </button>
-        <p className={'text-sm flex-1 ' + (achieved ? 'text-[#94A3B8] line-through' : 'text-[#0F172A]')}>{g.title}</p>
+        <p className={'text-sm flex-1 ' + (achieved ? 'text-[#A3A3A3] line-through' : 'text-[#0A0A0A]')}>{g.title}</p>
         <button
           onClick={() => eliminar(g)}
           disabled={busyId === g.id}
-          className="text-[#CBD5E1] hover:text-red-500 text-sm shrink-0 cursor-pointer transition-colors"
+          className="text-[#D2D2D7] hover:text-red-500 text-sm shrink-0 cursor-pointer transition-colors"
           aria-label="Eliminar"
         >
           ✕
@@ -86,11 +86,11 @@ export default function PlanTratamiento({ patientId, goals }: { patientId: strin
   }
 
   return (
-    <div className="bg-white rounded-2xl p-5 mb-4 border border-[#E2E8F0]">
+    <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">🎯 Plan de tratamiento</h2>
+        <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest">🎯 Plan de tratamiento</h2>
         {goals.length > 0 && (
-          <span className="text-xs text-[#94A3B8]">{logrados.length}/{goals.length} logrados</span>
+          <span className="text-xs text-[#A3A3A3]">{logrados.length}/{goals.length} logrados</span>
         )}
       </div>
 
@@ -101,12 +101,12 @@ export default function PlanTratamiento({ patientId, goals }: { patientId: strin
           onChange={e => setTitle(e.target.value)}
           onKeyDown={e => { if (e.key === 'Enter') agregar() }}
           placeholder="Nuevo objetivo terapéutico…"
-          className="flex-1 border border-[#E2E8F0] rounded-xl px-4 py-2.5 text-sm text-[#0F172A] outline-none focus:border-[#2563EB] bg-[#F8FAFC]"
+          className="flex-1 border border-[#EDEDED] rounded-xl px-4 py-2.5 text-sm text-[#0A0A0A] outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]"
         />
         <button
           onClick={agregar}
           disabled={!title.trim() || adding}
-          className="bg-[#2563EB] text-white rounded-xl px-4 py-2.5 text-sm font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 cursor-pointer shrink-0"
+          className="bg-[#0A0A0A] text-white rounded-xl px-4 py-2.5 text-sm font-medium hover:bg-[#262626] transition-colors disabled:opacity-50 cursor-pointer shrink-0"
         >
           {adding ? '…' : 'Agregar'}
         </button>
@@ -116,12 +116,12 @@ export default function PlanTratamiento({ patientId, goals }: { patientId: strin
         <div>
           {activos.map(g => <GoalRow key={g.id} g={g} />)}
           {logrados.length > 0 && activos.length > 0 && (
-            <p className="text-[11px] text-[#94A3B8] uppercase tracking-widest mt-4 mb-1">Logrados</p>
+            <p className="text-[11px] text-[#A3A3A3] uppercase tracking-widest mt-4 mb-1">Logrados</p>
           )}
           {logrados.map(g => <GoalRow key={g.id} g={g} />)}
         </div>
       ) : (
-        <p className="text-sm text-[#64748B]">Sumá los objetivos del tratamiento para seguir el progreso sesión a sesión.</p>
+        <p className="text-sm text-[#6E6E73]">Sumá los objetivos del tratamiento para seguir el progreso sesión a sesión.</p>
       )}
     </div>
   )

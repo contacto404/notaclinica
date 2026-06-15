@@ -12,7 +12,7 @@ export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <div className="grid grid-cols-3 gap-2 p-1 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0]">
+    <div className="grid grid-cols-3 gap-2 p-1 bg-[#F5F5F7] rounded-xl border border-[#EDEDED]">
       {OPTIONS.map(opt => {
         const active = theme === opt.value
         return (
@@ -24,8 +24,8 @@ export default function ThemeToggle() {
             className={
               'flex flex-col items-center justify-center gap-1 rounded-lg py-2.5 text-xs font-medium transition-colors cursor-pointer ' +
               (active
-                ? 'bg-[#2563EB] text-white'
-                : 'text-[#475569] hover:bg-[#E2E8F0]')
+                ? 'bg-[#0A0A0A] text-white'
+                : 'text-[#6E6E73] hover:bg-[#EDEDED]')
             }
           >
             <span className="text-base leading-none">{opt.icon}</span>

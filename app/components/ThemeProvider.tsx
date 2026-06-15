@@ -16,8 +16,8 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 const STORAGE_KEY = 'theme'
 const THEME_COLOR: Record<Resolved, string> = {
-  light: '#2563EB',
-  dark: '#0F172A',
+  light: '#0A0A0A',
+  dark: '#0A0A0A',
 }
 
 function systemPrefersDark() {

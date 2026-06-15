@@ -77,49 +77,49 @@ export default function AgendarButton({
 
       <button
         onClick={() => setOpen(true)}
-        className="bg-[#2563EB] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#1D4ED8] transition-colors flex items-center gap-1.5">
+        className="bg-[#0A0A0A] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#262626] transition-colors flex items-center gap-1.5">
         📅 {hasAppointment ? 'Reagendar' : 'Agendar'}
       </button>
 
       {open && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-5 w-full max-w-sm border border-[#E2E8F0] shadow-xl">
-            <h3 className="text-base font-bold text-[#0F172A] mb-5">
+          <div className="bg-white rounded-2xl p-5 w-full max-w-sm border border-[#EDEDED] shadow-xl">
+            <h3 className="text-base font-bold text-[#0A0A0A] mb-5">
               {hasAppointment ? 'Reagendar turno' : 'Agendar turno'} — {patientName}
             </h3>
 
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Fecha</label>
+                <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Fecha</label>
                 <input type="date" value={date} onChange={e => setDate(e.target.value)}
-                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC] w-full" />
+                  className="border border-[#EDEDED] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0A0A0A] bg-[#F5F5F7] w-full" />
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Hora</label>
+                <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Hora</label>
                 <div className="flex gap-2">
                   <select value={hour} onChange={e => setHour(e.target.value)}
-                    className="flex-1 border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]">
+                    className="flex-1 border border-[#EDEDED] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]">
                     {hours.map(h => <option key={h} value={h}>{h}hs</option>)}
                   </select>
                   <select value={minute} onChange={e => setMinute(e.target.value)}
-                    className="flex-1 border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]">
+                    className="flex-1 border border-[#EDEDED] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]">
                     {minutes.map(m => <option key={m} value={m}>{m}min</option>)}
                   </select>
                 </div>
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-[#64748B] font-medium uppercase tracking-widest">Notas (opcional)</label>
+                <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Notas (opcional)</label>
                 <input type="text" value={notes} onChange={e => setNotes(e.target.value)}
                   placeholder="Ej: traer estudios"
-                  className="border border-[#E2E8F0] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2563EB] bg-[#F8FAFC]" />
+                  className="border border-[#EDEDED] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0A0A0A] bg-[#F5F5F7]" />
               </div>
             </div>
 
             <div className="flex flex-col gap-2 mt-6">
               <button onClick={handleSave} disabled={loading || !date}
-                className="bg-[#2563EB] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1D4ED8] disabled:opacity-50 transition-colors">
+                className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors">
                 {loading ? 'Guardando...' : hasAppointment ? 'Guardar nuevo turno' : 'Confirmar turno'}
               </button>
 
@@ -131,7 +131,7 @@ export default function AgendarButton({
               )}
 
               <button onClick={() => setOpen(false)}
-                className="text-sm text-[#64748B] hover:text-[#0F172A] py-2 transition-colors">
+                className="text-sm text-[#6E6E73] hover:text-[#0A0A0A] py-2 transition-colors">
                 Cancelar
               </button>
             </div>

@@ -47,20 +47,20 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
     .maybeSingle()
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] p-5 md:p-8">
+    <div className="min-h-screen bg-[#F5F5F7] p-5 md:p-8">
       <div className="max-w-2xl mx-auto">
 
         <div className="mb-6">
-          <a href={"/dashboard/pacientes/" + patient.id} className="text-xs text-[#64748B] hover:text-[#0F172A] transition-colors font-medium">
+          <a href={"/dashboard/pacientes/" + patient.id} className="text-xs text-[#6E6E73] hover:text-[#0A0A0A] transition-colors font-medium">
             ← Volver al paciente
           </a>
         </div>
 
         <div className="flex items-start justify-between gap-4 mb-6 flex-wrap">
           <div>
-            <p className="text-xs text-[#64748B] font-medium uppercase tracking-widest mb-1">Sesion</p>
-            <h1 className="text-2xl font-bold text-[#0F172A]">{patient.full_name}</h1>
-            <p className="text-sm text-[#64748B] mt-0.5">
+            <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1">Sesion</p>
+            <h1 className="text-2xl font-bold text-[#0A0A0A]">{patient.full_name}</h1>
+            <p className="text-sm text-[#6E6E73] mt-0.5">
               {new Date(session.session_date).toLocaleDateString('es-UY', {
                 timeZone: 'America/Montevideo',
                 day: '2-digit', month: 'long', year: 'numeric'

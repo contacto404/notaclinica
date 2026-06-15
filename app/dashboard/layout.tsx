@@ -44,55 +44,55 @@ export default async function DashboardLayout({
   if (!isActive) redirect('/suscripcion')
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-[#F5F5F7]">
 
       {/* Header móvil */}
       <header
-        className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC] border-b border-[#E2E8F0]"
+        className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F5F5F7] border-b border-[#EDEDED]"
         style={{ paddingTop: 'var(--safe-top)' }}
       >
         <div className="px-4 flex items-center justify-center h-14">
-          <span className="font-light text-[#0F172A] text-lg tracking-tight lowercase">notaclinica</span>
+          <span className="font-light text-[#0A0A0A] text-lg tracking-tight lowercase">notaclinica</span>
         </div>
       </header>
 
       {/* Sidebar desktop */}
-      <aside className="hidden md:flex flex-col fixed top-0 left-0 h-full w-56 bg-[#F8FAFC] border-r border-[#E2E8F0] py-6 px-3 z-40">
+      <aside className="hidden md:flex flex-col fixed top-0 left-0 h-full w-56 bg-[#F5F5F7] border-r border-[#EDEDED] py-6 px-3 z-40">
         <div className="mb-8 px-3">
-          <span className="font-light text-[#0F172A] text-lg tracking-tight lowercase">notaclinica</span>
+          <span className="font-light text-[#0A0A0A] text-lg tracking-tight lowercase">notaclinica</span>
         </div>
         <nav className="flex flex-col gap-1">
           <Link href="/dashboard"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
             🏠 Inicio
           </Link>
           <Link href="/dashboard/agenda"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
             📅 Agenda
           </Link>
           <Link href="/dashboard/buscar"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
             🔍 Buscar
           </Link>
           <Link href="/dashboard/pacientes/nuevo"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
             + Nuevo paciente
           </Link>
           <Link href="/dashboard/honorarios"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
             💳 Honorarios
           </Link>
           <Link href="/dashboard/estadisticas"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
             📊 Estadísticas
           </Link>
           <Link href="/dashboard/cuenta"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#475569] hover:bg-[#E2E8F0] transition-colors">
+            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
             ⚙️ Mi cuenta
           </Link>
         </nav>
-        <div className="border-t border-[#E2E8F0] pt-4 mt-auto">
-          <p className="text-xs text-[#64748B] px-3 mb-2 truncate">{user.email}</p>
+        <div className="border-t border-[#EDEDED] pt-4 mt-auto">
+          <p className="text-xs text-[#6E6E73] px-3 mb-2 truncate">{user.email}</p>
           <LogoutButton />
         </div>
       </aside>

@@ -107,8 +107,8 @@ export default function ConsentimientoButton({ patientId, patientName, professio
           <div className="bg-white rounded-2xl p-5 w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
 
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base font-bold text-[#0F172A]">📋 Consentimiento informado</h2>
-              <button onClick={() => setOpen(false)} className="text-[#94A3B8] hover:text-[#0F172A] text-xl leading-none">×</button>
+              <h2 className="text-base font-bold text-[#0A0A0A]">📋 Consentimiento informado</h2>
+              <button onClick={() => setOpen(false)} className="text-[#A3A3A3] hover:text-[#0A0A0A] text-xl leading-none">×</button>
             </div>
 
             {signed ? (
@@ -125,23 +125,23 @@ export default function ConsentimientoButton({ patientId, patientName, professio
                 </div>
                 <button
                   onClick={() => setOpen(false)}
-                  className="w-full border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] transition-colors"
+                  className="w-full border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] transition-colors"
                 >
                   Cerrar
                 </button>
               </>
             ) : (
               <>
-                <p className="text-xs text-[#64748B] mb-3">
-                  Paciente: <span className="font-semibold text-[#0F172A]">{patientName}</span>
+                <p className="text-xs text-[#6E6E73] mb-3">
+                  Paciente: <span className="font-semibold text-[#0A0A0A]">{patientName}</span>
                 </p>
 
-                <div className="bg-[#F8FAFC] rounded-2xl p-4 mb-4 border border-[#E2E8F0] text-xs text-[#475569] whitespace-pre-line leading-relaxed max-h-48 overflow-y-auto">
+                <div className="bg-[#F5F5F7] rounded-2xl p-4 mb-4 border border-[#EDEDED] text-xs text-[#6E6E73] whitespace-pre-line leading-relaxed max-h-48 overflow-y-auto">
                   {CONSENT_TEXT}
                 </div>
 
                 <div className="mb-3">
-                  <label className="text-xs font-medium text-[#64748B] block mb-1.5">
+                  <label className="text-xs font-medium text-[#6E6E73] block mb-1.5">
                     Nombre completo del paciente
                   </label>
                   <input
@@ -149,7 +149,7 @@ export default function ConsentimientoButton({ patientId, patientName, professio
                     value={nombre}
                     onChange={e => setNombre(e.target.value)}
                     placeholder="Ej: María García"
-                    className="w-full border border-[#E2E8F0] rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
+                    className="w-full border border-[#EDEDED] rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]/20 focus:border-[#0A0A0A]"
                   />
                 </div>
 
@@ -158,9 +158,9 @@ export default function ConsentimientoButton({ patientId, patientName, professio
                     type="checkbox"
                     checked={aceptado}
                     onChange={e => setAceptado(e.target.checked)}
-                    className="mt-0.5 accent-[#2563EB]"
+                    className="mt-0.5 accent-[#0A0A0A]"
                   />
-                  <span className="text-xs text-[#475569]">
+                  <span className="text-xs text-[#6E6E73]">
                     El paciente declara haber leído y comprendido el consentimiento informado y acepta sus términos voluntariamente.
                   </span>
                 </label>
@@ -171,14 +171,14 @@ export default function ConsentimientoButton({ patientId, patientName, professio
                   <button
                     onClick={handlePendiente}
                     disabled={loading}
-                    className="flex-1 border border-[#E2E8F0] text-[#475569] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F8FAFC] transition-colors disabled:opacity-50"
+                    className="flex-1 border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] transition-colors disabled:opacity-50"
                   >
                     Dejar pendiente
                   </button>
                   <button
                     onClick={handleFirmar}
                     disabled={loading}
-                    className="flex-1 bg-[#2563EB] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1D4ED8] transition-colors disabled:opacity-50 shadow-sm"
+                    className="flex-1 bg-[#0A0A0A] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#262626] transition-colors disabled:opacity-50 shadow-sm"
                   >
                     {loading ? 'Guardando...' : 'Registrar firma'}
                   </button>
