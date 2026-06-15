@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Toast from '../../components/Toast'
+import { capitalizar } from '@/lib/sessionStatus'
+import { DIAGNOSTICOS_COMUNES } from '@/lib/diagnosticos'
 
 export default function EditarPacienteButton({ patient }: {
   patient: {
@@ -34,8 +36,8 @@ export default function EditarPacienteButton({ patient }: {
   async function handleSave() {
     setLoading(true)
     await supabase.from('patients').update({
-      full_name: fields.full_name,
-      diagnosis: fields.diagnosis || null,
+      full_name: capitalizar(fields.full_name),
+      diagnosis: fields.diagnosis ? capitalizar(fields.diagnosis) : null,
       phone: fields.phone || null,
       notes: fields.notes || null,
       date_of_birth: fields.date_of_birth || null,
@@ -77,8 +79,11 @@ export default function EditarPacienteButton({ patient }: {
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Diagnóstico</label>
                 <input type="text" value={fields.diagnosis} onChange={e => setFields(p => ({ ...p, diagnosis: e.target.value }))}
-                  placeholder="Ansiedad generalizada"
+                  list="diagnosticos-comunes-edit" placeholder="Ansiedad generalizada"
                   className="border border-[#EDEDED] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0A0A0A] bg-[#F5F5F7] text-[#0A0A0A]" />
+                <datalist id="diagnosticos-comunes-edit">
+                  {DIAGNOSTICOS_COMUNES.map(d => <option key={d} value={d} />)}
+                </datalist>
               </div>
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Teléfono (WhatsApp)</label>

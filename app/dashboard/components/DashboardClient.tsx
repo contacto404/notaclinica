@@ -4,7 +4,7 @@ import type { Patient, Appointment } from '@/types/db'
 
 type Alerta = { patientId: string; patientName: string; tipo: string; detalle: string; nivel: 'alta' | 'media' }
 
-export default function DashboardClient({ patients, sesionesEsteMes, pdfsExportados, turnosHoy, alertas = [], saludo, nombre }: {
+export default function DashboardClient({ patients, sesionesEsteMes, pdfsExportados, turnosHoy, alertas = [], saludo, nombre, ultimaSesionPorPaciente = {}, proximoTurnoPorPaciente = {} }: {
   patients: Patient[]
   sesionesEsteMes: number
   pdfsExportados: number
@@ -12,14 +12,29 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
   alertas?: Alerta[]
   saludo: string
   nombre: string
+  ultimaSesionPorPaciente?: Record<string, string>
+  proximoTurnoPorPaciente?: Record<string, string>
 }) {
   const [busqueda, setBusqueda] = useState('')
-  const [orden, setOrden] = useState<'reciente' | 'nombre'>('reciente')
+  const [orden, setOrden] = useState<'reciente' | 'nombre' | 'ultima' | 'proximo' | 'diagnostico'>('reciente')
 
-  const filtrados = patients
+  const filtrados = [...patients]
     .filter(p => p.full_name?.toLowerCase().includes(busqueda.toLowerCase()))
-    .sort((a, b) => {
+    .sort((a: any, b: any) => {
       if (orden === 'nombre') return a.full_name.localeCompare(b.full_name)
+      if (orden === 'diagnostico') return (a.diagnosis ?? '').localeCompare(b.diagnosis ?? '')
+      if (orden === 'ultima') {
+        // Más reciente primero; sin sesiones al final
+        const ua = ultimaSesionPorPaciente[a.id] ?? ''
+        const ub = ultimaSesionPorPaciente[b.id] ?? ''
+        return ub.localeCompare(ua)
+      }
+      if (orden === 'proximo') {
+        // Turno más próximo primero; sin turno al final
+        const pa = proximoTurnoPorPaciente[a.id] ?? '9999'
+        const pb = proximoTurnoPorPaciente[b.id] ?? '9999'
+        return pa.localeCompare(pb)
+      }
       return 0
     })
 
@@ -132,11 +147,14 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
           />
           <select
             value={orden}
-            onChange={e => setOrden(e.target.value as 'reciente' | 'nombre')}
+            onChange={e => setOrden(e.target.value as typeof orden)}
             className="border border-[#EDEDED] dark:border-[#262626] rounded-lg px-2.5 py-2 text-sm text-[#0A0A0A] dark:text-white outline-none focus:border-[#0A0A0A] bg-white dark:bg-[#1A1A1A] shrink-0"
           >
             <option value="reciente">Reciente</option>
             <option value="nombre">Nombre</option>
+            <option value="ultima">Última sesión</option>
+            <option value="proximo">Próximo turno</option>
+            <option value="diagnostico">Diagnóstico</option>
           </select>
         </div>
       </div>

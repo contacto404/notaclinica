@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { capitalizar } from '@/lib/sessionStatus'
+import { DIAGNOSTICOS_COMUNES } from '@/lib/diagnosticos'
 
 export default function NuevoPacientePage() {
   const [nombre, setNombre] = useState('')
@@ -68,7 +69,10 @@ export default function NuevoPacientePage() {
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] text-[#6E6E73] font-medium uppercase tracking-[0.08em]">Diagnóstico</label>
               <input type="text" value={diagnostico} onChange={e => setDiagnostico(e.target.value)}
-                placeholder="Ansiedad generalizada" className={inputClass} />
+                list="diagnosticos-comunes" placeholder="Ansiedad generalizada" className={inputClass} />
+              <datalist id="diagnosticos-comunes">
+                {DIAGNOSTICOS_COMUNES.map(d => <option key={d} value={d} />)}
+              </datalist>
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] text-[#6E6E73] font-medium uppercase tracking-[0.08em]">Teléfono (WhatsApp)</label>

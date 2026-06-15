@@ -126,7 +126,7 @@ function ScaleBlock({ scale, history, onNew }: { scale: ScaleDef; history: any[]
                     {a.score}<span className="text-[#A3A3A3] font-normal">/{scale.max}</span>
                   </span>
                   {a.source === 'patient' && (
-                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EEF2FF] text-[#4338CA]">paciente</span>
+                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#F0F0F0] text-[#0A0A0A]">paciente</span>
                   )}
                   <span className={'text-xs font-medium px-2 py-0.5 rounded-full ml-auto ' + sev.pill}>{sev.label}</span>
                 </div>

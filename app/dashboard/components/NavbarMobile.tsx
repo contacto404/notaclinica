@@ -8,8 +8,10 @@ export default function NavbarMobile() {
   const items = [
     { href: '/dashboard', label: 'Inicio', icon: '🏠' },
     { href: '/dashboard/agenda', label: 'Agenda', icon: '📅' },
+    { href: '/dashboard/buscar', label: 'Buscar', icon: '🔍' },
     { href: '/dashboard/pacientes/nuevo', label: 'Nuevo', icon: '+' },
     { href: '/dashboard/honorarios', label: 'Cobros', icon: '💳' },
+    { href: '/dashboard/estadisticas', label: 'Stats', icon: '📊' },
     { href: '/dashboard/cuenta', label: 'Cuenta', icon: '⚙️' },
   ]
 
@@ -25,12 +27,12 @@ export default function NavbarMobile() {
         const active = pathname === item.href
         return (
           <Link key={item.href} href={item.href}
-            className="flex-1 flex flex-col items-center justify-center py-2 gap-1 transition-colors relative"
+            className="flex-1 flex flex-col items-center justify-center py-2 gap-0.5 transition-colors relative min-w-0"
           >
-            <span className={`text-xl ${item.label === 'Nuevo' ? `w-8 h-8 flex items-center justify-center rounded-full text-base font-bold ${active ? 'bg-[#0A0A0A] text-white' : 'bg-[#F5F5F7] text-[#0A0A0A]'}` : ''}`}>
+            <span className={`text-lg ${item.label === 'Nuevo' ? `w-7 h-7 flex items-center justify-center rounded-full text-base font-bold ${active ? 'bg-[#0A0A0A] text-white' : 'bg-[#F5F5F7] text-[#0A0A0A]'}` : ''}`}>
               {item.icon}
             </span>
-            <span className={`text-xs font-medium ${active ? 'text-[#0A0A0A]' : 'text-[#A3A3A3]'}`}>
+            <span className={`text-[10px] font-medium ${active ? 'text-[#0A0A0A]' : 'text-[#A3A3A3]'}`}>
               {item.label}
             </span>
             {active && <span className="absolute bottom-0 w-8 h-0.5 bg-[#0A0A0A] rounded-full" />}

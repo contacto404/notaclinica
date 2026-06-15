@@ -54,6 +54,26 @@ export default async function DashboardPage() {
   const nombrePorId: Record<string, string> = {}
   ;(patients ?? []).forEach((p: any) => { nombrePorId[p.id] = p.full_name })
 
+  // Mapas para ordenar la lista de pacientes
+  const ultimaSesionPorPaciente: Record<string, string> = {}
+  ;(allSessions ?? [])
+    .filter((s: any) => ['summarized', 'signed', 'complete'].includes(s.status))
+    .forEach((s: any) => {
+      const cur = ultimaSesionPorPaciente[s.patient_id]
+      if (!cur || s.session_date > cur) ultimaSesionPorPaciente[s.patient_id] = s.session_date
+    })
+
+  const { data: turnosFuturos } = await supabase
+    .from('appointments')
+    .select('patient_id, appointment_date')
+    .eq('professional_id', user!.id)
+    .gte('appointment_date', new Date().toISOString())
+    .order('appointment_date', { ascending: true })
+  const proximoTurnoPorPaciente: Record<string, string> = {}
+  ;(turnosFuturos ?? []).forEach((t: any) => {
+    if (!proximoTurnoPorPaciente[t.patient_id]) proximoTurnoPorPaciente[t.patient_id] = t.appointment_date
+  })
+
   type Alerta = { patientId: string; patientName: string; tipo: string; detalle: string; nivel: 'alta' | 'media' }
   const alertas: Alerta[] = []
 
@@ -114,6 +134,8 @@ export default async function DashboardPage() {
         alertas={alertasTop}
         saludo={saludo}
         nombre={nombre}
+        ultimaSesionPorPaciente={ultimaSesionPorPaciente}
+        proximoTurnoPorPaciente={proximoTurnoPorPaciente}
       />
     </div>
   )
