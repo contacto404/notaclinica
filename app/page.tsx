@@ -3,6 +3,7 @@ import Link from 'next/link'
 import EspecialidadesDemo from './promo/EspecialidadesDemo'
 import MotionProvider from './promo/MotionProvider'
 import DemoEnAccion from './promo/DemoEnAccion'
+import StatsCounter from './promo/StatsCounter'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://notaclinica.vercel.app'),
@@ -115,7 +116,7 @@ export default function PromoPage() {
       <MotionProvider />
 
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-black/[0.06]">
         <div
           className="flex items-center justify-between gap-3 h-14"
           style={{
@@ -186,7 +187,7 @@ export default function PromoPage() {
 
       {/* Tira de confianza (honesta) */}
       <section className="px-5 pt-7">
-        <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-sm text-[#525252]">
+        <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-sm text-[#6E6E73]">
           <span>🔒 Datos cifrados</span>
           <span className="text-[#D4D4D4]">·</span>
           <span>🩺 Todas las especialidades</span>
@@ -217,7 +218,7 @@ export default function PromoPage() {
       <section className="px-3 sm:px-5 pt-20">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>En acción</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-12 max-w-2xl">De la conversación al resumen clínico</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-12 max-w-2xl">De la conversación al resumen clínico</h2>
 
           <DemoEnAccion />
           <p className="text-center text-xs text-[#A3A3A3] mt-4">Vista ilustrativa: la sesión se graba y la IA arma el resumen en segundos.</p>
@@ -225,34 +226,27 @@ export default function PromoPage() {
       </section>
 
       {/* Números — estimaciones honestas */}
-      <section className="px-3 sm:px-5 pt-24">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>El impacto</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-12 max-w-2xl">Menos pantalla, más paciente</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-9">
-            {STATS.map(s => (
-              <div key={s.label}>
-                <p className="text-4xl md:text-5xl font-medium tracking-tight">{s.value}</p>
-                <p className="text-sm text-[#525252] mt-2 leading-snug">{s.label}</p>
-              </div>
-            ))}
-          </div>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-12 max-w-2xl">Menos pantalla, más paciente</h2>
+          <StatsCounter items={STATS} />
           <p className="text-[11px] text-[#A3A3A3] mt-8">Estimaciones según uso típico. Tu experiencia puede variar.</p>
         </div>
       </section>
 
       {/* En 3 pasos */}
-      <section id="como-funciona" className="px-3 sm:px-5 pt-24 pb-4 scroll-mt-20">
+      <section id="como-funciona" className="px-3 sm:px-5 pt-28 md:pt-32 pb-4 scroll-mt-20">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Cómo funciona</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">De la charla a la historia clínica</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">De la charla a la historia clínica</h2>
           <div className="grid md:grid-cols-3 gap-x-10 gap-y-10">
             {PASOS.map(s => (
               <div key={s.num}>
-                <p className="text-sm text-[#A3A3A3] mb-3 tabular-nums">{s.num}</p>
-                <div className="h-px bg-[#E5E5E5] mb-5" />
-                <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
-                <p className="text-sm text-[#525252] leading-relaxed">{s.desc}</p>
+                <p className="text-5xl md:text-6xl font-semibold text-[#E5E5EA] mb-3 tabular-nums tracking-[-0.03em] leading-none">{s.num}</p>
+                <div className="h-px bg-[#D2D2D7] mb-5" />
+                <h3 className="text-xl font-semibold mb-2 tracking-[-0.01em]">{s.title}</h3>
+                <p className="text-[15px] text-[#6E6E73] leading-relaxed">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -260,15 +254,15 @@ export default function PromoPage() {
       </section>
 
       {/* Features */}
-      <section className="px-3 sm:px-5 pt-24">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Producto</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">Una sola app para toda la consulta</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">Una sola app para toda la consulta</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {FEATURES.map(f => (
-              <div key={f.title} className="bg-[#FAFAFA] rounded-3xl border border-[#EDEDED] p-7 hover:border-[#D4D4D4] transition-colors">
-                <h3 className="text-base font-semibold mb-2">{f.title}</h3>
-                <p className="text-sm text-[#525252] leading-relaxed">{f.desc}</p>
+              <div key={f.title} className="bg-[#F5F5F7] rounded-[18px] border border-[#EDEDED] p-7 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:-translate-y-0.5">
+                <h3 className="text-xl font-semibold mb-2 tracking-[-0.01em]">{f.title}</h3>
+                <p className="text-[15px] text-[#6E6E73] leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -276,10 +270,10 @@ export default function PromoPage() {
       </section>
 
       {/* Casos de uso — funciona en cualquier contexto */}
-      <section className="px-3 sm:px-5 pt-24">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Donde sea</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">Funciona en cualquier contexto</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">Funciona en cualquier contexto</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {CASOS.map(c => (
               <div key={c.title} className="group relative rounded-3xl overflow-hidden aspect-[3/4] bg-[#0A0A0A]">
@@ -297,14 +291,14 @@ export default function PromoPage() {
       </section>
 
       {/* Adaptado a tu especialidad — tile oscuro */}
-      <section className="px-3 sm:px-5 pt-24">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div
           data-reveal
           className="rounded-[2rem] overflow-hidden px-7 sm:px-16 py-20 text-center"
           style={{ background: 'radial-gradient(110% 120% at 50% 0%, #232323 0%, #121212 50%, #0a0a0a 100%)' }}
         >
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A] mb-5">Se adapta a tu especialidad</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-white mb-6 max-w-3xl mx-auto leading-tight">
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] text-white mb-6 max-w-3xl mx-auto leading-tight">
             Seguí la evolución del paciente, no solo la nota
           </h2>
           <p className="text-[#C8C8C8] leading-relaxed max-w-xl mx-auto mb-9">
@@ -318,24 +312,24 @@ export default function PromoPage() {
       </section>
 
       {/* Ejemplo interactivo por especialidad */}
-      <section className="px-3 sm:px-5 pt-24">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-3xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Un ejemplo por especialidad</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-3 max-w-2xl">Tocá tu especialidad y mirá el resumen</h2>
-          <p className="text-[#525252] leading-relaxed max-w-xl mb-10">El mismo motor, adaptado a la estructura de cada práctica clínica.</p>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-3 max-w-2xl">Tocá tu especialidad y mirá el resumen</h2>
+          <p className="text-[#6E6E73] leading-relaxed max-w-xl mb-10">El mismo motor, adaptado a la estructura de cada práctica clínica.</p>
           <EspecialidadesDemo />
         </div>
       </section>
 
       {/* Testimonios — se muestra solo cuando hay testimonios reales cargados */}
       {TESTIMONIOS.length > 0 && (
-        <section className="px-3 sm:px-5 pt-24">
+        <section className="px-3 sm:px-5 pt-28 md:pt-32">
           <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
             <p className={kicker}>Lo que dicen</p>
-            <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">Profesionales que ya lo usan</h2>
+            <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">Profesionales que ya lo usan</h2>
             <div className="grid md:grid-cols-3 gap-4">
               {TESTIMONIOS.map((t, i) => (
-                <div key={i} className="bg-[#FAFAFA] rounded-3xl border border-[#EDEDED] p-7">
+                <div key={i} className="bg-[#F5F5F7] rounded-3xl border border-[#EDEDED] p-7">
                   <p className="text-base text-[#0A0A0A] leading-relaxed mb-5">“{t.quote}”</p>
                   <p className="text-sm font-semibold">{t.name}</p>
                   <p className="text-sm text-[#737373]">{t.role}</p>
@@ -347,15 +341,15 @@ export default function PromoPage() {
       )}
 
       {/* Confianza */}
-      <section className="px-3 sm:px-5 pt-24">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Sin riesgo</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-14 max-w-2xl">Probalo sin ningún compromiso</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">Probalo sin ningún compromiso</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {CONFIANZA.map(t => (
-              <div key={t.title} className="border-t border-[#E5E5E5] pt-5">
+              <div key={t.title} className="border-t border-[#D2D2D7] pt-5">
                 <h3 className="text-base font-semibold mb-2">{t.title}</h3>
-                <p className="text-sm text-[#525252] leading-relaxed">{t.desc}</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed">{t.desc}</p>
               </div>
             ))}
           </div>
@@ -363,17 +357,17 @@ export default function PromoPage() {
       </section>
 
       {/* Precio */}
-      <section id="precio" className="px-3 sm:px-5 pt-24 scroll-mt-20">
+      <section id="precio" className="px-3 sm:px-5 pt-28 md:pt-32 scroll-mt-20">
         <div data-reveal className="max-w-4xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Precio</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-3 max-w-2xl">Un plan simple, sin sorpresas</h2>
-          <p className="text-[#525252] leading-relaxed max-w-xl mb-10">Probás 30 días gratis, sin tarjeta. Si te sirve, seguís por un precio menor al de una consulta. Cancelás cuando quieras.</p>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-3 max-w-2xl">Un plan simple, sin sorpresas</h2>
+          <p className="text-[#6E6E73] leading-relaxed max-w-xl mb-10">Probás 30 días gratis, sin tarjeta. Si te sirve, seguís por un precio menor al de una consulta. Cancelás cuando quieras.</p>
 
           <div className="grid md:grid-cols-[1.3fr_1fr] gap-4">
             {/* Plan individual */}
             <div className="bg-[#0A0A0A] text-white rounded-3xl p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#9A9A9A] mb-4">NotaClínica Pro</p>
-              <p className="text-5xl font-medium tracking-tight">US$49<span className="text-lg text-[#9A9A9A] font-normal"> /mes</span></p>
+              <p className="text-6xl font-semibold tracking-[-0.03em]">US$49<span className="text-lg text-[#9A9A9A] font-normal align-middle"> /mes</span></p>
               <p className="text-sm text-[#C8C8C8] mt-2 mb-7">El equivalente a una consulta. 30 días gratis para empezar.</p>
               <ul className="flex flex-col gap-2.5 mb-8">
                 {['Pacientes y sesiones ilimitados', 'Transcripción y resúmenes con IA', 'Escalas, evolución y plan de tratamiento', 'Recetas y PDF con tu firma', 'Agenda, portal del paciente y honorarios', 'Soporte directo'].map(f => (
@@ -389,12 +383,12 @@ export default function PromoPage() {
             </div>
 
             {/* Clínicas */}
-            <div className="border border-[#E5E5E5] rounded-3xl p-8 flex flex-col">
+            <div className="border border-[#D2D2D7] rounded-3xl p-8 flex flex-col">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-4">Clínicas y equipos</p>
               <h3 className="text-xl font-semibold mb-2">¿Varios profesionales?</h3>
-              <p className="text-sm text-[#525252] leading-relaxed mb-6">Armamos un plan a medida para tu clínica o consultorio con varios profesionales. Escribinos y lo vemos juntos.</p>
+              <p className="text-sm text-[#6E6E73] leading-relaxed mb-6">Armamos un plan a medida para tu clínica o consultorio con varios profesionales. Escribinos y lo vemos juntos.</p>
               <a href="mailto:sortiplansa@gmail.com"
-                className="mt-auto inline-flex items-center justify-center gap-1.5 border border-[#0A0A0A] text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#FAFAFA] transition-colors">
+                className="mt-auto inline-flex items-center justify-center gap-1.5 border border-[#0A0A0A] text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#F5F5F7] transition-colors">
                 Hablar con nosotros
               </a>
             </div>
@@ -403,18 +397,18 @@ export default function PromoPage() {
       </section>
 
       {/* FAQ */}
-      <section className="px-3 sm:px-5 pt-24">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-3xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Preguntas frecuentes</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-12 max-w-2xl">Antes de empezar</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-12 max-w-2xl">Antes de empezar</h2>
           <div className="flex flex-col gap-3">
             {FAQS.map((f, i) => (
-              <details key={i} className="group bg-[#FAFAFA] border border-[#EDEDED] rounded-2xl px-5 py-4">
+              <details key={i} className="group bg-[#F5F5F7] border border-[#EDEDED] rounded-2xl px-5 py-4">
                 <summary className="flex items-center justify-between cursor-pointer list-none font-medium text-[15px]">
                   {f.q}
-                  <span className="text-[#A3A3A3] transition-transform group-open:rotate-45 text-xl leading-none ml-3">+</span>
+                  <span className="text-[#A3A3A3] transition-transform duration-200 ease-out group-open:rotate-45 text-xl leading-none ml-3">+</span>
                 </summary>
-                <p className="text-sm text-[#525252] leading-relaxed mt-3">{f.a}</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed mt-3">{f.a}</p>
               </details>
             ))}
           </div>
@@ -422,11 +416,11 @@ export default function PromoPage() {
       </section>
 
       {/* Descargá la app */}
-      <section className="px-3 sm:px-5 pt-24">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Descargá la app</p>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-6 max-w-2xl">Usala donde estés</h2>
-          <p className="text-[#525252] leading-relaxed max-w-xl mb-10">
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-6 max-w-2xl">Usala donde estés</h2>
+          <p className="text-[#6E6E73] leading-relaxed max-w-xl mb-10">
             Funciona desde el navegador y se instala como app en tu celular. En iPhone: <span className="text-[#0A0A0A]">Compartir → Agregar a inicio</span>. En Android: <span className="text-[#0A0A0A]">Instalar app</span>.
           </p>
 
@@ -437,7 +431,7 @@ export default function PromoPage() {
             </Link>
 
             <div className="flex items-center gap-3">
-              <div className="relative flex items-center gap-3 border border-[#E5E5E5] rounded-2xl px-5 py-2.5 opacity-80 select-none">
+              <div className="relative flex items-center gap-3 border border-[#D2D2D7] rounded-2xl px-5 py-2.5 opacity-80 select-none">
                 <svg viewBox="0 0 384 512" className="w-6 h-6 fill-[#0A0A0A] shrink-0" aria-hidden="true">
                   <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
                 </svg>
@@ -447,7 +441,7 @@ export default function PromoPage() {
                 </div>
               </div>
 
-              <div className="relative flex items-center gap-3 border border-[#E5E5E5] rounded-2xl px-5 py-2.5 opacity-80 select-none">
+              <div className="relative flex items-center gap-3 border border-[#D2D2D7] rounded-2xl px-5 py-2.5 opacity-80 select-none">
                 <svg viewBox="0 0 512 512" className="w-5 h-5 fill-[#0A0A0A] shrink-0" aria-hidden="true">
                   <path d="M47 32C37 37 31 47 31 60v392c0 13 6 23 16 28l228-224L47 32zm262 196 57-56-238-138c-9-5-18-6-26-3l207 197zm0 56L101 481c8 3 17 2 26-3l238-138-56-56zm65-65 75-44c20-12 20-39 0-51l-75-43-62 61 62 61z"/>
                 </svg>
@@ -462,13 +456,13 @@ export default function PromoPage() {
       </section>
 
       {/* CTA final */}
-      <section className="px-3 sm:px-5 pt-24 pb-5">
+      <section className="px-3 sm:px-5 pt-28 md:pt-32 pb-5">
         <div
           data-reveal
           className="rounded-[2rem] overflow-hidden px-7 sm:px-16 py-20 text-center"
           style={{ background: 'radial-gradient(110% 120% at 50% 100%, #242424 0%, #121212 55%, #0a0a0a 100%)' }}
         >
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-white mb-5">Recuperá tus horas. Empezá hoy.</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] text-white mb-5">Recuperá tus horas. Empezá hoy.</h2>
           <p className="text-[#C8C8C8] mb-9 max-w-md mx-auto">Probá NotaClínica 30 días gratis, sin límite de consultas y sin tarjeta. Cancelás cuando quieras.</p>
           <Link href="/login?tab=registro"
             className="inline-flex items-center gap-1.5 bg-white text-[#0A0A0A] pl-7 pr-6 py-4 rounded-full font-semibold hover:bg-[#EDEDED] transition-colors shadow-lg">
@@ -496,7 +490,7 @@ export default function PromoPage() {
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Contacto</p>
               <ul className="space-y-2 text-sm text-[#737373]">
-                <li><a href="mailto:sortiplansa@gmail.com" className="hover:text-[#0A0A0A] transition-colors">sortiplansa@gmail.com</a></li>
+                <li><a href="mailto:sortiplansa@gmail.com" className="hover:text-[#0A0A0A] transition-colors">Contactar</a></li>
                 <li><a href="https://wa.me/598" target="_blank" rel="noopener noreferrer" className="hover:text-[#0A0A0A] transition-colors">WhatsApp</a></li>
                 <li><Link href="/privacidad" className="hover:text-[#0A0A0A] transition-colors">Privacidad</Link></li>
               </ul>
