@@ -79,6 +79,15 @@ const CASOS = [
   { title: 'A domicilio', img: '/casos/domicilio.jpg' },
 ]
 
+const SEGURIDAD = [
+  'Cifrado en tránsito (TLS) y en reposo (AES-256).',
+  'Cada profesional accede únicamente a sus propios pacientes.',
+  'El audio se usa solo para transcribir: no se almacena.',
+  'No usamos tus datos para entrenar modelos de IA.',
+  'Cumplimos la Ley 18.331 (Uruguay) y 25.326 (Argentina) de protección de datos.',
+  'Infraestructura con certificación SOC 2 (Supabase, OpenAI, Anthropic).',
+]
+
 const kicker = 'text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-3'
 
 const JSON_LD = {
@@ -352,6 +361,45 @@ export default function PromoPage() {
                 <p className="text-sm text-[#6E6E73] leading-relaxed">{t.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Seguridad y confianza */}
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
+        <div
+          data-reveal
+          className="relative rounded-[2rem] overflow-hidden px-7 sm:px-14 py-16 md:py-20"
+          style={{ background: 'radial-gradient(120% 100% at 82% 18%, #242424 0%, #131313 50%, #0a0a0a 100%)' }}
+        >
+          <div className="relative z-10 grid md:grid-cols-[1.5fr_1fr] gap-12 items-center">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A] mb-5">Seguridad</p>
+              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-white mb-8 max-w-lg leading-tight">
+                Un socio seguro en el que confiar
+              </h2>
+              <ul className="flex flex-col gap-5 max-w-lg">
+                {SEGURIDAD.map(s => (
+                  <li key={s} className="flex items-start gap-3 border-b border-white/10 pb-5 last:border-b-0 last:pb-0">
+                    <span className="text-white mt-0.5 shrink-0">✓</span>
+                    <span className="text-sm sm:text-base text-[#EDEDED] leading-relaxed">{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Visual: candado con ondas */}
+            <div className="hidden md:flex items-center justify-center">
+              <svg viewBox="0 0 200 200" className="w-44 h-44" aria-hidden="true">
+                <circle cx="100" cy="100" r="92" fill="none" stroke="#fff" strokeOpacity="0.05" />
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#fff" strokeOpacity="0.09" />
+                <circle cx="100" cy="100" r="48" fill="none" stroke="#fff" strokeOpacity="0.14" />
+                <rect x="70" y="92" width="60" height="48" rx="12" fill="#1c1c1c" stroke="#fff" strokeOpacity="0.35" />
+                <path d="M82 92 v-12 a18 18 0 0 1 36 0 v12" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="6" />
+                <circle cx="100" cy="112" r="6" fill="#fff" />
+                <rect x="97" y="113" width="6" height="15" rx="3" fill="#fff" />
+              </svg>
+            </div>
           </div>
         </div>
       </section>
