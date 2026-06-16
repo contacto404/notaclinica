@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { createClient } from '@/lib/supabase/server'
+import { checkAiQuota } from '@/lib/aiUsage'
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
@@ -12,6 +13,9 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    if (!(await checkAiQuota(user.id))) {
+      return NextResponse.json({ error: 'Alcanzaste el límite de IA por hoy. Probá mañana.' }, { status: 429 })
+    }
 
     const formData = await request.formData()
     const audio = formData.get('audio') as File

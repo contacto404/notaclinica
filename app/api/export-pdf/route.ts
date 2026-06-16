@@ -16,7 +16,8 @@ export async function GET(request: NextRequest) {
     .from('sessions')
     .select('*, patients(*), transcriptions(*), summaries(*)')
     .eq('id', sessionId)
-    .single()
+    .eq('professional_id', user.id)
+    .maybeSingle()
 
   if (!session) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 

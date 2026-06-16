@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@/lib/supabase/server'
 import { createClient as createAdmin } from '@supabase/supabase-js'
+import { checkAiQuota } from '@/lib/aiUsage'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -13,6 +14,9 @@ export async function POST(request: NextRequest) {
 
     const { patientId } = await request.json()
     if (!patientId) return NextResponse.json({ error: 'Falta patientId' }, { status: 400 })
+    if (!(await checkAiQuota(user.id))) {
+      return NextResponse.json({ error: 'Alcanzaste el límite de IA por hoy. Probá mañana.' }, { status: 429 })
+    }
 
     const admin = createAdmin(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,

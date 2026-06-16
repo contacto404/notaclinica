@@ -52,19 +52,19 @@ export async function GET(request: NextRequest) {
       subject: 'Tu suscripción se renueva en 3 días',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 24px;">
-          <h2 style="color: #2563EB;">NotaClínica</h2>
-          <p style="color: #0F172A;">Hola ${nombre},</p>
-          <p style="color: #475569;">Te avisamos que tu suscripción se renueva automáticamente en <strong>3 días</strong>.</p>
-          <div style="background: #DBEAFE; border-radius: 12px; padding: 16px; margin: 16px 0;">
-            <p style="margin: 0; color: #1E40AF; font-weight: bold;">📅 Fecha de renovación: ${fechaRenovacion}</p>
-            <p style="margin: 8px 0 0; color: #1E40AF;">💳 Monto: $49 USD</p>
+          <h2 style="color: #0A0A0A;">NotaClínica</h2>
+          <p style="color: #0A0A0A;">Hola ${nombre},</p>
+          <p style="color: #6E6E73;">Te avisamos que tu suscripción se renueva automáticamente en <strong>3 días</strong>.</p>
+          <div style="background: #F0F0F0; border-radius: 12px; padding: 16px; margin: 16px 0;">
+            <p style="margin: 0; color: #0A0A0A; font-weight: bold;">📅 Fecha de renovación: ${fechaRenovacion}</p>
+            <p style="margin: 8px 0 0; color: #0A0A0A;">💳 Monto: $49 USD</p>
           </div>
-          <p style="color: #475569; font-size: 14px;">El cobro se realizará automáticamente a través de MercadoPago. No necesitás hacer nada.</p>
-          <p style="color: #475569; font-size: 14px;">Si querés cancelar tu suscripción antes de la renovación, podés hacerlo desde <strong>Mi cuenta</strong> en la app.</p>
-          <a href="https://notaclinica.vercel.app/dashboard/cuenta" style="display: inline-block; background: #2563EB; color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 8px;">
+          <p style="color: #6E6E73; font-size: 14px;">El cobro se realizará automáticamente a través de MercadoPago. No necesitás hacer nada.</p>
+          <p style="color: #6E6E73; font-size: 14px;">Si querés cancelar tu suscripción antes de la renovación, podés hacerlo desde <strong>Mi cuenta</strong> en la app.</p>
+          <a href="https://notaclinica.vercel.app/dashboard/cuenta" style="display: inline-block; background: #0A0A0A; color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 8px;">
             Ir a Mi cuenta
           </a>
-          <p style="color: #94A3B8; font-size: 12px; margin-top: 24px;">NotaClínica · Sortiplan SA · Uruguay</p>
+          <p style="color: #A3A3A3; font-size: 12px; margin-top: 24px;">NotaClínica · Sortiplan SA · Uruguay</p>
         </div>
       `
     })

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { checkAiQuota } from '@/lib/aiUsage'
 
 export async function POST(request: NextRequest) {
   const supabase = await createClient()
@@ -12,6 +13,15 @@ export async function POST(request: NextRequest) {
   const patientId = formData.get('patientId') as string
 
   if (!file || !patientId) return NextResponse.json({ error: 'Faltan datos' }, { status: 400 })
+
+  // Propiedad: el paciente debe ser del profesional
+  const { data: ownsPatient } = await supabase
+    .from('patients').select('id').eq('id', patientId).eq('professional_id', user.id).maybeSingle()
+  if (!ownsPatient) return NextResponse.json({ error: 'Paciente no encontrado' }, { status: 403 })
+
+  if (!(await checkAiQuota(user.id))) {
+    return NextResponse.json({ error: 'Alcanzaste el límite de IA por hoy. Probá mañana.' }, { status: 429 })
+  }
 
   const bytes = await file.arrayBuffer()
   const base64 = Buffer.from(bytes).toString('base64')

@@ -3,6 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@supabase/supabase-js'
 import { createClient as createServerClient } from '@/lib/supabase/server'
 import { summaryPromptFields } from '@/lib/noteFormat'
+import { checkAiQuota } from '@/lib/aiUsage'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 const supabase = createClient(
@@ -111,6 +112,9 @@ export async function POST(request: NextRequest) {
     const authClient = await createServerClient()
     const { data: { user } } = await authClient.auth.getUser()
     if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    if (!(await checkAiQuota(user.id))) {
+      return NextResponse.json({ error: 'Alcanzaste el límite de IA por hoy. Probá mañana.' }, { status: 429 })
+    }
 
     const { transcription, patientName, diagnosis, patientId } = await request.json()
     const professionalId = user.id // derivado del usuario autenticado, nunca del body
