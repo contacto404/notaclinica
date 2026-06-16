@@ -50,11 +50,11 @@ export default async function DashboardLayout({
       {/* Header móvil */}
       <header
         className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F5F5F7] border-b border-[#EDEDED]"
-        style={{ paddingTop: 'max(calc(var(--safe-top) - 12px), 6px)' }}
+        style={{ paddingTop: 'max(calc(var(--safe-top) - 22px), 4px)' }}
       >
-        <div className="px-4 flex items-center justify-center h-12">
-          <img src="/logo-v4.png" alt="NotaClínica" className="h-11 w-auto dark:hidden" />
-          <img src="/logo-white-v4.png" alt="NotaClínica" className="h-11 w-auto hidden dark:block" />
+        <div className="px-4 flex items-center justify-center h-10">
+          <img src="/logo-v4.png" alt="NotaClínica" className="h-10 w-auto dark:hidden" />
+          <img src="/logo-white-v4.png" alt="NotaClínica" className="h-10 w-auto hidden dark:block" />
         </div>
       </header>
 
