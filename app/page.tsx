@@ -127,15 +127,15 @@ export default function PromoPage() {
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-black/[0.06]">
         <div
-          className="flex items-center justify-between gap-3 h-14"
+          className="flex items-center justify-between gap-3 h-16"
           style={{
             paddingTop: 'var(--safe-top)',
             paddingLeft: 'max(env(safe-area-inset-left), 16px)',
             paddingRight: 'max(env(safe-area-inset-right), 16px)',
-            minHeight: 'calc(var(--safe-top) + 56px)',
+            minHeight: 'calc(var(--safe-top) + 64px)',
           }}
         >
-          <img src="/logo.png" alt="NotaClínica" className="h-10 sm:h-12 w-auto shrink-0" />
+          <img src="/logo.png" alt="NotaClínica" className="h-12 sm:h-14 w-auto shrink-0" />
           <div className="flex items-center gap-2 shrink-0">
             <Link href="/login" className="hidden sm:inline-flex text-sm font-medium text-[#0A0A0A] bg-[#F0F0F0] px-4 py-2 rounded-full hover:bg-[#E5E5E5] transition-colors">
               Iniciar sesión
@@ -148,7 +148,7 @@ export default function PromoPage() {
       </nav>
 
       {/* Hero — beneficio + captura real del producto */}
-      <section className="px-3 sm:px-5" style={{ paddingTop: 'calc(var(--safe-top) + 56px + 12px)' }}>
+      <section className="px-3 sm:px-5" style={{ paddingTop: 'calc(var(--safe-top) + 64px + 12px)' }}>
         <div
           className="relative rounded-[2rem] overflow-hidden px-5 py-7 sm:p-14"
           style={{ background: 'radial-gradient(120% 90% at 78% 12%, #2b2b2b 0%, #141414 45%, #0a0a0a 100%)' }}
