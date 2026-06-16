@@ -135,7 +135,7 @@ export default function PromoPage() {
             minHeight: 'calc(var(--safe-top) + 64px)',
           }}
         >
-          <img src="/logo-v2.png" alt="NotaClínica" className="h-12 sm:h-14 w-auto shrink-0" />
+          <img src="/logo-v3.png" alt="NotaClínica" className="h-12 sm:h-14 w-auto shrink-0" />
           <div className="flex items-center gap-2 shrink-0">
             <Link href="/login" className="hidden sm:inline-flex text-sm font-medium text-[#0A0A0A] bg-[#F0F0F0] px-4 py-2 rounded-full hover:bg-[#E5E5E5] transition-colors">
               Iniciar sesión
@@ -512,7 +512,7 @@ export default function PromoPage() {
       <footer className="px-6 py-12 border-t border-[#EDEDED] mt-8">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-start justify-between gap-8">
           <div>
-            <img src="/logo-v2.png" alt="NotaClínica" className="h-9 w-auto" />
+            <img src="/logo-v3.png" alt="NotaClínica" className="h-9 w-auto" />
             <p className="text-sm text-[#737373] mt-3 max-w-xs leading-relaxed">Documentación clínica con IA para profesionales de la salud.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-10">
