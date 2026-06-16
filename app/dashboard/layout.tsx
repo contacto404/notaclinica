@@ -52,17 +52,17 @@ export default async function DashboardLayout({
         className="md:hidden fixed top-0 left-0 right-0 z-50 bg-[#F5F5F7] border-b border-[#EDEDED]"
         style={{ paddingTop: 'max(calc(var(--safe-top) - 22px), 4px)' }}
       >
-        <div className="px-4 flex items-center justify-center h-10">
-          <img src="/logo-v4.png" alt="NotaClínica" className="h-10 w-auto dark:hidden" />
-          <img src="/logo-white-v4.png" alt="NotaClínica" className="h-10 w-auto hidden dark:block" />
+        <div className="px-4 flex items-center justify-center h-12">
+          <img src="/logo-v5.png" alt="NotaClínica" className="h-11 w-auto dark:hidden" />
+          <img src="/logo-white-v5.png" alt="NotaClínica" className="h-11 w-auto hidden dark:block" />
         </div>
       </header>
 
       {/* Sidebar desktop */}
       <aside className="hidden md:flex flex-col fixed top-0 left-0 h-full w-56 bg-[#F5F5F7] border-r border-[#EDEDED] py-6 px-3 z-40">
         <div className="mb-8 px-3">
-          <img src="/logo-v4.png" alt="NotaClínica" className="h-10 w-auto dark:hidden" />
-          <img src="/logo-white-v4.png" alt="NotaClínica" className="h-10 w-auto hidden dark:block" />
+          <img src="/logo-v5.png" alt="NotaClínica" className="h-10 w-auto dark:hidden" />
+          <img src="/logo-white-v5.png" alt="NotaClínica" className="h-10 w-auto hidden dark:block" />
         </div>
         <nav className="flex flex-col gap-1">
           <Link href="/dashboard"
