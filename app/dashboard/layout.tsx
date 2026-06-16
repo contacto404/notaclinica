@@ -107,7 +107,7 @@ export default async function DashboardLayout({
       <main
         className="md:ml-56 md:pt-0 overflow-x-hidden"
         style={{
-          paddingTop: 'calc(var(--safe-top) + 38px)',
+          paddingTop: 'calc(var(--safe-top) + 56px)',
           paddingBottom: 'calc(max(env(safe-area-inset-bottom), 8px) + 56px)'
         }}
       >
