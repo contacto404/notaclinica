@@ -150,7 +150,7 @@ export default function PromoPage() {
       {/* Hero — beneficio + captura real del producto */}
       <section className="px-3 sm:px-5" style={{ paddingTop: 'calc(var(--safe-top) + 56px + 12px)' }}>
         <div
-          className="relative rounded-[2rem] overflow-hidden p-7 sm:p-14"
+          className="relative rounded-[2rem] overflow-hidden px-5 py-7 sm:p-14"
           style={{ background: 'radial-gradient(120% 90% at 78% 12%, #2b2b2b 0%, #141414 45%, #0a0a0a 100%)' }}
         >
           {/* Glow animado de fondo */}
@@ -187,7 +187,7 @@ export default function PromoPage() {
               <img
                 src="/screenshots/consulta.jpg"
                 alt="Profesional usando NotaClínica en el celular durante una consulta"
-                className="promo-float w-[280px] sm:w-[340px] rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
+                className="promo-float w-full max-w-[440px] sm:w-[340px] sm:max-w-none mx-auto rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
               />
             </div>
           </div>
