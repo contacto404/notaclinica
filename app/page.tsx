@@ -194,17 +194,6 @@ export default function PromoPage() {
         </div>
       </section>
 
-      {/* Tira de confianza (honesta) */}
-      <section className="px-5 pt-7">
-        <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-sm text-[#6E6E73]">
-          <span>🔒 Datos cifrados</span>
-          <span className="text-[#D4D4D4]">·</span>
-          <span>🩺 Todas las especialidades</span>
-          <span className="text-[#D4D4D4]">·</span>
-          <span>⏱️ Resumen en segundos</span>
-        </div>
-      </section>
-
       {/* Marquee de especialidades (cambiar por logos de clientes cuando los haya) */}
       <section className="pt-14 overflow-hidden">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-7">Para profesionales de todas las especialidades</p>
