@@ -47,7 +47,7 @@ function LoginForm() {
         {/* Panel izquierdo */}
         <div className="flex-1 bg-[#0A0A0A] p-10 flex-col justify-between gap-8 hidden md:flex">
           <div>
-            <img src="/logo-white.png" alt="NotaClínica" className="h-9 w-auto" />
+            <img src="/logo-white-v2.png" alt="NotaClínica" className="h-9 w-auto" />
             <p className="text-[#F0F0F0] text-sm mt-3 leading-relaxed">La consulta más organizada de tu carrera</p>
             <p className="text-[#E5E5E5] text-xs mt-1 leading-relaxed">IA para médicos que quieren enfocarse en <strong className="text-white">sus pacientes</strong>, no en el papeleo</p>
           </div>
@@ -71,8 +71,8 @@ function LoginForm() {
         {/* Panel derecho */}
         <div className="w-full md:w-[380px] p-10 bg-white flex flex-col justify-center gap-5 flex-shrink-0">
           <div className="md:hidden">
-            <img src="/logo.png" alt="NotaClínica" className="h-9 w-auto dark:hidden" />
-            <img src="/logo-white.png" alt="NotaClínica" className="h-9 w-auto hidden dark:block" />
+            <img src="/logo-v2.png" alt="NotaClínica" className="h-9 w-auto dark:hidden" />
+            <img src="/logo-white-v2.png" alt="NotaClínica" className="h-9 w-auto hidden dark:block" />
           </div>
           <div>
             <p className="text-[11px] text-[#6E6E73] font-medium uppercase tracking-widest mb-0.5">
