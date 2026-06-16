@@ -545,7 +545,7 @@ export default function PromoPage() {
             </div>
           </div>
         </div>
-        <p className="max-w-5xl mx-auto text-xs text-[#A3A3A3] mt-10">© 2026 NotaClínica · Sortiplan SA · Montevideo, Uruguay</p>
+        <p className="max-w-5xl mx-auto text-xs text-[#A3A3A3] mt-10">© 2026 NotaClínica · Sortiplan SA</p>
       </footer>
 
     </div>
