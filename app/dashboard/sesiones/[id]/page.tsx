@@ -5,6 +5,7 @@ import WhatsAppButton from './WhatsAppButton'
 import ReporteButton from '@/app/dashboard/pacientes/[id]/ReporteButton'
 import SesionTabs from './SesionTabs'
 import ExportPDFButton from './ExportPDFButton'
+import CopiarNotaButton from './CopiarNotaButton'
 
 export default async function SesionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -102,6 +103,9 @@ export default async function SesionPage({ params }: { params: Promise<{ id: str
               sessionId={id}
             />
             <ExportPDFButton sessionId={id} />
+            {summary && (
+              <CopiarNotaButton patientName={patient.full_name} sessionDate={session.session_date} summary={summary} />
+            )}
           </div>
         </div>
 
