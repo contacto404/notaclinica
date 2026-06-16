@@ -11,15 +11,60 @@ export default function NuevaSesionPage() {
   const [summary, setSummary] = useState<any>(null)
   const [step, setStep] = useState<'record' | 'transcribing' | 'summarizing' | 'done'>('record')
   const [error, setError] = useState('')
+  const [elapsed, setElapsed] = useState(0)
   const mediaRef = useRef<MediaRecorder | null>(null)
   const chunksRef = useRef<Blob[]>([])
+  const streamRef = useRef<MediaStream | null>(null)
+  const audioCtxRef = useRef<AudioContext | null>(null)
+  const rafRef = useRef<number | null>(null)
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const supabase = createClient()
   const router = useRouter()
   const params = useParams()
   const patientId = params.id as string
 
+  function mmss(s: number) {
+    const m = Math.floor(s / 60), sec = s % 60
+    return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+  }
+
+  function drawWaveform(analyser: AnalyserNode) {
+    const canvas = canvasRef.current
+    if (!canvas) { rafRef.current = requestAnimationFrame(() => drawWaveform(analyser)); return }
+    const ctx = canvas.getContext('2d')!
+    const dpr = window.devicePixelRatio || 1
+    const W = canvas.clientWidth, H = canvas.clientHeight
+    if (canvas.width !== W * dpr) { canvas.width = W * dpr; canvas.height = H * dpr; ctx.scale(dpr, dpr) }
+    const bins = 32
+    const data = new Uint8Array(analyser.frequencyBinCount)
+    analyser.getByteFrequencyData(data)
+    ctx.clearRect(0, 0, W, H)
+    const step = Math.floor(data.length / bins)
+    const bw = W / bins
+    for (let i = 0; i < bins; i++) {
+      const v = data[i * step] / 255
+      const h = Math.max(3, v * H)
+      ctx.fillStyle = '#0A0A0A'
+      const x = i * bw + bw * 0.2
+      ctx.fillRect(x, (H - h) / 2, bw * 0.6, h)
+    }
+    rafRef.current = requestAnimationFrame(() => drawWaveform(analyser))
+  }
+
+  function teardownAudio() {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    if (timerRef.current) clearInterval(timerRef.current)
+    rafRef.current = null; timerRef.current = null
+    audioCtxRef.current?.close().catch(() => {})
+    audioCtxRef.current = null
+    streamRef.current?.getTracks().forEach(t => t.stop())
+    streamRef.current = null
+  }
+
   async function startRecording() {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+    streamRef.current = stream
     const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4'
     const media = new MediaRecorder(stream, { mimeType })
     mediaRef.current = media
@@ -28,11 +73,26 @@ export default function NuevaSesionPage() {
     media.onstop = () => setAudioBlob(new Blob(chunksRef.current, { type: mimeType }))
     media.start()
     setRecording(true)
+    // Cronómetro
+    setElapsed(0)
+    timerRef.current = setInterval(() => setElapsed(s => s + 1), 1000)
+    // Onda de audio en vivo (solo visual; no transcribe)
+    try {
+      const Ctx = window.AudioContext || (window as any).webkitAudioContext
+      const audioCtx = new Ctx()
+      audioCtxRef.current = audioCtx
+      const source = audioCtx.createMediaStreamSource(stream)
+      const analyser = audioCtx.createAnalyser()
+      analyser.fftSize = 128
+      source.connect(analyser)
+      drawWaveform(analyser)
+    } catch {}
   }
 
   function stopRecording() {
     mediaRef.current?.stop()
     setRecording(false)
+    teardownAudio()
   }
 
   async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -134,6 +194,12 @@ export default function NuevaSesionPage() {
                   className="w-24 h-24 rounded-full bg-red-500 cursor-pointer text-white font-bold text-sm tracking-wider flex items-center justify-center hover:bg-red-600 transition-colors shadow-lg animate-pulse">
                   STOP
                 </button>
+              )}
+              {recording && (
+                <div className="w-full flex flex-col items-center gap-2">
+                  <span className="text-2xl font-bold text-[#0A0A0A] tabular-nums">{mmss(elapsed)}</span>
+                  <canvas ref={canvasRef} className="w-full max-w-xs h-12" />
+                </div>
               )}
               <p className="text-sm text-[#6E6E73]">
                 {recording ? 'Grabando... presiona STOP para detener' : 'Presiona para grabar'}
