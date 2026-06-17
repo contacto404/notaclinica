@@ -532,7 +532,7 @@ export default function PromoPage() {
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Producto</p>
               <ul className="space-y-2 text-sm text-[#737373]">
-                <li><Link href="/" className="hover:text-[#0A0A0A] transition-colors">Inicio</Link></li>
+                <li><Link href="#como-funciona" className="hover:text-[#0A0A0A] transition-colors">Cómo funciona</Link></li>
                 <li><Link href="/login?tab=registro" className="hover:text-[#0A0A0A] transition-colors">Empezar gratis</Link></li>
                 <li><Link href="/login" className="hover:text-[#0A0A0A] transition-colors">Iniciar sesión</Link></li>
               </ul>
@@ -541,7 +541,6 @@ export default function PromoPage() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Contacto</p>
               <ul className="space-y-2 text-sm text-[#737373]">
                 <li><a href="mailto:sortiplansa@gmail.com" className="hover:text-[#0A0A0A] transition-colors">Contactar</a></li>
-                <li><a href="https://wa.me/598" target="_blank" rel="noopener noreferrer" className="hover:text-[#0A0A0A] transition-colors">WhatsApp</a></li>
                 <li><Link href="/privacidad" className="hover:text-[#0A0A0A] transition-colors">Privacidad</Link></li>
               </ul>
             </div>
