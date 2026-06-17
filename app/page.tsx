@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: 'NotaClínica',
     title: 'NotaClínica — Terminá la consulta con la nota clínica ya lista',
     description: 'Grabá la consulta y la IA hace el resto. 30 días gratis, sin tarjeta.',
-    images: [{ url: '/og-promo-v2.png', width: 1200, height: 630, alt: 'NotaClínica — Terminá la consulta con la nota clínica ya lista' }],
+    images: [{ url: '/og-promo-v3.png', width: 1200, height: 630, alt: 'NotaClínica — Terminá la consulta con la nota clínica ya lista' }],
   },
 }
 
