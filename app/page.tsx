@@ -191,6 +191,23 @@ export default function PromoPage() {
         </div>
       </section>
 
+      {/* Franja de confianza — señales reales (sin testimonios ni números inventados) */}
+      <section className="px-3 sm:px-5 pt-10">
+        <div data-reveal className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+          {[
+            { t: 'Resumen en segundos', icon: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></> },
+            { t: 'Datos cifrados · Ley 18.331', icon: <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z M9.5 12l1.8 1.8L15 10" /> },
+            { t: 'Todas las especialidades médicas', icon: <path d="M3 5v6a4 4 0 008 0V5 M7 5V3 M7 5v0 M11 15a5 5 0 0010 0v-1 M16 18v1a2 2 0 11-4 0" /> },
+            { t: 'Hecho en Uruguay', icon: <><path d="M12 21s-7-5.6-7-11a7 7 0 1114 0c0 5.4-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></> },
+          ].map(item => (
+            <span key={item.t} className="inline-flex items-center gap-2 bg-[#F5F5F7] text-[#0A0A0A] rounded-full px-4 py-2 text-[13px] font-medium">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-[#6E6E73]">{item.icon}</svg>
+              {item.t}
+            </span>
+          ))}
+        </div>
+      </section>
+
       {/* Marquee de especialidades (cambiar por logos de clientes cuando los haya) */}
       <section className="pt-14 overflow-hidden">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-7">Para profesionales de todas las especialidades</p>
