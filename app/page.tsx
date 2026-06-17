@@ -4,6 +4,7 @@ import EspecialidadesDemo from './promo/EspecialidadesDemo'
 import MotionProvider from './promo/MotionProvider'
 import DemoEnAccion from './promo/DemoEnAccion'
 import StatsCounter from './promo/StatsCounter'
+import HeroNotaDemo from './promo/HeroNotaDemo'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.notaclinica.app'),
@@ -182,13 +183,9 @@ export default function PromoPage() {
               <p data-reveal className="text-[13px] text-[#9A9A9A] mt-5" style={{ transitionDelay: '0.34s' }}>Cancelás cuando quieras, sin compromiso</p>
             </div>
 
-            {/* El producto en uso real */}
+            {/* El resultado primero: la nota clínica generada por IA */}
             <div data-reveal className="flex justify-center md:justify-end" style={{ transitionDelay: '0.22s' }}>
-              <img
-                src="/screenshots/consulta.jpg"
-                alt="Profesional usando NotaClínica en el celular durante una consulta"
-                className="promo-float w-full max-w-[440px] sm:w-[340px] sm:max-w-none mx-auto rounded-[1.75rem] shadow-2xl ring-1 ring-white/10"
-              />
+              <HeroNotaDemo />
             </div>
           </div>
         </div>
