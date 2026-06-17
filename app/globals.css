@@ -49,19 +49,6 @@ html.native [data-show-in-app] { display: revert !important; }
   animation: promoShiny 5s linear infinite;
 }
 
-/* Aparecer / desaparecer: la palabra se funde suavemente y vuelve */
-@keyframes promoFade {
-  0%, 18%  { opacity: 1; filter: blur(0); }
-  50%      { opacity: 0; filter: blur(5px); }
-  82%, 100% { opacity: 1; filter: blur(0); }
-}
-.promo-fade {
-  display: inline-block;
-  color: #fff; -webkit-text-fill-color: #fff;
-  animation: promoFade 4s ease-in-out infinite;
-  will-change: opacity, filter;
-}
-
 /* Reveal al hacer scroll con blur-rise. Solo aplica con html.reveal-on (lo agrega
    el JS), así sin JS o con reduce-motion el contenido se ve siempre. */
 html.reveal-on [data-reveal] {
