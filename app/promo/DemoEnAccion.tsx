@@ -10,7 +10,7 @@ const TRANSCRIPT = [
 
 const RESUMEN = [
   { label: 'Motivo', text: 'Seguimiento de ansiedad e insomnio.' },
-  { label: 'Evolución', text: 'Mejora del sueño; episodios de ansiedad en disminución con la medicación ajustada.' },
+  { label: 'Evolución', text: 'Mejor descanso; ansiedad en baja con la medicación ajustada.' },
   { label: 'Plan', text: 'Mantener el esquema actual y reforzar técnicas de higiene del sueño.' },
 ]
 
@@ -118,7 +118,7 @@ export default function DemoEnAccion() {
             <p className="text-[11px] uppercase tracking-[0.14em] text-[#6B6B6B] mb-4 font-semibold">Resumen con IA</p>
             <div className="flex flex-col gap-3">
               {RESUMEN.map((r, i) => (
-                <div key={r.label} className="bg-[#FAFAFA] rounded-r-xl border-l-2 border-[#0A0A0A] px-4 py-2.5 min-h-[58px]">
+                <div key={r.label} className="bg-[#FAFAFA] rounded-r-xl border-l-2 border-[#0A0A0A] px-4 py-2.5 h-[84px] overflow-hidden">
                   <p className="text-[10px] uppercase tracking-[0.12em] text-[#A3A3A3] mb-1">{r.label}</p>
                   <p className="text-sm text-[#0A0A0A] leading-snug">
                     {typed[i]}
