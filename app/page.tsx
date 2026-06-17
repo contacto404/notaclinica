@@ -6,7 +6,7 @@ import DemoEnAccion from './promo/DemoEnAccion'
 import StatsCounter from './promo/StatsCounter'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://notaclinica.vercel.app'),
+  metadataBase: new URL('https://www.notaclinica.app'),
   title: 'NotaClínica — Terminá la consulta con la nota clínica ya lista',
   description:
     'NotaClínica graba la consulta y la IA arma el resumen clínico en segundos. Ahorrá horas de papeleo y dedicáselas a tus pacientes. 30 días gratis, sin tarjeta.',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_UY',
-    url: 'https://notaclinica.vercel.app',
+    url: 'https://www.notaclinica.app',
     siteName: 'NotaClínica',
     title: 'NotaClínica — Terminá la consulta con la nota clínica ya lista',
     description: 'Grabá la consulta y la IA hace el resto. 30 días gratis, sin tarjeta.',
@@ -99,7 +99,7 @@ const JSON_LD = {
       applicationCategory: 'MedicalApplication',
       operatingSystem: 'Web, iOS, Android',
       description: 'NotaClínica graba la consulta y la IA arma el resumen clínico en segundos. Documentación clínica con IA para profesionales de la salud.',
-      url: 'https://notaclinica.vercel.app',
+      url: 'https://www.notaclinica.app',
       offers: {
         '@type': 'Offer',
         price: '49',
