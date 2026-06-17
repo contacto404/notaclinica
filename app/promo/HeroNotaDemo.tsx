@@ -17,7 +17,10 @@ export default function HeroNotaDemo() {
   const [active, setActive] = useState(0)
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // En mobile (o con reduce-motion) mostramos la nota completa y fija: la
+    // animación cambia de alto al teclear y haría "saltar" la página en pantallas chicas.
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    if (isMobile || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setPhase('done'); setTyped(NOTA.map(n => n.text)); setActive(-1); return
     }
     let cancelled = false
