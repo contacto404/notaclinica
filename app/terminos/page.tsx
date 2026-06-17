@@ -59,7 +59,7 @@ export default function TerminosPage() {
             },
             {
               title: '11. Ley aplicable y contacto',
-              content: 'Estos Términos se rigen por las leyes de la República Oriental del Uruguay. Para consultas: contacto@notaclinica.app'
+              content: 'Estos Términos se rigen por las leyes de la República Oriental del Uruguay. Para consultas: sortiplansa@gmail.com'
             },
           ].map(({ title, content }) => (
             <div key={title} className="bg-white rounded-3xl border border-[#EDEDED] p-6">

@@ -442,7 +442,7 @@ export default function PromoPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-4">Clínicas y equipos</p>
               <h3 className="text-xl font-semibold mb-2">¿Varios profesionales?</h3>
               <p className="text-sm text-[#6E6E73] leading-relaxed mb-6">Armamos un plan a medida para tu clínica o consultorio con varios profesionales. Escribinos y lo vemos juntos.</p>
-              <a href="mailto:contacto@notaclinica.app"
+              <a href="mailto:sortiplansa@gmail.com"
                 className="mt-auto inline-flex items-center justify-center gap-1.5 border border-[#0A0A0A] text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#F5F5F7] transition-colors">
                 Hablar con nosotros
               </a>
@@ -551,7 +551,7 @@ export default function PromoPage() {
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Contacto y legal</p>
               <ul className="space-y-2 text-sm text-[#737373]">
-                <li><a href="mailto:contacto@notaclinica.app" className="hover:text-[#0A0A0A] transition-colors">Contactar</a></li>
+                <li><a href="mailto:sortiplansa@gmail.com" className="hover:text-[#0A0A0A] transition-colors">Contactar</a></li>
                 <li><Link href="/privacidad" className="hover:text-[#0A0A0A] transition-colors">Privacidad</Link></li>
                 <li><Link href="/terminos" className="hover:text-[#0A0A0A] transition-colors">Términos</Link></li>
               </ul>
