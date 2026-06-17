@@ -35,6 +35,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/portal') ||
     pathname.startsWith('/promo') ||
     pathname === '/privacidad' ||
+    pathname === '/terminos' ||
     pathname === '/manifest.json' ||
     pathname === '/sw.js' ||
     pathname === '/'

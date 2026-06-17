@@ -117,7 +117,10 @@ function LoginForm() {
           </p>
 
           <p className="text-center text-xs text-[#6E6E73]">
-            Al registrarte aceptás nuestra{' '}
+            Al registrarte aceptás nuestros{' '}
+            <a href="/terminos" target="_blank" className="text-[#0A0A0A] hover:underline font-medium">
+              Términos
+            </a>{' '}y la{' '}
             <a href="/privacidad" target="_blank" className="text-[#0A0A0A] hover:underline font-medium">
               Política de Privacidad
             </a>

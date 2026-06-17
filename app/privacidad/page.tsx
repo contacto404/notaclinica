@@ -20,7 +20,7 @@ export default function PrivacidadPage() {
           {[
             {
               title: '1. Responsable del tratamiento',
-              content: 'Sortiplan SA (RUT 218380350012) es la responsable del tratamiento de los datos personales recabados a través de NotaClínica. Contacto: sortiplansa@gmail.com'
+              content: 'Sortiplan SA (RUT 218380350012) es la responsable del tratamiento de los datos personales recabados a través de NotaClínica. Contacto: contacto@notaclinica.app'
             },
             {
               title: '2. ¿Qué datos recopilamos?',
@@ -63,7 +63,7 @@ export default function PrivacidadPage() {
               content: null,
               extra: (
                 <div className="flex flex-col gap-3">
-                  <p className="text-sm text-[#0A0A0A] leading-relaxed">El usuario tiene derecho a acceder, rectificar, cancelar y oponerse al tratamiento de sus datos. Para ejercerlos: <span className="text-[#0A0A0A]">sortiplansa@gmail.com</span></p>
+                  <p className="text-sm text-[#0A0A0A] leading-relaxed">El usuario tiene derecho a acceder, rectificar, cancelar y oponerse al tratamiento de sus datos. Para ejercerlos: <span className="text-[#0A0A0A]">contacto@notaclinica.app</span></p>
                   <div className="bg-[#F5F5F7] rounded-2xl p-4">
                     <p className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest mb-1.5">Uruguay</p>
                     <p className="text-sm text-[#0A0A0A] leading-relaxed">Ley 18.331 de Protección de Datos Personales. Organismo de control: URCDP.</p>
@@ -93,7 +93,7 @@ export default function PrivacidadPage() {
             },
             {
               title: '11. Contacto',
-              content: 'Para consultas sobre privacidad: sortiplansa@gmail.com'
+              content: 'Para consultas sobre privacidad: contacto@notaclinica.app'
             },
           ].map(({ title, content, extra }) => (
             <div key={title} className="bg-white rounded-3xl border border-[#EDEDED] p-6">

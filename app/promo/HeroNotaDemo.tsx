@@ -6,7 +6,7 @@ const NOTA = [
   { label: 'Motivo de consulta', text: 'Control de hipertensión arterial; refiere cefaleas ocasionales.' },
   { label: 'Evolución', text: 'Cifras tensionales en descenso respecto al control previo. Buena adherencia al tratamiento.' },
   { label: 'Diagnóstico', text: 'Hipertensión arterial esencial, controlada.' },
-  { label: 'Plan', text: 'Mantener enalapril 10 mg/día. Control en 4 semanas con registro domiciliario de presión.' },
+  { label: 'Plan', text: 'Mantener enalapril 10 mg/día. Control en 4 semanas.' },
 ]
 
 type Phase = 'rec' | 'gen' | 'done'
@@ -55,7 +55,7 @@ export default function HeroNotaDemo() {
   const statusLabel = phase === 'rec' ? 'Grabando sesión' : phase === 'gen' ? 'Generando resumen…' : 'Resumen listo'
 
   return (
-    <div className="w-full max-w-[360px] mx-auto md:mx-0 md:ml-auto">
+    <div className="w-full max-w-[360px] mx-auto md:mx-0 md:ml-auto" role="img" aria-label="Ejemplo ilustrativo de una nota clínica generada por la IA de NotaClínica: motivo, evolución, diagnóstico y plan.">
       {/* Cuerpo del teléfono */}
       <div className="rounded-[2.4rem] bg-[#0A0A0A] p-2.5 shadow-2xl ring-1 ring-white/10">
         <div className="rounded-[1.9rem] bg-[#F7F7F8] overflow-hidden">

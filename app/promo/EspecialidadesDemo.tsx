@@ -5,6 +5,7 @@ const EJEMPLOS: Record<string, { label: string; text: string }[]> = {
   'Psicología': [
     { label: 'Motivo', text: 'Seguimiento de ansiedad e insomnio.' },
     { label: 'Observaciones', text: 'Refiere mejor descanso y menor rumiación; buena adherencia a las pautas.' },
+    { label: 'Impresión', text: 'Cuadro ansioso en evolución favorable, con buena respuesta al abordaje.' },
     { label: 'Plan', text: 'Continuar reestructuración cognitiva y reforzar higiene del sueño.' },
   ],
   'Medicina clínica': [

@@ -62,7 +62,7 @@ export default function DemoEnAccion() {
   }, [])
 
   return (
-    <div className="rounded-[2rem] border border-[#EDEDED] bg-[#FAFAFA] p-4 sm:p-8">
+    <div role="img" aria-label="Demostración ilustrativa: una conversación de consulta se convierte en un resumen clínico con IA (motivo, evolución y plan)." className="rounded-[2rem] border border-[#EDEDED] bg-[#FAFAFA] p-4 sm:p-8">
       <div className="bg-white rounded-3xl border border-[#EDEDED] shadow-sm overflow-hidden">
         {/* Barra de ventana estilo macOS */}
         <div className="relative flex items-center px-4 py-2.5 border-b border-[#F0F0F0] bg-[#FCFCFC]">

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 const PASOS = [
   { num: '01', title: 'Grabá la consulta', desc: 'Un botón desde el celular. Funciona durante la sesión, sin interrumpir al paciente.' },
-  { num: '02', title: 'La IA documenta', desc: 'Transcripción completa y resumen clínico estructurado según tu especialidad, en segundos.' },
+  { num: '02', title: 'La IA arma el resumen', desc: 'Transcripción completa y resumen clínico estructurado según tu especialidad, en segundos.' },
   { num: '03', title: 'Enviá y archivá', desc: 'PDF firmado, receta con QR o envío por WhatsApp. Todo queda en el historial del paciente.' },
 ]
 
@@ -65,6 +65,7 @@ const TESTIMONIOS: { quote: string; name: string; role: string }[] = []
 const FAQS = [
   { q: '¿Puedo editar el resumen que genera la IA?', a: 'Sí. La IA arma el borrador y vos lo revisás y editás antes de guardarlo. El criterio clínico siempre es tuyo: es una asistente, no un reemplazo.' },
   { q: '¿Funciona sin conexión a internet?', a: 'Podés grabar la sesión sin conexión. La transcripción y el resumen con IA se generan en cuanto recuperás internet.' },
+  { q: 'Si el audio no se guarda, ¿puedo corregir la transcripción?', a: 'Sí. La transcripción y el resumen quedan guardados y los podés editar las veces que quieras. El audio se usa solo para transcribir en el momento y no se almacena, así que la edición es sobre el texto, no sobre el audio.' },
   { q: '¿Qué pasa con mis datos si cancelo?', a: 'Tus datos siguen siendo tuyos. Podés exportar el historial completo de cada paciente en PDF en cualquier momento, antes o después de cancelar.' },
   { q: '¿Para qué especialidades sirve?', a: 'Los resúmenes se adaptan a tu especialidad: psicología, psiquiatría, medicina clínica, pediatría, nutrición y más. Lo configurás en un clic.' },
   { q: '¿Mis datos y los de mis pacientes están seguros?', a: 'Sí. La información viaja cifrada y cada profesional accede únicamente a sus propios pacientes. Cumplimos con la Ley 18.331 de protección de datos.' },
@@ -168,7 +169,7 @@ export default function PromoPage() {
                 Terminá la consulta con la nota clínica <span className="promo-shiny">ya lista</span>
               </h1>
               <p data-reveal className="text-base sm:text-lg text-[#C8C8C8] max-w-md leading-relaxed mb-8" style={{ transitionDelay: '0.2s' }}>
-                ¿Todavía escribís la historia clínica después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. Volvés a estar presente con tu paciente, no con la pantalla.
+                ¿Todavía escribís las notas después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. Volvés a estar presente con tu paciente, no con la pantalla.
               </p>
               <div data-reveal className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4" style={{ transitionDelay: '0.28s' }}>
                 <Link href="/login?tab=registro"
@@ -250,7 +251,7 @@ export default function PromoPage() {
       <section id="como-funciona" className="px-3 sm:px-5 pt-28 md:pt-32 pb-4 scroll-mt-20">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Cómo funciona</p>
-          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">De la charla a la historia clínica</h2>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">De la charla a la nota clínica</h2>
           <div className="grid md:grid-cols-3 gap-x-10 gap-y-10">
             {PASOS.map(s => (
               <div key={s.num}>
@@ -388,6 +389,10 @@ export default function PromoPage() {
                   </li>
                 ))}
               </ul>
+              <Link href="/login?tab=registro"
+                className="inline-flex items-center gap-1.5 bg-white text-[#0A0A0A] pl-6 pr-5 py-3.5 rounded-full font-semibold mt-9 hover:bg-[#EDEDED] transition-colors">
+                Empezar 30 días gratis <span className="text-lg leading-none">›</span>
+              </Link>
             </div>
 
             {/* Visual: candado con ondas */}
@@ -411,14 +416,14 @@ export default function PromoPage() {
         <div data-reveal className="max-w-4xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Precio</p>
           <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-3 max-w-2xl">Un plan simple, sin sorpresas</h2>
-          <p className="text-[#6E6E73] leading-relaxed max-w-xl mb-10">Probás 30 días gratis, sin tarjeta. Si te sirve, seguís por un precio menor al de una consulta. Cancelás cuando quieras.</p>
+          <p className="text-[#6E6E73] leading-relaxed max-w-xl mb-10">Probás 30 días gratis, sin tarjeta. Si te sirve, seguís con un plan simple y sin sorpresas. Cancelás cuando quieras.</p>
 
           <div className="grid md:grid-cols-[1.3fr_1fr] gap-4">
             {/* Plan individual */}
             <div className="bg-[#0A0A0A] text-white rounded-3xl p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#9A9A9A] mb-4">NotaClínica Pro</p>
               <p className="text-6xl font-semibold tracking-[-0.03em]">US$49<span className="text-lg text-[#9A9A9A] font-normal align-middle"> /mes</span></p>
-              <p className="text-sm text-[#C8C8C8] mt-2 mb-7">El equivalente a una consulta. 30 días gratis para empezar.</p>
+              <p className="text-sm text-[#C8C8C8] mt-2 mb-7">Precio en dólares (USD). 30 días gratis para empezar, sin tarjeta.</p>
               <ul className="flex flex-col gap-2.5 mb-8">
                 {['Pacientes y sesiones ilimitados', 'Transcripción y resúmenes con IA', 'Escalas, evolución y plan de tratamiento', 'Recetas y PDF con tu firma', 'Agenda, portal del paciente y honorarios', 'Soporte directo'].map(f => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-[#EDEDED]">
@@ -437,7 +442,7 @@ export default function PromoPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-4">Clínicas y equipos</p>
               <h3 className="text-xl font-semibold mb-2">¿Varios profesionales?</h3>
               <p className="text-sm text-[#6E6E73] leading-relaxed mb-6">Armamos un plan a medida para tu clínica o consultorio con varios profesionales. Escribinos y lo vemos juntos.</p>
-              <a href="mailto:sortiplansa@gmail.com"
+              <a href="mailto:contacto@notaclinica.app"
                 className="mt-auto inline-flex items-center justify-center gap-1.5 border border-[#0A0A0A] text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#F5F5F7] transition-colors">
                 Hablar con nosotros
               </a>
@@ -453,7 +458,7 @@ export default function PromoPage() {
           <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-12 max-w-2xl">Antes de empezar</h2>
           <div className="flex flex-col gap-3">
             {FAQS.map((f, i) => (
-              <details key={i} className="group bg-[#F5F5F7] border border-[#EDEDED] rounded-2xl px-5 py-4">
+              <details key={i} open={i < 2} className="group bg-[#F5F5F7] border border-[#EDEDED] rounded-2xl px-5 py-4">
                 <summary className="flex items-center justify-between cursor-pointer list-none font-medium text-[15px]">
                   {f.q}
                   <span className="text-[#A3A3A3] transition-transform duration-200 ease-out group-open:rotate-45 text-xl leading-none ml-3">+</span>
@@ -468,7 +473,7 @@ export default function PromoPage() {
       {/* Descargá la app */}
       <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
-          <p className={kicker}>Descargá la app</p>
+          <p className={kicker}>Instalá la app</p>
           <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-6 max-w-2xl">Usala donde estés</h2>
           <p className="text-[#6E6E73] leading-relaxed max-w-xl mb-10">
             Funciona desde el navegador y se instala como app en tu celular. En iPhone: <span className="text-[#0A0A0A]">Compartir → Agregar a inicio</span>. En Android: <span className="text-[#0A0A0A]">Instalar app</span>.
@@ -533,15 +538,22 @@ export default function PromoPage() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Producto</p>
               <ul className="space-y-2 text-sm text-[#737373]">
                 <li><Link href="#como-funciona" className="hover:text-[#0A0A0A] transition-colors">Cómo funciona</Link></li>
+                <li><Link href="#precio" className="hover:text-[#0A0A0A] transition-colors">Precio</Link></li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Acceso</p>
+              <ul className="space-y-2 text-sm text-[#737373]">
                 <li><Link href="/login?tab=registro" className="hover:text-[#0A0A0A] transition-colors">Empezar gratis</Link></li>
                 <li><Link href="/login" className="hover:text-[#0A0A0A] transition-colors">Iniciar sesión</Link></li>
               </ul>
             </div>
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Contacto</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#0A0A0A] mb-3">Contacto y legal</p>
               <ul className="space-y-2 text-sm text-[#737373]">
-                <li><a href="mailto:sortiplansa@gmail.com" className="hover:text-[#0A0A0A] transition-colors">Contactar</a></li>
+                <li><a href="mailto:contacto@notaclinica.app" className="hover:text-[#0A0A0A] transition-colors">Contactar</a></li>
                 <li><Link href="/privacidad" className="hover:text-[#0A0A0A] transition-colors">Privacidad</Link></li>
+                <li><Link href="/terminos" className="hover:text-[#0A0A0A] transition-colors">Términos</Link></li>
               </ul>
             </div>
           </div>
