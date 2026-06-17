@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'NotaClínica',
   webDir: 'out',
   server: {
-    url: 'https://notaclinica.vercel.app',
+    url: 'https://notaclinica.vercel.app/dashboard',
     cleartext: false
   },
   ios: {

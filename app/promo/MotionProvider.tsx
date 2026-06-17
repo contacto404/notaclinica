@@ -29,7 +29,13 @@ export default function MotionProvider() {
     )
     els.forEach((el) => io.observe(el))
 
-    return () => io.disconnect()
+    // Red de seguridad: si el observer no dispara (p. ej. dentro de un webview),
+    // revelar todo igual tras 1.2s para no dejar nunca la página en blanco.
+    const failsafe = setTimeout(() => {
+      els.forEach((el) => el.classList.add('is-visible'))
+    }, 1200)
+
+    return () => { io.disconnect(); clearTimeout(failsafe) }
   }, [])
 
   return null
