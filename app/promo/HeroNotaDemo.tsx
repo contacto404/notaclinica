@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 // Nota clínica de ejemplo (médico general). Ilustrativa, sin datos reales.
 const NOTA = [
   { label: 'Motivo de consulta', text: 'Control de hipertensión arterial; refiere cefaleas ocasionales.' },
-  { label: 'Evolución', text: 'Cifras tensionales en descenso respecto al control previo. Buena adherencia al tratamiento.' },
+  { label: 'Evolución', text: 'Cifras en descenso; buena adherencia al tratamiento.' },
   { label: 'Diagnóstico', text: 'Hipertensión arterial esencial, controlada.' },
   { label: 'Plan', text: 'Mantener enalapril 10 mg/día. Control en 4 semanas.' },
 ]
@@ -17,10 +17,7 @@ export default function HeroNotaDemo() {
   const [active, setActive] = useState(0)
 
   useEffect(() => {
-    // En mobile (o con reduce-motion) mostramos la nota completa y fija: la
-    // animación cambia de alto al teclear y haría "saltar" la página en pantallas chicas.
-    const isMobile = window.matchMedia('(max-width: 768px)').matches
-    if (isMobile || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setPhase('done'); setTyped(NOTA.map(n => n.text)); setActive(-1); return
     }
     let cancelled = false
@@ -91,7 +88,7 @@ export default function HeroNotaDemo() {
             </p>
             <div className="flex flex-col gap-2.5">
               {NOTA.map((n, i) => (
-                <div key={n.label} className="bg-white rounded-r-lg border-l-2 border-[#0A0A0A] px-3.5 py-2 min-h-[52px] shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+                <div key={n.label} className="bg-white rounded-r-lg border-l-2 border-[#0A0A0A] px-3.5 py-2 h-[70px] overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
                   <p className="text-[9px] uppercase tracking-[0.12em] text-[#A3A3A3] mb-0.5">{n.label}</p>
                   <p className="text-[12.5px] text-[#0A0A0A] leading-snug">
                     {typed[i]}

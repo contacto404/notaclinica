@@ -54,7 +54,7 @@ export default function EspecialidadesDemo() {
 
       <div className="bg-[#FAFAFA] rounded-3xl border border-[#EDEDED] p-6 sm:p-8">
         <p className="text-[11px] uppercase tracking-[0.14em] text-[#6B6B6B] mb-4 font-semibold">Resumen clínico · {sel}</p>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 min-h-[340px] md:min-h-[280px]">
           {EJEMPLOS[sel].map(f => (
             <div key={f.label} className="bg-white rounded-r-xl border-l-2 border-[#0A0A0A] px-4 py-2.5">
               <p className="text-[10px] uppercase tracking-[0.12em] text-[#A3A3A3] mb-1">{f.label}</p>
