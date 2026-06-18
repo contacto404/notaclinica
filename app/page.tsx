@@ -139,6 +139,12 @@ export default function PromoPage() {
           }}
         >
           <img src="/logo-v5.png" alt="NotaClínica" className="h-10 sm:h-11 w-auto shrink-0" />
+          <nav aria-label="Secciones" className="hidden lg:flex items-center gap-7 text-sm text-[#6E6E73]">
+            <a href="#como-funciona" className="hover:text-[#0A0A0A] transition-colors">Cómo funciona</a>
+            <a href="#producto" className="hover:text-[#0A0A0A] transition-colors">Producto</a>
+            <a href="#precio" className="hover:text-[#0A0A0A] transition-colors">Precio</a>
+            <a href="#faq" className="hover:text-[#0A0A0A] transition-colors">Preguntas</a>
+          </nav>
           <div className="flex items-center gap-2 shrink-0">
             <Link href="/login" className="hidden sm:inline-flex text-sm font-medium text-[#0A0A0A] bg-[#F0F0F0] px-4 py-2 rounded-full hover:bg-[#E5E5E5] transition-colors">
               Iniciar sesión
@@ -316,7 +322,7 @@ export default function PromoPage() {
       </section>
 
       {/* Features */}
-      <section className="px-3 sm:px-5 pt-28 md:pt-32">
+      <section id="producto" className="px-3 sm:px-5 pt-28 md:pt-32 scroll-mt-20">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Producto</p>
           <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">Una sola app para toda la consulta</h2>
@@ -362,6 +368,7 @@ export default function PromoPage() {
                 <img
                   src={c.img}
                   alt={c.title}
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.35) 45%, transparent 72%)' }} />
@@ -524,7 +531,14 @@ export default function PromoPage() {
             <div className="border border-[#D2D2D7] rounded-3xl p-8 flex flex-col">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6B6B6B] mb-4">Clínicas y equipos</p>
               <h3 className="text-xl font-semibold mb-2">¿Varios profesionales?</h3>
-              <p className="text-sm text-[#6E6E73] leading-relaxed mb-6">Armamos un plan a medida para tu clínica o consultorio con varios profesionales. Escribinos y lo vemos juntos.</p>
+              <p className="text-sm text-[#6E6E73] leading-relaxed mb-5">Armamos un plan a medida para tu clínica o consultorio. Escribinos y lo vemos juntos.</p>
+              <ul className="flex flex-col gap-2.5 mb-6">
+                {['Un perfil para cada profesional', 'Métricas del equipo consolidadas', 'Precio y facturación a medida'].map(f => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-[#0A0A0A]">
+                    <span className="text-[#0A0A0A] mt-0.5">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
               <a href="mailto:sortiplansa@gmail.com"
                 className="mt-auto inline-flex items-center justify-center gap-1.5 border border-[#0A0A0A] text-[#0A0A0A] w-full py-3.5 rounded-full font-semibold hover:bg-[#F5F5F7] transition-colors">
                 Hablar con nosotros
@@ -535,7 +549,7 @@ export default function PromoPage() {
       </section>
 
       {/* FAQ */}
-      <section className="px-3 sm:px-5 pt-28 md:pt-32">
+      <section id="faq" className="px-3 sm:px-5 pt-28 md:pt-32 scroll-mt-20">
         <div data-reveal className="max-w-3xl mx-auto px-2 sm:px-4">
           <p className={kicker}>Preguntas frecuentes</p>
           <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-12 max-w-2xl">Antes de empezar</h2>

@@ -62,7 +62,10 @@ html.reveal-on [data-reveal] {
 }
 html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; filter: blur(0); }
 
+html { scroll-behavior: smooth; }
+
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .promo-float, .promo-glow, .promo-kenburns, .promo-marquee, .app-marquee, .promo-wave-bar, .promo-caret, .promo-shiny, .promo-fade { animation: none; opacity: 1; filter: none; }
 }
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }

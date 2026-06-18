@@ -40,6 +40,7 @@ export default function EspecialidadesDemo() {
           <button
             key={k}
             onClick={() => setSel(k)}
+            aria-pressed={sel === k}
             className={
               'text-sm rounded-full px-4 py-2 border transition-colors cursor-pointer ' +
               (sel === k
