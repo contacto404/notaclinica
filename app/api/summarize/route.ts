@@ -153,7 +153,7 @@ export async function POST(request: NextRequest) {
         .from('sessions')
         .select(`session_date, summaries (chief_complaint, observations, plan, next_steps)`)
         .eq('patient_id', patientId)
-        .eq('status', 'complete')
+        .in('status', ['summarized', 'complete', 'signed'])
         .order('session_date', { ascending: false })
         .limit(5)
 

@@ -160,7 +160,7 @@ export default function NuevaSesionPage() {
       if (dialogue && dialogue.length > 0) {
         await supabase.from('transcriptions').update({ dialogue }).eq('session_id', session.id)
       }
-      await supabase.from('sessions').update({ status: 'complete' }).eq('id', session.id)
+      await supabase.from('sessions').update({ status: 'summarized' }).eq('id', session.id)
       setStep('done')
     } catch (err: any) {
       setError(err.message)
