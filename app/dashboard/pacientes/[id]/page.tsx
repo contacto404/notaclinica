@@ -16,7 +16,7 @@ import PlanTratamiento from './PlanTratamiento'
 import { showsScales } from '@/lib/scales'
 import { isSessionDone, capitalizar } from '@/lib/sessionStatus'
 import HistorialSesiones from './HistorialSesiones'
-import { IconMic } from '../../components/Icons'
+import { IconMic, IconSearch, IconVideo, IconPhone, IconBuilding, IconFileText, IconClipboard, IconPill, IconActivity, IconChart, IconDownload, IconCalendar } from '../../components/Icons'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -108,23 +108,23 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               </div>
               <p className="text-sm text-[#6E6E73] mt-0.5">{diagnosticoNorm ?? 'Sin diagnóstico'}</p>
               {patient.phone && (
-                <p className="text-xs text-[#6E6E73] mt-0.5">📱 {patient.phone}</p>
+                <p className="text-xs text-[#6E6E73] mt-0.5 flex items-center gap-1.5"><IconPhone className="w-3.5 h-3.5 shrink-0" /> {patient.phone}</p>
               )}
               {patient.insurance_provider && (
-                <p className="text-xs text-[#6E6E73] mt-0.5">🏥 {patient.insurance_provider}{patient.insurance_member_id ? ` · Afiliado ${patient.insurance_member_id}` : ''}</p>
+                <p className="text-xs text-[#6E6E73] mt-0.5 flex items-center gap-1.5"><IconBuilding className="w-3.5 h-3.5 shrink-0" /> {patient.insurance_provider}{patient.insurance_member_id ? ` · Afiliado ${patient.insurance_member_id}` : ''}</p>
               )}
             </div>
           </div>
           <div className="flex gap-2 mt-4 flex-wrap">
             <ConsentimientoButton patientId={id} patientName={patient.full_name} professionalId={user.id} consent={consent} />
             <a href={"/dashboard/pacientes/" + id + "/historial"} className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
-              🔍 Historial IA
+              <IconSearch className="w-4 h-4" /> Historial IA
             </a>
             <ReporteButton patientId={id} patientName={patient.full_name} patientPhone={patient.phone} nextAppointment={nextAppointment} />
             <RecetaButton patientId={id} patientName={patient.full_name} />
             <PortalLinkButton token={patient.portal_token} patientPhone={patient.phone} />
             <a href="https://zoom.us/start/videomeeting" target="_blank" rel="noopener noreferrer" className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
-              📹 Videollamada
+              <IconVideo className="w-4 h-4" /> Videollamada
             </a>
             <CobroButton patientId={id} patientName={patient.full_name} sessionId={lastSummarizedSession?.id} />
           </div>
@@ -150,7 +150,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           </div>
           {nextAppointment ? (
             <div className="bg-[#F0F0F0] rounded-2xl p-4 flex items-center gap-3">
-              <span className="text-2xl">📅</span>
+              <IconCalendar className="w-6 h-6 text-[#0A0A0A] shrink-0" />
               <div>
                 <p className="text-sm font-semibold text-[#0A0A0A]">
                   {new Date(nextAppointment.appointment_date).toLocaleDateString('es-UY', {
@@ -176,7 +176,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {preconsulta && (
           <div className="bg-white rounded-2xl p-5 mb-4 border-l-2 border-[#0A0A0A] dark:border-white border-y border-r border-[#EDEDED]">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest">📝 Pre-consulta del paciente</h2>
+              <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest flex items-center gap-1.5"><IconFileText className="w-4 h-4" /> Pre-consulta del paciente</h2>
               <span className="text-[11px] text-[#A3A3A3] shrink-0">
                 {new Date(preconsulta.created_at).toLocaleDateString('es-UY', { timeZone: 'America/Montevideo', day: '2-digit', month: 'short' })}
               </span>
@@ -205,10 +205,10 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {/* Card briefing pre-consulta */}
         {lastSummarizedSession && (
           <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
-            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">🧠 Antes de entrar</h2>
+            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4 flex items-center gap-1.5"><IconClipboard className="w-4 h-4" /> Antes de entrar</h2>
             <div className="flex flex-col gap-3">
               <div className="flex items-start gap-3">
-                <span className="text-lg mt-0.5">🏥</span>
+                <IconActivity className="w-[18px] h-[18px] mt-0.5 text-[#6E6E73] shrink-0" />
                 <div>
                   <p className="text-xs text-[#6E6E73] font-medium">Diagnóstico</p>
                   <p className="text-sm text-[#0A0A0A]">{diagnosticoNorm ?? 'No registrado'}</p>
@@ -216,7 +216,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               </div>
               {patient.medication && (
                 <div className="flex items-start gap-3">
-                  <span className="text-lg mt-0.5">💊</span>
+                  <IconPill className="w-[18px] h-[18px] mt-0.5 text-[#6E6E73] shrink-0" />
                   <div>
                     <p className="text-xs text-[#6E6E73] font-medium">Medicación</p>
                     <p className="text-sm text-[#0A0A0A]">{patient.medication}</p>
@@ -224,7 +224,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                 </div>
               )}
               <div className="flex items-start gap-3">
-                <span className="text-lg mt-0.5">📋</span>
+                <IconFileText className="w-[18px] h-[18px] mt-0.5 text-[#6E6E73] shrink-0" />
                 <div>
                   <p className="text-xs text-[#6E6E73] font-medium">Última sesión</p>
                   <p className="text-sm text-[#0A0A0A]">
@@ -239,7 +239,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-lg mt-0.5">📊</span>
+                <IconChart className="w-[18px] h-[18px] mt-0.5 text-[#6E6E73] shrink-0" />
                 <div>
                   <p className="text-xs text-[#6E6E73] font-medium">Sesiones totales</p>
                   <p className="text-sm text-[#0A0A0A]">{totalSessions} consulta{totalSessions !== 1 ? 's' : ''}</p>
@@ -252,7 +252,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {/* Check-ins del portal */}
         {checkins && checkins.length > 0 && (
           <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
-            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">📲 Registros del paciente</h2>
+            <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4 flex items-center gap-1.5"><IconActivity className="w-4 h-4" /> Registros del paciente</h2>
             <div className="flex flex-col gap-2.5">
               {checkins.map((c: any, i: number) => (
                 <div key={i} className="bg-[#F5F5F7] rounded-xl p-3">
@@ -296,7 +296,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
 
         <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <a href={"/api/export-historial?patientId=" + id} target="_blank" className="inline-flex items-center gap-2 border border-[#EDEDED] text-[#0A0A0A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] transition-colors">
-            ⬇️ Exportar historial completo
+            <IconDownload className="w-4 h-4" /> Exportar historial completo
           </a>
           <DarDeBajaButton patientId={id} patientName={patient.full_name} />
         </div>
