@@ -5,7 +5,6 @@ import MotionProvider from './promo/MotionProvider'
 import DemoEnAccion from './promo/DemoEnAccion'
 import StatsCounter from './promo/StatsCounter'
 import HeroNotaDemo from './promo/HeroNotaDemo'
-import VideoTour from './promo/VideoTour'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.notaclinica.app'),
@@ -277,15 +276,41 @@ export default function PromoPage() {
         </div>
       </section>
 
-      {/* Video del producto */}
-      <section className="px-3 sm:px-5 pt-16">
-        <div data-reveal className="max-w-4xl mx-auto px-2 sm:px-4">
-          <p className={kicker}>La app por dentro</p>
-          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-8 max-w-2xl">Mirá el recorrido completo</h2>
-          <div className="rounded-[2rem] overflow-hidden border border-[#EDEDED] shadow-sm bg-[#0A0A0A]">
-            <VideoTour />
+      {/* La app por dentro — franja oscura con capturas reales en movimiento */}
+      <section className="mt-28 md:mt-32 bg-[#0A0A0A] py-20 overflow-hidden">
+        <div data-reveal className="max-w-5xl mx-auto px-5 mb-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#9A9A9A] mb-3">La app por dentro</p>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] text-white max-w-2xl">Todo en un solo lugar</h2>
+          <p className="text-[#9A9A9A] leading-relaxed max-w-xl mt-5">Del panel del día a la nota con diagnóstico. Capturas reales de la app.</p>
+        </div>
+        <div
+          className="relative"
+          style={{
+            WebkitMaskImage: 'linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)',
+            maskImage: 'linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)',
+          }}
+        >
+          <div className="promo-marquee">
+            {[
+              { img: '/app/app-inicio.jpg', label: 'Tu panel del día' },
+              { img: '/app/app-estadisticas.jpg', label: 'Estadísticas' },
+              { img: '/app/app-pacientes.jpg', label: 'Tus pacientes' },
+              { img: '/app/app-ficha.jpg', label: 'Ficha del paciente' },
+              { img: '/app/app-grabar.jpg', label: 'Grabás la consulta' },
+              { img: '/app/app-resumen.jpg', label: 'Resumen y diagnóstico' },
+              { img: '/app/app-inicio.jpg', label: 'Tu panel del día' },
+              { img: '/app/app-estadisticas.jpg', label: 'Estadísticas' },
+              { img: '/app/app-pacientes.jpg', label: 'Tus pacientes' },
+              { img: '/app/app-ficha.jpg', label: 'Ficha del paciente' },
+              { img: '/app/app-grabar.jpg', label: 'Grabás la consulta' },
+              { img: '/app/app-resumen.jpg', label: 'Resumen y diagnóstico' },
+            ].map((s, i) => (
+              <figure key={i} className="shrink-0 w-[208px] mr-6">
+                <img src={s.img} alt={s.label} loading="lazy" className="w-full h-auto rounded-[1.7rem] border border-white/10 shadow-2xl" />
+                <figcaption className="text-center text-[13px] text-[#9A9A9A] mt-3">{s.label}</figcaption>
+              </figure>
+            ))}
           </div>
-          <p className="text-center text-xs text-[#A3A3A3] mt-4">Recorrido ilustrativo del producto.</p>
         </div>
       </section>
 
