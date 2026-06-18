@@ -11,7 +11,7 @@ const TRANSCRIPT = [
 const RESUMEN = [
   { label: 'Motivo', text: 'Seguimiento de ansiedad e insomnio.' },
   { label: 'Evolución', text: 'Mejor descanso; ansiedad en baja con la medicación ajustada.' },
-  { label: 'Plan', text: 'Mantener el esquema actual y reforzar técnicas de higiene del sueño.' },
+  { label: 'Plan', text: 'Mantener el esquema y reforzar higiene del sueño.' },
 ]
 
 export default function DemoEnAccion() {
@@ -94,7 +94,7 @@ export default function DemoEnAccion() {
           {/* Conversación */}
           <div>
             <p className="text-[11px] uppercase tracking-[0.14em] text-[#6B6B6B] mb-4 font-semibold">Conversación</p>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 min-h-[336px]">
               {TRANSCRIPT.map((t, i) => {
                 const paciente = t.who === 'Paciente'
                 return (
