@@ -276,7 +276,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         <div className="flex justify-end mb-2">
           <ImportarHistorialButton patientId={id} />
         </div>
-        <HistorialSesiones sessions={sessions ?? []} patientId={id} />
+        <HistorialSesiones sessions={sessions ?? []} patientId={id} patientName={patient.full_name} diagnosis={patient.diagnosis ?? null} />
 
         {/* Copiloto clínico (IA) */}
         <CopilotoCard patientId={id} />

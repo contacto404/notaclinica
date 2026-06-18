@@ -1,10 +1,11 @@
 'use client'
 import { useState } from 'react'
 import { isSessionDone } from '@/lib/sessionStatus'
+import GenerarResumenButton from './GenerarResumenButton'
 
 type Filtro = 'todas' | 'completas' | 'pendientes'
 
-export default function HistorialSesiones({ sessions, patientId }: { sessions: any[]; patientId: string }) {
+export default function HistorialSesiones({ sessions, patientId, patientName = '', diagnosis = null }: { sessions: any[]; patientId: string; patientName?: string; diagnosis?: string | null }) {
   const [filtro, setFiltro] = useState<Filtro>('todas')
 
   const filtradas = sessions.filter(s => {
@@ -62,9 +63,7 @@ export default function HistorialSesiones({ sessions, patientId }: { sessions: a
                   </p>
                 </div>
                 {s.status === 'transcribed' && (
-                  <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-md shrink-0 bg-[#FFF7ED] text-[#C2410C]">
-                    Resumen pendiente
-                  </span>
+                  <GenerarResumenButton session={s} patientName={patientName} diagnosis={diagnosis} patientId={patientId} />
                 )}
                 <span className="text-[#D2D2D7] text-lg shrink-0">›</span>
               </a>
