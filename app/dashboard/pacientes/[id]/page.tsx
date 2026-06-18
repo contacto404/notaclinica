@@ -126,9 +126,6 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
               📹 Videollamada
             </a>
             <CobroButton patientId={id} patientName={patient.full_name} sessionId={lastSummarizedSession?.id} />
-            <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"} className="bg-[#0A0A0A] text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#262626] flex items-center gap-2 transition-colors shadow-sm">
-              🎙️ Nueva sesión
-            </a>
           </div>
           {patient.notes && (
             <div className="mt-5 pt-4 border-t border-[#EDEDED]">
@@ -137,6 +134,12 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
             </div>
           )}
         </div>
+
+        {/* Acción principal — destacada y sin scroll */}
+        <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"}
+          className="flex items-center justify-center gap-2 bg-[#0A0A0A] text-white rounded-2xl py-4 mb-4 text-base font-semibold hover:bg-[#262626] transition-colors shadow-sm">
+          🎙️ Nueva sesión
+        </a>
 
         {/* Card próximo turno */}
         <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
@@ -268,6 +271,12 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
           </div>
         )}
 
+        {/* Historial de sesiones (contexto antes de entrar) */}
+        <div className="flex justify-end mb-2">
+          <ImportarHistorialButton patientId={id} />
+        </div>
+        <HistorialSesiones sessions={sessions ?? []} patientId={id} />
+
         {/* Copiloto clínico (IA) */}
         <CopilotoCard patientId={id} />
 
@@ -283,12 +292,6 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {showScales && (
           <EscalasEvaluacion patientId={id} assessments={assessments ?? []} />
         )}
-
-        {/* Importar historial + Historial de sesiones (con filtros) */}
-        <div className="flex justify-end mb-2">
-          <ImportarHistorialButton patientId={id} />
-        </div>
-        <HistorialSesiones sessions={sessions ?? []} patientId={id} />
 
         <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <a href={"/api/export-historial?patientId=" + id} target="_blank" className="inline-flex items-center gap-2 border border-[#EDEDED] text-[#0A0A0A] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] transition-colors">
