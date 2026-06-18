@@ -226,6 +226,17 @@ export default function PromoPage() {
         </div>
       </section>
 
+      {/* El problema */}
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
+        <div data-reveal className="max-w-3xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>El problema</p>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-6 max-w-2xl">Terminás la consulta y todavía te falta lo peor: escribir.</h2>
+          <p className="text-lg text-[#6E6E73] leading-relaxed max-w-xl">
+            Notas a mano o en sistemas distintos, recetas, turnos. Cada paciente te roba minutos de papeleo —y de atención. NotaClínica se encarga de la documentación para que vuelvas a enfocarte en quien tenés enfrente.
+          </p>
+        </div>
+      </section>
+
       {/* En acción: médico-paciente → resumen con IA */}
       <section className="px-3 sm:px-5 pt-20">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
@@ -265,6 +276,27 @@ export default function PromoPage() {
         </div>
       </section>
 
+      {/* Video del producto */}
+      <section className="px-3 sm:px-5 pt-16">
+        <div data-reveal className="max-w-4xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>La app por dentro</p>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-8 max-w-2xl">Mirá el recorrido completo</h2>
+          <div className="rounded-[2rem] overflow-hidden border border-[#EDEDED] shadow-sm bg-[#0A0A0A]">
+            <video
+              src="/video-notaclinica.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="Recorrido del producto NotaClínica: login, panel, estadísticas, pacientes, grabar y resumen clínico."
+              className="w-full h-auto block"
+            />
+          </div>
+          <p className="text-center text-xs text-[#A3A3A3] mt-4">Recorrido ilustrativo del producto.</p>
+        </div>
+      </section>
+
       {/* Features */}
       <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
@@ -275,6 +307,26 @@ export default function PromoPage() {
               <div key={f.title} className="bg-[#F5F5F7] rounded-[18px] border border-[#EDEDED] p-7 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:-translate-y-0.5">
                 <h3 className="text-xl font-semibold mb-2 tracking-[-0.01em]">{f.title}</h3>
                 <p className="text-[15px] text-[#6E6E73] leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Para quién es */}
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>Para quién es</p>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-14 max-w-2xl">Pensado para tu práctica</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              { t: 'Médicos clínicos y especialistas', d: 'Resúmenes con la estructura de tu especialidad, recetas y PDF con tu firma.' },
+              { t: 'Salud mental', d: 'Psicología y psiquiatría: escalas PHQ-9 y GAD-7, evolución y plan de tratamiento por objetivos.' },
+              { t: 'Consultorios y clínicas', d: 'Varios profesionales, agenda y honorarios en un solo lugar. Plan a medida.' },
+            ].map(p => (
+              <div key={p.t} className="bg-[#F5F5F7] rounded-[18px] border border-[#EDEDED] p-7">
+                <h3 className="text-xl font-semibold mb-2 tracking-[-0.01em]">{p.t}</h3>
+                <p className="text-[15px] text-[#6E6E73] leading-relaxed">{p.d}</p>
               </div>
             ))}
           </div>
