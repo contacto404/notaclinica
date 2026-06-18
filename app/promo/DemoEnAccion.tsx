@@ -73,20 +73,18 @@ export default function DemoEnAccion() {
           </div>
           <span className="absolute left-1/2 -translate-x-1/2 text-xs text-[#9A9A9A] font-medium">NotaClínica — Sesión</span>
         </div>
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 sm:px-7 py-4 border-b border-[#F0F0F0]">
-          <div className="flex items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-[#0A0A0A] animate-pulse" />
-            <span className="text-sm font-medium">{status}</span>
-            {recording && (
-              <div className="flex items-center gap-[3px] ml-1.5 h-5">
-                {Array.from({ length: 9 }).map((_, i) => (
-                  <span key={i} className="promo-wave-bar" style={{ animationDelay: `${i * 0.08}s` }} />
-                ))}
-              </div>
-            )}
+        {/* Header — altura fija para que el cambio de estado no mueva la página */}
+        <div className="flex items-center justify-between px-5 sm:px-7 h-[58px] border-b border-[#F0F0F0]">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <span className="w-2 h-2 rounded-full bg-[#0A0A0A] animate-pulse shrink-0" />
+            <span className="text-sm font-medium whitespace-nowrap">{status}</span>
+            <div className="flex items-center gap-[3px] ml-1.5 h-5 shrink-0" style={{ visibility: recording ? 'visible' : 'hidden' }}>
+              {Array.from({ length: 9 }).map((_, i) => (
+                <span key={i} className="promo-wave-bar" style={{ animationDelay: `${i * 0.08}s` }} />
+              ))}
+            </div>
           </div>
-          <span className="text-xs text-[#737373]">María G. · Psicología</span>
+          <span className="text-xs text-[#737373] whitespace-nowrap shrink-0 ml-2 hidden sm:inline">María G. · Psicología</span>
         </div>
 
         {/* Cuerpo */}

@@ -63,22 +63,18 @@ export default function HeroNotaDemo() {
             <span className="font-semibold tracking-tight">5G</span>
           </div>
 
-          {/* Estado */}
-          <div className="flex items-center justify-between px-5 py-3 bg-white border-y border-[#F0F0F0]">
+          {/* Estado — altura fija para no mover la página al cambiar de fase */}
+          <div className="flex items-center justify-between px-5 h-[52px] bg-white border-y border-[#F0F0F0]">
             <div className="flex items-center gap-2.5 min-w-0">
-              <span className={'w-2 h-2 rounded-full ' + (phase === 'done' ? 'bg-[#28c840]' : 'bg-[#ff5f57] animate-pulse')} />
-              <span className="text-[13px] font-medium text-[#0A0A0A] truncate">{statusLabel}</span>
-              {phase === 'rec' && (
-                <div className="flex items-center gap-[3px] ml-1 h-4">
-                  {Array.from({ length: 7 }).map((_, i) => (
-                    <span key={i} className="promo-wave-bar" style={{ height: 16, animationDelay: `${i * 0.08}s` }} />
-                  ))}
-                </div>
-              )}
+              <span className={'w-2 h-2 rounded-full shrink-0 ' + (phase === 'done' ? 'bg-[#28c840]' : 'bg-[#ff5f57] animate-pulse')} />
+              <span className="text-[13px] font-medium text-[#0A0A0A] whitespace-nowrap truncate">{statusLabel}</span>
+              <div className="flex items-center gap-[3px] ml-1 h-4 shrink-0" style={{ visibility: phase === 'rec' ? 'visible' : 'hidden' }}>
+                {Array.from({ length: 7 }).map((_, i) => (
+                  <span key={i} className="promo-wave-bar" style={{ height: 16, animationDelay: `${i * 0.08}s` }} />
+                ))}
+              </div>
             </div>
-            {phase === 'done' && (
-              <span className="text-[10px] font-medium text-[#0A0A0A] bg-[#EFEFEF] rounded-full px-2 py-0.5 shrink-0">✨ con IA</span>
-            )}
+            <span className="text-[10px] font-medium text-[#0A0A0A] bg-[#EFEFEF] rounded-full px-2 py-0.5 shrink-0 ml-2" style={{ visibility: phase === 'done' ? 'visible' : 'hidden' }}>✨ con IA</span>
           </div>
 
           {/* Cuerpo: nota generada */}
