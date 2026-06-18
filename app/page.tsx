@@ -204,7 +204,7 @@ export default function PromoPage() {
         <div data-reveal className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
           {[
             { t: 'Resumen en segundos', icon: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></> },
-            { t: 'Datos cifrados · Ley 18.331', icon: <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z M9.5 12l1.8 1.8L15 10" /> },
+            { t: 'Datos cifrados y privados', icon: <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z M9.5 12l1.8 1.8L15 10" /> },
             { t: 'Todas las especialidades médicas', icon: <path d="M3 5v6a4 4 0 008 0V5 M7 5V3 M7 5v0 M11 15a5 5 0 0010 0v-1 M16 18v1a2 2 0 11-4 0" /> },
           ].map(item => (
             <span key={item.t} className="inline-flex items-center gap-2 bg-[#F5F5F7] text-[#0A0A0A] rounded-full px-4 py-2 text-[13px] font-medium">
@@ -513,7 +513,8 @@ export default function PromoPage() {
             <div className="bg-[#0A0A0A] text-white rounded-3xl p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#9A9A9A] mb-4">NotaClínica Pro</p>
               <p className="text-6xl font-semibold tracking-[-0.03em]">US$49<span className="text-lg text-[#9A9A9A] font-normal align-middle"> /mes</span></p>
-              <p className="text-sm text-[#C8C8C8] mt-2 mb-7">Precio en dólares (USD). 30 días gratis para empezar, sin tarjeta.</p>
+              <p className="text-sm text-white/90 mt-2">Menos de US$2 por día de trabajo.</p>
+              <p className="text-sm text-[#C8C8C8] mt-1 mb-7">Precio en dólares (USD). 30 días gratis para empezar, sin tarjeta.</p>
               <ul className="flex flex-col gap-2.5 mb-8">
                 {['Pacientes y sesiones ilimitados', 'Transcripción y resúmenes con IA', 'Escalas, evolución y plan de tratamiento', 'Recetas y PDF con tu firma', 'Agenda, portal del paciente y honorarios', 'Soporte directo'].map(f => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-[#EDEDED]">
@@ -582,27 +583,7 @@ export default function PromoPage() {
               Usar gratis ahora <span className="text-lg leading-none">›</span>
             </Link>
 
-            <div className="flex items-center gap-3">
-              <div className="relative flex items-center gap-3 border border-[#D2D2D7] rounded-2xl px-5 py-2.5 opacity-80 select-none">
-                <svg viewBox="0 0 384 512" className="w-6 h-6 fill-[#0A0A0A] shrink-0" aria-hidden="true">
-                  <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                </svg>
-                <div className="text-left leading-tight">
-                  <p className="text-[10px] text-[#737373]">Próximamente en</p>
-                  <p className="text-sm font-semibold text-[#0A0A0A]">App Store</p>
-                </div>
-              </div>
-
-              <div className="relative flex items-center gap-3 border border-[#D2D2D7] rounded-2xl px-5 py-2.5 opacity-80 select-none">
-                <svg viewBox="0 0 512 512" className="w-5 h-5 fill-[#0A0A0A] shrink-0" aria-hidden="true">
-                  <path d="M47 32C37 37 31 47 31 60v392c0 13 6 23 16 28l228-224L47 32zm262 196 57-56-238-138c-9-5-18-6-26-3l207 197zm0 56L101 481c8 3 17 2 26-3l238-138-56-56zm65-65 75-44c20-12 20-39 0-51l-75-43-62 61 62 61z"/>
-                </svg>
-                <div className="text-left leading-tight">
-                  <p className="text-[10px] text-[#737373]">Próximamente en</p>
-                  <p className="text-sm font-semibold text-[#0A0A0A]">Google Play</p>
-                </div>
-              </div>
-            </div>
+            <p className="text-[13px] text-[#9A9A9A] self-center">Las apps para App Store y Google Play están en camino.</p>
           </div>
         </div>
       </section>

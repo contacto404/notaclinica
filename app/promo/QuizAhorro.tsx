@@ -6,6 +6,7 @@ const OPC = {
   pac: [6, 10, 15, 20],
   min: [3, 5, 8, 12],
   dias: [3, 4, 5, 6],
+  hora: [500, 1000, 2000, 4000],
 }
 
 function Fila({ label, opciones, valor, set, unidad }: { label: string; opciones: number[]; valor: number; set: (n: number) => void; unidad: string }) {
@@ -34,9 +35,11 @@ export default function QuizAhorro() {
   const [pac, setPac] = useState(12)
   const [min, setMin] = useState(6)
   const [dias, setDias] = useState(5)
+  const [hora, setHora] = useState(2000)
 
   const minSemana = pac * min * dias
   const horas = Math.round((minSemana / 60) * 10) / 10
+  const dineroMes = Math.round((horas * 4.33) * hora)
 
   return (
     <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
@@ -44,13 +47,14 @@ export default function QuizAhorro() {
         <Fila label="¿Cuántos pacientes atendés por día?" opciones={OPC.pac} valor={pac} set={setPac} unidad="" />
         <Fila label="¿Cuántos minutos te lleva documentar cada consulta?" opciones={OPC.min} valor={min} set={setMin} unidad="min" />
         <Fila label="¿Cuántos días por semana atendés?" opciones={OPC.dias} valor={dias} set={setDias} unidad="días" />
+        <Fila label="¿Cuánto vale tu hora? (en tu moneda)" opciones={OPC.hora} valor={hora} set={setHora} unidad="" />
       </div>
 
       <div className="bg-white/[0.04] border border-white/10 rounded-3xl p-8 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#9A9A9A] mb-4">Hoy dedicás aproximadamente</p>
         <p className="text-6xl md:text-7xl font-semibold tracking-[-0.03em] text-white tabular-nums">{horas} <span className="text-2xl font-normal text-[#9A9A9A]">h / semana</span></p>
         <p className="text-[15px] text-[#C8C8C8] leading-relaxed mt-5 max-w-xs mx-auto">
-          a escribir notas. NotaClínica arma la nota por vos para que recuperes buena parte de ese tiempo.
+          a escribir notas. Eso equivale a <span className="text-white font-semibold">≈ ${dineroMes.toLocaleString('es-UY')} por mes</span> de tu tiempo. NotaClínica arma la nota por vos para que recuperes buena parte.
         </p>
         <Link href="/login?tab=registro"
           className="inline-flex items-center justify-center gap-1.5 bg-white text-[#0A0A0A] px-7 py-3.5 rounded-full font-semibold mt-7 hover:bg-[#EDEDED] transition-colors">
