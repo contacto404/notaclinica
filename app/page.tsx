@@ -5,6 +5,7 @@ import MotionProvider from './promo/MotionProvider'
 import DemoEnAccion from './promo/DemoEnAccion'
 import StatsCounter from './promo/StatsCounter'
 import HeroNotaDemo from './promo/HeroNotaDemo'
+import QuizAhorro from './promo/QuizAhorro'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.notaclinica.app'),
@@ -477,6 +478,19 @@ export default function PromoPage() {
               </svg>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Quiz: calculá tu ahorro */}
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
+        <div
+          data-reveal
+          className="rounded-[2rem] overflow-hidden px-7 sm:px-14 py-16 md:py-20"
+          style={{ background: 'radial-gradient(120% 100% at 20% 12%, #242424 0%, #131313 50%, #0a0a0a 100%)' }}
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A] mb-5">Calculá tu ahorro</p>
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-white mb-10 max-w-2xl leading-tight">¿Cuánto tiempo perdés en papeleo?</h2>
+          <QuizAhorro />
         </div>
       </section>
 
