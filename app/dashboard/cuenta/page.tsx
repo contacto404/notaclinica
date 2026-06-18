@@ -226,7 +226,7 @@ export default function CuentaPage() {
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Numero de identificacion (opcional)</label>
+            <label className="text-xs text-[#6E6E73] font-medium uppercase tracking-widest">Número de identificación (opcional)</label>
             <input
               type="text"
               value={identification}
@@ -326,7 +326,7 @@ export default function CuentaPage() {
       </div>
 
       <div className="bg-white rounded-2xl border border-[#EDEDED] p-6 mb-4">
-        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-4">Suscripcion</h2>
+        <h2 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-4">Suscripción</h2>
         {sub?.status === 'active' ? (
           <>
             <div className="flex justify-between items-center mb-2">

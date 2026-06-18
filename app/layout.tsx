@@ -15,8 +15,8 @@ const themeInitScript = `
   try {
     var path = window.location.pathname;
     var t = localStorage.getItem('theme') || 'system';
-    // Las páginas públicas de marketing son siempre claras; el modo oscuro queda para la app.
-    var lightOnly = path === '/' || path.indexOf('/promo') === 0;
+    // Las páginas públicas (marketing, login, legales) son siempre claras; el modo oscuro queda para la app.
+    var lightOnly = path === '/' || path.indexOf('/promo') === 0 || path.indexOf('/login') === 0 || path.indexOf('/registro') === 0 || path === '/privacidad' || path === '/terminos';
     var dark = lightOnly ? false : (t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches));
     var d = document.documentElement;
     d.dataset.theme = dark ? 'dark' : 'light';

@@ -76,7 +76,7 @@ export default async function AgendaPage() {
                             <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md bg-[#FEE2E2] text-[#B91C1C] shrink-0">Canceló</span>
                           )}
                           {a.status === 'reschedule_requested' && (
-                            <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md bg-[#FFF7ED] text-[#C2410C] shrink-0">Pide reprogramar</span>
+                            <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-md bg-[#F59E0B]/20 text-[#F59E0B] border border-[#F59E0B]/40 shrink-0">⚠ Pide reprogramar</span>
                           )}
                         </div>
                         <p className="text-xs text-[#6E6E73] mt-0.5 truncate">{a.patients?.diagnosis ?? 'Sin diagnóstico'}{a.notes ? ` · ${a.notes}` : ''}</p>

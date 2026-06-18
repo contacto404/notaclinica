@@ -10,8 +10,8 @@ export default function NavbarMobile() {
     { href: '/dashboard/agenda', label: 'Agenda', icon: '📅' },
     { href: '/dashboard/buscar', label: 'Buscar', icon: '🔍' },
     { href: '/dashboard/pacientes/nuevo', label: 'Nuevo', icon: '+' },
-    { href: '/dashboard/honorarios', label: 'Cobros', icon: '💳' },
-    { href: '/dashboard/estadisticas', label: 'Stats', icon: '📊' },
+    { href: '/dashboard/honorarios', label: 'Honorarios', icon: '💳' },
+    { href: '/dashboard/estadisticas', label: 'Estadísticas', icon: '📊' },
     { href: '/dashboard/cuenta', label: 'Cuenta', icon: '⚙️' },
   ]
 
@@ -32,7 +32,7 @@ export default function NavbarMobile() {
             <span className={`text-lg ${item.label === 'Nuevo' ? `w-7 h-7 flex items-center justify-center rounded-full text-base font-bold ${active ? 'bg-[#0A0A0A] text-white' : 'bg-[#F5F5F7] text-[#0A0A0A]'}` : ''}`}>
               {item.icon}
             </span>
-            <span className={`text-[10px] font-medium ${active ? 'text-[#0A0A0A]' : 'text-[#A3A3A3]'}`}>
+            <span className={`text-[9px] font-medium truncate max-w-full px-0.5 ${active ? 'text-[#0A0A0A]' : 'text-[#A3A3A3]'}`}>
               {item.label}
             </span>
             {active && <span className="absolute bottom-0 w-8 h-0.5 bg-[#0A0A0A] rounded-full" />}
