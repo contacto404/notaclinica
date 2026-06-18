@@ -5,6 +5,7 @@ import MotionProvider from './promo/MotionProvider'
 import DemoEnAccion from './promo/DemoEnAccion'
 import StatsCounter from './promo/StatsCounter'
 import HeroNotaDemo from './promo/HeroNotaDemo'
+import VideoTour from './promo/VideoTour'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.notaclinica.app'),
@@ -282,16 +283,7 @@ export default function PromoPage() {
           <p className={kicker}>La app por dentro</p>
           <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-8 max-w-2xl">Mirá el recorrido completo</h2>
           <div className="rounded-[2rem] overflow-hidden border border-[#EDEDED] shadow-sm bg-[#0A0A0A]">
-            <video
-              src="/video-notaclinica.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="Recorrido del producto NotaClínica: login, panel, estadísticas, pacientes, grabar y resumen clínico."
-              className="w-full h-auto block"
-            />
+            <VideoTour />
           </div>
           <p className="text-center text-xs text-[#A3A3A3] mt-4">Recorrido ilustrativo del producto.</p>
         </div>
