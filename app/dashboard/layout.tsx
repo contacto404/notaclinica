@@ -5,6 +5,7 @@ import Link from 'next/link'
 import LogoutButton from './components/LogoutButton'
 import NavbarMobile from './components/NavbarMobile'
 import ThemeToggle from '@/app/components/ThemeToggle'
+import { IconHome, IconCalendar, IconSearch, IconPlus, IconWallet, IconChart, IconUser } from './components/Icons'
 
 export default async function DashboardLayout({
   children,
@@ -66,32 +67,32 @@ export default async function DashboardLayout({
         </div>
         <nav className="flex flex-col gap-1">
           <Link href="/dashboard"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
-            🏠 Inicio
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
+            <IconHome className="w-[18px] h-[18px] shrink-0" /> Inicio
           </Link>
           <Link href="/dashboard/agenda"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
-            📅 Agenda
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
+            <IconCalendar className="w-[18px] h-[18px] shrink-0" /> Agenda
           </Link>
           <Link href="/dashboard/buscar"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
-            🔍 Buscar
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
+            <IconSearch className="w-[18px] h-[18px] shrink-0" /> Buscar
           </Link>
           <Link href="/dashboard/pacientes/nuevo"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
-            + Nuevo paciente
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
+            <IconPlus className="w-[18px] h-[18px] shrink-0" /> Nuevo paciente
           </Link>
           <Link href="/dashboard/honorarios"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
-            💳 Honorarios
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
+            <IconWallet className="w-[18px] h-[18px] shrink-0" /> Honorarios
           </Link>
           <Link href="/dashboard/estadisticas"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
-            📊 Estadísticas
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
+            <IconChart className="w-[18px] h-[18px] shrink-0" /> Estadísticas
           </Link>
           <Link href="/dashboard/cuenta"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
-            ⚙️ Mi cuenta
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-[#6E6E73] hover:bg-[#EDEDED] transition-colors">
+            <IconUser className="w-[18px] h-[18px] shrink-0" /> Mi cuenta
           </Link>
         </nav>
         <div className="border-t border-[#EDEDED] pt-4 mt-auto">

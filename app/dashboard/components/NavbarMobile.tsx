@@ -1,18 +1,19 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { IconHome, IconCalendar, IconSearch, IconPlus, IconWallet, IconChart, IconUser } from './Icons'
 
 export default function NavbarMobile() {
   const pathname = usePathname()
 
   const items = [
-    { href: '/dashboard', label: 'Inicio', icon: '🏠' },
-    { href: '/dashboard/agenda', label: 'Agenda', icon: '📅' },
-    { href: '/dashboard/buscar', label: 'Buscar', icon: '🔍' },
-    { href: '/dashboard/pacientes/nuevo', label: 'Nuevo', icon: '+' },
-    { href: '/dashboard/honorarios', label: 'Honorarios', icon: '💳' },
-    { href: '/dashboard/estadisticas', label: 'Estadísticas', icon: '📊' },
-    { href: '/dashboard/cuenta', label: 'Cuenta', icon: '⚙️' },
+    { href: '/dashboard', label: 'Inicio', Icon: IconHome },
+    { href: '/dashboard/agenda', label: 'Agenda', Icon: IconCalendar },
+    { href: '/dashboard/buscar', label: 'Buscar', Icon: IconSearch },
+    { href: '/dashboard/pacientes/nuevo', label: 'Nuevo', Icon: IconPlus, primary: true },
+    { href: '/dashboard/honorarios', label: 'Honorarios', Icon: IconWallet },
+    { href: '/dashboard/estadisticas', label: 'Estadísticas', Icon: IconChart },
+    { href: '/dashboard/cuenta', label: 'Cuenta', Icon: IconUser },
   ]
 
   return (
@@ -25,13 +26,18 @@ export default function NavbarMobile() {
     >
       {items.map(item => {
         const active = pathname === item.href
+        const Icon = item.Icon
         return (
           <Link key={item.href} href={item.href}
             className="flex-1 flex flex-col items-center justify-center py-2 gap-0.5 transition-colors relative min-w-0"
           >
-            <span className={`text-lg ${item.label === 'Nuevo' ? `w-7 h-7 flex items-center justify-center rounded-full text-base font-bold ${active ? 'bg-[#0A0A0A] text-white' : 'bg-[#F5F5F7] text-[#0A0A0A]'}` : ''}`}>
-              {item.icon}
-            </span>
+            {item.primary ? (
+              <span className={`w-7 h-7 flex items-center justify-center rounded-full ${active ? 'bg-[#0A0A0A] text-white' : 'bg-[#F5F5F7] text-[#0A0A0A]'}`}>
+                <Icon className="w-4 h-4" />
+              </span>
+            ) : (
+              <Icon className={`w-[22px] h-[22px] ${active ? 'text-[#0A0A0A]' : 'text-[#A3A3A3]'}`} />
+            )}
             <span className={`text-[9px] font-medium truncate max-w-full px-0.5 ${active ? 'text-[#0A0A0A]' : 'text-[#A3A3A3]'}`}>
               {item.label}
             </span>

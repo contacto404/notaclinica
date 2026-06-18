@@ -16,6 +16,7 @@ import PlanTratamiento from './PlanTratamiento'
 import { showsScales } from '@/lib/scales'
 import { isSessionDone, capitalizar } from '@/lib/sessionStatus'
 import HistorialSesiones from './HistorialSesiones'
+import { IconMic } from '../../components/Icons'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -138,7 +139,7 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {/* Acción principal — destacada y sin scroll */}
         <a href={"/dashboard/pacientes/" + id + "/nueva-sesion"}
           className="flex items-center justify-center gap-2 bg-[#0A0A0A] text-white rounded-2xl py-4 mb-4 text-base font-semibold hover:bg-[#262626] transition-colors shadow-sm">
-          🎙️ Nueva sesión
+          <IconMic className="w-5 h-5" /> Nueva sesión
         </a>
 
         {/* Card próximo turno */}
