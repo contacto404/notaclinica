@@ -290,7 +290,7 @@ export default function PromoPage() {
             maskImage: 'linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)',
           }}
         >
-          <div className="promo-marquee">
+          <div className="app-marquee">
             {[
               { img: '/app/app-inicio.jpg', label: 'Tu panel del día' },
               { img: '/app/app-estadisticas.jpg', label: 'Estadísticas' },
@@ -306,7 +306,7 @@ export default function PromoPage() {
               { img: '/app/app-resumen.jpg', label: 'Resumen y diagnóstico' },
             ].map((s, i) => (
               <figure key={i} className="shrink-0 w-[208px] mr-6">
-                <img src={s.img} alt={s.label} loading="lazy" className="w-full h-auto rounded-[1.7rem] border border-white/10 shadow-2xl" />
+                <img src={s.img} alt={s.label} className="w-full h-auto rounded-[1.7rem] border border-white/10 shadow-2xl" />
                 <figcaption className="text-center text-[13px] text-[#9A9A9A] mt-3">{s.label}</figcaption>
               </figure>
             ))}

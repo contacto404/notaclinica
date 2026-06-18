@@ -32,6 +32,8 @@ html.native [data-show-in-app] { display: revert !important; }
 @keyframes promoMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .promo-marquee { display: flex; width: max-content; animation: promoMarquee 38s linear infinite; }
 .promo-marquee:hover { animation-play-state: paused; }
+/* Variante para las capturas de la app: continua (no se frena al hover) y más rápida */
+.app-marquee { display: flex; width: max-content; animation: promoMarquee 22s linear infinite; }
 
 /* Demo animado: onda de grabación + cursor de tipeo */
 @keyframes promoWave { 0%, 100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
@@ -61,7 +63,7 @@ html.reveal-on [data-reveal] {
 html.reveal-on [data-reveal].is-visible { opacity: 1; transform: none; filter: blur(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .promo-float, .promo-glow, .promo-kenburns, .promo-marquee, .promo-wave-bar, .promo-caret, .promo-shiny, .promo-fade { animation: none; opacity: 1; filter: none; }
+  .promo-float, .promo-glow, .promo-kenburns, .promo-marquee, .app-marquee, .promo-wave-bar, .promo-caret, .promo-shiny, .promo-fade { animation: none; opacity: 1; filter: none; }
 }
 html.native { --safe-top: max(env(safe-area-inset-top), 44px); }
 
