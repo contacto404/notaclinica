@@ -3,6 +3,7 @@ import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter, useParams } from 'next/navigation'
 import { summaryFields } from '@/lib/noteFormat'
+import { IconMic } from '../../../components/Icons'
 
 export default function NuevaSesionPage() {
   const [recording, setRecording] = useState(false)
@@ -186,8 +187,8 @@ export default function NuevaSesionPage() {
             <div className="flex flex-col items-center gap-4 py-6">
               {!recording ? (
                 <button onClick={startRecording}
-                  className="w-24 h-24 rounded-full bg-[#0A0A0A] text-4xl cursor-pointer text-white flex items-center justify-center hover:bg-[#262626] transition-colors shadow-lg">
-                  🎙️
+                  className="w-24 h-24 rounded-full bg-[#0A0A0A] cursor-pointer text-white flex items-center justify-center hover:bg-[#262626] transition-colors shadow-lg">
+                  <IconMic className="w-9 h-9" />
                 </button>
               ) : (
                 <button onClick={stopRecording}

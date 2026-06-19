@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { IconDownload } from '../../components/Icons'
 
 export default function ExportPDFButton({ sessionId }: { sessionId: string }) {
   const [loading, setLoading] = useState(false)
@@ -24,9 +25,9 @@ export default function ExportPDFButton({ sessionId }: { sessionId: string }) {
       <button
         onClick={handleExport}
         disabled={loading}
-        className="bg-[#0A0A0A] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#262626] transition-colors shadow-sm shrink-0 disabled:opacity-60"
+        className="bg-[#0A0A0A] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#262626] transition-colors shadow-sm shrink-0 disabled:opacity-60 inline-flex items-center gap-2"
       >
-        {loading ? 'Generando...' : '⬇ Exportar PDF'}
+        {loading ? 'Generando...' : <><IconDownload className="w-4 h-4" /> Exportar PDF</>}
       </button>
 
       {open && (
@@ -37,7 +38,7 @@ export default function ExportPDFButton({ sessionId }: { sessionId: string }) {
             style={{ paddingTop: 'var(--safe-top)' }}
           >
             <div className="h-14 flex items-center">
-              <span className="font-semibold text-[#0A0A0A] text-sm">Resumen clinico</span>
+              <span className="font-semibold text-[#0A0A0A] text-sm">Resumen clínico</span>
             </div>
             <button
               onClick={() => setOpen(false)}
@@ -49,7 +50,7 @@ export default function ExportPDFButton({ sessionId }: { sessionId: string }) {
           <iframe
             srcDoc={html}
             className="flex-1 w-full border-0"
-            title="Resumen clinico"
+            title="Resumen clínico"
           />
         </div>
       )}

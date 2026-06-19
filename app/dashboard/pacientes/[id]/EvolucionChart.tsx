@@ -1,6 +1,7 @@
 'use client'
 import { useMemo } from 'react'
 import { isSessionDone } from '@/lib/sessionStatus'
+import { IconChart, IconAlert } from '../../components/Icons'
 
 export default function EvolucionChart({ sessions }: { sessions: any[] }) {
   const completadas = sessions.filter(isSessionDone)
@@ -56,7 +57,7 @@ export default function EvolucionChart({ sessions }: { sessions: any[] }) {
 
   return (
     <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
-      <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5">📈 Evolución</h2>
+      <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5 flex items-center gap-1.5"><IconChart className="w-4 h-4" /> Evolución</h2>
 
       {/* Stats rápidas */}
       <div className="grid grid-cols-3 gap-3 mb-6">
@@ -100,8 +101,8 @@ export default function EvolucionChart({ sessions }: { sessions: any[] }) {
       {/* Alerta si hace mucho que no viene */}
       {diasDesdeUltima !== null && diasDesdeUltima > 30 && (
         <div className="mt-4 bg-[#FFF7ED] border border-[#FED7AA] rounded-2xl px-4 py-3">
-          <p className="text-xs text-[#C2410C] font-medium">
-            ⚠️ Hace {diasDesdeUltima} días que {' '}
+          <p className="text-xs text-[#C2410C] font-medium flex items-center gap-1.5">
+            <IconAlert className="w-3.5 h-3.5 shrink-0" /> Hace {diasDesdeUltima} días que {' '}
             {diasDesdeUltima > 60 ? 'no tiene consultas' : 'no viene a consulta'}
           </p>
         </div>

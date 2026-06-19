@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import type { Patient, Appointment } from '@/types/db'
+import { IconUser, IconCalendar, IconFileText, IconChart, IconSearch } from './Icons'
 
 type Alerta = { patientId: string; patientName: string; tipo: string; detalle: string; nivel: 'alta' | 'media' }
 
@@ -39,9 +40,9 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
     })
 
   const stats = [
-    { label: 'Pacientes activos', value: patients.length, icon: '👥', tint: 'bg-[#F0F0F0] dark:bg-[#0A0A0A]/40', text: 'text-[#0A0A0A] dark:text-[#FFFFFF]' },
-    { label: 'Sesiones este mes', value: sesionesEsteMes, icon: '🗓️', tint: 'bg-[#E8F4E8] dark:bg-[#14532D]/40', text: 'text-[#2D6A2D] dark:text-[#86EFAC]' },
-    { label: 'PDFs exportados', value: pdfsExportados, icon: '📄', tint: 'bg-[#E8EEF8] dark:bg-[#262626]', text: 'text-[#2D3F6A] dark:text-[#D2D2D7]' },
+    { label: 'Pacientes activos', value: patients.length, Icon: IconUser, tint: 'bg-[#F0F0F0] dark:bg-[#0A0A0A]/40', text: 'text-[#0A0A0A] dark:text-[#FFFFFF]' },
+    { label: 'Sesiones este mes', value: sesionesEsteMes, Icon: IconCalendar, tint: 'bg-[#E8F4E8] dark:bg-[#14532D]/40', text: 'text-[#2D6A2D] dark:text-[#86EFAC]' },
+    { label: 'PDFs exportados', value: pdfsExportados, Icon: IconFileText, tint: 'bg-[#E8EEF8] dark:bg-[#262626]', text: 'text-[#2D3F6A] dark:text-[#D2D2D7]' },
   ]
 
   return (
@@ -116,20 +117,23 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3 mb-3">
-        {stats.map(stat => (
+        {stats.map(stat => {
+          const Icon = stat.Icon
+          return (
           <div key={stat.label} className="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#EDEDED] dark:border-[#262626] p-3.5">
-            <span className={`w-7 h-7 rounded-lg ${stat.tint} flex items-center justify-center text-sm mb-2.5`}>{stat.icon}</span>
+            <span className={`w-7 h-7 rounded-lg ${stat.tint} flex items-center justify-center mb-2.5`}><Icon className="w-4 h-4" /></span>
             <p className={`text-2xl font-bold leading-none ${stat.text}`}>{stat.value}</p>
             <p className="text-[11px] text-[#6E6E73] dark:text-[#A3A3A3] mt-1.5 leading-tight">{stat.label}</p>
           </div>
-        ))}
+          )
+        })}
       </div>
 
       {/* Acceso a estadísticas */}
       <a href="/dashboard/estadisticas"
         className="flex items-center justify-between bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#EDEDED] dark:border-[#262626] px-4 py-3 mb-6 hover:border-[#0A0A0A] dark:hover:border-[#0A0A0A] transition-colors group">
         <span className="flex items-center gap-2 text-sm font-medium text-[#0A0A0A] dark:text-white">
-          <span className="text-base">📊</span> Estadísticas del consultorio
+          <IconChart className="w-4 h-4" /> Estadísticas del consultorio
         </span>
         <span className="text-[#A3A3A3] group-hover:text-[#0A0A0A] text-lg transition-colors">›</span>
       </a>
@@ -175,7 +179,7 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
           </a>
         )) : (
           <div className="bg-white dark:bg-[#1A1A1A] border border-dashed border-[#EDEDED] dark:border-[#262626] rounded-2xl px-4 py-12 text-center">
-            <p className="text-2xl mb-2">{busqueda ? '🔍' : '🌱'}</p>
+            <span className="inline-flex mb-2 text-[#A3A3A3]">{busqueda ? <IconSearch className="w-7 h-7" /> : <IconUser className="w-7 h-7" />}</span>
             <p className="text-sm text-[#6E6E73] dark:text-[#A3A3A3]">{busqueda ? 'No se encontraron pacientes.' : 'Todavía no tenés pacientes.'}</p>
             {!busqueda && (
               <a href="/dashboard/pacientes/nuevo" className="text-sm text-[#0A0A0A] mt-1 inline-block hover:underline">

@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Toast from '../../components/Toast'
 import { summaryFields } from '@/lib/noteFormat'
+import { IconEdit } from '../../components/Icons'
 
 export default function EditarResumenButton({ summaryId, initial, format }: {
   summaryId: string
@@ -44,8 +45,8 @@ export default function EditarResumenButton({ summaryId, initial, format }: {
       {toast && <Toast message="Resumen guardado" onDone={() => setToast(false)} />}
 
       <button onClick={() => setOpen(true)}
-        className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#F5F5F7] transition-colors">
-        ✏️ Editar resumen
+        className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#F5F5F7] transition-colors inline-flex items-center gap-2">
+        <IconEdit className="w-4 h-4" /> Editar resumen
       </button>
 
       {open && (

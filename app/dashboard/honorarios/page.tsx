@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { IconWallet } from '../components/Icons'
 
 export default async function HonorariosPage() {
   const supabase = await createClient()
@@ -81,7 +82,7 @@ export default async function HonorariosPage() {
               </div>
             )) : (
               <div className="bg-white rounded-2xl border border-[#EDEDED] p-12 text-center">
-                <p className="text-3xl mb-3">💳</p>
+                <IconWallet className="w-8 h-8 mx-auto mb-3 text-[#A3A3A3]" />
                 <p className="text-sm font-semibold text-[#0A0A0A]">No hay cobros registrados</p>
                 <p className="text-xs text-[#6E6E73] mt-1">Los cobros aparecerán acá cuando uses el botón "Cobrar sesión"</p>
               </div>

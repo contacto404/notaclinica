@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { IconCalendar, IconSend } from '../../components/Icons'
 import Toast from '../../components/Toast'
 
 export default function AgendarButton({
@@ -78,7 +79,7 @@ export default function AgendarButton({
       <button
         onClick={() => setOpen(true)}
         className="bg-[#0A0A0A] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#262626] transition-colors flex items-center gap-1.5">
-        📅 {hasAppointment ? 'Reagendar' : 'Agendar'}
+        <IconCalendar className="w-4 h-4" /> {hasAppointment ? 'Reagendar' : 'Agendar'}
       </button>
 
       {open && (
@@ -126,7 +127,7 @@ export default function AgendarButton({
               {patientPhone && date && (
                 <button onClick={handleWhatsApp}
                   className="bg-[#25D366] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1DA851] transition-colors flex items-center justify-center gap-2">
-                  💬 Enviar por WhatsApp
+                  <IconSend className="w-4 h-4" /> Enviar por WhatsApp
                 </button>
               )}
 

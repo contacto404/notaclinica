@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Toast from '../../components/Toast'
+import { IconReceipt, IconSend } from '../../components/Icons'
 
 export default function CobroButton({ patientId, patientName, sessionId }: {
   patientId: string
@@ -74,7 +75,7 @@ export default function CobroButton({ patientId, patientName, sessionId }: {
       <button
         onClick={() => setOpen(true)}
         className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
-        🧾 Cobrar sesión
+        <IconReceipt className="w-4 h-4" /> Cobrar sesión
       </button>
 
       {open && (
@@ -114,14 +115,14 @@ export default function CobroButton({ patientId, patientName, sessionId }: {
                 disabled={loading || !amount}
                 className="bg-[#25D366] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1DA851] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
               >
-                {loading ? 'Generando...' : '💬 Enviar por WhatsApp'}
+                {loading ? 'Generando...' : <><IconSend className="w-4 h-4" /> Enviar por WhatsApp</>}
               </button>
               <button
                 onClick={handleCobrar}
                 disabled={loading || !amount}
-                className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors"
+                className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
               >
-                {loading ? 'Generando...' : '🧾 Generar link de pago'}
+                {loading ? 'Generando...' : <><IconReceipt className="w-4 h-4" /> Generar link de pago</>}
               </button>
               <button
                 onClick={() => setOpen(false)}

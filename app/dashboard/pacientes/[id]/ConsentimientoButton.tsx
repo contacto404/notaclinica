@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { IconCheck, IconAlert, IconClipboard } from '../../components/Icons'
 
 interface Props {
   patientId: string
@@ -99,7 +100,7 @@ export default function ConsentimientoButton({ patientId, patientName, professio
             : 'border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100')
         }
       >
-        {signed ? '✅ Consentimiento firmado' : '⚠️ Consentimiento pendiente'}
+        {signed ? <><IconCheck className="w-3.5 h-3.5" /> Consentimiento firmado</> : <><IconAlert className="w-3.5 h-3.5" /> Consentimiento pendiente</>}
       </button>
 
       {open && (
@@ -107,14 +108,14 @@ export default function ConsentimientoButton({ patientId, patientName, professio
           <div className="bg-white rounded-2xl p-5 w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
 
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base font-bold text-[#0A0A0A]">📋 Consentimiento informado</h2>
+              <h2 className="text-base font-bold text-[#0A0A0A] flex items-center gap-2"><IconClipboard className="w-5 h-5" /> Consentimiento informado</h2>
               <button onClick={() => setOpen(false)} className="text-[#A3A3A3] hover:text-[#0A0A0A] text-xl leading-none">×</button>
             </div>
 
             {signed ? (
               <>
                 <div className="bg-green-50 rounded-2xl p-4 mb-4 border border-green-200">
-                  <p className="text-sm font-semibold text-green-800">✅ Firmado por {consent?.signed_name}</p>
+                  <p className="text-sm font-semibold text-green-800 flex items-center gap-1.5"><IconCheck className="w-4 h-4" /> Firmado por {consent?.signed_name}</p>
                   <p className="text-xs text-green-600 mt-1">
                     {consent?.signed_at && new Date(consent.signed_at).toLocaleDateString('es-UY', {
                       day: '2-digit', month: 'long', year: 'numeric',

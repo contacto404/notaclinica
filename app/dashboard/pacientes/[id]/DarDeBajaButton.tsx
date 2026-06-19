@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { IconTrash } from '../../components/Icons'
 
 export default function DarDeBajaButton({ patientId, patientName }: {
   patientId: string
@@ -21,8 +22,8 @@ export default function DarDeBajaButton({ patientId, patientName }: {
   return (
     <>
       <button onClick={() => setOpen(true)}
-        className="text-xs text-[#6E6E73] hover:text-red-500 transition-colors underline underline-offset-2">
-        🗑 Dar de baja paciente
+        className="text-xs text-[#6E6E73] hover:text-red-500 transition-colors inline-flex items-center gap-1.5">
+        <IconTrash className="w-3.5 h-3.5" /> Dar de baja paciente
       </button>
 
       {open && (

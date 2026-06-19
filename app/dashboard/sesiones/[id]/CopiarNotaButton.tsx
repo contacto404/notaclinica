@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { summaryFields } from '@/lib/noteFormat'
+import { IconCheck, IconClipboard } from '../../components/Icons'
 
 type Props = {
   patientName: string
@@ -50,7 +51,7 @@ export default function CopiarNotaButton({ patientName, sessionDate, summary }: 
       className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors cursor-pointer"
       title="Copiar el resumen para pegarlo en la historia clínica de tu clínica"
     >
-      {copiado ? '✓ Copiado' : '📋 Copiar nota'}
+      {copiado ? <><IconCheck className="w-4 h-4" /> Copiado</> : <><IconClipboard className="w-4 h-4" /> Copiar nota</>}
     </button>
   )
 }

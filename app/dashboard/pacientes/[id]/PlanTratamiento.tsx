@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { IconTarget } from '../../components/Icons'
 import { useRouter } from 'next/navigation'
 import { capitalizar, normalizarComparacion } from '@/lib/sessionStatus'
 
@@ -95,7 +96,7 @@ export default function PlanTratamiento({ patientId, goals }: { patientId: strin
   return (
     <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest">🎯 Plan de tratamiento</h2>
+        <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest flex items-center gap-1.5"><IconTarget className="w-4 h-4" /> Plan de tratamiento</h2>
         {goals.length > 0 && (
           <span className="text-xs text-[#A3A3A3]">{logrados.length}/{goals.length} logrados</span>
         )}

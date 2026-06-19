@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import WaitlistButton from './WaitlistButton'
 import WaitlistItem from './WaitlistItem'
+import { IconCalendar } from '../components/Icons'
 
 export default async function AgendaPage() {
   const supabase = await createClient()
@@ -91,7 +92,7 @@ export default async function AgendaPage() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl border border-[#EDEDED] p-12 text-center mb-6">
-            <p className="text-3xl mb-3">📅</p>
+            <IconCalendar className="w-8 h-8 mx-auto mb-3 text-[#A3A3A3]" />
             <p className="text-sm font-semibold text-[#0A0A0A]">No hay turnos próximos</p>
             <p className="text-xs text-[#6E6E73] mt-1">Los turnos que agendes aparecerán acá</p>
           </div>

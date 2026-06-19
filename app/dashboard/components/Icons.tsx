@@ -54,3 +54,33 @@ export function IconActivity({ className }: P) {
 export function IconDownload({ className }: P) {
   return <svg className={className} {...base}><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" /></svg>
 }
+export function IconCheck({ className }: P) {
+  return <svg className={className} {...base}><path d="M5 12.5l4.5 4.5L19 7" /></svg>
+}
+export function IconAlert({ className }: P) {
+  return <svg className={className} {...base}><path d="M12 3.5L22 20H2L12 3.5z" /><path d="M12 10v4M12 17v.01" /></svg>
+}
+export function IconEdit({ className }: P) {
+  return <svg className={className} {...base}><path d="M4 20h4L19 9l-4-4L4 16v4z" /><path d="M14 6l4 4" /></svg>
+}
+export function IconTrash({ className }: P) {
+  return <svg className={className} {...base}><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" /></svg>
+}
+export function IconSparkles({ className }: P) {
+  return <svg className={className} {...base}><path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3z" /><path d="M18.5 15l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8z" /></svg>
+}
+export function IconReceipt({ className }: P) {
+  return <svg className={className} {...base}><path d="M6 3h12v18l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3L6 21V3z" /><path d="M9 8h6M9 12h6" /></svg>
+}
+export function IconSend({ className }: P) {
+  return <svg className={className} {...base}><path d="M21 4L3 11l6 2.5L21 4zM9 13.5V20l3.5-4.2" /></svg>
+}
+export function IconShield({ className }: P) {
+  return <svg className={className} {...base}><path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-3z" /><path d="M9 12l2 2 4-4" /></svg>
+}
+export function IconClock({ className }: P) {
+  return <svg className={className} {...base}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+}
+export function IconTarget({ className }: P) {
+  return <svg className={className} {...base}><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" /></svg>
+}

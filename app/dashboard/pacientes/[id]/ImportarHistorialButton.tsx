@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import { IconDownload, IconFileText, IconSparkles, IconCheck } from '../../components/Icons'
 
 export default function ImportarHistorialButton({ patientId }: { patientId: string }) {
   const [open, setOpen] = useState(false)
@@ -41,7 +42,7 @@ export default function ImportarHistorialButton({ patientId }: { patientId: stri
     <>
       <button onClick={() => setOpen(true)}
         className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2 rounded-xl text-xs font-medium hover:bg-[#F5F5F7] flex items-center gap-1.5 transition-colors">
-        📂 Importar historial
+        <IconDownload className="w-3.5 h-3.5" /> Importar historial
       </button>
 
       {open && (
@@ -56,7 +57,7 @@ export default function ImportarHistorialButton({ patientId }: { patientId: stri
                 <div
                   onClick={() => fileRef.current?.click()}
                   className="border-2 border-dashed border-[#EDEDED] rounded-2xl p-8 text-center cursor-pointer hover:border-[#0A0A0A] transition-colors mb-4">
-                  <p className="text-3xl mb-2">📄</p>
+                  <IconFileText className="w-8 h-8 mx-auto mb-2 text-[#A3A3A3]" />
                   <p className="text-sm font-medium text-[#0A0A0A]">
                     {file ? file.name : 'Tocá para seleccionar un PDF'}
                   </p>
@@ -69,8 +70,8 @@ export default function ImportarHistorialButton({ patientId }: { patientId: stri
 
                 <div className="flex flex-col gap-2">
                   <button onClick={handleImport} disabled={!file || loading}
-                    className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors">
-                    {loading ? '🔄 Procesando con IA...' : '✨ Importar y extraer datos'}
+                    className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors flex items-center justify-center gap-2">
+                    {loading ? 'Procesando con IA...' : <><IconSparkles className="w-4 h-4" /> Importar y extraer datos</>}
                   </button>
                   <button onClick={() => setOpen(false)}
                     className="text-sm text-[#6E6E73] hover:text-[#0A0A0A] py-2 transition-colors">
@@ -80,7 +81,7 @@ export default function ImportarHistorialButton({ patientId }: { patientId: stri
               </>
             ) : (
               <>
-                <h3 className="text-base font-bold text-[#0A0A0A] mb-1">✅ Historial importado</h3>
+                <h3 className="text-base font-bold text-[#0A0A0A] mb-1 flex items-center gap-2"><IconCheck className="w-5 h-5" /> Historial importado</h3>
                 <p className="text-xs text-[#6E6E73] mb-4">Se encontró y guardó la siguiente información:</p>
 
                 <div className="flex flex-col gap-3 max-h-80 overflow-y-auto">

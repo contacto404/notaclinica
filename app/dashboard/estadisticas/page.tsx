@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { IconFileText, IconChart, IconWallet } from '../components/Icons'
 
 const TZ = 'America/Montevideo'
 
@@ -126,9 +127,9 @@ export default async function EstadisticasPage() {
           </div>
           <a
             href="/dashboard/reporte"
-            className="shrink-0 bg-[#0A0A0A] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#262626] transition-colors"
+            className="shrink-0 bg-[#0A0A0A] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#262626] transition-colors inline-flex items-center gap-2"
           >
-            📄 Reporte mensual
+            <IconFileText className="w-4 h-4" /> Reporte mensual
           </a>
         </div>
 
@@ -166,7 +167,7 @@ export default async function EstadisticasPage() {
 
         {/* Sesiones por mes */}
         <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
-          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5">📈 Sesiones por mes</h2>
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5 flex items-center gap-1.5"><IconChart className="w-4 h-4" /> Sesiones por mes</h2>
           {completadas.length > 0 ? (
             <div className="flex items-end gap-2 h-28">
               {sesionesPorMes.map((m, i) => (
@@ -187,7 +188,7 @@ export default async function EstadisticasPage() {
 
         {/* Ingresos por mes */}
         <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
-          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5">💰 Ingresos por mes (UYU)</h2>
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5 flex items-center gap-1.5"><IconWallet className="w-4 h-4" /> Ingresos por mes (UYU)</h2>
           {cobradoTotal > 0 ? (
             <div className="flex items-end gap-2 h-28">
               {ingresosPorMes.map((m, i) => (
@@ -205,7 +206,7 @@ export default async function EstadisticasPage() {
             </div>
           ) : (
             <div className="rounded-2xl border border-dashed border-[#D2D2D7] bg-[#F5F5F7] px-4 py-10 text-center">
-              <p className="text-2xl mb-2">💰</p>
+              <IconWallet className="w-7 h-7 mx-auto mb-2 text-[#A3A3A3]" />
               <p className="text-sm text-[#6E6E73]">Todavía no hay cobros registrados.</p>
               <p className="text-xs text-[#A3A3A3] mt-1">Usá “Cobrar sesión” en el perfil del paciente y tus ingresos aparecerán acá.</p>
             </div>
@@ -233,7 +234,7 @@ export default async function EstadisticasPage() {
 
         {/* Resumen cobros */}
         <div className="bg-white rounded-2xl p-5 border border-[#EDEDED]">
-          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">💳 Cobros</h2>
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4 flex items-center gap-1.5"><IconWallet className="w-4 h-4" /> Cobros</h2>
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#E8F4E8] rounded-2xl p-3 text-center">
               <p className="text-xl font-bold text-[#2D6A2D]">${cobradoMes.toLocaleString('es-UY')}</p>

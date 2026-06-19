@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Toast from '../../components/Toast'
 import { capitalizar } from '@/lib/sessionStatus'
+import { IconEdit } from '../../components/Icons'
 import { DIAGNOSTICOS_COMUNES } from '@/lib/diagnosticos'
 
 export default function EditarPacienteButton({ patient }: {
@@ -57,7 +58,7 @@ export default function EditarPacienteButton({ patient }: {
       <button onClick={() => setOpen(true)}
         className="text-[#6E6E73] hover:text-[#0A0A0A] transition-colors p-1 rounded-lg hover:bg-[#F0F0F0]"
         title="Editar paciente">
-        ✏️
+        <IconEdit className="w-4 h-4" />
       </button>
 
       {open && (

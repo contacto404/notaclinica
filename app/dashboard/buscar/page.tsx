@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { IconSearch } from '../components/Icons'
 
 // Recorta un fragmento alrededor de la coincidencia
 function excerpt(text: string | null, q: string): string | null {
@@ -66,7 +67,7 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
 
         {!hasQuery ? (
           <div className="bg-white rounded-2xl border border-[#EDEDED] p-10 text-center">
-            <p className="text-2xl mb-2">🔍</p>
+            <IconSearch className="w-7 h-7 mx-auto mb-2 text-[#A3A3A3]" />
             <p className="text-sm text-[#6E6E73]">Escribí al menos 2 caracteres para buscar en pacientes y notas de sesión.</p>
           </div>
         ) : totalResultados === 0 ? (

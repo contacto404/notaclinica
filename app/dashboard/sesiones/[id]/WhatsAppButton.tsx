@@ -1,4 +1,5 @@
 'use client'
+import { IconSend } from '../../components/Icons'
 
 export default function WhatsAppButton({
   phone,
@@ -56,9 +57,9 @@ export default function WhatsAppButton({
   return (
     <button
       onClick={handleClick}
-      className="bg-[#25D366] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#1DA851] transition-colors shadow-sm shrink-0"
+      className="bg-[#25D366] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#1DA851] transition-colors shadow-sm shrink-0 inline-flex items-center gap-2"
     >
-      💬 WhatsApp
+      <IconSend className="w-4 h-4" /> WhatsApp
     </button>
   )
 }

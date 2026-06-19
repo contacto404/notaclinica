@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { IconClipboard } from '../../components/Icons'
 import Toast from '../../components/Toast'
 import { SCALES, SCALE_LIST, OPTIONS, type ScaleId, type ScaleDef } from './scales'
 
@@ -23,7 +24,7 @@ export default function EscalasEvaluacion({ patientId, assessments }: { patientI
   return (
     <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
       {toast && <Toast message={toast} onDone={() => setToast('')} />}
-      <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5">📋 Escalas de evaluación</h2>
+      <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-5 flex items-center gap-1.5"><IconClipboard className="w-4 h-4" /> Escalas de evaluación</h2>
 
       <div className="flex flex-col gap-7">
         {SCALE_LIST.map(scale => (

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { IconFileText } from '../../components/Icons'
 
 interface Props {
   patientId: string
@@ -40,7 +41,7 @@ export default function RecetaButton({ patientId, patientName }: Props) {
     <>
       <button onClick={() => setOpen(true)}
         className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
-        📝 Receta
+        <IconFileText className="w-4 h-4" /> Receta
       </button>
 
       {open && (

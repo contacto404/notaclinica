@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { IconFileText, IconCalendar, IconCheck, IconSend } from '../../components/Icons'
 
 export default function ReporteButton({
   patientId, patientName, patientPhone, nextAppointment, sessionId
@@ -75,7 +76,7 @@ export default function ReporteButton({
     <>
       <button onClick={() => setOpen(true)}
         className="border border-[#EDEDED] text-[#6E6E73] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#F5F5F7] flex items-center gap-2 transition-colors">
-        📋 Resumen médico
+        <IconFileText className="w-4 h-4" /> Resumen médico
       </button>
 
       {open && (
@@ -130,16 +131,16 @@ export default function ReporteButton({
                   </div>
 
                   {nextAppointment && (
-                    <div className="bg-[#F0F0F0] rounded-xl p-3 text-sm text-[#0A0A0A]">
-                      📅 Próxima consulta: <strong>{new Date(nextAppointment.appointment_date).toLocaleDateString('es-AR', { weekday: 'long', day: '2-digit', month: 'long' })}</strong>
+                    <div className="bg-[#F0F0F0] rounded-xl p-3 text-sm text-[#0A0A0A] flex items-center gap-2">
+                      <IconCalendar className="w-4 h-4 shrink-0" /> Próxima consulta: <strong>{new Date(nextAppointment.appointment_date).toLocaleDateString('es-AR', { weekday: 'long', day: '2-digit', month: 'long' })}</strong>
                     </div>
                   )}
                 </div>
 
                 <div className="flex flex-col gap-2 mt-6">
                   <button onClick={handleGenerate} disabled={loading}
-                    className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors">
-                    {loading ? 'Generando...' : '📋 Generar resumen'}
+                    className="bg-[#0A0A0A] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#262626] disabled:opacity-50 transition-colors flex items-center justify-center gap-2">
+                    {loading ? 'Generando...' : <><IconFileText className="w-4 h-4" /> Generar resumen</>}
                   </button>
                   <button onClick={handleClose}
                     className="text-sm text-[#6E6E73] hover:text-[#0A0A0A] py-2 transition-colors">
@@ -149,14 +150,14 @@ export default function ReporteButton({
               </>
             ) : (
               <>
-                <h3 className="text-base font-bold text-[#0A0A0A] mb-2">✅ Resumen generado</h3>
+                <h3 className="text-base font-bold text-[#0A0A0A] mb-2 flex items-center gap-2"><IconCheck className="w-5 h-5" /> Resumen generado</h3>
                 <p className="text-xs text-[#6E6E73] mb-5">Ahora podés enviarlo al paciente o verlo en el navegador.</p>
 
                 <div className="flex flex-col gap-2">
                   {patientPhone && (
                     <button onClick={handleWhatsApp}
                       className="bg-[#25D366] text-white rounded-xl py-3 text-sm font-semibold hover:bg-[#1DA851] transition-colors flex items-center justify-center gap-2">
-                      💬 Enviar por WhatsApp a {patientName}
+                      <IconSend className="w-4 h-4" /> Enviar por WhatsApp a {patientName}
                     </button>
                   )}
                   <a href={reportUrl} target="_blank"
