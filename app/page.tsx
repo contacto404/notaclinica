@@ -379,6 +379,28 @@ export default function PromoPage() {
         </div>
       </section>
 
+      {/* Memoria clínica: el historial que se construye solo */}
+      <section className="px-3 sm:px-5 pt-28 md:pt-32">
+        <div data-reveal className="max-w-5xl mx-auto px-2 sm:px-4">
+          <p className={kicker}>Memoria clínica</p>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.02em] mb-3 max-w-2xl">La historia del paciente se escribe sola</h2>
+          <p className="text-[#6E6E73] leading-relaxed max-w-xl mb-14">Cada sesión suma al historial. No empezás de cero en ninguna consulta.</p>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              { t: 'Resúmenes con contexto', d: 'La IA redacta cada resumen teniendo en cuenta las sesiones anteriores del paciente, no solo la de hoy.' },
+              { t: 'Briefing antes de entrar', d: 'Llegás a la consulta con el diagnóstico, la última nota y las sesiones previas a la vista.' },
+              { t: 'Evolución en el tiempo', d: 'Escalas, progreso y plan de tratamiento que se siguen sesión a sesión.' },
+            ].map(c => (
+              <div key={c.t} className="bg-[#F5F5F7] rounded-[18px] border border-[#EDEDED] p-7">
+                <h3 className="text-xl font-semibold mb-2 tracking-[-0.01em]">{c.t}</h3>
+                <p className="text-[15px] text-[#6E6E73] leading-relaxed">{c.d}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-[13px] text-[#A3A3A3] mt-6">Todo el historial viaja cifrado y solo vos accedés a tus pacientes.</p>
+        </div>
+      </section>
+
       {/* Adaptado a tu especialidad — tile oscuro */}
       <section className="px-3 sm:px-5 pt-28 md:pt-32">
         <div
