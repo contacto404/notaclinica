@@ -17,6 +17,7 @@ import { showsScales } from '@/lib/scales'
 import { isSessionDone, capitalizar } from '@/lib/sessionStatus'
 import HistorialSesiones from './HistorialSesiones'
 import { IconMic, IconSearch, IconVideo, IconPhone, IconBuilding, IconFileText, IconClipboard, IconPill, IconActivity, IconChart, IconDownload, IconCalendar } from '../../components/Icons'
+import { avatarColor } from '@/lib/avatar'
 
 export default async function PacientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -98,8 +99,8 @@ export default async function PacientePage({ params }: { params: Promise<{ id: s
         {/* Card paciente */}
         <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
           <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-full bg-[#F0F0F0] flex items-center justify-center text-2xl font-bold text-[#0A0A0A] shrink-0">
-              {patient.full_name?.[0]}
+            <div className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shrink-0" style={{ backgroundColor: avatarColor(patient.full_name)[0], color: avatarColor(patient.full_name)[1] }}>
+              {patient.full_name?.[0]?.toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">

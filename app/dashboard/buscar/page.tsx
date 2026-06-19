@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { IconSearch } from '../components/Icons'
+import { avatarColor } from '@/lib/avatar'
 
 // Recorta un fragmento alrededor de la coincidencia
 function excerpt(text: string | null, q: string): string | null {
@@ -86,7 +87,7 @@ export default async function BuscarPage({ searchParams }: { searchParams: Promi
                   {patients.map(p => (
                     <a key={p.id} href={"/dashboard/pacientes/" + p.id}
                       className="bg-white rounded-xl border border-[#EDEDED] px-3.5 py-3 flex items-center gap-3 hover:shadow-sm hover:border-[#D2D2D7] dark:hover:border-[#6E6E73] transition-all">
-                      <div className="w-9 h-9 rounded-full bg-[#F0F0F0] flex items-center justify-center text-sm font-semibold text-[#0A0A0A] shrink-0 uppercase">
+                      <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold shrink-0 uppercase" style={{ backgroundColor: avatarColor(p.full_name)[0], color: avatarColor(p.full_name)[1] }}>
                         {p.full_name?.[0]}
                       </div>
                       <div className="flex-1 min-w-0">

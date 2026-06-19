@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import type { Patient, Appointment } from '@/types/db'
 import { IconUser, IconCalendar, IconFileText, IconChart, IconSearch } from './Icons'
+import { avatarColor } from '@/lib/avatar'
 
 type Alerta = { patientId: string; patientName: string; tipo: string; detalle: string; nivel: 'alta' | 'media' }
 
@@ -168,7 +169,7 @@ export default function DashboardClient({ patients, sesionesEsteMes, pdfsExporta
         {filtrados.length > 0 ? filtrados.map((p: any) => (
           <a key={p.id} href={"/dashboard/pacientes/" + p.id}
             className="bg-white dark:bg-[#1A1A1A] rounded-xl px-3.5 py-3 flex items-center gap-3 hover:shadow-sm hover:border-[#D2D2D7] dark:hover:border-[#6E6E73] transition-all border border-[#EDEDED] dark:border-[#262626]">
-            <div className="w-9 h-9 rounded-full bg-[#F0F0F0] dark:bg-[#0A0A0A]/40 flex items-center justify-center text-sm font-semibold text-[#0A0A0A] dark:text-[#FFFFFF] shrink-0 uppercase">
+            <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold shrink-0 uppercase" style={{ backgroundColor: avatarColor(p.full_name)[0], color: avatarColor(p.full_name)[1] }}>
               {p.full_name?.[0]}
             </div>
             <div className="flex-1 min-w-0">

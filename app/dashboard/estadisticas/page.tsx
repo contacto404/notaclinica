@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import { IconFileText, IconChart, IconWallet, IconUser } from '../components/Icons'
+import { IconFileText, IconChart, IconWallet, IconUser, IconRefresh, IconUsers } from '../components/Icons'
 
 const TZ = 'America/Montevideo'
 
@@ -92,6 +92,11 @@ export default async function EstadisticasPage() {
     ? Math.round((pacientesRecurrentes / pacientesConSesion) * 100)
     : 0
 
+  // --- Engagement: ahorro de tiempo estimado y trabajo pendiente ---
+  const MIN_AHORRO_POR_SESION = 12 // estimación conservadora de minutos de papeleo evitados
+  const horasAhorradasMes = Math.round((sesionesEsteMes * MIN_AHORRO_POR_SESION) / 60 * 10) / 10
+  const pendientesSinResumen = ses.filter(s => s.status === 'transcribed').length
+
   // --- Series mensuales (últimos 6 meses) ---
   const meses = lastSixMonths()
 
@@ -144,9 +149,26 @@ export default async function EstadisticasPage() {
           ))}
         </div>
 
+        {/* Insight de engagement — ahorro y pendientes */}
+        <div className="bg-[#0A0A0A] text-white rounded-2xl p-5 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#9A9A9A] mb-2">Tu mes con NotaClínica</p>
+          {sesionesEsteMes > 0 ? (
+            <p className="text-lg leading-snug">
+              Documentaste <strong>{sesionesEsteMes}</strong> {sesionesEsteMes === 1 ? 'sesión' : 'sesiones'} este mes — unas <strong>{horasAhorradasMes} h</strong> menos de papeleo <span className="text-[#9A9A9A] text-sm">(estimado)</span>.
+            </p>
+          ) : (
+            <p className="text-lg leading-snug">Grabá tu primera sesión del mes y la IA arma la nota por vos.</p>
+          )}
+          {pendientesSinResumen > 0 && (
+            <p className="text-sm text-[#C8C8C8] mt-3">
+              Tenés <strong className="text-white">{pendientesSinResumen}</strong> {pendientesSinResumen === 1 ? 'sesión transcripta sin resumen' : 'sesiones transcriptas sin resumen'}. Generá el resumen desde la ficha del paciente con un clic.
+            </p>
+          )}
+        </div>
+
         {/* Retención */}
         <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
-          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">🔁 Retención de pacientes</h2>
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4 flex items-center gap-1.5"><IconRefresh className="w-4 h-4" /> Retención de pacientes</h2>
           {pacientesConSesion > 0 ? (
             <>
               <div className="flex items-end justify-between mb-3">
@@ -250,6 +272,19 @@ export default async function EstadisticasPage() {
             </div>
           </div>
         </div>
+
+        {/* Banner: plan Clínicas (upsell sutil) */}
+        <a href="mailto:sortiplansa@gmail.com?subject=Plan%20Cl%C3%ADnicas%20NotaCl%C3%ADnica"
+          className="mt-4 flex items-center gap-3 bg-white rounded-2xl p-4 border border-[#EDEDED] hover:bg-[#F5F5F7] transition-colors">
+          <span className="w-9 h-9 rounded-xl bg-[#F0F0F0] flex items-center justify-center text-[#0A0A0A] shrink-0">
+            <IconUsers className="w-5 h-5" />
+          </span>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-[#0A0A0A]">¿Trabajás en equipo?</p>
+            <p className="text-xs text-[#6E6E73]">Conocé el plan Clínicas: varios profesionales y métricas consolidadas.</p>
+          </div>
+          <span className="text-[#D2D2D7] text-lg shrink-0">›</span>
+        </a>
 
       </div>
     </div>

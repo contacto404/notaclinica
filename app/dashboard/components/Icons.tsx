@@ -84,3 +84,9 @@ export function IconClock({ className }: P) {
 export function IconTarget({ className }: P) {
   return <svg className={className} {...base}><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" /></svg>
 }
+export function IconRefresh({ className }: P) {
+  return <svg className={className} {...base}><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8M20 4v4h-4" /><path d="M20 12a8 8 0 0 1-13.7 5.6L4 16M4 20v-4h4" /></svg>
+}
+export function IconUsers({ className }: P) {
+  return <svg className={className} {...base}><circle cx="9" cy="8" r="3.2" /><path d="M3.5 19c0-3 2.5-4.6 5.5-4.6s5.5 1.6 5.5 4.6" /><path d="M16 5.2a3.2 3.2 0 0 1 0 5.6M17 14.6c2.3.4 4 1.8 4 4.4" /></svg>
+}
