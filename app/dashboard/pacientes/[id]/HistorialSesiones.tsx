@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { isSessionDone } from '@/lib/sessionStatus'
 import GenerarResumenButton from './GenerarResumenButton'
+import { IconFileText } from '../../components/Icons'
 
 type Filtro = 'todas' | 'completas' | 'pendientes'
 
@@ -74,7 +75,7 @@ export default function HistorialSesiones({ sessions, patientId, patientName = '
         <p className="text-sm text-[#6E6E73] text-center py-8">No hay sesiones {filtro === 'completas' ? 'completas' : 'pendientes'}.</p>
       ) : (
         <div className="text-center py-10">
-          <p className="text-2xl mb-2">📋</p>
+          <IconFileText className="w-7 h-7 mx-auto mb-2 text-[#A3A3A3]" />
           <p className="text-sm text-[#6E6E73]">No hay sesiones todavía.</p>
           <a href={"/dashboard/pacientes/" + patientId + "/nueva-sesion"} className="text-sm text-[#0A0A0A] mt-1 inline-block hover:underline">
             + Iniciar primera sesión

@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { IconUser, IconMic, IconActivity } from './Icons'
 
 const pasos = [
   {
@@ -76,9 +77,9 @@ export default function OnboardingGuide() {
           ))}
         </div>
 
-        {/* Emoji */}
-        <div className="text-4xl mb-4">
-          {paso === 0 ? '🏥' : paso === 1 ? '👤' : '🎙️'}
+        {/* Ícono del paso */}
+        <div className="mb-4 flex justify-center text-[#0A0A0A]">
+          {paso === 0 ? <IconActivity className="w-10 h-10" /> : paso === 1 ? <IconUser className="w-10 h-10" /> : <IconMic className="w-10 h-10" />}
         </div>
 
         {/* Contenido */}

@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Toast from '../components/Toast'
 import ThemeToggle from '@/app/components/ThemeToggle'
+import { IconEdit } from '../components/Icons'
 
 const ESPECIALIDADES = [
   { value: 'general', label: 'General / Otra' },
@@ -264,7 +265,7 @@ export default function CuentaPage() {
           </div>
         ) : (
           <label className="flex flex-col items-center justify-center gap-2 border border-dashed border-[#D2D2D7] rounded-xl bg-[#F5F5F7] py-8 px-4 mb-4 cursor-pointer hover:border-[#0A0A0A] transition-colors">
-            <span className="text-2xl">✍️</span>
+            <IconEdit className="w-6 h-6 text-[#A3A3A3]" />
             <span className="text-sm text-[#6E6E73]">Tocá para subir tu firma</span>
             <input type="file" accept="image/*" onChange={handleSignatureFile} className="hidden" />
           </label>

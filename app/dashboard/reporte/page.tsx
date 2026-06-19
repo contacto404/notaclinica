@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { IconDownload } from '../components/Icons'
 
 // Minutos ahorrados por sesión documentada con IA (de ~10 min a ~2 min).
 const MIN_AHORRADOS_POR_SESION = 8
@@ -57,9 +58,9 @@ export default async function ReporteMensualPage() {
             <a
               href="/api/reporte-mensual"
               target="_blank"
-              className="shrink-0 bg-[#0A0A0A] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#262626] transition-colors"
+              className="shrink-0 bg-[#0A0A0A] text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-[#262626] transition-colors inline-flex items-center gap-2"
             >
-              📄 Exportar PDF
+              <IconDownload className="w-4 h-4" /> Exportar PDF
             </a>
           </div>
         </div>

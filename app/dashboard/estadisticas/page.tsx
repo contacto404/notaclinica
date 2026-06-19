@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import { IconFileText, IconChart, IconWallet } from '../components/Icons'
+import { IconFileText, IconChart, IconWallet, IconUser } from '../components/Icons'
 
 const TZ = 'America/Montevideo'
 
@@ -215,7 +215,7 @@ export default async function EstadisticasPage() {
 
         {/* Resumen pacientes */}
         <div className="bg-white rounded-2xl p-5 mb-4 border border-[#EDEDED]">
-          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4">👥 Pacientes</h2>
+          <h2 className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-4 flex items-center gap-1.5"><IconUser className="w-4 h-4" /> Pacientes</h2>
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-[#F0F0F0] rounded-2xl p-3 text-center">
               <p className="text-2xl font-bold text-[#0A0A0A]">{pacs.length}</p>

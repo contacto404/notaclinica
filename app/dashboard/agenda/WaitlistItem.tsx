@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { IconClock, IconSend } from '../components/Icons'
 
 export default function WaitlistItem({ item }: { item: any }) {
   const [removing, setRemoving] = useState(false)
@@ -24,8 +25,8 @@ export default function WaitlistItem({ item }: { item: any }) {
 
   return (
     <div className="bg-white rounded-2xl border border-[#EDEDED] px-4 py-4 flex items-center gap-3">
-      <div className="w-9 h-9 rounded-full bg-[#FFF7ED] flex items-center justify-center text-sm shrink-0">
-        ⏳
+      <div className="w-9 h-9 rounded-full bg-[#FFF7ED] flex items-center justify-center shrink-0 text-[#C2410C]">
+        <IconClock className="w-4 h-4" />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold text-[#0A0A0A] truncate">{item.full_name}</p>
@@ -36,8 +37,8 @@ export default function WaitlistItem({ item }: { item: any }) {
       <div className="flex items-center gap-2 shrink-0">
         {waLink && (
           <a href={waLink} target="_blank" rel="noopener noreferrer"
-            className="bg-[#25D366] text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-[#1DA851] transition-colors">
-            💬
+            className="bg-[#25D366] text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-[#1DA851] transition-colors inline-flex items-center">
+            <IconSend className="w-3.5 h-3.5" />
           </a>
         )}
         <button
