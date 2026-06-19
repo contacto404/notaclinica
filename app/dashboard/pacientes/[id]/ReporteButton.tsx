@@ -106,7 +106,7 @@ export default function ReporteButton({
                           <input value={m.name} onChange={e => updateMed(i, 'name', e.target.value)}
                             placeholder="Nombre del medicamento"
                             className="flex-1 border border-[#EDEDED] rounded-lg px-3 py-2 text-sm outline-none focus:border-[#0A0A0A] bg-white" />
-                          <button onClick={() => removeMed(i)} className="text-[#6E6E73] hover:text-red-500 text-lg px-1">×</button>
+                          <button onClick={() => removeMed(i)} aria-label="Quitar medicamento" className="text-[#6E6E73] hover:text-red-500 text-lg px-1">×</button>
                         </div>
                         <div className="flex gap-2">
                           <input value={m.dose} onChange={e => updateMed(i, 'dose', e.target.value)}

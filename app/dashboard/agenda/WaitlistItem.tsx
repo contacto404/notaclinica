@@ -36,7 +36,7 @@ export default function WaitlistItem({ item }: { item: any }) {
       </div>
       <div className="flex items-center gap-2 shrink-0">
         {waLink && (
-          <a href={waLink} target="_blank" rel="noopener noreferrer"
+          <a href={waLink} target="_blank" rel="noopener noreferrer" aria-label="Avisar por WhatsApp"
             className="bg-[#25D366] text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-[#1DA851] transition-colors inline-flex items-center">
             <IconSend className="w-3.5 h-3.5" />
           </a>
@@ -44,6 +44,7 @@ export default function WaitlistItem({ item }: { item: any }) {
         <button
           onClick={handleRemove}
           disabled={removing}
+          aria-label="Quitar de la lista de espera"
           className="text-[#A3A3A3] hover:text-red-500 transition-colors text-lg leading-none px-1"
         >
           ×

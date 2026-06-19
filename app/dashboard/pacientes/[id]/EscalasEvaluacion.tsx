@@ -189,7 +189,7 @@ function AssessmentModal({
             <p className="text-base font-bold text-[#0A0A0A]">{scale.name} · {scale.topic}</p>
             <p className="text-xs text-[#6E6E73] mt-0.5">{scale.intro}</p>
           </div>
-          <button onClick={onClose} className="text-[#6E6E73] text-xl leading-none px-1 cursor-pointer shrink-0">✕</button>
+          <button onClick={onClose} aria-label="Cerrar" className="text-[#6E6E73] text-xl leading-none px-1 cursor-pointer shrink-0">✕</button>
         </div>
 
         <div className="px-6 py-4 flex flex-col gap-5">

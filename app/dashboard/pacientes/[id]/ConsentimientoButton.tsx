@@ -109,7 +109,7 @@ export default function ConsentimientoButton({ patientId, patientName, professio
 
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-bold text-[#0A0A0A] flex items-center gap-2"><IconClipboard className="w-5 h-5" /> Consentimiento informado</h2>
-              <button onClick={() => setOpen(false)} className="text-[#A3A3A3] hover:text-[#0A0A0A] text-xl leading-none">×</button>
+              <button onClick={() => setOpen(false)} aria-label="Cerrar" className="text-[#A3A3A3] hover:text-[#0A0A0A] text-xl leading-none">×</button>
             </div>
 
             {signed ? (

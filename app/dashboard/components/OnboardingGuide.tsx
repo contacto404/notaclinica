@@ -60,6 +60,7 @@ export default function OnboardingGuide() {
         {/* Cerrar */}
         <button
           onClick={cerrar}
+          aria-label="Cerrar guía"
           className="absolute top-4 right-4 text-[#A3A3A3] hover:text-[#6E6E73] text-xl leading-none"
         >
           ×
