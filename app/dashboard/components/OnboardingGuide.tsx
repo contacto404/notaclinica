@@ -47,15 +47,15 @@ export default function OnboardingGuide() {
   const actual = pasos[paso]
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
-      {/* Overlay */}
+    <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-4 sm:p-0">
+      {/* Overlay suave: deja ver el dashboard detrás (guía, no bloqueo) */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/30"
         onClick={cerrar}
       />
 
       {/* Card */}
-      <div className="relative bg-white rounded-2xl p-6 mx-6 max-w-sm w-full shadow-2xl">
+      <div className="relative bg-white rounded-2xl p-6 mx-auto sm:mx-6 max-w-sm w-full shadow-2xl mb-[max(env(safe-area-inset-bottom),16px)] sm:mb-0">
 
         {/* Cerrar */}
         <button

@@ -176,7 +176,7 @@ export default function PromoPage() {
                 Terminá la consulta con la nota clínica <span className="promo-shiny">ya lista</span>
               </h1>
               <p data-reveal className="text-base sm:text-lg text-[#C8C8C8] max-w-md leading-relaxed mb-8" style={{ transitionDelay: '0.2s' }}>
-                ¿Todavía escribís las notas después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. Volvés a estar presente con tu paciente, no con la pantalla.
+                ¿Todavía escribís las notas después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. <span className="text-white font-medium">Volvés a estar presente con tu paciente, no con la pantalla.</span>
               </p>
               <div data-reveal className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4" style={{ transitionDelay: '0.28s' }}>
                 <Link href="/login?tab=registro"
@@ -609,7 +609,8 @@ export default function PromoPage() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-start justify-between gap-8">
           <div>
             <img src="/logo-v5.png" alt="NotaClínica" className="h-9 w-auto" />
-            <p className="text-sm text-[#737373] mt-3 max-w-xs leading-relaxed">Documentación clínica con IA para profesionales de la salud.</p>
+            <p className="text-base font-medium text-[#0A0A0A] mt-3">De la voz a la nota, en segundos.</p>
+            <p className="text-sm text-[#737373] mt-1.5 max-w-xs leading-relaxed">Documentación clínica con IA para profesionales de la salud.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-10">
             <div>
