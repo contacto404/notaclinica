@@ -173,7 +173,7 @@ export default function PromoPage() {
                 30 días gratis · Sin tarjeta
               </div>
               <h1 data-reveal className="text-[2.4rem] leading-[1.06] sm:text-5xl md:text-6xl font-medium tracking-tight text-white mb-6" style={{ transitionDelay: '0.12s' }}>
-                Terminá la consulta con la nota clínica <span className="promo-shiny">ya lista</span>
+                Terminá la consulta con la nota clínica <span className="text-white">ya lista</span>
               </h1>
               <p data-reveal className="text-base sm:text-lg text-[#C8C8C8] max-w-md leading-relaxed mb-8" style={{ transitionDelay: '0.2s' }}>
                 ¿Todavía escribís las notas después de cada paciente? NotaClínica graba la sesión y la IA arma el resumen en segundos. <span className="text-white font-medium">Volvés a estar presente con tu paciente, no con la pantalla.</span>
